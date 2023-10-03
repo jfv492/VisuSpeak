@@ -1,5 +1,5 @@
 <p align="center">
-# VisuSpeak
+ <h1>VisuSpeak</h1>
 </p>
 
 ## 🎯 Project Idea 
