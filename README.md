@@ -1,4 +1,6 @@
+<p align="center">
 # VisuSpeak
+</p>
 
 ## 🎯 Project Idea 
 Our team aims to create an innovative ASL-English bidirectional translation application for the capstone project. This application will aim to bridge the communication gap between ASL users and English speakers. This application will enable seamless real-time translation from ASL to English, allowing people with special accessibility needs to communicate effectively with others and gain access to essential services and information.
