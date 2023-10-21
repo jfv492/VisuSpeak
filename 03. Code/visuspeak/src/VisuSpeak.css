@@ -1,0 +1,79 @@
+/* -----------------------------------------------------------------
+    Header Styles
+------------------------------------------------------------------*/
+.header {
+    padding: 0.5%;
+    display: grid;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #ffffff;
+}
+
+.heading-grid-container {
+    display: inline-grid;
+    grid-template-columns: 20% auto 15% 15%;
+}
+
+/* -----------------------------------------------------------------
+    Footer Styles
+------------------------------------------------------------------*/
+.footer {
+    padding: 3%;
+    display: grid;
+    background-color: #000000;
+}
+
+/* -----------------------------------------------------------------
+    Generic Body Styles
+------------------------------------------------------------------*/
+.bodyPadding {
+    padding-top: 15%;
+    padding-bottom: 10%;
+    background-color: #ffffff;
+}
+
+.centered {
+    margin: auto;
+    width: 100%;
+    text-align: center;
+}
+
+
+/* -----------------------------------------------------------------
+    Button Styles
+------------------------------------------------------------------*/
+.button {
+    padding: 10% 25%;
+    background-color: #000000;
+    color: #ffffff;
+    border-radius: 8px;
+}
+
+.button-grid-container {
+    display: inline-grid;
+    grid-template-columns: 40% 10% 10% 40%;
+}
+
+/* -----------------------------------------------------------------
+    General Grid Styles
+------------------------------------------------------------------*/
+.grid-container {
+    display: inline-grid;
+    grid-template-columns: 5% 45% 45% 5%;
+}
+  
+.grid-item {
+    padding: 20px;
+    font-size: 20px;
+    text-align: center;
+}
+
+/* -----------------------------------------------------------------
+    Heading/Paragraph Related Styles
+------------------------------------------------------------------*/
+.heading {
+    font-family:serif;
+}
+
+
