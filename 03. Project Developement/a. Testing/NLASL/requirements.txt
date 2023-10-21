@@ -1,0 +1,18 @@
+# azureml==0.2.7
+# azureml_core==1.44.0
+Lintel
+matplotlib
+numpy
+opencv-python
+Pillow
+PyYAML
+scikit_learn
+timm
+torch
+torchvision
+tqdm
+transformers
+wandb
+mmdet
+mmcv
+mmpose
