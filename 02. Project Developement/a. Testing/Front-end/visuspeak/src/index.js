@@ -1,13 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import MyApp from './App';
 import reportWebVitals from './reportWebVitals';
+
+import './index.css';
+
+//Depending on which page you want to view right now, replace the import keyword
+//on line 16
+import Login from './Login';
+import SignUp from './SignUp'
+import MyApp from './App';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <MyApp />
+    <SignUp />
   </React.StrictMode>
 );
 
