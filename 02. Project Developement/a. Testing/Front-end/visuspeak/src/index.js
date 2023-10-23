@@ -13,7 +13,9 @@ import MyApp from './App';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <SignUp />
+    <MyApp />
+    {/* <SignUp /> */}
+    {/* <Login /> */}
   </React.StrictMode>
 );
 

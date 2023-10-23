@@ -3,6 +3,7 @@ import filler from './images/FillerPhoto.jpg';
 
 import Header from './Header';
 import Footer from './Footer';
+import Login from './Login';
 
 export default function MyApp() {
   return (
@@ -16,7 +17,7 @@ export default function MyApp() {
           <div class="button-grid-container">
             <div class="grid-item"></div>
             <div class="grid-item">
-              <button className = "button">Login</button>
+            <button className = "button">Log in</button>
             </div>
             <div class="grid-item">
               <button className = "button">Sign Up</button>

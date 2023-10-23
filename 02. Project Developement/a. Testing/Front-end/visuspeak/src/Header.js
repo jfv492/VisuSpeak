@@ -9,8 +9,8 @@ export default function Header() {
             <img src={logo} alt="VisuSpeak Logo" height = "70"/>
           </div>
           <div class="grid-item"></div>
-          <div class="grid-item">Home</div>  
-          <div class="grid-item">ASL Resources</div>
+          <div class="grid-item">ASL Resources</div>  
+          <div class="grid-item">About Us</div>
         </div>
       </div>
     );
