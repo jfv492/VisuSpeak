@@ -1,5 +1,5 @@
 import './VisuSpeak.css';
-import whiteLogo from './images/VisuSpeakLogoWhite.png';
+import whiteLogo from './images/VisuSpeak_Logo_White.png';
 
 export default function Footer() {
     return (

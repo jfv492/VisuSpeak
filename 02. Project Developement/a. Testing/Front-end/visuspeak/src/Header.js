@@ -1,5 +1,5 @@
 import './VisuSpeak.css';
-import logo from './images/VisuSpeakLogo.png';
+import logo from './images/VisuSpeak_Logo.jpeg';
 
 export default function Header() {
     return (
