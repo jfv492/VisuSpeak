@@ -1,5 +1,7 @@
 import './VisuSpeak.css';
 import filler from './images/FillerPhoto.jpg';
+import { Link } from 'react-router-dom';
+
 
 import Header from './Header';
 import Footer from './Footer';
@@ -17,7 +19,7 @@ export default function MyApp() {
           <div class="button-grid-container">
             <div class="grid-item"></div>
             <div class="grid-item">
-            <button className = "button">Log in</button>
+              <a href="./Login" className="button">Log in</a>
             </div>
             <div class="grid-item">
               <button className = "button">Sign Up</button>
