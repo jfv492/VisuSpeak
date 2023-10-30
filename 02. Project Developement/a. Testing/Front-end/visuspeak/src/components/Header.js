@@ -8,25 +8,25 @@ import {
 export default function Header() {
   return (
     <div>
-      <nav class="navbar bg-body-tertiary">
-        <div class="container-fluid">
-          <Link class="navbar-brand" to="/">
+      <nav className="navbar bg-body-tertiary">
+        <div className="container-fluid">
+          <Link className="navbar-brand" to="/">
             <img src={ColourLogo} width="150" />
           </Link>
-          <ul class="nav nav-pills nav-pills-link-active-color justify-content-end">
-            <li class="nav-item">
-              <a class="active nav-link" aria-current="page" href="/">
+          <ul className="nav nav-pills nav-pills-link-active-color justify-content-end">
+            <li className="nav-item">
+              <a className="active nav-link" aria-current="page" href="/">
                 ASL Resources
               </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/">
+            <li className="nav-item">
+              <a className="nav-link" href="/">
                 About Us
               </a>
             </li>
-            <li class="nav-item dropdown">
+            <li className="nav-item dropdown">
               <a
-                class="nav-link dropdown-toggle"
+                className="nav-link dropdown-toggle"
                 data-bs-toggle="dropdown"
                 href="/"
                 role="button"
@@ -34,14 +34,14 @@ export default function Header() {
               >
                 User
               </a>
-              <ul class="dropdown-menu">
+              <ul className="dropdown-menu">
                 <li>
-                  <a class="dropdown-item" href="/">
+                  <a className="dropdown-item" href="/">
                     Account Settings
                   </a>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="/">
+                  <a className="dropdown-item" href="/">
                     Logout
                   </a>
                 </li>

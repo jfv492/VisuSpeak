@@ -5,52 +5,52 @@ import {
 
 export default function Login() {
   return (
-    <div class="container my-5 ms-5">
+    <div className="container my-5 ms-5">
       <h1 className="text-center">Login</h1>
-      <div class="container text-right">
-        <div class="row">
-          <div class="col"></div>
-          <div class="col-10">
-            <form class="container my-5 ms-5 text-end">
-              <div class="row mb-4">
-                <label for="inputEmail3" class="col-sm-3 col-form-label">
+      <div className="container text-right">
+        <div className="row">
+          <div className="col"></div>
+          <div className="col-10">
+            <form className="container my-5 ms-5 text-end">
+              <div className="row mb-4">
+                <label for="inputEmail3" className="col-sm-3 col-form-label">
                   Username or Email:
                 </label>
-                <div class="col-sm-7">
-                  <input type="text" class="form-control" id="inputEmail3" />
+                <div className="col-sm-7">
+                  <input type="text" className="form-control" id="inputEmail3" />
                 </div>
               </div>
-              <div class="row mb-4">
-                <label for="inputPassword3" class="col-sm-3 col-form-label">
+              <div className="row mb-4">
+                <label for="inputPassword3" className="col-sm-3 col-form-label">
                   Password:
                 </label>
-                <div class="col-sm-7">
+                <div className="col-sm-7">
                   <input
                     type="password"
-                    class="form-control"
+                    className="form-control"
                     id="inputPassword3"
                   />
                 </div>
               </div>
-              <div class="row mb-4">
+              <div className="row mb-4">
                 <label
                   for="inputPassword3"
-                  class="col-sm-3 col-form-label"
+                  className="col-sm-3 col-form-label"
                 ></label>
-                <div class="col-sm-7">
+                <div className="col-sm-7">
                   <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <button type="submit" class="btn btn-dark btn-lg">
+                    <button type="submit" className="btn btn-dark btn-lg">
                       Login
                     </button>
                   </div>
                 </div>
               </div>
-              <div class="row mb-4">
+              <div className="row mb-4">
                 <label
                   for="inputPassword3"
-                  class="col-sm-3 col-form-label"
+                  className="col-sm-3 col-form-label"
                 ></label>
-                <div class="col-sm-7">
+                <div className="col-sm-7">
                   <div className="d-grid gap-2 d-md-flex justify-content-md-end">
                     <Link to="/signup">Click here to sign up</Link>
                   </div>
@@ -58,7 +58,7 @@ export default function Login() {
               </div>
             </form>
           </div>
-          <div class="col"></div>
+          <div className="col"></div>
         </div>
       </div>
     </div>

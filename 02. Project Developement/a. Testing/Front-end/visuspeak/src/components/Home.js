@@ -9,18 +9,18 @@ export default function Home() {
     <div className="container my-5 ms-5">
       <h1 className="text-center">Welcome to VisuSpeak</h1>
       <h3 className="text-center">Your ASL Companion</h3>
-      <div class="d-grid gap-2 col-6 mx-auto my-4">
-        <Link to="/login" class="btn btn-dark btn-lg" tabindex="1" role="button">
+      <div className="d-grid gap-2 col-6 mx-auto my-4">
+        <Link to="/login" className="btn btn-dark btn-lg" tabIndex="1" role="button">
           Login
         </Link>
-        <Link to="/signup" class="btn btn-dark btn-lg" tabindex="2" role="button">
+        <Link to="/signup" className="btn btn-dark btn-lg" tabIndex="2" role="button">
           Sign Up
         </Link>
       </div>
 
-      <div class="container my-5">
-        <div class="row my-5">
-          <div class="col">
+      <div className="container my-5">
+        <div className="row my-5">
+          <div className="col">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Volutpat
             ac tincidunt vitae semper quis lectus nulla at. Arcu dictum varius
@@ -34,15 +34,15 @@ export default function Home() {
             sit amet volutpat consequat. Cursus in hac habitasse platea
             dictumst. Morbi enim nunc faucibus a.
           </div>
-          <div class="col">
-            <img src={StockImage} class="img-fluid" alt="..." />
+          <div className="col">
+            <img src={StockImage} className="img-fluid" alt="..." />
           </div>
         </div>
-        <div class="row my-5">
-          <div class="col">
-            <img src={StockImage} class="img-fluid" alt="..." />
+        <div className="row my-5">
+          <div className="col">
+            <img src={StockImage} className="img-fluid" alt="..." />
           </div>
-          <div class="col">
+          <div className="col">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Volutpat
             ac tincidunt vitae semper quis lectus nulla at. Arcu dictum varius
