@@ -1,4 +1,5 @@
 import "./App.css";
+import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Home from "./components/Home.js";
 import Login from "./components/Login";
@@ -17,6 +18,7 @@ function App() {
             <Route exact path="/signup" element={<SignUp />} />
           </Routes>
         </div>
+        <Footer />
       </BrowserRouter>
     </>
   );

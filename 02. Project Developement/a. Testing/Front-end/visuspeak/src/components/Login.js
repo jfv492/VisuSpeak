@@ -1,4 +1,7 @@
 import React from "react";
+import {
+  Link
+} from "react-router-dom";
 
 export default function Login() {
   return (
@@ -49,7 +52,7 @@ export default function Login() {
                 ></label>
                 <div class="col-sm-7">
                   <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <a href="/">Click here to sign up</a>
+                    <Link to="/signup">Click here to sign up</Link>
                   </div>
                 </div>
               </div>
