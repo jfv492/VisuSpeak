@@ -29,7 +29,7 @@ export default function Header() {
                 role="button"
                 aria-expanded="false"
               >
-                Dropdown
+                User
               </a>
               <ul class="dropdown-menu">
                 <li>
