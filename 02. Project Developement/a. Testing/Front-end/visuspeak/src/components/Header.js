@@ -1,3 +1,4 @@
+import '../VisuSpeak.css';
 import ColourLogo from "../images/VisuSpeak_Logo.jpeg";
 import React from "react";
 
@@ -6,20 +7,25 @@ export default function Header() {
     <div>
       <nav class="navbar bg-body-tertiary">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">
+          <a class="navbar-brand" href="/">
             <img src={ColourLogo} width="150" />
           </a>
-          <ul class="nav nav-pills justify-content-end">
+          <ul class="nav nav-pills nav-pills-link-active-color justify-content-end">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">
-                Active
+              <a class="active nav-link" aria-current="page" href="/">
+                ASL Resources
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                About Us
               </a>
             </li>
             <li class="nav-item dropdown">
               <a
                 class="nav-link dropdown-toggle"
                 data-bs-toggle="dropdown"
-                href="#"
+                href="/"
                 role="button"
                 aria-expanded="false"
               >
@@ -27,39 +33,16 @@ export default function Header() {
               </a>
               <ul class="dropdown-menu">
                 <li>
-                  <a class="dropdown-item" href="#">
-                    Action
+                  <a class="dropdown-item" href="/">
+                    Account Settings
                   </a>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="#">
-                    Another action
-                  </a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="#">
-                    Something else here
-                  </a>
-                </li>
-                <li>
-                  <hr class="dropdown-divider" />
-                </li>
-                <li>
-                  <a class="dropdown-item" href="#">
-                    Separated link
+                  <a class="dropdown-item" href="/">
+                    Logout
                   </a>
                 </li>
               </ul>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-                Link
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link disabled" aria-disabled="true">
-                Disabled
-              </a>
             </li>
           </ul>
         </div>
