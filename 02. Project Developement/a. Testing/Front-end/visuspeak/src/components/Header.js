@@ -1,15 +1,18 @@
 import '../VisuSpeak.css';
 import ColourLogo from "../images/VisuSpeak_Logo.jpeg";
 import React from "react";
+import {
+    Link
+  } from "react-router-dom";
 
 export default function Header() {
   return (
     <div>
       <nav class="navbar bg-body-tertiary">
         <div class="container-fluid">
-          <a class="navbar-brand" href="/">
+          <Link class="navbar-brand" to="/">
             <img src={ColourLogo} width="150" />
-          </a>
+          </Link>
           <ul class="nav nav-pills nav-pills-link-active-color justify-content-end">
             <li class="nav-item">
               <a class="active nav-link" aria-current="page" href="/">

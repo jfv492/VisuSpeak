@@ -1,5 +1,8 @@
 import React from "react";
 import StockImage from "../images/FillerPhoto.jpg";
+import {
+    Link
+  } from "react-router-dom";
 
 export default function Home() {
   return (
@@ -7,12 +10,12 @@ export default function Home() {
       <h1 className="text-center">Welcome to VisuSpeak</h1>
       <h3 className="text-center">Your ASL Companion</h3>
       <div class="d-grid gap-2 col-6 mx-auto my-4">
-        <a href="/" class="btn btn-dark btn-lg" tabindex="1" role="button">
+        <Link to="/login" class="btn btn-dark btn-lg" tabindex="1" role="button">
           Login
-        </a>
-        <a href="/" class="btn btn-dark btn-lg" tabindex="2" role="button">
+        </Link>
+        <Link to="/signup" class="btn btn-dark btn-lg" tabindex="2" role="button">
           Sign Up
-        </a>
+        </Link>
       </div>
 
       <div class="container my-5">
