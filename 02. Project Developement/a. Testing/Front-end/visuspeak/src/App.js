@@ -1,9 +1,9 @@
 import "./App.css";
-import Footer from "./components/Footer";
-import Header from "./components/Header";
+import Footer from "./components/Footer.js";
+import Header from "./components/Header.js";
 import Home from "./components/Home.js";
-import Login from "./components/Login";
-import SignUp from "./components/SignUp";
+import Login from "./components/Login.js";
+import SignUp from "./components/SignUp.js";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
