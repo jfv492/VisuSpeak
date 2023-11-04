@@ -39,7 +39,7 @@ export default function Login() {
                 ></label>
                 <div className="col-sm-7">
                   <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <button type="submit" className="btn btn-dark btn-lg">
+                    <button type="submit" className="btn btn-dark btn-lg button-style">
                       Login
                     </button>
                   </div>
@@ -52,7 +52,10 @@ export default function Login() {
                 ></label>
                 <div className="col-sm-7">
                   <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <Link to="/signup">Click here to sign up</Link>
+                    <p>Do no have an account? </p>
+                    <Link to="/signup" className="btn btn-dark btn-lg button-style" tabIndex="2" role="button">
+                    Sign Up
+                    </Link>
                   </div>
                 </div>
               </div>

@@ -80,7 +80,7 @@ export default function SignUp() {
                 ></label>
                 <div className="col-sm-7">
                   <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <button type="submit" className="btn btn-dark btn-lg">
+                    <button type="submit" className="btn btn-dark btn-lg button-style">
                       Sign Up
                     </button>
                   </div>

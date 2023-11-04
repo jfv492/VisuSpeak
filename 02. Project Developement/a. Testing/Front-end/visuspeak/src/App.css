@@ -35,4 +35,10 @@
   to {
     transform: rotate(360deg);
   }
+  
+}
+
+.button-style{
+  background-color: #7d255b;
+  color: white;
 }

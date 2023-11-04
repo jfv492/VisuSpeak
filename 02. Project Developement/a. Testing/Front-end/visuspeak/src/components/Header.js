@@ -1,5 +1,5 @@
 import '../VisuSpeak.css';
-import ColourLogo from "../images/VisuSpeak_Logo.jpeg";
+import ColourLogo from "../images/PrimaryLogo.png";
 import React from "react";
 import {
     Link

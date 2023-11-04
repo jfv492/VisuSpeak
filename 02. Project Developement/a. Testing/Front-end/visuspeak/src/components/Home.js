@@ -10,10 +10,11 @@ export default function Home() {
       <h1 className="text-center">Welcome to VisuSpeak</h1>
       <h3 className="text-center">Your ASL Companion</h3>
       <div className="d-grid gap-2 col-6 mx-auto my-4">
-        <Link to="/login" className="btn btn-dark btn-lg" tabIndex="1" role="button">
-          Login
+        <Link to="/login" className="btn btn-lg button-style"tabIndex="1" role="button">
+        Login
         </Link>
-        <Link to="/signup" className="btn btn-dark btn-lg" tabIndex="2" role="button">
+
+        <Link to="/signup" className="btn btn-dark btn-lg button-style" tabIndex="2" role="button">
           Sign Up
         </Link>
       </div>
