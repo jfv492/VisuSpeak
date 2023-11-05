@@ -10,15 +10,18 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <Header />
-        <div>
+        <div className="page-container">
+          <div className="content-wrap">
+          <Header />
+
           <Routes>
-          <Route exact path="/" element={<Home />} />
+            <Route exact path="/" element={<Home />} />
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/signup" element={<SignUp />} />
           </Routes>
         </div>
         <Footer />
+        </div>
       </BrowserRouter>
     </>
   );

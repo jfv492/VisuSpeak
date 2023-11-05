@@ -170,20 +170,3 @@ fieldset{
     font-family:serif;
 } */
 
-.nav-pills .nav-link.active,
-.nav-pills .show>.nav-link {
-    color: white;
-    background-color: black;
-}
-
-.nav-link {
-    color: black;
-}
-
-footer {
-    margin: 0;
-    color: white;
-    background-color: black;
-    -webkit-text-size-adjust: 100%;
-    -webkit-tap-highlight-color: transparent;
-}
