@@ -1,9 +1,46 @@
 const express = require('express');
+const { body, validationResult } = require('express-validator');
 const router = express.Router();
 const db = require('../db'); // Import the database connection (assuming it's in the same directory)
 
+// Define your validations as an array
+const userValidationRules = () => {
+  return [
+    // First Name must not be empty
+    body('firstName', 'First Name is required').trim().not().isEmpty(),
+    // Last Name must not be empty
+    body('lastName', 'Last Name is required').trim().not().isEmpty(),
+    // Username must be at least 3 chars long
+    body('username', 'Username must be at least 3 characters long').isLength({ min: 3 }),
+    // Email must be valid
+    body('email', 'Invalid email').isEmail().normalizeEmail(),
+    // Password must be at least 8 chars long
+    body('password', 'Password must be at least 8 characters long').isLength({ min: 8 }),
+    // ConfirmPassword must be at least 8 chars long
+    body('confirmPassword', 'Confirm Password must be at least 8 characters long').isLength({ min: 8 }),
+    // Passwords must match
+    body('confirmPassword', 'Passwords do not match').custom((value, { req }) => value === req.body.password),
+    // AgreeTerms must be true
+    body('agreeTerms', 'You must agree to the terms and conditions').isBoolean().withMessage('You must agree to the terms and conditions').isIn([true]),
+  ];
+};
+
+// Define a middleware to check the validation result
+const validateSignup = (req, res, next) => {
+  const errors = validationResult(req);
+  if (errors.isEmpty()) {
+    return next();
+  }
+  const extractedErrors = [];
+  errors.array().map(err => extractedErrors.push({ [err.param]: err.msg }));
+
+  return res.status(422).json({
+    errors: extractedErrors,
+  });
+};
+
 // User registration (signup)
-router.post('/signup', (req, res) => {
+router.post('/signup', userValidationRules(), validateSignup, (req, res) => {
     const { firstName, lastName, username, email, password } = req.body;
   
     // Perform server-side validation, data sanitization, and password hashing as needed

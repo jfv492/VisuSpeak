@@ -15,7 +15,7 @@ export default function Header() {
               <li className="nav-item dropdown">
                 <a
                   className="nav-link dropdown-toggle"
-                  href="#"
+                  href="/"
                   role="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
@@ -24,7 +24,7 @@ export default function Header() {
                 </a>
                 <ul className="dropdown-menu p-2 shadow-lg">
                   <li>
-                    <a className="dropdown-item" href="#">
+                    <a className="dropdown-item" href="/">
                       New Chat
                     </a>
                   </li>
@@ -32,7 +32,7 @@ export default function Header() {
                     <hr className="dropdown-divider" />
                   </li>
                   <li>
-                    <a className="dropdown-item" href="#">
+                    <a className="dropdown-item" href="/">
                       Chat History
                     </a>
                   </li>

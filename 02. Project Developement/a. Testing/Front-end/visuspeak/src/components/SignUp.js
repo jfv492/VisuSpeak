@@ -4,7 +4,7 @@ import axios from "axios";
 import { useState } from "react";
 
 export default function SignUp() {
-  const serverUrl = 'http://localhost:8081'; // Assuming your backend is running on port 8081
+  const serverUrl = "http://localhost:8081"; // Assuming your backend is running on port 8081
   const signupUrl = `${serverUrl}/auth/signup`;
 
   const [formData, setFormData] = useState({
@@ -17,6 +17,8 @@ export default function SignUp() {
     agreeTerms: false,
   });
 
+  const [formErrors, setFormErrors] = useState({});
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     const newValue = type === "checkbox" ? checked : value;
@@ -26,15 +28,25 @@ export default function SignUp() {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Send the form data to the server using Axios
+    setFormErrors({});
     axios
-    .post(signupUrl, formData) // Replace with the correct URL for your server's signup endpoint
+      .post(signupUrl, formData) // Replace with the correct URL for your server's signup endpoint
       .then((response) => {
         console.log("Signup successful", response.data);
         // You can add a redirect or show a success message here
       })
       .catch((error) => {
-        console.error("Signup failed", error);
-        // Handle signup failure, e.g., show an error message to the user
+        if (error.response && error.response.status === 422) {
+          // Assuming the backend sends back an array of objects
+          const errors = error.response.data.errors;
+          console.log(errors);
+          setFormErrors(error.response.data.errors);
+        } else {
+          // Handle other types of errors or set a general error
+          setFormErrors({
+            general: "An unexpected error occurred. Please try again later.",
+          });
+        }
       });
   };
 
@@ -48,7 +60,20 @@ export default function SignUp() {
               First Name:
             </label>
             <div className="col-sm-7">
-              <input type="text" className="form-control firstName" id="firstName" name="firstName" value={formData.firstName} onChange={handleChange}/>
+              <input
+                type="text"
+                className="form-control firstName"
+                id="firstName"
+                name="firstName"
+                value={formData.firstName}
+                onChange={handleChange}
+              />
+              {/* Display error for firstName if it exists */}
+              {formErrors.firstName && (
+                <div className="alert alert-danger" role="alert">
+                  {formErrors.firstName}
+                </div>
+              )}
             </div>
           </div>
           <div className="row mb-4">
@@ -56,7 +81,14 @@ export default function SignUp() {
               Last Name:
             </label>
             <div className="col-sm-7">
-              <input type="text" className="form-control" id="lastName" name="lastName" value={formData.lastName} onChange={handleChange}/>
+              <input
+                type="text"
+                className="form-control"
+                id="lastName"
+                name="lastName"
+                value={formData.lastName}
+                onChange={handleChange}
+              />
             </div>
           </div>
           <div className="row mb-4">
@@ -64,7 +96,14 @@ export default function SignUp() {
               Username:
             </label>
             <div className="col-sm-7">
-              <input type="text" className="form-control" id="username" name="username" value={formData.username} onChange={handleChange}/>
+              <input
+                type="text"
+                className="form-control"
+                id="username"
+                name="username"
+                value={formData.username}
+                onChange={handleChange}
+              />
             </div>
           </div>
           <div className="row mb-4">
@@ -72,7 +111,14 @@ export default function SignUp() {
               Email:
             </label>
             <div className="col-sm-7">
-              <input type="text" className="form-control" id="email" name="email" value={formData.email} onChange={handleChange}/>
+              <input
+                type="text"
+                className="form-control"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+              />
             </div>
           </div>
           <div className="row mb-4">
@@ -85,12 +131,16 @@ export default function SignUp() {
                 className="form-control"
                 id="password"
                 name="password"
-                value={formData.password} onChange={handleChange}
+                value={formData.password}
+                onChange={handleChange}
               />
             </div>
           </div>
           <div className="row mb-4">
-            <label htmlFor="confirmPassword" className="col-sm-3 col-form-label">
+            <label
+              htmlFor="confirmPassword"
+              className="col-sm-3 col-form-label"
+            >
               Confirm Password:
             </label>
             <div className="col-sm-7">
@@ -99,20 +149,27 @@ export default function SignUp() {
                 className="form-control"
                 id="confirmPassword"
                 name="confirmPassword"
-                value={formData.confirmPassword} onChange={handleChange}
+                value={formData.confirmPassword}
+                onChange={handleChange}
               />
             </div>
           </div>
           <div className="row mb-4 align-items-center">
-            <label className="col-sm-3 col-form-label"><input
-              type="checkbox"
-              className="form-check-input"
-              id="agreeTerms"
-              name="agreeTerms"
-              value={formData.agreeTerms} onChange={handleChange}
-            /></label>
+            <label className="col-sm-3 col-form-label">
+              <input
+                type="checkbox"
+                className="form-check-input"
+                id="agreeTerms"
+                name="agreeTerms"
+                value={formData.agreeTerms}
+                onChange={handleChange}
+              />
+            </label>
             <div className="col-sm-7 text-start">
-              <label className="form-check-label col-form-label" htmlFor="agreeTerms">
+              <label
+                className="form-check-label col-form-label"
+                htmlFor="agreeTerms"
+              >
                 Do you agee with the terms and conditions
               </label>
             </div>
