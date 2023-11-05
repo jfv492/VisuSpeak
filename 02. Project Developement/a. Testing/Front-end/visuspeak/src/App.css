@@ -41,4 +41,20 @@
 .button-style{
   background-color: #7d255b;
   color: white;
+  width: 150px;
+}
+
+.navbar {
+  font-size: larger;
+  background-color: #FEFCFD;
+  border-bottom: #7d255b;
+}
+
+.b-example-divider {
+  background-color: #00000018;
+  height: 50px;
+}
+
+.home-text {
+  font-size: larger;
 }
