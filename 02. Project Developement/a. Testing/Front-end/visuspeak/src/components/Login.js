@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export default function Login() {
   return (
     <div className="hero px-4 py-5 text-center shadow-lg">
-      <h1 class="display-3 mt-5 fw-bold ">Login</h1>
+      <h1 className="display-3 mt-5 fw-bold ">Login</h1>
       <div className="container text-right">
         <form className="container my-5 ms-5 text-end">
           <div className="row mb-4">

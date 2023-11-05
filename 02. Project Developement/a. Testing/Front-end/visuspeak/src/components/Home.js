@@ -5,13 +5,13 @@ import { Link } from "react-router-dom";
 export default function Home() {
   return (
     <>
-      <div class="hero px-4 py-5 text-center shadow-lg">
-        <h1 class="display-3 mt-5 fw-bold ">
+      <div className="hero px-4 py-5 text-center shadow-lg">
+        <h1 className="display-3 mt-5 fw-bold ">
           Welcome to VisuSpeak
         </h1>
-        <div class="col-lg-6 mx-auto">
-          <h1 class="display-5 text-body-emphasis">Your ASL Companion</h1>
-          <div class="d-grid gap-2 d-sm-flex justify-content-sm-center my-5">
+        <div className="col-lg-6 mx-auto">
+          <h1 className="display-5 text-body-emphasis">Your ASL Companion</h1>
+          <div className="d-grid gap-2 d-sm-flex justify-content-sm-center my-5">
             <Link
               to="/login"
               className="btn btn-lg button-style"
@@ -20,7 +20,6 @@ export default function Home() {
             >
               Login
             </Link>
-
             <Link
               to="/signup"
               className="btn btn-lg button-style"
@@ -32,7 +31,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div class="b-example-divider">
+      <div className="b-example-divider">
       </div>
       <div className="container my-5">
           <div className="row mt-5">

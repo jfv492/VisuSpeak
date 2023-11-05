@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export default function SignUp() {
   return (
     <div className="hero px-4 py-5 text-center shadow-lg">
-      <h1 class="display-3 mt-5 fw-bold ">Sign Up</h1>
+      <h1 className="display-3 mt-5 fw-bold ">Sign Up</h1>
       <div className="container text-right">
         <form className="container my-5 ms-5 text-end">
           <div className="row mb-4">
@@ -66,11 +66,11 @@ export default function SignUp() {
           <div className="row mb-4 align-items-center">
             <label className="col-sm-3 col-form-label"><input
                   type="checkbox"
-                  class="form-check-input"
+                  className="form-check-input"
                   id="exampleCheck1"
                 /></label>
             <div className="col-sm-7 text-start"> 
-                <label class="form-check-label col-form-label" for="exampleCheck1">
+                <label className="form-check-label col-form-label" for="exampleCheck1">
                   Do you agee with the terms and conditions
                 </label>
             </div>

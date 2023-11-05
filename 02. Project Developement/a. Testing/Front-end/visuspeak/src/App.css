@@ -109,6 +109,11 @@
   background-color: black;
 }
 
+.nav-link:hover, .nav-link:focus {
+  background-color: #7d255b;
+  color: white;
+}
+
 .nav-link {
   color: black;
 }

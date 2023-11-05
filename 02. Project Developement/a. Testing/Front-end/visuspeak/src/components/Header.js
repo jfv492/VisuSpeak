@@ -12,9 +12,9 @@ export default function Header() {
               <img src={ColourLogo} alt="VisuSpeak Logo" width="150" />
             </Link>
             <ul className="nav nav-pills nav-pills-link-active-color justify-content-end mx-5 ">
-              <li class="nav-item dropdown">
+              <li className="nav-item dropdown">
                 <a
-                  class="nav-link dropdown-toggle"
+                  className="nav-link dropdown-toggle"
                   href="#"
                   role="button"
                   data-bs-toggle="dropdown"
@@ -22,17 +22,17 @@ export default function Header() {
                 >
                   Chat
                 </a>
-                <ul class="dropdown-menu p-2 shadow-lg">
+                <ul className="dropdown-menu p-2 shadow-lg">
                   <li>
-                    <a class="dropdown-item" href="#">
+                    <a className="dropdown-item" href="#">
                       New Chat
                     </a>
                   </li>
                   <li>
-                    <hr class="dropdown-divider" />
+                    <hr className="dropdown-divider" />
                   </li>
                   <li>
-                    <a class="dropdown-item" href="#">
+                    <a className="dropdown-item" href="#">
                       Chat History
                     </a>
                   </li>
@@ -71,7 +71,7 @@ export default function Header() {
                     </a>
                   </li>
                   <li>
-                    <hr class="dropdown-divider" />
+                    <hr className="dropdown-divider" />
                   </li>
                   <li>
                     <a className="dropdown-item" href="/">
