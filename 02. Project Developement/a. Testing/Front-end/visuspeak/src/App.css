@@ -48,7 +48,7 @@
 }
 
 .button-style:hover {
-  background-color: #000000;
+  background-color: #006262;
   color: white;
   width: 150px;
   font-size: x-large;
@@ -65,7 +65,8 @@
 }
 
 .btn-outline-dark:hover {
-  border-color: #000000;
+  border-color: #006262;
+  background-color: #006262;
   border-width: 0.2rem;
   color: #ffffff;
   width: 150px;
@@ -106,7 +107,7 @@
 .nav-pills .nav-link.active,
 .nav-pills .show>.nav-link {
   color: white;
-  background-color: black;
+  background-color: #006262;
 }
 
 .nav-link:hover, .nav-link:focus {
@@ -145,4 +146,16 @@ footer {
   height: 30px;
   width: 30px;
   border-color: #000000;
+}
+
+.form-error {
+  color: #993a3a;
+}
+
+.hyperlink {
+  color: #7d255b;
+}
+
+.hyperlink:hover {
+  color: #006262;
 }

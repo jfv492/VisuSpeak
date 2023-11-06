@@ -25,7 +25,7 @@
 
 //   const handleSubmit = (e) => {
 //     e.preventDefault();
-    
+
 //     // Send the form data to the server using Axios
 //     axios
 //     .post(signupUrl, formData) // Replace with the correct URL for your server's signup endpoint
@@ -201,7 +201,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 export default function SignUp() {
-  const serverUrl = 'http://localhost:8081';
+  const serverUrl = "http://localhost:8081";
   const signupUrl = `${serverUrl}/auth/signup`;
 
   const [formData, setFormData] = useState({
@@ -221,7 +221,7 @@ export default function SignUp() {
     const newValue = type === "checkbox" ? checked : value;
     setFormData({ ...formData, [name]: newValue });
     // Reset individual field error
-    setErrors({ ...errors, [name]: '' });
+    setErrors({ ...errors, [name]: "" });
   };
 
   const handleSubmit = (e) => {
@@ -231,9 +231,10 @@ export default function SignUp() {
 
     // Check for blank fields
     for (const [key, value] of Object.entries(formData)) {
-      if (!value && key !== 'agreeTerms') { // agreeTerms is a boolean, it should be checked separately
+      if (!value && key !== "agreeTerms") {
+        // agreeTerms is a boolean, it should be checked separately
         formIsValid = false;
-        currentErrors[key] = 'This field cannot be blank.';
+        currentErrors[key] = "This field cannot be blank.";
       }
     }
 
@@ -241,19 +242,19 @@ export default function SignUp() {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(formData.email)) {
       formIsValid = false;
-      currentErrors.email = 'Please enter a valid email address.';
+      currentErrors.email = "Please enter a valid email address.";
     }
 
     // Check if passwords match
     if (formData.password !== formData.confirmPassword) {
       formIsValid = false;
-      currentErrors.confirmPassword = 'Passwords do not match.';
+      currentErrors.confirmPassword = "Passwords do not match.";
     }
 
     // Check if terms and conditions are agreed to
     if (!formData.agreeTerms) {
       formIsValid = false;
-      currentErrors.agreeTerms = 'You must agree to the terms and conditions.';
+      currentErrors.agreeTerms = "You must agree to the terms and conditions.";
     }
 
     setErrors(currentErrors);
@@ -278,20 +279,27 @@ export default function SignUp() {
   // Form input fields
   const formField = (name, label, type = "text", isCheckbox = false) => (
     <div className="row mb-4">
-      <label htmlFor={name} className={`col-sm-3 col-form-label${isCheckbox ? ' form-check-label' : ''}`}>
+      <label
+        htmlFor={name}
+        className={`col-sm-3 col-form-label${
+          isCheckbox ? " form-check-label" : ""
+        }`}
+      >
         {label}:
       </label>
       <div className="col-sm-7">
         <input
           type={type}
-          className={`form-control${isCheckbox ? ' form-check-input' : ''}`}
+          className={`form-control${isCheckbox ? " form-check-input" : ""}`}
           id={name}
           name={name}
           value={formData[name]}
           onChange={handleChange}
           checked={type === "checkbox" ? formData[name] : undefined}
         />
-        {!isCheckbox && errors[name] && <div style={{ color: 'red' }}>{errors[name]}</div>}
+        {errors[name] && (
+          <div class="text-start form-error">{errors[name]}</div>
+        )}
       </div>
     </div>
   );
@@ -307,9 +315,27 @@ export default function SignUp() {
           {formField("email", "Email")}
           {formField("password", "Password", "password")}
           {formField("confirmPassword", "Confirm Password", "password")}
-          {formField("agreeTerms", "Do you agree with the terms and conditions", "checkbox", true)}
-          {errors.agreeTerms && <div className="text-start" style={{ color: 'red' }}>{errors.agreeTerms}</div>}
-          <div className="row mb-4">
+          <div className="row mb-4"></div>
+          <div className="col-sm-7">
+            <div className="justify-content-center">
+              <label className="form-check-label col-form-label mx-3" htmlFor="agreeTerms">
+                Do you agree with the <Link className="hyperlink" to="/">terms and conditions</Link>?
+              </label>
+              <input
+                type="checkbox"
+                className="form-check-input"
+                id="agreeTerms"
+                name="agreeTerms"
+                checked={formData.agreeTerms}
+                onChange={handleChange}
+                
+              />
+              {errors.agreeTerms && (
+                <div class="form-error">{errors.agreeTerms}</div>
+              )}
+            </div>
+          </div>
+          <div className="row mt-4 mb-4">
             <div className="col-sm-7 offset-sm-3">
               <div className="d-grid gap-2 d-md-flex justify-content-md-end">
                 <button
@@ -337,4 +363,3 @@ export default function SignUp() {
     </div>
   );
 }
-

@@ -5,27 +5,6 @@ const db = require('../db'); // Import the database connection
 // User registration (signup)
 router.post('/signup', (req, res) => {
     const { firstName, lastName, username, email, password } = req.body;
-
-    // // Backend validation logic
-    // if (!firstName || !lastName || !username || !email || !password || !confirmPassword || !agreeTerms) {
-    //   return res.status(400).json({ error: 'Please fill in all fields.' });
-    // }
-  
-    // // Validating email
-    // const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    // if (!emailRegex.test(email)) {
-    //   return res.status(400).json({ error: 'Invalid email address.' });
-    // }
-  
-    // // Check if passwords match
-    // if (password !== confirmPassword) {
-    //   return res.status(400).json({ error: 'Passwords do not match.' });
-    // }
-
-    // // Check if terms and conditions are agreed to
-    // if (!agreeTerms) {
-    //   return res.status(400).json({ error: 'You must agree to the terms and conditions.' });
-    // }
   
     const sql = 'INSERT INTO user (FirstName, LastName, Username, Email, Password) VALUES (?, ?, ?, ?, ?)';
     db.query(sql, [firstName, lastName, username, email, password], (err, result) => {

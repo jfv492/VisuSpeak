@@ -11,7 +11,7 @@ export default function Home() {
         </h1>
         <div className="col-lg-6 mx-auto">
           <h1 className="display-5 text-body-emphasis">Your ASL Companion</h1>
-          <div className="d-grid gap-2 d-sm-flex justify-content-sm-center my-5">
+          <div className="d-grid gap-4 d-sm-flex justify-content-sm-center my-5">
             <Link
               to="/login"
               className="btn btn-lg button-style"
