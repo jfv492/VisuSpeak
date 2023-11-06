@@ -17,7 +17,17 @@ export default function SignUp() {
     agreeTerms: false,
   });
 
-  const [formErrors, setFormErrors] = useState({});
+  const [formErrors, setFormErrors] = useState({
+    firstName: "",
+    lastName: "",
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    agreeTerms: "",
+  });
+
+  // const [formErrors, setFormErrors] = useState({});
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -36,11 +46,19 @@ export default function SignUp() {
         // You can add a redirect or show a success message here
       })
       .catch((error) => {
+        // Here you add the new error handling code
         if (error.response && error.response.status === 422) {
-          // Assuming the backend sends back an array of objects
+          // Formatting the errors received from the backend
           const errors = error.response.data.errors;
-          console.log(errors);
-          setFormErrors(error.response.data.errors);
+          let formattedErrors = {};
+          errors.forEach(error => {
+            const fieldName = Object.keys(error)[0];
+            formattedErrors[fieldName] = error[fieldName];
+            // setFormErrors(formattedErrors);
+            // console.log(formattedErrors);
+          });
+          setFormErrors(formattedErrors);
+          
         } else {
           // Handle other types of errors or set a general error
           setFormErrors({
@@ -62,7 +80,7 @@ export default function SignUp() {
             <div className="col-sm-7">
               <input
                 type="text"
-                className="form-control firstName"
+                className={`form-control ${formErrors.firstName ? 'is-invalid' : ''}`}
                 id="firstName"
                 name="firstName"
                 value={formData.firstName}
