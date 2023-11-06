@@ -4,18 +4,36 @@ const db = require('../db'); // Import the database connection
 
 // User registration (signup)
 router.post('/signup', (req, res) => {
-    const { firstName, lastName, username, email, password } = req.body;
-  
-    const sql = 'INSERT INTO user (FirstName, LastName, Username, Email, Password) VALUES (?, ?, ?, ?, ?)';
-    db.query(sql, [firstName, lastName, username, email, password], (err, result) => {
-      if (err) {
-        console.error('Error registering user: ' + err.message);
-        return res.status(500).json({ error: 'Error registering user' });
-      }
-      console.log('User registered successfully');
-      return res.status(200).json({ message: 'User registered successfully' });
-    });
+  const { firstName, lastName, username, email, password } = req.body;
+
+  // Query to check if the email or username already exists
+  const checkUserSql = 'SELECT * FROM user WHERE Username = ? OR Email = ?';
+  db.query(checkUserSql, [username, email], (err, result) => {
+    if (err) {
+      console.error('Error checking user: ' + err.message);
+      console.log('Sending 500 response due to server error on checking user.');
+      return res.status(500).json({ error: 'Error checking user' });
+    }
+    
+    if (result.length > 0) {
+      // User with the same username or email already exists
+      console.log('Username or email already exists. Sending 409 response.');
+      return res.status(409).json({ error: 'Username or email already exists' });
+    } else {
+      // No user with the username or email exists, proceed with registration
+      const sql = 'INSERT INTO user (FirstName, LastName, Username, Email, Password) VALUES (?, ?, ?, ?, ?)';
+      db.query(sql, [firstName, lastName, username, email, password], (insertErr, insertResult) => {
+        if (insertErr) {
+          console.error('Error registering user: ' + insertErr.message);
+          console.log('Sending 500 response due to server error on user registration.');
+          return res.status(500).json({ error: 'Error registering user' });
+        }
+        console.log('User registered successfully. Sending 200 response.');
+        return res.status(200).json({ message: 'User registered successfully' });
+      });
+    }
   });
+});
 
 // User login
 router.post('/login', (req, res) => {
