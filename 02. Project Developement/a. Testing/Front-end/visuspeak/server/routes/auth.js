@@ -19,28 +19,35 @@ router.post('/signup', (req, res) => {
 
 // User login
 router.post('/login', (req, res) => {
-  const { email, password } = req.body;
+  const { username, password } = req.body;
 
-  // Implement user authentication logic here, including checking credentials
-  // You may use libraries like bcrypt to compare hashed passwords
+  // Check if username and password are provided
+  if (!username || !password) {
+    return res.status(400).json({ error: 'Username and password cannot be empty' });
+  }
 
-  const sql = 'SELECT * FROM users WHERE email = ?';
-  db.query(sql, [email], (err, data) => {
+  const sql = 'SELECT * FROM user WHERE Username = ?';
+  db.query(sql, [username], (err, data) => {
     if (err) {
       console.error('Error during login: ' + err.message);
       return res.status(500).json({ error: 'Error during login' });
     }
 
+    console.log('Data from the database:', data[0]);
+
     if (data.length === 0) {
-      return res.status(401).json({ error: 'User not found' });
+      console.log('Login failed: User not found');
+      return res.status(401).json({ error: 'Invalid credentials' });
     }
 
-    // Implement password comparison logic here
-    // Example: if (bcrypt.compareSync(password, data[0].password)) {
-    //   return res.status(200).json({ message: 'Login successful' });
-    // } else {
-    //   return res.status(401).json({ error: 'Invalid password' });
-    // }
+    const user = data[0];
+    if (password === user.Password) {
+      console.log('User logged in successfully');
+      return res.status(200).json({ message: 'User logged in successfully' });
+    } else {
+      console.log('Invalid password');
+      return res.status(401).json({ error: 'Invalid credentials' });
+    }
   });
 });
 

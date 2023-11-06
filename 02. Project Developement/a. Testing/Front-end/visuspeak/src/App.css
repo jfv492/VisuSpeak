@@ -159,3 +159,7 @@ footer {
 .hyperlink:hover {
   color: #006262;
 }
+
+.alert {
+  width: 200px,
+}
