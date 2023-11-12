@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
-export default function SignUp() {
+export default function SignUp(props) {
   const PORT = process.env.PORT || 8081
   const serverUrl = `http://localhost:${PORT}`;
   const signupUrl = `${serverUrl}/auth/signup`;
+  let navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -71,24 +72,29 @@ export default function SignUp() {
       axios
         .post(signupUrl, formData)
         .then((response) => {
-          console.log("Signup successful", response.data);
+          console.log("Signup successful.", response.data);
+          props.showAlert("Signup successful.", "success");
           // Update the state with the success message from the server
           setErrors({});
           // Optionally, include a state to manage success messages
           setSuccess(response.data.message);
           // Redirect or show success message
+          navigate("/login");
         })
         .catch((error) => {
           console.error("Signup failed", error);
+          props.showAlert("Signup failed.", "danger");
           // Update the state with the error message from the server
           if (error.response && error.response.data) {
             // Handle the case where there's a response with a data payload
             setErrors({ form: error.response.data.error });
+            props.showAlert(error.response.data.error, "danger");
           } else {
             // Handle the case where the error doesn't have a response (e.g., network error)
             setErrors({
               form: "An unexpected error occurred. Please try again later.",
             });
+            props.showAlert("An unexpected error occurred. Please try again later.", "danger");
           }
         });
     }
@@ -124,13 +130,9 @@ export default function SignUp() {
 
   return (
     <div className="hero px-4 py-5 text-center shadow-lg">
-      <h1 className="display-3 mt-5 fw-bold ">Sign Up</h1>
+      <h1 className="display-3 mt-5 fw-bold ">{props.heading}</h1>
 
       <div className="container text-right">
-        {errors.form && (
-          <div className="text-center form-error">{errors.form}</div>
-        )}
-        {success && <div className="alert alert-success">{success}</div>}
         <form className="container my-5 ms-5 text-end" onSubmit={handleSubmit}>
           {formField("firstName", "First Name")}
           {formField("lastName", "Last Name")}

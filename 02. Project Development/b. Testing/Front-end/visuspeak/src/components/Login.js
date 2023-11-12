@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-export default function Login() {
+export default function Login(props) {
   const PORT = process.env.PORT || 8081
   const serverUrl = `http://localhost:${PORT}`;
   const loginUrl = `${serverUrl}/auth/login`;
@@ -31,17 +31,19 @@ export default function Login() {
       .post(loginUrl, formData)
       .then((response) => {
         console.log("Login successful", response.data);
+        props.showAlert("Login successful.", "success");
         // Handle successful login
       })
       .catch((error) => {
         console.error("Login failed", error);
+        props.showAlert("Login failed.", "danger");
         setError("Invalid credentials. Please try again.");
       });
   };
 
   return (
     <div className="hero px-4 py-5 text-center shadow-lg">
-      <h1 className="display-3 mt-5 fw-bold ">Login</h1>
+      <h1 className="display-3 mt-5 fw-bold ">{props.heading}</h1>
 
       <div className="container text-right">
         <div class="container text-center">
