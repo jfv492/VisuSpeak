@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export default function Login(props) {
   const PORT = process.env.PORT || 8081
   const serverUrl = `http://localhost:${PORT}`;
   const loginUrl = `${serverUrl}/auth/login`;
+  let navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     username: "",
@@ -19,9 +20,8 @@ export default function Login(props) {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (!formData.username || !formData.password) {
       setError("Username and password cannot be empty.");
       return;
@@ -32,7 +32,11 @@ export default function Login(props) {
       .then((response) => {
         console.log("Login successful", response.data);
         props.showAlert("Login successful.", "success");
+        setError();
         // Handle successful login
+        const json = response.data;
+        localStorage.setItem('username', json.username);
+        navigate("/chat");
       })
       .catch((error) => {
         console.error("Login failed", error);

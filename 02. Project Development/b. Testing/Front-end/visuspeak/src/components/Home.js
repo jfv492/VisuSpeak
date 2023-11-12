@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import StockImage from "../images/FillerPhoto.jpg";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export default function Home() {
+  let location = useLocation();
+
+  useEffect(() => {
+    console.log(location.pathname);
+  }, [location]);
+
   return (
     <>
-      <div className="hero px-4 py-5 text-center shadow-lg">
+      <div className={`hero px-4 py-5 text-center shadow-lg  ${
+                    location.pathname === "/about" ? "d-none" : ""
+                  }`} >
         <h1 className="display-3 mt-5 fw-bold ">
           Welcome to VisuSpeak
         </h1>
@@ -31,7 +39,9 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="b-example-divider">
+      <div className={`b-example-divider  ${
+                    location.pathname === "/about" ? "d-none" : ""
+                  }`}>
       </div>
       <div className="container my-5">
           <div className="row mt-5">

@@ -1,8 +1,18 @@
 import ColourLogo from "../images/PrimaryLogo.png";
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 export default function Header() {
+  let navigate = useNavigate();
+  const handleSignOut = () => {
+    localStorage.clear();
+    navigate("/");
+  };
+  let location = useLocation();
+
+  useEffect(() => {
+    console.log(location.pathname);
+  }, [location]);
   return (
     <>
       <div>
@@ -13,42 +23,69 @@ export default function Header() {
             </Link>
             <ul className="nav nav-pills nav-pills-link-active-color justify-content-end mx-5 ">
               <li className="nav-item dropdown">
-                <a
-                  className="nav-link dropdown-toggle"
-                  href="/"
+                <Link
+                  className={`nav-link dropdown-toggle ${
+                    location.pathname === "/chat" ? "active" : ""
+                  } ${
+                    localStorage.getItem("username") === null ? "disabled" : ""
+                  }`}
+                  to="/chat"
                   role="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
                   Chat
-                </a>
+                </Link>
                 <ul className="dropdown-menu p-2 shadow-lg">
                   <li>
-                    <a className="dropdown-item" href="/">
+                    <Link className="dropdown-item" to="/">
+                      <i
+                        class="fa-solid fa-message me-2"
+                        style={{ color: "#000000" }}
+                      ></i>
                       New Chat
-                    </a>
+                    </Link>
                   </li>
                   <li>
                     <hr className="dropdown-divider" />
                   </li>
                   <li>
-                    <a className="dropdown-item" href="/">
+                    <Link className="dropdown-item" to="/">
+                      <i
+                        class="fa-solid fa-bars me-2"
+                        style={{ color: "#000000" }}
+                      ></i>
                       Chat History
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </li>
               <li className="nav-item">
-                <a className="nav-link" aria-current="page" href="/">
+                <Link
+                  className={`nav-link ${
+                    location.pathname === "/resources" ? "active" : ""
+                  }`}
+                  aria-current="page"
+                  to="/resources"
+                >
                   ASL Resources
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="/">
+                <Link
+                  className={`nav-link ${
+                    location.pathname === "/about" ? "active" : ""
+                  }`}
+                  to="/about"
+                >
                   About Us
-                </a>
+                </Link>
               </li>
-              <li className="nav-item dropdown">
+              <li
+                className={`nav-item dropdown mt-2 verticalLine ${
+                  localStorage.getItem("username") === null ? "d-none" : ""
+                }`}
+              >
                 <Link
                   to="/"
                   className="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle dropdown-toggle-split"
@@ -56,27 +93,39 @@ export default function Header() {
                   data-bs-display="static"
                   aria-expanded="false"
                 >
-                  <img
-                    src="https://github.com/mdo.png"
-                    alt=""
-                    width="40"
-                    height="40"
-                    className="rounded-circle me-2"
-                  />
+                  <i
+                    class="rounded-circle fa-solid fa-circle-user fa-2xl me-2"
+                    style={{ color: "#006463" }}
+                  ></i>
+                  <strong className="me-2">
+                    {localStorage.getItem("username")}
+                  </strong>
                 </Link>
                 <ul className="dropdown-menu dropdown-menu-lg-end p-2 shadow-lg">
                   <li>
-                    <a className="dropdown-item" href="/">
+                    <Link className="dropdown-item" to="/">
+                      <i
+                        class="fa-solid fa-gear me-3"
+                        style={{ color: "#000000" }}
+                      ></i>
                       Account Settings
-                    </a>
+                    </Link>
                   </li>
                   <li>
                     <hr className="dropdown-divider" />
                   </li>
                   <li>
-                    <a className="dropdown-item" href="/">
+                    <Link
+                      className="dropdown-item"
+                      onClick={handleSignOut}
+                      to="/"
+                    >
+                      <i
+                        class="fa-solid fa-right-from-bracket me-3"
+                        style={{ color: "#000000" }}
+                      ></i>
                       Logout
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </li>

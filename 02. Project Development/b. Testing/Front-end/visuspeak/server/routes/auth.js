@@ -61,7 +61,7 @@ router.post('/login', (req, res) => {
     const user = data[0];
     if (password === user.Password) {
       console.log('User logged in successfully');
-      return res.status(200).json({ message: 'User logged in successfully' });
+      return res.status(200).json({ message: 'User logged in successfully', username: username });
     } else {
       console.log('Invalid password');
       return res.status(401).json({ error: 'Invalid credentials' });

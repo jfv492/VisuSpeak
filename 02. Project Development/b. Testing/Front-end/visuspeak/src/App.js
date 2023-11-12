@@ -5,6 +5,7 @@ import Home from "./components/Home.js";
 import Login from "./components/Login.js";
 import SignUp from "./components/SignUp.js";
 import Alert from "./components/Alert.js";
+import Chat from "./components/Chat.js";
 import React, { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
@@ -29,6 +30,8 @@ function App() {
           <Alert alert={alert}/>
           <Routes>
             <Route exact path="/" element={<Home />} />
+            <Route exact path="/chat" element={<Chat />} />
+            <Route exact path="/about" element={<Home />} />
             <Route exact path="/login" element={<Login heading="Login" showAlert={showAlert}/>} />
             <Route exact path="/signup" element={<SignUp heading="Sign Up" showAlert={showAlert}/>} />
           </Routes>

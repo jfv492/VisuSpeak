@@ -47,6 +47,22 @@
   font-weight: bold;
 }
 
+.large-button-style {
+  background-color: #7d255b;
+  color: white;
+  height: 70px;
+  font-size: x-large;
+  font-weight: bold;
+}
+
+.large-button-style:hover {
+  background-color: #006262;
+  color: white;
+  height: 70px;
+  font-size: x-large;
+  font-weight: bold;
+}
+
 .button-style:hover {
   background-color: #006262;
   color: white;
@@ -81,8 +97,8 @@
 }
 
 .dropdown-menu {
-  border-color: #7d255b;
-  border-width: 5px;
+  /* border-color: #7d255b;
+  border-width: 5px; */
   font-size: larger;
 }
 
