@@ -1,0 +1,165 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+
+}
+
+.button-style {
+  background-color: #7d255b;
+  color: white;
+  width: 150px;
+  font-size: x-large;
+  font-weight: bold;
+}
+
+.button-style:hover {
+  background-color: #006262;
+  color: white;
+  width: 150px;
+  font-size: x-large;
+  font-weight: bold;
+}
+
+.btn-outline-dark {
+  border-color: #7d255b;
+  border-width: 0.2rem;
+  color: #7d255b;
+  width: 150px;
+  font-size: x-large;
+  font-weight: bold;
+}
+
+.btn-outline-dark:hover {
+  border-color: #006262;
+  background-color: #006262;
+  border-width: 0.2rem;
+  color: #ffffff;
+  width: 150px;
+  font-size: x-large;
+  font-weight: bold;
+}
+
+.navbar {
+  font-size: larger;
+  background-color: #FEFCFD;
+  border-bottom: #7d255b;
+}
+
+.dropdown-menu {
+  border-color: #7d255b;
+  border-width: 5px;
+  font-size: larger;
+}
+
+.b-example-divider {
+  background-color: #00000018;
+  height: 50px;
+}
+
+.large-text-style {
+  font-size: larger;
+}
+
+.page-container {
+  position: relative;
+  min-height: 100vh;
+}
+
+.content-wrap {
+  padding-bottom: 6rem;
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show>.nav-link {
+  color: white;
+  background-color: #006262;
+}
+
+.nav-link:hover, .nav-link:focus {
+  background-color: #7d255b;
+  color: white;
+}
+
+.nav-link {
+  color: black;
+}
+
+footer {
+  color: white;
+  background-color: black;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 6rem;
+}
+
+.col-form-label{
+  font-size: larger;
+  font-weight: bold;
+}
+
+.form-control {
+  border-color: #000000;
+}
+
+.form-control:focus {
+  border-color: #7d255b;
+  border-width: 0.2rem;
+}
+
+.form-check-input {
+  height: 30px;
+  width: 30px;
+  border-color: #000000;
+}
+
+.form-error {
+  color: #993a3a;
+}
+
+.hyperlink {
+  color: #7d255b;
+}
+
+.hyperlink:hover {
+  color: #006262;
+}
+
+.alert {
+  width: 200px,
+}
