@@ -50,13 +50,13 @@ export default function Login(props) {
       <h1 className="display-3 mt-5 fw-bold ">{props.heading}</h1>
 
       <div className="container text-right">
-        <div class="container text-center">
-          <div class="row">
-            <div class="col"></div>
-            <div class="col">
+        <div className="container text-center">
+          <div className="row">
+            <div className="col"></div>
+            <div className="col">
               
             </div>
-            <div class="col"></div>
+            <div className="col"></div>
           </div>
         </div>
         <form className="container mb-5 ms-5 text-end" onSubmit={handleSubmit}>

@@ -38,9 +38,9 @@ export default function Header() {
                 </Link>
                 <ul className="dropdown-menu p-2 shadow-lg">
                   <li>
-                    <Link className="dropdown-item" to="/">
+                    <Link className="dropdown-item" to="/new-chat">
                       <i
-                        class="fa-solid fa-message me-2"
+                        className="fa-solid fa-message me-2"
                         style={{ color: "#000000" }}
                       ></i>
                       New Chat
@@ -50,9 +50,9 @@ export default function Header() {
                     <hr className="dropdown-divider" />
                   </li>
                   <li>
-                    <Link className="dropdown-item" to="/">
+                    <Link className="dropdown-item" to="/transcript-history">
                       <i
-                        class="fa-solid fa-bars me-2"
+                        className="fa-solid fa-bars me-2"
                         style={{ color: "#000000" }}
                       ></i>
                       Chat History
@@ -94,7 +94,7 @@ export default function Header() {
                   aria-expanded="false"
                 >
                   <i
-                    class="rounded-circle fa-solid fa-circle-user fa-2xl me-2"
+                    className="rounded-circle fa-solid fa-circle-user fa-2xl me-2"
                     style={{ color: "#006463" }}
                   ></i>
                   <strong className="me-2">
@@ -103,9 +103,9 @@ export default function Header() {
                 </Link>
                 <ul className="dropdown-menu dropdown-menu-lg-end p-2 shadow-lg">
                   <li>
-                    <Link className="dropdown-item" to="/">
+                    <Link className="dropdown-item" to="/account-settings">
                       <i
-                        class="fa-solid fa-gear me-3"
+                        className="fa-solid fa-gear me-3"
                         style={{ color: "#000000" }}
                       ></i>
                       Account Settings
@@ -121,7 +121,7 @@ export default function Header() {
                       to="/"
                     >
                       <i
-                        class="fa-solid fa-right-from-bracket me-3"
+                        className="fa-solid fa-right-from-bracket me-3"
                         style={{ color: "#000000" }}
                       ></i>
                       Logout

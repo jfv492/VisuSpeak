@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import StockImage from "../images/FillerPhoto.jpg";
 import { Link, useLocation } from "react-router-dom";
 
-export default function Home() {
+export default function NewChat() {
   let location = useLocation();
 
   useEffect(() => {
@@ -11,48 +11,12 @@ export default function Home() {
 
   return (
     <>
-      <div className={`hero px-4 py-5 text-center shadow-lg  ${
-                  localStorage.getItem("username") !== null ? "d-none" : ""
-                }`} >
-        <h1 className="display-3 mt-5 fw-bold ">
-          Welcome to VisuSpeak
-        </h1>
-        <div className="col-lg-6 mx-auto">
-          <h1 className="display-5 text-body-emphasis">Your ASL Companion</h1>
-          <div className="d-grid gap-4 d-sm-flex justify-content-sm-center my-5">
-            <Link
-              to="/login"
-              className="btn btn-lg button-style"
-              tabIndex="1"
-              role="button"
-            >
-              Login
-            </Link>
-            <Link
-              to="/signup"
-              className="btn btn-lg button-style"
-              tabIndex="2"
-              role="button"
-            >
-              Sign Up
-            </Link>
-          </div>
-        </div>
-      </div>
-
-      <div className={`hero px-4 py-5 text-center shadow-lg  ${
-                  localStorage.getItem("username") === null ? "d-none" : ""
-                }`} >
-        <h1 className="display-3 mt-5 fw-bold ">
-          Welcome, {localStorage.getItem("username")}!
-        </h1>
-      </div>
-
-      <div className={`b-example-divider  ${
-                    location.pathname === "/about" ? "d-none" : ""
-                  }`}>
-      </div>
       <div className="container my-5">
+        <div>
+            <h1 className="display-3 mt-5 fw-bold ">
+                New Chat
+            </h1>
+        </div>        
           <div className="row mt-5">
             <div className="col large-text-style">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
