@@ -122,7 +122,7 @@ export default function SignUp(props) {
           checked={type === "checkbox" ? formData[name] : undefined}
         />
         {errors[name] && (
-          <div className="text-start form-error">{errors[name]}</div>
+          <div class="text-start form-error">{errors[name]}</div>
         )}
       </div>
     </div>
@@ -162,7 +162,7 @@ export default function SignUp(props) {
                 onChange={handleChange}
               />
               {errors.agreeTerms && (
-                <div className="form-error">{errors.agreeTerms}</div>
+                <div class="form-error">{errors.agreeTerms}</div>
               )}
             </div>
           </div>

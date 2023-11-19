@@ -12,8 +12,8 @@ export default function Home() {
   return (
     <>
       <div className={`hero px-4 py-5 text-center shadow-lg  ${
-                  localStorage.getItem("username") !== null ? "d-none" : ""
-                }`} >
+                    location.pathname === "/about" ? "d-none" : ""
+                  }`} >
         <h1 className="display-3 mt-5 fw-bold ">
           Welcome to VisuSpeak
         </h1>
@@ -39,15 +39,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-
-      <div className={`hero px-4 py-5 text-center shadow-lg  ${
-                  localStorage.getItem("username") === null ? "d-none" : ""
-                }`} >
-        <h1 className="display-3 mt-5 fw-bold ">
-          Welcome, {localStorage.getItem("username")}!
-        </h1>
-      </div>
-
       <div className={`b-example-divider  ${
                     location.pathname === "/about" ? "d-none" : ""
                   }`}>

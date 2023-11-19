@@ -12,39 +12,16 @@ export default function Login(props) {
   return (
     <div className="hero px-4 py-5 text-center shadow-lg">
       <div className="container text-right">
-        <div className="container text-center">
-          <div className="row">
-            <div className="container my-5">
-              <div>
-                <h1 className="display-3 mt-5 fw-bold ">
-                  Welcome, {localStorage.getItem("username")}!
-                </h1>
-              </div>
-            </div>
-            <div className="col">
-            </div>
-            <div className="col">
-            <div className="d-grid gap-2">
-              <Link
-                to="/new-chat"
-                className="btn btn-lg large-button-style my-5"
-                tabIndex="1"
-                role="button"
-              >
-                Start New Chat
-              </Link>
-            
-              <Link
-                to="/transcript-history"
-                className="btn large-button-style btn-lg mb-5"
-                tabIndex="2"
-                role="button"
-              >
-                View Transcript History
-              </Link>
+        <div class="container text-center">
+          <div class="row">
+            <div class="col"></div>
+            <div class="col">
+            <div class="d-grid gap-2">
+            <button class="btn large-button-style btn-lg my-5" type="button">Start New Chat</button>
+            <button class="btn large-button-style btn-lg mb-5" type="button">View Transcript History</button>
             </div>
             </div>
-            <div className="col"></div>
+            <div class="col"></div>
           </div>
         </div>
       </div>
