@@ -31,7 +31,7 @@ export default function Header() {
                   }`}
                   to="/chat"
                   role="button"
-                  data-bs-toggle="dropdown"
+                  // data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
                   Chat

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import VideoComponent from './VideoComponent.js'
 
 export default function Login(props) {
   let navigate = useNavigate();
@@ -15,21 +17,7 @@ export default function Login(props) {
           <div class="row">
             <div class="col"></div>
             <div class="col">
-              <div class="d-grid gap-2 my-2">
-                <Link
-                  to="/video"
-                  class="btn large-button-style btn-lg my-5"
-                  type="button"
-                >
-                  Start New Chat
-                </Link>
-                <button
-                  class="btn large-button-style btn-lg mb-5"
-                  type="button"
-                >
-                  View Transcript History
-                </button>
-              </div>
+              <VideoComponent />
             </div>
             <div class="col">
             
