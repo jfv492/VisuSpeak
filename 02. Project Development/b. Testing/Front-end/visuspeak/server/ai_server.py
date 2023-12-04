@@ -1,16 +1,18 @@
 # backend/server.py
 from flask import Flask, request, jsonify
 from model import create_model  
-from processing import preprocess_for_vgg  # Your preprocessing function
+from processing import preprocess_for_vgg 
 import numpy as np
 import cv2
 import base64
 import string
+import time
+import argparse
 
 app = Flask(__name__)
 
 # Load your model here
-my_model = create_model(model='vgg16', model_weights_path='/sign2text/weights/snapshot_vgg_weights.hdf5')
+my_model = create_model(model='vgg16', model_weights_path='./sign2text/weights/snapshot_vgg_weights.hdf5')
 
 # Convert numerical classes to alphabet
 label_dict = {pos: letter for pos, letter in enumerate(string.ascii_uppercase)}
