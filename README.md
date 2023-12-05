@@ -12,6 +12,7 @@ Our proposed project will enhance accessibility for individuals with vocal and h
 
 ## 🎬 Project Vlogs
 - [Vlog 1 - Project Introduction](https://youtu.be/OcyOhmqbeCk)
+- [Vlog 2 - Project Update](https://youtu.be/Btn4pApUPg8)
 
 
 ## 👥 Team Members
