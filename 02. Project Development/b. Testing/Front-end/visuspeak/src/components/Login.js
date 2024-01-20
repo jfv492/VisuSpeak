@@ -34,8 +34,11 @@ export default function Login(props) {
         props.showAlert("Login successful.", "success");
         setError();
         // Handle successful login
+        
         const json = response.data;
         localStorage.setItem('username', json.username);
+        localStorage.setItem('userID', json.userID);
+        localStorage.setItem('authtoken', json.authtoken);
         navigate("/chat");
       })
       .catch((error) => {
