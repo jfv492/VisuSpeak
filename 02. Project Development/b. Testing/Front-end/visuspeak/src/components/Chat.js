@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import Background from "./Background.js";
 
 export default function Login(props) {
   let navigate = useNavigate();
@@ -36,6 +37,9 @@ export default function Login(props) {
             </div>
           </div>
         </div>
+      </div>
+      <div>
+        <Background />
       </div>
     </div>
   );

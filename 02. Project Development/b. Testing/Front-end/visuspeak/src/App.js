@@ -6,7 +6,13 @@ import Login from "./components/Login.js";
 import SignUp from "./components/SignUp.js";
 import Alert from "./components/Alert.js";
 import Chat from "./components/Chat.js";
+<<<<<<< Updated upstream
 import NewChat from "./components/ChatContainer.js";
+=======
+import Video from "./components/Video.js";
+import About from "./components/About.js";
+import Resources from "./components/Resources.js";
+>>>>>>> Stashed changes
 import React, { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
@@ -32,10 +38,15 @@ function App() {
           <Routes>
             <Route exact path="/" element={<Home />} />
             <Route exact path="/chat" element={<Chat />} />
-            <Route exact path="/about" element={<Home />} />
+            <Route exact path="/about" element={<About />} />
             <Route exact path="/login" element={<Login heading="Login" showAlert={showAlert}/>} />
             <Route exact path="/signup" element={<SignUp heading="Sign Up" showAlert={showAlert}/>} />
+<<<<<<< Updated upstream
             <Route exact path="/newchat" element={<NewChat />} />
+=======
+            <Route exact path="/video" element={<Video />} />
+            <Route exact path="/resources" element={<Resources />} />
+>>>>>>> Stashed changes
           </Routes>
         </div>
         <Footer />

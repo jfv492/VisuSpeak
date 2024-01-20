@@ -40,7 +40,7 @@
 }
 
 .button-style {
-  background-color: #7d255b;
+  background-color: #006262;
   color: white;
   width: 150px;
   font-size: x-large;
@@ -48,7 +48,7 @@
 }
 
 .large-button-style {
-  background-color: #7d255b;
+  background-color: #006262;
   color: white;
   height: 70px;
   font-size: x-large;
@@ -72,9 +72,9 @@
 }
 
 .btn-outline-dark {
-  border-color: #7d255b;
+  border-color: #006262;
   border-width: 0.2rem;
-  color: #7d255b;
+  color: #006262;
   width: 150px;
   font-size: x-large;
   font-weight: bold;
@@ -93,7 +93,7 @@
 .navbar {
   font-size: larger;
   background-color: #FEFCFD;
-  border-bottom: #7d255b;
+  border-bottom: #006262;
 }
 
 .dropdown-menu {
@@ -127,7 +127,7 @@
 }
 
 .nav-link:hover, .nav-link:focus {
-  background-color: #7d255b;
+  background-color: #006262;
   color: white;
 }
 
@@ -178,4 +178,33 @@ footer {
 
 .alert {
   width: 200px,
+}
+
+h1 {
+  padding-left: 80px;
+}
+
+.hand-gesture-background {
+  max-width: 100%;
+  height: auto;
+}
+
+.resources-grid {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-row-gap: 50px;
+  grid-column-gap: 50px;
+}
+
+.resources-grid-item {
+  min-height: 300px;
+  border-style: solid;
+  border-width: 3px;
+  border-color: #bdbdbd;
+  border-radius: 5px;
+}
+
+.shadow-before-background {
+  min-height: 10px;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.2), 0 4px 6px -4px rgb(0 0 0 / 0.2);
 }

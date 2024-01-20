@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 import StockImage from "../images/FillerPhoto.jpg";
 import { Link, useLocation } from "react-router-dom";
+import Background from "./Background.js";
 
-export default function Home() {
+export default function About() {
   let location = useLocation();
 
   useEffect(() => {
@@ -10,39 +11,10 @@ export default function Home() {
   }, [location]);
 
   return (
-    <>
-      <div className={`hero px-4 py-5 text-center shadow-lg  ${
-                    location.pathname === "/about" ? "d-none" : ""
-                  }`} >
-        <h1 className="display-3 mt-5 fw-bold ">
-          Welcome to VisuSpeak
-        </h1>
-        <div className="col-lg-6 mx-auto">
-          <h1 className="display-5 text-body-emphasis">Your ASL Companion</h1>
-          <div className="d-grid gap-4 d-sm-flex justify-content-sm-center my-5">
-            <Link
-              to="/login"
-              className="btn btn-lg button-style" 
-              tabIndex="1"
-              role="button"
-            >
-              Login
-            </Link>
-            <Link
-              to="/signup"
-              className="btn btn-lg button-style"
-              tabIndex="2"
-              role="button"
-            >
-              Sign Up
-            </Link>
-          </div>
+    <>  
+    <div className="d-grid gap-4 d-sm-flex justify-content-flex-start my-5">
+            <h1 className="display-3 mt-5 fw-bold "> About Us </h1>
         </div>
-      </div>
-      <div className={`b-example-divider  ${
-                    location.pathname === "/about" ? "d-none" : ""
-                  }`}>
-      </div>
       <div className="container my-5">
           <div className="row mt-5">
             <div className="col large-text-style">
@@ -101,6 +73,10 @@ export default function Home() {
               <img src={StockImage} className="rounded mx-auto d-block" alt="..." height="350"/>
             </div>
           </div>
+      </div>
+ 
+      <div>
+        <Background />
       </div>
     </>
   );

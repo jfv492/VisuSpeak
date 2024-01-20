@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import Background from "./Background.js";
 
 export default function SignUp(props) {
   const PORT = process.env.PORT || 8081
@@ -129,68 +130,73 @@ export default function SignUp(props) {
   );
 
   return (
-    <div className="hero px-4 py-5 text-center shadow-lg">
-      <h1 className="display-3 mt-5 fw-bold ">{props.heading}</h1>
+    <> {/* This little container thing could mess up the submission for the form. I included it to make the handgesture bg appear shadowed (missing here, present on other pages) */}
+      <div className="hero px-4 py-5 text-center">
+        <h1 className="display-3 mt-5 fw-bold ">{props.heading}</h1>
 
-      <div className="container text-right">
-        <form className="container my-5 ms-5 text-end" onSubmit={handleSubmit}>
-          {formField("firstName", "First Name")}
-          {formField("lastName", "Last Name")}
-          {formField("username", "Username")}
-          {formField("email", "Email")}
-          {formField("password", "Password", "password")}
-          {formField("confirmPassword", "Confirm Password", "password")}
-          <div className="row mb-4"></div>
-          <div className="col-sm-7">
-            <div className="justify-content-center">
-              <label
-                className="form-check-label col-form-label mx-3"
-                htmlFor="agreeTerms"
-              >
-                Do you agree with the{" "}
-                <Link className="hyperlink" to="/">
-                  terms and conditions
-                </Link>
-                ?
-              </label>
-              <input
-                type="checkbox"
-                className="form-check-input"
-                id="agreeTerms"
-                name="agreeTerms"
-                checked={formData.agreeTerms}
-                onChange={handleChange}
-              />
-              {errors.agreeTerms && (
-                <div class="form-error">{errors.agreeTerms}</div>
-              )}
-            </div>
-          </div>
-          <div className="row mt-4 mb-4">
-            <div className="col-sm-7 offset-sm-3">
-              <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                <button
-                  type="submit"
-                  className="btn btn-dark btn-lg button-style"
+        <div className="container text-right">
+          <form className="container my-5 ms-5 text-end" onSubmit={handleSubmit}>
+            {formField("firstName", "First Name")}
+            {formField("lastName", "Last Name")}
+            {formField("username", "Username")}
+            {formField("email", "Email")}
+            {formField("password", "Password", "password")}
+            {formField("confirmPassword", "Confirm Password", "password")}
+            <div className="row mb-4"></div>
+            <div className="col-sm-7">
+              <div className="justify-content-center">
+                <label
+                  className="form-check-label col-form-label mx-3"
+                  htmlFor="agreeTerms"
                 >
-                  Sign Up
-                </button>
+                  Do you agree with the{" "}
+                  <Link className="hyperlink" to="/">
+                    terms and conditions
+                  </Link>
+                  ?
+                </label>
+                <input
+                  type="checkbox"
+                  className="form-check-input"
+                  id="agreeTerms"
+                  name="agreeTerms"
+                  checked={formData.agreeTerms}
+                  onChange={handleChange}
+                />
+                {errors.agreeTerms && (
+                  <div class="form-error">{errors.agreeTerms}</div>
+                )}
               </div>
             </div>
+            <div className="row mt-4 mb-4">
+              <div className="col-sm-7 offset-sm-3">
+                <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+                  <button
+                    type="submit"
+                    className="btn btn-dark btn-lg button-style"
+                  >
+                    Sign Up
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+          <div className="d-grid gap-4 d-sm-flex justify-content-sm-center align-items-center my-5">
+            <label className="large-text-style">Already have an account?</label>
+            <Link
+              to="/login"
+              className="btn btn-outline-dark btn-lg button-outline-style"
+              tabIndex="2"
+              role="button"
+            >
+              Log In
+            </Link>
           </div>
-        </form>
-        <div className="d-grid gap-4 d-sm-flex justify-content-sm-center align-items-center my-5">
-          <label className="large-text-style">Already have an account?</label>
-          <Link
-            to="/login"
-            className="btn btn-outline-dark btn-lg button-outline-style"
-            tabIndex="2"
-            role="button"
-          >
-            Log In
-          </Link>
         </div>
       </div>
-    </div>
+      <div>
+          <Background />
+      </div>
+    </>
   );
 }
