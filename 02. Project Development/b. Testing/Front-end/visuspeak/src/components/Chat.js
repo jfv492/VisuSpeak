@@ -17,7 +17,7 @@ export default function Login(props) {
             <div class="col">
               <div class="d-grid gap-2 my-2">
                 <Link
-                  to="/video"
+                  to="/newchat"
                   class="btn large-button-style btn-lg my-5"
                   type="button"
                 >

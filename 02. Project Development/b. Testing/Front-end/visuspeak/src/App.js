@@ -6,7 +6,7 @@ import Login from "./components/Login.js";
 import SignUp from "./components/SignUp.js";
 import Alert from "./components/Alert.js";
 import Chat from "./components/Chat.js";
-import Video from "./components/Video.js";
+import NewChat from "./components/ChatContainer.js";
 import React, { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
@@ -35,7 +35,7 @@ function App() {
             <Route exact path="/about" element={<Home />} />
             <Route exact path="/login" element={<Login heading="Login" showAlert={showAlert}/>} />
             <Route exact path="/signup" element={<SignUp heading="Sign Up" showAlert={showAlert}/>} />
-            <Route exact path="/video" element={<Video />} />
+            <Route exact path="/newchat" element={<NewChat />} />
           </Routes>
         </div>
         <Footer />

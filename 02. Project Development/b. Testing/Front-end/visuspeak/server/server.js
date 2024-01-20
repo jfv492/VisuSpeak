@@ -21,6 +21,8 @@ app.get('/users', (req, res) => {
 
 const authRouter = require('./routes/auth');
 app.use('/auth', authRouter);
+const chatRouter = require('./routes/chat');
+app.use('/chat', chatRouter);
 
 const PORT = process.env.PORT || 8081
 
