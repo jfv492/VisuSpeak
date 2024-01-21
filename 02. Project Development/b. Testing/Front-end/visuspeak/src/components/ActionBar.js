@@ -2,6 +2,11 @@ import React from 'react';
 import "../App.css"
 
 function ActionBar({ onOpenMic, onToggleKeyboard, onOpenCamera, onCloseCamera }) {
+    // Define the function to open the camera link
+  const handleOpenCamera = () => {
+    window.open("http://localhost:3001/", "_blank");
+  };
+
   return (
     <div className="action-bar">
       <div className="d-grid gap-4 d-sm-flex justify-content-sm-center align-items-center my-5">

@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 function InputArea({ onSendMessage }) {
-  const [message, setMessage] = useState('');
+    const [message, setMessage] = useState('');
 
   const handleInputChange = (e) => {
     setMessage(e.target.value);
@@ -19,6 +19,20 @@ function InputArea({ onSendMessage }) {
       handleSendClick();
     }
   };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      fetch('http://localhost:3002/getword')
+        .then(response => response.json())
+        .then(data => {
+          if (data.word) {
+            setMessage(prev => prev + ' ' + data.word);
+          }
+        });
+    }, 10000); // Fetch every 10 seconds
+  
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className="input-area hero px-4 py-5 text-center">
