@@ -8,6 +8,10 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^29.5.11",
+    "@types/node": "^20.11.5",
+    "@types/react": "^18.2.48",
+    "@types/react-dom": "^18.2.18",
     "axios": "^1.6.0",
     "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
@@ -23,6 +27,7 @@
     "react-router-dom": "^6.17.0",
     "react-scripts": "5.0.1",
     "react-webcam": "^7.2.0",
+    "typescript": "^5.3.3",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -31,7 +36,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "server": "nodemon server/server.js",
-    "both": "concurrently \"npm run start\" \"nodemon server/server.js\""
+    "both": "concurrently \"react-scripts start\" \"nodemon server/server.js\""
   },
   "eslintConfig": {
     "extends": [
