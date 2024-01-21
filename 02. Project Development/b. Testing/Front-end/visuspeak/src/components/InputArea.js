@@ -21,15 +21,32 @@ function InputArea({ onSendMessage }) {
   };
 
   return (
-    <div className="input-area">
+    <div className="input-area hero px-4 py-5 text-center">
+      <div className="text-center container mb-5">
+      <div class="row">
+        <div class="col">
+          
+        </div>
+        <div class="col-6">
+        <div class="input-group mb-3">
       <input
+        className="form-control"
         type="text"
         value={message}
         onChange={handleInputChange}
         onKeyPress={handleKeyPress}
         placeholder="Type your message here..."
       />
-      <button onClick={handleSendClick}>Send</button>
+        <button onClick={handleSendClick}>Send</button>
+      </div>
+        </div>
+        <div class="col">
+          
+        </div>
+      </div>
+      
+      </div>
+      
     </div>
   );
 }

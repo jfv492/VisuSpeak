@@ -40,7 +40,7 @@ function App() {
             <Route exact path="/webcam" element={<WebCam />} />
           </Routes>
         </div>
-        {/* <Footer /> */}
+        <Footer />
         </div>
       </BrowserRouter>
     </>
