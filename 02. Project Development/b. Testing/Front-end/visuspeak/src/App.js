@@ -9,6 +9,7 @@ import Chat from "./components/Chat.js";
 import NewChat from "./components/ChatContainer.js";
 import React, { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import WebCam from "./components/WebCam.js";
 
 function App() {
   const [alert, setAlert] = useState(null);
@@ -36,9 +37,10 @@ function App() {
             <Route exact path="/login" element={<Login heading="Login" showAlert={showAlert}/>} />
             <Route exact path="/signup" element={<SignUp heading="Sign Up" showAlert={showAlert}/>} />
             <Route exact path="/newchat" element={<NewChat />} />
+            <Route exact path="/webcam" element={<WebCam />} />
           </Routes>
         </div>
-        <Footer />
+        {/* <Footer /> */}
         </div>
       </BrowserRouter>
     </>
