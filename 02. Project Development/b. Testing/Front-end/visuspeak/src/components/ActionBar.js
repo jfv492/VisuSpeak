@@ -27,7 +27,7 @@ function ActionBar({ onOpenMic, onToggleKeyboard, onOpenCamera, onCloseCamera })
       </button>
 
       <button 
-        onClick={onOpenCamera} 
+        onClick={handleOpenCamera} 
         className="btn button-style btn-lg button-outline-style camera-button" 
         tabIndex="2"
       >
