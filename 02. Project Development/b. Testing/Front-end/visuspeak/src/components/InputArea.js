@@ -29,7 +29,7 @@ function InputArea({ onSendMessage }) {
             setMessage(prev => prev + ' ' + data.word);
           }
         });
-    }, 10000); // Fetch every 10 seconds
+    }, 5000); // Fetch every 5 seconds
   
     return () => clearInterval(interval);
   }, []);
@@ -51,7 +51,7 @@ function InputArea({ onSendMessage }) {
         onKeyPress={handleKeyPress}
         placeholder="Type your message here..."
       />
-        <button onClick={handleSendClick}>Send</button>
+        <button className="btn button-style btn button-outline-style" onClick={handleSendClick}>Send</button>
       </div>
         </div>
         <div class="col">
