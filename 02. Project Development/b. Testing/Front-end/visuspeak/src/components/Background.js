@@ -1,5 +1,4 @@
 import HandGestureBG from "../images/ASl Signs.png";
-import "../VisuSpeak.css";
 import React from "react";
 
 export default function Background() {

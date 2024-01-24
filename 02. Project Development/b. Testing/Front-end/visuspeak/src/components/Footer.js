@@ -1,5 +1,4 @@
 import FooterLogo from "../images/White.png";
-import "../VisuSpeak.css";
 import React from "react";
 
 export default function Footer() {

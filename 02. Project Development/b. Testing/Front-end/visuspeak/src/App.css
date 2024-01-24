@@ -56,7 +56,7 @@
 }
 
 .large-button-style:hover {
-  background-color: #006262;
+  background-color: #023e3d;
   color: white;
   height: 70px;
   font-size: x-large;
@@ -64,7 +64,7 @@
 }
 
 .button-style:hover {
-  background-color: #006262;
+  background-color: #023e3d;
   color: white;
   width: 150px;
   font-size: x-large;
@@ -81,8 +81,8 @@
 }
 
 .btn-outline-dark:hover {
-  border-color: #006262;
-  background-color: #006262;
+  border-color: #023e3d;
+  background-color: #023e3d;
   border-width: 0.2rem;
   color: #ffffff;
   width: 150px;
@@ -127,7 +127,7 @@
 }
 
 .nav-link:hover, .nav-link:focus {
-  background-color: #006262;
+  background-color: #023e3d;
   color: white;
 }
 
@@ -173,7 +173,7 @@ footer {
 }
 
 .hyperlink:hover {
-  color: #006262;
+  color: #023e3d;
 }
 
 .alert {
