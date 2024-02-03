@@ -169,11 +169,12 @@ footer {
 }
 
 .hyperlink {
-  color: #7d255b;
+
+  color: #023e3d;
 }
 
 .hyperlink:hover {
-  color: #023e3d;
+  color: #7d255b;
 }
 
 .alert {
