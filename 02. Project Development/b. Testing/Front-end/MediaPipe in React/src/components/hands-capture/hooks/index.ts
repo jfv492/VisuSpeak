@@ -5,7 +5,7 @@ import {
   drawLandmarks,
   drawRectangle,
 } from '@mediapipe/drawing_utils';
-import { Hands, HAND_CONNECTIONS } from '@mediapipe/hands';
+import { Hands, HAND_CONNECTIONS, Results, Landmark } from '@mediapipe/hands';
 import useKeyPointClassifier from '../hooks/useKeyPointClassifier';
 import CONFIGS from '../../../../constants';
 
@@ -13,44 +13,43 @@ const maxVideoWidth = 960;
 const maxVideoHeight = 540;
 
 function useLogic() {
-  const videoElement = useRef<any>(null);
-  const hands = useRef<any>(null);
-  const camera = useRef<any>(null);
-  const canvasEl = useRef(null);
-  const handsGesture = useRef<any>([]);
+  const videoElement = useRef<HTMLVideoElement>(null);
+  const hands = useRef<Hands>(new Hands({
+    locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`,
+  })); 
+  const camera = useRef<Camera>();
+  const canvasEl = useRef<HTMLCanvasElement>(null);
+  const handsGesture = useRef<any[]>([]);
 
   const { processLandmark } = useKeyPointClassifier();
 
-  async function onResults(results) {
+  async function onResults(results: Results) {
     if (canvasEl.current) {
       if (results.multiHandLandmarks.length) {
       }
       const ctx = canvasEl.current.getContext('2d');
 
-      ctx.save();
+      if (ctx) {
+        ctx.save();
       ctx.clearRect(0, 0, canvasEl.current.width, canvasEl.current.height);
-      ctx.drawImage(results.image, 0, 0, maxVideoWidth, maxVideoHeight);
+      // Ensure that results.image is of a type compatible with drawImage
+      if (results.image instanceof HTMLImageElement || results.image instanceof HTMLCanvasElement || results.image instanceof HTMLVideoElement) {
+        ctx.drawImage(results.image, 0, 0, maxVideoWidth, maxVideoHeight);
+      }
 
       if (results.multiHandLandmarks) {
         for (const [index, landmarks] of results.multiHandLandmarks.entries()) {
-          processLandmark(landmarks, results.image).then(
-            (val) => (handsGesture.current[index] = val)
-          );
+          if (results.image instanceof HTMLCanvasElement) {
+            processLandmark(landmarks, results.image).then(
+              (val) => (handsGesture.current[index] = val)
+            );
+          }
+          
           console.log(CONFIGS.keypointClassifierLabels[handsGesture.current[index]]);
 
-          fetch('http://localhost:3002/sendword', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ word: CONFIGS.keypointClassifierLabels[handsGesture.current[index]] }),
-          })
-          .then(response => response.json())
-          .then(data => console.log(data));
 
-
-          const landmarksX = landmarks.map((landmark) => landmark.x);
-          const landmarksY = landmarks.map((landmark) => landmark.y);
+          const landmarksX = landmarks.map((landmark: Landmark) => landmark.x); // Add type to landmark
+          const landmarksY = landmarks.map((landmark: Landmark) => landmark.y); // Add type to landmark
           ctx.fillStyle = '#ff0000';
           ctx.font = '24px serif';
           ctx.fillText(
@@ -70,7 +69,7 @@ function useLogic() {
               width: Math.max(...landmarksX) - Math.min(...landmarksX),
               height: Math.max(...landmarksY) - Math.min(...landmarksY),
               rotation: 0,
-              rectId: 13,
+              //rectId: 13,
             },
             {
               fillColor: 'transparent',
@@ -88,39 +87,37 @@ function useLogic() {
           });
         }
       }
-      ctx.restore();
+      ctx?.restore();
+      } 
     }
   }
 
-  const loadHands = () => {
-    hands.current = new Hands({
-      locateFile: (file) => {
-        return `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`;
-      },
-    });
+  useEffect(() => {
+    async function initCamera() {
+      if (videoElement.current && !camera.current) {
+        camera.current = new Camera(videoElement.current, {
+          onFrame: async () => {
+            if (videoElement.current) {
+              await hands.current.send({ image: videoElement.current });
+            }
+          },
+          width: maxVideoWidth,
+          height: maxVideoHeight,
+        });
+        camera.current.start();
+      }
+    }
+
     hands.current.setOptions({
       maxNumHands: 2,
       modelComplexity: 1,
       minDetectionConfidence: 0.5,
       minTrackingConfidence: 0.5,
     });
+
     hands.current.onResults(onResults);
-  };
 
-  useEffect(() => {
-    async function initCamara() {
-      camera.current = new Camera(videoElement.current, {
-        onFrame: async () => {
-          await hands.current.send({ image: videoElement.current });
-        },
-        width: maxVideoWidth,
-        height: maxVideoHeight,
-      });
-      camera.current.start();
-    }
-
-    initCamara();
-    loadHands();
+    initCamera();
   }, []);
 
   return { maxVideoHeight, maxVideoWidth, canvasEl, videoElement };

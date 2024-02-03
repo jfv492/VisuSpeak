@@ -1,4 +1,3 @@
-import React from 'react';
 import useLogic from './hooks/index';
 
 function HandsCapture() {

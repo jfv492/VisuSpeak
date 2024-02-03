@@ -1,9 +1,9 @@
 import { useEffect, useRef } from 'react';
-import { Landmark, Results } from '@mediapipe/hands';
+import { Landmark } from '@mediapipe/hands';
 import * as tf from '@tensorflow/tfjs';
 import _ from 'lodash';
 
-const calcLandmarkList = (image, landmarks) => {
+const calcLandmarkList = (image: HTMLCanvasElement, landmarks: Landmark[]) => {
   const { width: imageWidth, height: imageHeight } = image;
 
   const landmarkPoint: any = [];
@@ -19,52 +19,49 @@ const calcLandmarkList = (image, landmarks) => {
   return landmarkPoint;
 };
 
-const preProcessLandmark = (landmarkList) => {
+const preProcessLandmark = (landmarkList: number[][]) => {
   let tempLandmarkList = _.cloneDeep(landmarkList);
 
   let baseX = 0;
   let baseY = 0;
 
-  //convert to realtive coordinates
-  Object.values(tempLandmarkList).forEach((landmarkPoint, index) => {
-    if (!index) {
-      baseX = parseInt(landmarkPoint[0]);
-      baseY = parseInt(landmarkPoint[1]);
+  // Convert to relative coordinates
+  tempLandmarkList.forEach((landmarkPoint, index) => {
+    if (index === 0) {
+      baseX = landmarkPoint[0];
+      baseY = landmarkPoint[1];
     }
 
-    tempLandmarkList[index][0] = tempLandmarkList[index][0] - baseX;
-    tempLandmarkList[index][1] = tempLandmarkList[index][1] - baseY;
+    landmarkPoint[0] -= baseX;
+    landmarkPoint[1] -= baseY;
   });
 
-  //convert to one-dimensional list
-  tempLandmarkList = _.flatten(tempLandmarkList);
+  // Flatten the array if your model expects a one-dimensional array
+  const flattenedList = _.flatten(tempLandmarkList);
 
-  //normalize
-  const maxValue = Math.max(
-    ...tempLandmarkList.map((value) => Math.abs(value))
-  );
-  tempLandmarkList = tempLandmarkList.map((value) => value / maxValue);
-  return tempLandmarkList;
+  // Normalize
+  const maxValue = Math.max(...flattenedList.map(Math.abs));
+  return flattenedList.map(value => value / maxValue);
 };
 
 function useKeyPointClassifier() {
-  const model = useRef<any>();
+  const model = useRef<tf.GraphModel>();
 
-  const keyPointClassifier = async (landmarkList) => {
-    const result = await model.current
-      .execute(tf.tensor2d([landmarkList]))
-      .squeeze()
-      .argMax()
-      .data();
-
-    return result;
+  const keyPointClassifier = async (landmarkList: number[]) => {
+    if (model.current) {
+      const tensorResult = model.current.execute(tf.tensor2d([landmarkList])) as tf.Tensor;
+      const result = await tensorResult.squeeze().argMax().data();
+      return Array.from(result);
+    }
+    return [];
   };
 
-  const processLandmark = async (handLandmarks: Results, image) => {
+  const processLandmark = async (handLandmarks: Landmark[], image: HTMLCanvasElement) => {
     const landmarkList = calcLandmarkList(image, handLandmarks);
     const preProcessedLandmarkList = preProcessLandmark(landmarkList);
-    const handSignId = await keyPointClassifier(preProcessedLandmarkList);
-    return handSignId[0];
+    const flattenedList = _.flattenDeep(preProcessedLandmarkList);
+    const handSignId = await keyPointClassifier(flattenedList);
+    return handSignId.length > 0 ? handSignId[0] : undefined;
   };
 
   const loadModel = async () => {
