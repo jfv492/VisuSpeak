@@ -6,7 +6,7 @@ import {
   drawRectangle,
 } from '@mediapipe/drawing_utils';
 import { Hands, HAND_CONNECTIONS, Results, Landmark } from '@mediapipe/hands';
-import useKeyPointClassifier from '../hooks/useKeyPointClassifier';
+import useKeyPointClassifier from './useKeyPointClassifier';
 import CONFIGS from '../../../../constants';
 
 const maxVideoWidth = 960;

@@ -1,4 +1,4 @@
-import useLogic from './hooks/index';
+import useLogic from './hooks/useLogic';
 
 function HandsCapture() {
   const { videoElement, maxVideoWidth, maxVideoHeight, canvasEl } = useLogic();

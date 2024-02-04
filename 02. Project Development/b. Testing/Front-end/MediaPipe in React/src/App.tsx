@@ -1,4 +1,4 @@
-import HandsCapture from './components/hands-capture/index';
+import HandsCapture from './components/hands-capture/HandsCapture';
 
 function App() {
   return <HandsCapture /> 
