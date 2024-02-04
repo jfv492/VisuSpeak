@@ -9,6 +9,7 @@ import Chat from "./components/Chat.js";
 import NewChat from "./components/ChatContainer.js";
 import About from "./components/About.js";
 import Resources from "./components/Resources.js";
+import TestChat from "./components/TestChat.js";
 import React, { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
@@ -39,6 +40,7 @@ function App() {
             <Route exact path="/login" element={<Login heading="Login" showAlert={showAlert}/>} />
             <Route exact path="/signup" element={<SignUp heading="Sign Up" showAlert={showAlert}/>} />
             <Route exact path="/newchat" element={<NewChat />} />
+            <Route exact path="/testchat" element={<TestChat />} />
           </Routes>
         </div>
         <Footer />
