@@ -16,9 +16,7 @@ Our proposed project will enhance accessibility for individuals with vocal and h
 
 
 ## 👥 Team Members
-![Updated Github Teams-2](https://github.com/jfv492/VisuSpeak/assets/98986952/08442cc2-a2b1-4f33-92b3-287f48b18c5e)
-
-
+![Updated Github Teams-3](https://github.com/jfv492/VisuSpeak/assets/98986952/46ec9636-55be-41e6-a02c-49867797b81f)
 
 ## 📝 License 
 [Read the License agreement here](https://github.com/jfv492/VisuSpeak/blob/main/LICENSE)
