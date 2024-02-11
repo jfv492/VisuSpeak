@@ -33,4 +33,4 @@ apt-get install libsm6 libxext6 libxrender-dev
 ```
 
 ## Reference
-We followed a tutorial from Digital Ocean. Please find the link to the tutotial [here](https://www.digitalocean.com/community/tutorials/how-to-build-a-neural-network-to-translate-sign-language-into-english)
+We followed a tutorial from Digital Ocean. Please find the link to the tutotial [here](https://www.digitalocean.com/community/tutorials/how-to-build-a-neural-network-to-translate-sign-language-into-english) to follow along for the reamining steps.
