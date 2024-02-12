@@ -11,8 +11,8 @@ Many people with special needs, particularly those with vocal and hearing impair
 Our proposed project will enhance accessibility for individuals with vocal and hearing impairments by providing a reliable tool for communicating with English-speaking individuals, thereby reducing communication barriers and fostering inclusion. This application can facilitate communication between ASL Users and English speakers in educational settings.
 
 ## 🎬 Project Vlogs
-- [Vlog 1 - Project Introduction](https://youtu.be/OcyOhmqbeCk)
-- [Vlog 2 - Project Update](https://youtu.be/Btn4pApUPg8)
+- [Vlog 1 - Project Introduction](https://youtu.be/9bbMHseRjPQ?si=mt2znEMGykmHlMx4)
+- [Vlog 2 - Project Update](https://youtu.be/fPVWs4xmEK0?si=mfVZCNntbsyvqbJA)
 
 
 ## 👥 Team Members
