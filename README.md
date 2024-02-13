@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://github.com/jfv492/VisuSpeak/assets/98986952/73343806-7cc4-41ba-8e53-f3c3cf25cee0">
+  <a href="https://www.visuspeak.ca"><img src="https://github.com/jfv492/VisuSpeak/assets/98986952/73343806-7cc4-41ba-8e53-f3c3cf25cee0"></a>
 </div>
 
 ## 🎯 Project Idea 
