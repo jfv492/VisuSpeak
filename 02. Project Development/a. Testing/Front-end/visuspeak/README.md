@@ -1,70 +1,93 @@
-# Getting Started with Create React App
+# Installation Intructions
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Prerequisites
 
-## Available Scripts
+Before you begin, ensure you have met the following requirements:
+- Node.js (latest stable version)
+- npm (comes with Node.js)
+- MySQL Server (latest stable version)
+- A MySQL client (like MySQL Workbench, phpMyAdmin, or command-line client)
 
-In the project directory, you can run:
+## Setting up the Database
 
-### `npm start`
+1. **Start MySQL Server**: Ensure your MySQL server is running.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+2. **Create Database**:
+   - Open your MySQL client.
+   - Execute the following SQL command to create a new database:
+     ```sql
+     CREATE DATABASE VisuSpeak;
+     ```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+3. **Create Tables**:
+   - Select the `VisuSpeak` database.
+   - Execute the following SQL commands to create the necessary tables:
 
-### `npm test`
+     ```sql
+     CREATE TABLE `user` (
+       `userID` int(11) NOT NULL AUTO_INCREMENT,
+       `FirstName` varchar(255) NOT NULL,
+       `LastName` varchar(255) NOT NULL,
+       `Username` varchar(255) NOT NULL,
+       `Email` varchar(255) NOT NULL,
+       `Password` varchar(255) NOT NULL,
+       PRIMARY KEY (`userID`)
+     );
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+     CREATE TABLE `chat_sessions` (
+       `id` int(11) NOT NULL AUTO_INCREMENT,
+       `userID` int(11) NOT NULL,
+       `chatName` varchar(255) DEFAULT NULL,
+       `start_timestamp` timestamp NOT NULL DEFAULT current_timestamp(),
+       `end_timestamp` timestamp NULL DEFAULT NULL,
+       `status` enum('active','ended') DEFAULT 'active',
+       PRIMARY KEY (`id`),
+       KEY `userID` (`userID`),
+       CONSTRAINT `chat_sessions_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`)
+     );
 
-### `npm run build`
+     CREATE TABLE `messages` (
+       `id` int(11) NOT NULL AUTO_INCREMENT,
+       `userID` int(11) NOT NULL,
+       `username` varchar(255) NOT NULL,
+       `text` text DEFAULT NULL,
+       `timestamp` timestamp NOT NULL DEFAULT current_timestamp(),
+       `type` enum('text','image','audio') NOT NULL DEFAULT 'text',
+       `status` enum('sent','received','read') NOT NULL DEFAULT 'sent',
+       `sessionID` int(11) DEFAULT NULL,
+       PRIMARY KEY (`id`),
+       KEY `userID` (`userID`),
+       KEY `sessionID` (`sessionID`),
+       CONSTRAINT `messages_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`) ON DELETE CASCADE,
+       CONSTRAINT `messages_ibfk_2` FOREIGN KEY (`sessionID`) REFERENCES `chat_sessions` (`id`)
+     );
+     ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Running the React Project
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. **Clone the Repository**: Clone the project repository to your local machine.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. **Install Dependencies**:
+   - Navigate to the project directory in your terminal.
+   ```
+   cd 02.\ Project\ Development/a.\ Testing/Front-end/visuspeak/
+   ```
+   - Run `npm install` to install the required dependencies.
+   - Navigate to the server directory in your terminal.
+   ```
+   cd server
+   ```
+   - Run `npm install` to install the required dependencies.
 
-### `npm run eject`
+3. **Start the Application**:
+   - Run `npm run all` to start the development server.
+   - Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Additional Notes
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Ensure the database connection details in your project in `server/db.js` match the credentials you use for your MySQL server.
+- The React project might require additional setup or environment variables depending on its configuration.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Support
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+For support, please contact the repository owner or submit an issue on the GitHub repository page.
