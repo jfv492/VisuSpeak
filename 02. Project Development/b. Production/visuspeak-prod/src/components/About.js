@@ -142,7 +142,7 @@ export default function About() {
           </div>
 
           <div className="col p-2 mb-5 text-center">
-            <a class="hyperlink hyperlink:hover" href="https://www.youtube.com/@VisuSpeak/videos">
+            <a class="hyperlink hyperlink:hover" href="https://youtube.com/playlist?list=PLiqvO_Z9iNyY5reatlxQMcvnlBwdRqN6g&si=dZpY4PrzeeQtIN7p">
             <img src={YouTube} className="rounded mx-auto d-block" alt="..." width="25%"/>
               YouTube
             </a>
