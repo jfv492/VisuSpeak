@@ -1,12 +1,12 @@
 # sign2text: ASL Alphabets
 ## Objective 
-The objectice is to translate American Sign Language (ASL) [fingerspelled alphabet](http://lifeprint.com/asl101/topics/wallpaper1.htm) (26 letters). I utilised transfer learning to extract features, followed by a custom classification block to classify letters. This model is then implemented in a real-time system with OpenCV - reading frames from a web camera and classifying them frame-by-frame. This repository contains the code & weights for classifying the American Sign Language (ASL) alphabet in real-time.
+The aim is to translate the American Sign Language (ASL) fingerspelled alphabet, consisting of 26 letters. This model employs transfer learning to extract features, followed by a customized classification block for letter classification. The model is then integrated into a real-time system using OpenCV, which reads frames from a webcam and classifies them frame by frame. This repository contains the code and weights necessary for real-time classification of the American Sign Language (ASL) alphabet.
 
-Dataset - https://drive.google.com/drive/folders/1-t8rgN3eOW99KGDy7U0HJhrbbwOe-5Wh?usp=sharing
+The dataset can be found at: Dataset Link
 
-All the data is already split into train/validation subsets, and labelled with letters from A-Z. 
+All data has already been divided into train/validation subsets and labeled with letters from A to Z.
 
-NOTE - the Massey dataset I've included is already pre-processed and is only a subset of the entire dataset (part 5). I added padding due to odd shaped images, and also dropped a colour channel as there was a lot of green screen background in the images. Dropping the colour channel didn't cause any significant changes in performance so I've left it in. You can get the raw data directly from Massey University.
+Please note that the Massey dataset provided has already been pre-processed and represents only a subset of the complete dataset (part 5). The added padding to account for irregularly shaped images and removed a color channel due to significant green screen background in the images. The removal of the color channel did not significantly affect performance, so it has been retained. The raw data can be obtained directly from Massey University.
 
 # Usage 
 
@@ -43,19 +43,8 @@ required arguments:
 
 NOTE - On a MacBook Pro (macOS SIERRA 16GB 1600MHz DDR3/2.2 GHz Intel Core i7) using the CPU only, it can take up to ~250ms to classify a single frame. This results in lag during real-time classification as the effective frame rate is anywhere from 1-10 frames per second,  depending on which model is running. MobileNet is the most efficient model. Performance for all models is is significantly improved if running on a GPU. 
 
-# 1. American Sign Language
-
-There are no accurate measurements of how many people use American Sign Lanuage (ASL) - estimates vary from 500,000 to 15 million people. However, 28 million Americans (~10% of the population) have some degree of hearing loss, and 2 million of these 28 million are classified as deaf. For many of these people, their first lanugage is ASL.
-
-The ASL alphabet is 'fingerspelled' - this means all of the alphabet (26 letters, from A-Z) can be spelled using one hand. There are 3 main use cases of fingerspelling in any sign language: 
-
-(i) Spelling your name
-(ii) Emphasising a point (i.e. literally spelling out a word)
-(iii) When saying a word not present in the ASL dictionary (the current Oxford English dictionary has ~170,000 words while estimates for ASL range from 10,000-50,000 words)
-
-This project is a (very small!) first step towards bridging the gap between 'signers' and 'non-signers'.
-
 ## References
-https://research.gallaudet.edu/Publications/ASL_Users.pdf
-https://blog.keras.io/building-powerful-image-classification-models-using-very-little-data.html
+- https://github.com/dazcona/sign2text
+- https://research.gallaudet.edu/Publications/ASL_Users.pdf
+- https://blog.keras.io/building-powerful-image-classification-models-using-very-little-data.html
 
