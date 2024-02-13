@@ -16,7 +16,7 @@ export default function Header() {
   return (
     <>
       <div>
-        <nav className="navbar bg-body-tertiary shadow-lg">
+        <nav className="navbar bg-body-tertiary shadow">
           <div className="container-fluid">
             <Link className="navbar-brand mx-5" to="/">
               <img src={ColourLogo} alt="VisuSpeak Logo" height="50" />
@@ -24,14 +24,13 @@ export default function Header() {
             <ul className="nav nav-pills nav-pills-link-active-color justify-content-end mx-5 ">
               <li className="nav-item dropdown">
                 <Link
-                  className={`nav-link dropdown-toggle ${
+                  className={`nav-link dropdown-toggle mx-1 ${
                     location.pathname === "/chat" ? "active" : ""
                   } ${
                     localStorage.getItem("username") === null ? "disabled" : ""
                   }`}
                   to="/chat"
                   role="button"
-                  // data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
                   Chat
@@ -62,7 +61,7 @@ export default function Header() {
               </li>
               <li className="nav-item">
                 <Link
-                  className={`nav-link ${
+                  className={`nav-link mx-1 ${
                     location.pathname === "/resources" ? "active" : ""
                   }`}
                   aria-current="page"
@@ -73,7 +72,7 @@ export default function Header() {
               </li>
               <li className="nav-item">
                 <Link
-                  className={`nav-link ${
+                  className={`nav-link mx-1 ${
                     location.pathname === "/about" ? "active" : ""
                   }`}
                   to="/about"
@@ -93,10 +92,13 @@ export default function Header() {
                   data-bs-display="static"
                   aria-expanded="false"
                 >
-                  <i
-                    class="rounded-circle fa-solid fa-circle-user fa-2xl me-2"
-                    style={{ color: "#006463" }}
-                  ></i>
+                  <div class="">
+                    <i
+                      class="rounded-circle fa-solid fa-circle-user fa-2xl me-2"
+                      style={{ color: "#000000" }}
+                    ></i>
+                    <div class="status-indicator glowing"></div>
+                  </div>
                   <strong className="me-2">
                     {localStorage.getItem("username")}
                   </strong>

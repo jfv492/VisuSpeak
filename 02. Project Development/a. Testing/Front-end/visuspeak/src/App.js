@@ -9,7 +9,9 @@ import Chat from "./components/Chat.js";
 import NewChat from "./components/ChatContainer.js";
 import About from "./components/About.js";
 import Resources from "./components/Resources.js";
-import TestChat from "./components/TestChat.js";
+import ASLChat from "./components/ASLChat.js";
+import TranscriptHistory from "./components/TranscriptHistory.js";
+import SpeechTest from "./components/SpeechTest.js";
 import React, { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
@@ -18,32 +20,46 @@ function App() {
   const showAlert = (message, type) => {
     setAlert({
       msg: message,
-      type: type
-    })
+      type: type,
+    });
     setTimeout(() => {
       setAlert(null);
     }, 3000);
-    }
-    
+  };
+
   return (
     <>
       <BrowserRouter>
         <div className="page-container">
           <div className="content-wrap">
-          <Header />
-          <Alert alert={alert}/>
-          <Routes>
-            <Route exact path="/" element={<Home />} />
-            <Route exact path="/chat" element={<Chat />} />
-            <Route exact path="/about" element={<About />} />
-            <Route exact path="/resources" element={<Resources />} />
-            <Route exact path="/login" element={<Login heading="Login" showAlert={showAlert}/>} />
-            <Route exact path="/signup" element={<SignUp heading="Sign Up" showAlert={showAlert}/>} />
-            <Route exact path="/newchat" element={<NewChat />} />
-            <Route exact path="/testchat" element={<TestChat />} />
-          </Routes>
-        </div>
-        <Footer />
+            <Header />
+            <Alert alert={alert} />
+            <Routes>
+              <Route exact path="/" element={<Home />} />
+              <Route exact path="/chat" element={<Chat />} />
+              <Route exact path="/about" element={<About />} />
+              <Route exact path="/resources" element={<Resources />} />
+              <Route
+                exact
+                path="/login"
+                element={<Login heading="Login" showAlert={showAlert} />}
+              />
+              <Route
+                exact
+                path="/signup"
+                element={<SignUp heading="Sign Up" showAlert={showAlert} />}
+              />
+              <Route exact path="/newchat" element={<NewChat />} />
+              <Route
+                exact
+                path="/aslchat"
+                element={<ASLChat showAlert={showAlert} />}
+              />
+              <Route exact path="/history" element={<TranscriptHistory />} />
+              <Route exact path="/speechtest" element={<SpeechTest />} />
+            </Routes>
+          </div>
+          <Footer />
         </div>
       </BrowserRouter>
     </>

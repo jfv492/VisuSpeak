@@ -1,31 +1,31 @@
-const express = require('express');
-const cors = require('cors');
+// Importing the necessary modules
+const express = require("express");
+const cors = require("cors");
+
 const app = express();
+
+// Enabling CORS (Cross-Origin Resource Sharing) for handling requests from different origins
 app.use(cors());
 
-const db = require('./db'); // Import the database connection
+const db = require("./db");
 
 app.use(express.json());
 
-app.get('/', (req, res) => {
-  return res.json('From VisuSpeak Server');
+// GET endpoint at the root of the server
+app.get("/", (req, res) => {
+  return res.json("From VisuSpeak Server");
 });
 
-app.get('/users', (req, res) => {
-  const sql = 'SELECT * FROM user';
-  db.query(sql, (err, data) => {
-    if (err) return res.json(err);
-    return res.json(data);
-  });
-});
+// Importing and using the authentication routes
+const authRouter = require("./routes/auth");
+app.use("/auth", authRouter);
 
-const authRouter = require('./routes/auth');
-app.use('/auth', authRouter);
-const chatRouter = require('./routes/chat');
-app.use('/chat', chatRouter);
+// Importing and using the chat routes
+const chatRouter = require("./routes/chat");
+app.use("/chat", chatRouter);
 
-const PORT = process.env.PORT || 8081
+const PORT = process.env.PORT || 8081;
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
-}); 
+});

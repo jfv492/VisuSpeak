@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Background from "./Background.js";
+import serverUrl from "../Server-env.js";
 
 export default function Login(props) {
-  const PORT = process.env.PORT || 8081
-  const serverUrl = `http://localhost:${PORT}`;
   const loginUrl = `${serverUrl}/auth/login`;
   let navigate = useNavigate();
 
@@ -34,12 +33,11 @@ export default function Login(props) {
         console.log("Login successful", response.data);
         props.showAlert("Login successful.", "success");
         setError();
-        // Handle successful login
-        
+
         const json = response.data;
-        localStorage.setItem('username', json.username);
-        localStorage.setItem('userID', json.userID);
-        localStorage.setItem('authtoken', json.authtoken);
+        localStorage.setItem("username", json.username);
+        localStorage.setItem("userID", json.userID);
+        localStorage.setItem("authtoken", json.authtoken);
         navigate("/chat");
       })
       .catch((error) => {
@@ -50,7 +48,7 @@ export default function Login(props) {
   };
 
   return (
-    <> {/* This little container thing could mess up the submission for the form. I included it to make the handgesture bg appear shadowed (missing here, present on other pages) */}
+    <>
       <div className="hero px-4 py-5 text-center">
         <h1 className="display-3 mt-5 fw-bold ">{props.heading}</h1>
 
@@ -58,13 +56,14 @@ export default function Login(props) {
           <div class="container text-center">
             <div class="row">
               <div class="col"></div>
-              <div class="col">
-                
-              </div>
+              <div class="col"></div>
               <div class="col"></div>
             </div>
           </div>
-          <form className="container mb-5 ms-5 text-end" onSubmit={handleSubmit}>
+          <form
+            className="container mb-5 ms-5 text-end"
+            onSubmit={handleSubmit}
+          >
             <div className="row mb-4">
               <label htmlFor="username" className="col-sm-3 col-form-label">
                 Username:
@@ -93,20 +92,13 @@ export default function Login(props) {
                   value={formData.password}
                   onChange={handleChange}
                 />
-                {error && (
-                  <div className="text-start form-error">
-                    {error}
-                  </div>
-                )}
+                {error && <div className="text-start form-error">{error}</div>}
               </div>
             </div>
             <div className="row mb-4">
-              <div className="col-sm-3">
-                
-              </div>
+              <div className="col-sm-3"></div>
               <div className="col-sm-7">
                 <div className="gap-2 d-md-flex justify-content-md-end">
-                
                   <button
                     type="submit"
                     className="btn btn-dark btn-lg button-style"
@@ -134,7 +126,5 @@ export default function Login(props) {
         <Background />
       </div>
     </>
-    
-    
   );
 }

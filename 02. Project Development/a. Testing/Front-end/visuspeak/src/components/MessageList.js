@@ -1,10 +1,9 @@
-import React from 'react';
-import Message from './Message.js';
+import React from "react";
+import Message from "./Message.js";
 
 function MessageList({ messages }) {
-    
   return (
-    <div className="message-list mx-5 ">
+    <div className="message-list chat-container">
       {messages.map((message, index) => (
         <Message key={index} {...message} />
       ))}

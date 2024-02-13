@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Background from "./Background.js";
+import serverUrl from "../Server-env.js";
 
 export default function SignUp(props) {
-  const PORT = process.env.PORT || 8081
-  const serverUrl = `http://localhost:${PORT}`;
   const signupUrl = `${serverUrl}/auth/signup`;
   let navigate = useNavigate();
 
@@ -95,7 +94,10 @@ export default function SignUp(props) {
             setErrors({
               form: "An unexpected error occurred. Please try again later.",
             });
-            props.showAlert("An unexpected error occurred. Please try again later.", "danger");
+            props.showAlert(
+              "An unexpected error occurred. Please try again later.",
+              "danger"
+            );
           }
         });
     }
@@ -130,12 +132,17 @@ export default function SignUp(props) {
   );
 
   return (
-    <> {/* This little container thing could mess up the submission for the form. I included it to make the handgesture bg appear shadowed (missing here, present on other pages) */}
+    <>
+      {" "}
+      {/* This little container thing could mess up the submission for the form. I included it to make the handgesture bg appear shadowed (missing here, present on other pages) */}
       <div className="hero px-4 py-5 text-center">
         <h1 className="display-3 mt-5 fw-bold ">{props.heading}</h1>
 
         <div className="container text-right">
-          <form className="container my-5 ms-5 text-end" onSubmit={handleSubmit}>
+          <form
+            className="container my-5 ms-5 text-end"
+            onSubmit={handleSubmit}
+          >
             {formField("firstName", "First Name")}
             {formField("lastName", "Last Name")}
             {formField("username", "Username")}
@@ -195,7 +202,7 @@ export default function SignUp(props) {
         </div>
       </div>
       <div>
-          <Background />
+        <Background />
       </div>
     </>
   );

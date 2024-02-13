@@ -1,30 +1,36 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios"; // Import Axios for making HTTP requests
+import React from "react";
 
 function Message({ username, text, timestamp }) {
   return (
     <>
-      <div className={`message`}>
-      <div class="my-3 px-5 bg-body rounded shadow bg-body-tertiary rounded">
-        <div class="d-flex text-body-secondary pt-3">
-          <div
-            class="bd-placeholder-img flex-shrink-0 me-2 rounded pt-3"
-            
-          >
-            <i class="rounded-circle fa-solid fa-circle-user fa-2xl me-2"></i>
-          </div>
-          <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
-            <div class="d-flex justify-content-between">
-              <strong class="text-gray-dark user">{username}</strong>
-              <p className="timestamp">{timestamp}</p>
+      <div className={`chat`}>
+        <div class="chat-messages">
+          <div class="message theirs">
+            <i class="rounded-circle fa-solid fa-circle-user fa-2xl avatar pt-4"></i>
+            <div class="message-content">
+              <span class="username">{username}</span>
+              <p>{text}</p>
             </div>
-            <span class="d-block text">{text}</span>
           </div>
+          <span class="time theirs">
+            {new Date(timestamp).toLocaleString()}
+          </span>
+
+          {/* <div class="message mine">
+            <div class="message-content">
+              <span class="username">Username</span>
+              <p>
+                I'm meeting a friend here for dinner. How about you? 😊I'm
+                meeting a friend here for dinner. How about you? 😊I'm meeting a
+                friend here for dinner. How about you? 😊I'm meeting a friend
+                here for dinner. How about you? 😊
+              </p>
+            </div>
+            
+          </div>
+          <span class="time mine">5:30 PM</span> */}
         </div>
       </div>
-      </div>
-
-      
     </>
   );
 }
