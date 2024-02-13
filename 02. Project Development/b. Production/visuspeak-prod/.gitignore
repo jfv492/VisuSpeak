@@ -24,3 +24,6 @@ yarn-debug.log*
 yarn-error.log*
 
 deploy.sh
+
+./src/Chat-env.js
+./src/Server-env.js
