@@ -2,6 +2,11 @@
   <a href="https://www.visuspeak.ca"><img src="https://github.com/jfv492/VisuSpeak/assets/98986952/73343806-7cc4-41ba-8e53-f3c3cf25cee0"></a>
 </div>
 
+## 🖥️ Aplication Releases
+- Deployed Website: [VisuSpeak](https://www.visuspeak.ca)
+- Run on localhost: [visuspeak](https://github.com/jfv492/VisuSpeak/tree/main/02.%20Project%20Development/a.%20Testing/Front-end/visuspeak)
+- View our deployed AI model: [VisuSpeak-MediaPipe-Model](https://archishab.github.io/VisuSpeak-MediaPipe-Model/)
+
 ## 🎯 Project Idea 
 Our team aims to create an innovative ASL-English bidirectional translation application for the capstone project. This application will aim to bridge the communication gap between ASL users and English speakers. This application will enable seamless real-time translation from ASL to English, allowing people with special accessibility needs to communicate effectively with others and gain access to essential services and information.
 
