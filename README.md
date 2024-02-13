@@ -16,10 +16,7 @@ Many people with special needs, particularly those with vocal and hearing impair
 Our proposed project will enhance accessibility for individuals with vocal and hearing impairments by providing a reliable tool for communicating with English-speaking individuals, thereby reducing communication barriers and fostering inclusion. This application can facilitate communication between ASL Users and English speakers in educational settings.
 
 ## 🎬 Project Vlogs
-- [Vlog 1 - Project Introduction](https://youtu.be/9bbMHseRjPQ?si=mt2znEMGykmHlMx4)
-- [Vlog 2 - Project Update](https://youtu.be/fPVWs4xmEK0?si=mfVZCNntbsyvqbJA)
-- [Vlog 3 - Project Update](https://www.youtube.com/watch?v=-ziDf7P30js)
-
+Our project vlogs are available in our [playlist](https://youtube.com/playlist?list=PLiqvO_Z9iNyY5reatlxQMcvnlBwdRqN6g&si=iDKp75n8M7KSx_KU)
 
 ## 👥 Team Members
 ![Updated Github Teams-3](https://github.com/jfv492/VisuSpeak/assets/98986952/46ec9636-55be-41e6-a02c-49867797b81f)
