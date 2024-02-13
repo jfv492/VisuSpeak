@@ -68,15 +68,9 @@ Before you begin, ensure you have met the following requirements:
 1. **Clone the Repository**: Clone the project repository to your local machine.
 
 2. **Install Dependencies**:
-   - Navigate to the project directory in your terminal.
-   ```
-   cd 02.\ Project\ Development/a.\ Testing/Front-end/visuspeak/
-   ```
+   - Navigate to the project directory in your terminal: `cd 02.\ Project\ Development/a.\ Testing/Front-end/visuspeak/`
    - Run `npm install` to install the required dependencies.
-   - Navigate to the server directory in your terminal.
-   ```
-   cd server
-   ```
+   - Navigate to the server directory in your terminal: `cd server`
    - Run `npm install` to install the required dependencies.
 
 3. **Start the Application**:
