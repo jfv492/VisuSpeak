@@ -19,7 +19,9 @@ Our proposed project will enhance accessibility for individuals with vocal and h
 Our project vlogs are available in our [playlist](https://youtube.com/playlist?list=PLiqvO_Z9iNyY5reatlxQMcvnlBwdRqN6g&si=iDKp75n8M7KSx_KU)
 
 ## 👥 Team Members
-![Updated Github Teams-3](https://github.com/jfv492/VisuSpeak/assets/98986952/46ec9636-55be-41e6-a02c-49867797b81f)
+![Updated Github Teams-4](https://github.com/jfv492/VisuSpeak/assets/98986952/a0290ad0-37ae-4547-b44b-1909c2fd9eec)
+
+
 
 ## 📝 License 
 [Read the License agreement here](https://github.com/jfv492/VisuSpeak/blob/main/LICENSE)
