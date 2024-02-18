@@ -1,4 +1,4 @@
-import FooterLogo from "../images/White.png";
+import FooterLogo from "../assets/logos/VisuSpeakWhiteLogo.png";
 import React from "react";
 
 export default function Footer() {

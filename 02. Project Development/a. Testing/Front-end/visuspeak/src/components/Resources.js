@@ -1,10 +1,10 @@
 import React from "react";
 import Background from "./Background.js";
-import Hello from "../images/Hello.jpg";
-import Please from "../images/Please.jpg";
-import ThankYou from "../images/Thank You.png";
-import Yes from "../images/Yes.jpg";
-import No from "../images/No.jpg";
+import Hello from "../assets/images/Hello.jpg";
+import Please from "../assets/images/Please.jpg";
+import ThankYou from "../assets/images/ThankYou.png";
+import Yes from "../assets/images/Yes.jpg";
+import No from "../assets/images/No.jpg";
 
 export default function Resources() {
   return (

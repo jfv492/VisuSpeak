@@ -1,9 +1,9 @@
 // Importing necessary modules and components
 import React, { useEffect } from "react";
-import StockImage from "../images/FillerPhoto.jpg"; // Importing an image for use in the component
-import ConversationImage from "../images/Conversation.jpg"; // Importing another image
-import YouTube from "../images/YouTubeLogo.png"; // YouTube logo for external link
-import GitHub from "../images/GitHubLogo.png"; // GitHub logo for external link
+import Hands from "../assets/images/Hands.jpg"; // Importing an image for use in the component
+import ConversationImage from "../assets/images/Conversation.jpg"; // Importing another image
+import YouTube from "../assets/icons/YouTubeIcon.png"; // YouTube logo for external link
+import GitHub from "../assets/icons/GitHubIcon.png"; // GitHub logo for external link
 import { useLocation } from "react-router-dom"; // Hook from React Router for accessing location object
 import Background from "./Background.js"; // Importing a background component
 
@@ -38,7 +38,7 @@ export default function About() {
 
           <div class="col-sm-5">
             <img
-              src={StockImage}
+              src={Hands}
               className="rounded mx-auto d-block"
               alt="..."
               width="100%"

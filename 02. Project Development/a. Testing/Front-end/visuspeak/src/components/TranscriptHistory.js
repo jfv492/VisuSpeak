@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import MessageList from "./MessageList.js";
 import serverUrl from "../Server-env.js";
-import HandGestureBG from "../images/ASl Signs.png";
+import HandGestureBG from "../assets/images/ASLBackgroundSigns.png"; // Background image
 
 const TranscriptHistory = () => {
   let userId = localStorage.getItem("userID");

@@ -1,4 +1,4 @@
-import ColourLogo from "../images/PrimaryLogo.png";
+import ColourLogo from "../assets/logos/VisuSpeakPrimaryLogo.png";
 import React, { useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 

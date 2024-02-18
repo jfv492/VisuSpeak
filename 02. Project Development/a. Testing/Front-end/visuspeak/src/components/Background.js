@@ -1,4 +1,4 @@
-import HandGestureBG from "../images/ASl Signs.png";
+import HandGestureBG from "../assets/images/ASLBackgroundSigns.png"; // Background image
 import React from "react";
 
 export default function Background() {

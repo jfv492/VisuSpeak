@@ -3,10 +3,10 @@ import React, { useState, useEffect } from "react";
 import axios from "axios"; // For making HTTP requests
 import InputArea from "./InputArea.js"; // Component for input area
 import MessageList from "./MessageList.js"; // Component to display list of messages
-import HandGestureBG from "../images/ASl Signs.png"; // Background image
+import HandGestureBG from "../assets/images/ASLBackgroundSigns.png"; // Background image
 import serverUrl from "../Server-env.js"; // URL of the server
-import Tortoise from "../images/turtleIcon.png"; // Icon for slower speed
-import Rabbit from "../images/rabbitIcon.png"; // Icon for faster speed
+import Tortoise from "../assets/icons/TurtleIcon.png"; // Icon for slower speed
+import Rabbit from "../assets/icons/RabbitIcon.png"; // Icon for faster speed
 import { Link, useNavigate } from "react-router-dom"; // For routing
 
 const TestChat = (props) => {
