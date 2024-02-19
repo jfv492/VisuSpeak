@@ -44,7 +44,7 @@
   font-weight: bold;
 }
 
-.signup-link:hover {
+.form-link:hover {
   color: #023e3d;
   font-weight: bold;
 }
@@ -56,17 +56,8 @@
   background-position: center;
 }
 
-.login-form {
-  max-width: 800px;
-  position: absolute;
-  right: 50%;
-  top: 50%;
-  transform: translate(50%, -50%);
-  background: white;
-}
-
-.signup-form {
-  max-width: 1000px;
+.login-form, .signup-form  {
+  max-width: 900px;
   position: absolute;
   right: 50%;
   top: 50%;
@@ -105,27 +96,7 @@
 }
 
 .form-signup-submit-row {
-  padding-right: 0px !important;
-}
-
-@media screen and (max-width: 600px) {
-  .login-form {
-    width: 90%;
-    top: 53%;
-    text-align: start;
-  }
-
-  .signup-form {
-    width: 90%;
-    top: 53%;
-    text-align: start;
-  }
-
-  .form-label {
-    font-size: larger;
-    font-weight: bold;
-    text-align: start;
-  }
+  padding-right: 12px !important;
 }
 
 .hero {
@@ -765,4 +736,32 @@ footer {
   justify-content: center;
   text-align: center;
   margin-left: 10px;
+}
+
+@media screen and (max-width: 600px) {
+  .login-form, .signup-form {
+    width: 90%;
+    top: 53%;
+    text-align: start;
+  }
+
+  .form-label {
+    font-size: larger;
+    font-weight: bold;
+    text-align: start;
+  }
+
+  .button-style {
+    background-color: #006262;
+    color: white;
+    width: 100px;
+    font-size: medium;
+  }
+
+  .button-style:hover {
+    background-color: #006262;
+    color: white;
+    width: 100px;
+    font-size: medium;
+  }
 }

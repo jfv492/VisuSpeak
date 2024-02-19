@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import serverUrl from "../Server-env.js";
@@ -19,6 +19,21 @@ const SignUp = (props) => {
 
   const [errors, setErrors] = useState({});
   const [success, setSuccess] = useState("");
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [currentStep, setCurrentStep] = useState(1);
+  const mobileView = windowWidth < 600;
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const nextStep = () => setCurrentStep(currentStep + 1);
+  const prevStep = () => setCurrentStep(currentStep - 1);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -32,6 +47,11 @@ const SignUp = (props) => {
     e.preventDefault();
     let currentErrors = {};
     let formIsValid = true;
+
+    if (mobileView && currentStep === 1) {
+      nextStep();
+      return;
+    }
 
     // Check for blank fields
     for (const [key, value] of Object.entries(formData)) {
@@ -104,7 +124,7 @@ const SignUp = (props) => {
 
   // Form input fields
   const formField = (name, label, type = "text", isCheckbox = false) => (
-    <div className="col-md-6">
+    <div className="col-sm-6">
       <label
         htmlFor={name}
         className={`form-label${isCheckbox ? " form-check-label" : ""}`}
@@ -136,7 +156,7 @@ const SignUp = (props) => {
   return (
     <div class="signup-container">
       <form
-        className="container signup-form shadow-lg rounded-4 p-5 row g-3"
+        className="container signup-form shadow-lg rounded-4 p-5"
         onSubmit={handleSubmit}
         novalidate
       >
@@ -154,42 +174,75 @@ const SignUp = (props) => {
             </Link>
           </p>
         </div>
-        {formField("firstName", "First Name")}
-        {formField("lastName", "Last Name")}
-        {formField("username", "Username")}
-        {formField("email", "Email")}
-        {formField("password", "Password", "password")}
-        {formField("confirmPassword", "Confirm Password", "password")}
-        <div className="col-md-6">
-          <label className="" htmlFor="agreeTerms">
-            Do you agree with the
-            <Link className="hyperlink ms-1" to="/">
-              terms and conditions
-            </Link>
-            ?
-          </label>
-          <input
-            type="checkbox"
-            className="form-check-input ms-2"
-            id="agreeTerms"
-            name="agreeTerms"
-            checked={formData.agreeTerms}
-            onChange={handleChange}
-          />
-          <div className="text-start form-error">
-            {errors.agreeTerms && (
-              <i
-                className="fa-solid fa-circle-exclamation me-2"
-                style={{ color: "#ca4c4c" }}
-              ></i>
+        <div className="row justify-content-between">
+          {(!mobileView || currentStep === 1) && (
+            <>
+              {formField("firstName", "First Name")}
+              {formField("lastName", "Last Name")}
+              {formField("username", "Username")}
+            </>
+          )}
+          {(!mobileView || currentStep === 2) && (
+            <>
+              {formField("email", "Email")}
+              {formField("password", "Password", "password")}
+              {formField("confirmPassword", "Confirm Password", "password")}
+              <div className="col-sm-6">
+                <label className="" htmlFor="agreeTerms">
+                  <input
+                    type="checkbox"
+                    className="form-check-input me-2"
+                    id="agreeTerms"
+                    name="agreeTerms"
+                    checked={formData.agreeTerms}
+                    onChange={handleChange}
+                  />{" "}
+                  Do you agree with the
+                  <Link className="hyperlink ms-1" to="/">
+                    terms and conditions
+                  </Link>
+                  ?
+                </label>
+                <div className="text-start form-error">
+                  {errors.agreeTerms && (
+                    <i
+                      className="fa-solid fa-circle-exclamation me-2"
+                      style={{ color: "#ca4c4c" }}
+                    ></i>
+                  )}
+                  {errors.agreeTerms}
+                </div>
+              </div>
+            </>
+          )}
+
+          <div className="d-flex">
+            {mobileView && currentStep > 1 && (
+              <button
+                type="button"
+                className="btn back-button-style"
+                onClick={prevStep}
+              >
+                <i
+                  class="fa-solid fa-arrow-left"
+                  style={{ color: "#ffffff;" }}
+                ></i>
+              </button>
             )}
-            {errors.agreeTerms}
+
+            {mobileView && currentStep === 1 ? (
+              <button type="submit" className="btn back-button-style ms-auto">
+                <i
+                  class="fa-solid fa-arrow-right"
+                  style={{ color: "#ffffff;" }}
+                ></i>
+              </button>
+            ) : (
+              <button type="submit" className="btn button-style ms-auto">
+                Sign Up
+              </button>
+            )}
           </div>
-        </div>
-        <div className="row form-signup-submit-row justify-content-end">
-          <button type="submit" className="btn btn-dark btn-lg button-style ">
-            Sign Up
-          </button>
         </div>
       </form>
     </div>

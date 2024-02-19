@@ -63,7 +63,7 @@ function App() {
               <Route exact path="/speechtest" element={<SpeechTest />} />
             </Routes>
           </div>
-          <Footer />
+          {/* <Footer /> */}
         </div>
       </BrowserRouter>
     </>
