@@ -1,0 +1,87 @@
+@media screen and (max-width: 600px) {
+
+    .login-form,
+    .signup-form {
+        width: 90%;
+        top: 40%;
+        text-align: start;
+    }
+
+    .form-label {
+        font-size: larger;
+        font-weight: bold;
+        text-align: start;
+    }
+
+    .home-button-style {
+        background-color: #006262;
+        color: white;
+        width: 100%;
+        font-size: medium;
+    }
+
+    .home-button-style:hover {
+        background-color: #006262;
+        color: white;
+        width: 100%;
+        font-size: medium;
+    }
+
+    .button-style {
+        background-color: #006262;
+        color: white;
+        width: 100px;
+        font-size: medium;
+    }
+
+    .button-style:hover {
+        background-color: #006262;
+        color: white;
+        width: 100px;
+        font-size: medium;
+    }
+
+    /* ***************FOOTER STYLE*************** */
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .menu {
+        flex-direction: row;
+        align-items: center;
+        font-size: small;
+        padding: 10px;
+    }
+
+    .menu-item {
+        margin: 10px;
+    }
+
+    .social-media {
+        padding: 20px;
+    }
+
+    .rights {
+        margin-top: 10px;
+    }
+
+    /* ***************NAVBAR STYLE*************** */
+    .nav-link {
+        padding-left: 10px;
+    }
+
+    .nav-pills .nav-link.active,
+    .nav-pills .show>.nav-link {
+        color: white;
+        background-color: #006262;
+        /* padding-left: 10px; */
+    }
+
+    .nav-link:hover,
+    .nav-link:focus {
+        background-color: #023e3d;
+        color: white;
+
+    }
+}

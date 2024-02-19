@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <footer className="footer">
       <div className="footer-container">
-        <div className="logo">
+        <div className="logo mx-3">
           <img src={FooterLogo} height="50" />
           <div className="rights">© 2023-2024 Team VisuSpeak</div>
         </div>
@@ -25,7 +25,7 @@ const Footer = () => {
           </a>
         </nav>
 
-        <div className="social-media">
+        <div className="social-media mx-3">
           <i
             class="fa-brands fa-github fa-2xl me-3"
             style={{ color: "#ffffff;" }}

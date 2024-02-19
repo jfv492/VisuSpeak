@@ -46,14 +46,13 @@ const Login = (props) => {
       });
   };
   return (
-    <div class="background-container">
-      <form
-        className="container login-form shadow-lg rounded-4 p-5"
-        onSubmit={handleSubmit}
-      >
-        <div className="row  mb-4">
-          <h1> {props.heading}</h1>
-          <p class="lead">
+    <form
+      className="container login-form shadow-lg rounded-4 p-5"
+      onSubmit={handleSubmit}
+    >
+      <div className="row  mb-4">
+        <h1> {props.heading}</h1>
+        <p class="lead">
           <label className="">Don't have an account?</label>
           <Link
             to="/signup"
@@ -63,47 +62,54 @@ const Login = (props) => {
           >
             Sign Up
           </Link>
-          </p>
-        </div>
+        </p>
+      </div>
 
-        <div className="row mb-4">
-          <label htmlFor="username" className="form-label mt-1">
-            Username:
-          </label>
-          <div className="">
-            <input
-              type="text"
-              className="form-control"
-              id="username"
-              name="username"
-              value={formData.username}
-              onChange={handleChange}
-            />
+      <div className="row mb-4">
+        <label htmlFor="username" className="form-label mt-1">
+          Username:
+        </label>
+        <div className="">
+          <input
+            type="text"
+            className="form-control"
+            id="username"
+            name="username"
+            value={formData.username}
+            onChange={handleChange}
+          />
+        </div>
+      </div>
+      <div className="row">
+        <label htmlFor="password" className="form-label mt-1">
+          Password:
+        </label>
+        <div className="">
+          <input
+            type="password"
+            className="form-control"
+            id="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+          />
+          <div className="text-start form-error mt-1">
+            {error && (
+              <i
+                className="fa-solid fa-circle-exclamation me-2"
+                style={{ color: "#ca4c4c" }}
+              ></i>
+            )}
+            {error}
           </div>
         </div>
-        <div className="row">
-          <label htmlFor="password" className="form-label mt-1">
-            Password:
-          </label>
-          <div className="">
-            <input
-              type="password"
-              className="form-control"
-              id="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-            />
-            <div className="text-start form-error mt-1">{error && <i className="fa-solid fa-circle-exclamation me-2" style={{ color: "#ca4c4c" }}></i>}{error}</div>
-          </div>
-        </div>
-        <div className="row form-submit-row justify-content-end">
-          <button type="submit" className="btn button-style">
-            Login
-          </button>
-        </div>
-      </form>
-    </div>
+      </div>
+      <div className="row form-submit-row justify-content-end">
+        <button type="submit" className="btn button-style">
+          Login
+        </button>
+      </div>
+    </form>
   );
 };
 

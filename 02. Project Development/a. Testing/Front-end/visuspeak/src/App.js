@@ -1,13 +1,12 @@
 import "./App.css";
-import { ChakraProvider } from "@chakra-ui/react";
+import "./Mobile.css";
+
 import Login from "./modules/Login.js";
 import SignUp from "./modules/SignUp.js";
 import Footer from "./modules/Footer.js";
+import Navbar from "./modules/Navbar.js";
 
-
-import Header from "./components/Header.js";
-import Home from "./components/Home.js";
-
+import Home from "./modules/Home.js";
 
 import Alert from "./components/Alert.js";
 import Chat from "./components/Chat.js";
@@ -34,28 +33,28 @@ function App() {
 
   return (
     <>
-    
       <BrowserRouter>
         <div className="page-container">
-          <div className="">
-            <Header />
+          <div className="background-container">
+            <Navbar />
             <Alert alert={alert} />
             <Routes>
-            <Route
+              <Route exact path="/" element={<Home />} />
+              <Route
                 exact
                 path="/login"
                 element={<Login heading="Login" showAlert={showAlert} />}
               />
-              <Route exact path="/" element={<Home />} />
-              <Route exact path="/chat" element={<Chat />} />
-              <Route exact path="/about" element={<About />} />
-              <Route exact path="/resources" element={<Resources />} />
-
-              <Route
+                            <Route
                 exact
                 path="/signup"
                 element={<SignUp heading="Sign Up" showAlert={showAlert} />}
               />
+
+
+              <Route exact path="/chat" element={<Chat />} />
+              <Route exact path="/about" element={<About />} />
+              <Route exact path="/resources" element={<Resources />} />
               <Route exact path="/newchat" element={<NewChat />} />
               <Route
                 exact

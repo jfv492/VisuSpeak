@@ -154,98 +154,96 @@ const SignUp = (props) => {
     </div>
   );
   return (
-    <div class="background-container">
-      <form
-        className="container signup-form shadow-lg rounded-4 p-5"
-        onSubmit={handleSubmit}
-        novalidate
-      >
-        <div className="row mb-4">
-          <h1> {props.heading}</h1>
-          <p class="lead">
-            <label className="">Don't have an account?</label>
-            <Link
-              to="/login"
-              className="ms-2 form-link"
-              tabIndex="2"
-              role="button"
-            >
-              Login
-            </Link>
-          </p>
-        </div>
-        <div className="row justify-content-between">
-          {(!mobileView || currentStep === 1) && (
-            <>
-              {formField("firstName", "First Name")}
-              {formField("lastName", "Last Name")}
-              {formField("username", "Username")}
-            </>
-          )}
-          {(!mobileView || currentStep === 2) && (
-            <>
-              {formField("email", "Email")}
-              {formField("password", "Password", "password")}
-              {formField("confirmPassword", "Confirm Password", "password")}
-              <div className="col-sm-6">
-                <label className="" htmlFor="agreeTerms">
-                  <input
-                    type="checkbox"
-                    className="form-check-input"
-                    id="agreeTerms"
-                    name="agreeTerms"
-                    checked={formData.agreeTerms}
-                    onChange={handleChange}
-                  />{" "}
-                  Do you agree with the
-                  <Link className="hyperlink ms-1" to="/">
-                    terms and conditions
-                  </Link>
-                  ?
-                </label>
-                <div className="text-start form-error">
-                  {errors.agreeTerms && (
-                    <i
-                      className="fa-solid fa-circle-exclamation me-2"
-                      style={{ color: "#ca4c4c" }}
-                    ></i>
-                  )}
-                  {errors.agreeTerms}
-                </div>
+    <form
+      className="container signup-form shadow-lg rounded-4 p-5"
+      onSubmit={handleSubmit}
+      novalidate
+    >
+      <div className="row mb-4">
+        <h1> {props.heading}</h1>
+        <p class="lead">
+          <label className="">Don't have an account?</label>
+          <Link
+            to="/login"
+            className="ms-2 form-link"
+            tabIndex="2"
+            role="button"
+          >
+            Login
+          </Link>
+        </p>
+      </div>
+      <div className="row justify-content-between">
+        {(!mobileView || currentStep === 1) && (
+          <>
+            {formField("firstName", "First Name")}
+            {formField("lastName", "Last Name")}
+            {formField("username", "Username")}
+          </>
+        )}
+        {(!mobileView || currentStep === 2) && (
+          <>
+            {formField("email", "Email")}
+            {formField("password", "Password", "password")}
+            {formField("confirmPassword", "Confirm Password", "password")}
+            <div className="col-sm-6">
+              <label className="" htmlFor="agreeTerms">
+                <input
+                  type="checkbox"
+                  className="form-check-input"
+                  id="agreeTerms"
+                  name="agreeTerms"
+                  checked={formData.agreeTerms}
+                  onChange={handleChange}
+                />{" "}
+                Do you agree with the
+                <Link className="hyperlink ms-1" to="/">
+                  terms and conditions
+                </Link>
+                ?
+              </label>
+              <div className="text-start form-error">
+                {errors.agreeTerms && (
+                  <i
+                    className="fa-solid fa-circle-exclamation me-2"
+                    style={{ color: "#ca4c4c" }}
+                  ></i>
+                )}
+                {errors.agreeTerms}
               </div>
-            </>
+            </div>
+          </>
+        )}
+
+        <div className="d-flex">
+          {mobileView && currentStep > 1 && (
+            <button
+              type="button"
+              className="btn back-button-style"
+              onClick={prevStep}
+            >
+              <i
+                class="fa-solid fa-arrow-left"
+                style={{ color: "#ffffff;" }}
+              ></i>
+            </button>
           )}
 
-          <div className="d-flex">
-            {mobileView && currentStep > 1 && (
-              <button
-                type="button"
-                className="btn back-button-style"
-                onClick={prevStep}
-              >
-                <i
-                  class="fa-solid fa-arrow-left"
-                  style={{ color: "#ffffff;" }}
-                ></i>
-              </button>
-            )}
-
-            {mobileView && currentStep === 1 ? (
-              <button type="submit" className="btn back-button-style ms-auto">
-                <i
-                  class="fa-solid fa-arrow-right"
-                  style={{ color: "#ffffff;" }}
-                ></i>
-              </button>
-            ) : (
-              <button type="submit" className="btn button-style ms-auto">
-                Sign Up
-              </button>
-            )}
-          </div>
+          {mobileView && currentStep === 1 ? (
+            <button type="submit" className="btn back-button-style ms-auto">
+              <i
+                class="fa-solid fa-arrow-right"
+                style={{ color: "#ffffff;" }}
+              ></i>
+            </button>
+          ) : (
+            <button type="submit" className="btn button-style ms-auto">
+              Sign Up
+            </button>
+          )}
         </div>
-      </form>
-    </div>
+      </div>
+    </form>
   );
 };
 
