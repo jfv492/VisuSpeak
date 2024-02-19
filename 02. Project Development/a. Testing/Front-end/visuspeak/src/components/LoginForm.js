@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import Background from "./Background.js";
 import serverUrl from "../Server-env.js";
 
-const Login = (props) => {
+export default function Login(props) {
   const loginUrl = `${serverUrl}/auth/login`;
   let navigate = useNavigate();
 
@@ -45,32 +46,19 @@ const Login = (props) => {
         setError("Invalid credentials. Please try again.");
       });
   };
+
   return (
-    <div class="login-container">
+    <div class="">
       <form
-        className="container login-form shadow-lg rounded-4 p-5"
+        className="container text-end login-form shadow-lg rounded-4"
         onSubmit={handleSubmit}
       >
-        <div className="row  mb-4">
-          <h1> Login</h1>
-          <p class="lead">
-          <label className="">Don't have an account?</label>
-          <Link
-            to="/signup"
-            className="ms-2 signup-link"
-            tabIndex="2"
-            role="button"
-          >
-            Sign Up
-          </Link>
-          </p>
-        </div>
-
-        <div className="row  mb-4">
-          <label htmlFor="username" className="col-sm-2 form-label mt-1">
+        <h1>Login</h1>
+        <div className="row mb-4">
+          <label htmlFor="username" className="col-sm-3 col-form-label">
             Username:
           </label>
-          <div className="col-sm-10">
+          <div className="col-sm-7">
             <input
               type="text"
               className="form-control"
@@ -81,11 +69,11 @@ const Login = (props) => {
             />
           </div>
         </div>
-        <div className="row  mb-4">
-          <label htmlFor="password" className="col-sm-2 form-label mt-1">
+        <div className="row mb-4">
+          <label htmlFor="password" className="col-sm-3 col-form-label">
             Password:
           </label>
-          <div className="col-sm-10">
+          <div className="col-sm-7">
             <input
               type="password"
               className="form-control"
@@ -94,17 +82,35 @@ const Login = (props) => {
               value={formData.password}
               onChange={handleChange}
             />
-            <div className="text-start form-error mt-1">{error && <i className="fa-solid fa-circle-exclamation me-2" style={{ color: "#ca4c4c" }}></i>}{error}</div>
+            {error && <div className="text-start form-error">{error}</div>}
           </div>
         </div>
-        <div className="row form-submit-row justify-content-end">
-          <button type="submit" className="btn btn-dark btn-lg button-style ">
-            Login
-          </button>
+        <div className="row mb-4">
+          <div className="col-sm-3"></div>
+          <div className="col-sm-7">
+            <div className="gap-2 d-md-flex justify-content-md-end">
+              <button
+                type="submit"
+                className="btn btn-dark btn-lg button-style"
+              >
+                Login
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div className="d-grid gap-4 d-sm-flex justify-content-sm-center align-items-center my-5">
+          <label className="large-text-style">Don't have an account?</label>
+          <Link
+            to="/signup"
+            className="btn btn-outline-dark btn-lg button-outline-style"
+            tabIndex="2"
+            role="button"
+          >
+            Sign Up
+          </Link>
         </div>
       </form>
     </div>
   );
-};
-
-export default Login;
+}

@@ -39,6 +39,68 @@
 
 }
 
+.signup-link {
+  color: #006262;
+  font-weight: bold;
+}
+
+.signup-link:hover {
+  color: #023e3d;
+  font-weight: bold;
+}
+
+.login-container {
+  background-image: url('/src/assets/images/ASLBackgroundSigns.png');
+  height: 100%;
+  background-position: center;
+}
+
+.login-form {
+  max-width: 800px;
+  position: absolute;
+  right: 50%;
+  top: 45%;
+  transform: translate(50%, -50%);
+  background: white;
+}
+
+.form-label{
+  font-size: larger;
+  font-weight: bold;
+}
+
+.form-control {
+  border-color: #000000;
+}
+
+.form-control:focus {
+  border-color: #006262;
+  border-width: 0.2rem;
+}
+
+.form-check-input {
+  height: 30px;
+  width: 30px;
+  border-color: #000000;
+}
+
+.form-error {
+  color: #ca4c4c;
+  min-height: 25px;
+}
+
+.form-submit-row {
+  padding-right: 12px !important;
+}
+
+@media screen and (max-width: 600px) {
+  .login-form {
+      width: 90%;
+      top: 53%;
+      text-align:start;
+  }
+}
+
 .hero {
   min-height: 400px;
   justify-content: center; /* Center horizontally */
@@ -189,30 +251,6 @@ footer {
   bottom: 0;
   width: 100%;
   height: 6rem;
-}
-
-.col-form-label{
-  font-size: larger;
-  font-weight: bold;
-}
-
-.form-control {
-  border-color: #000000;
-}
-
-.form-control:focus {
-  border-color: #006262;
-  border-width: 0.2rem;
-}
-
-.form-check-input {
-  height: 30px;
-  width: 30px;
-  border-color: #000000;
-}
-
-.form-error {
-  color: #993a3a;
 }
 
 .hyperlink {
