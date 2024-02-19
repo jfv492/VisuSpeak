@@ -84,4 +84,10 @@
         color: white;
 
     }
+
+    /* ***************ABOUT US STYLE*************** */
+    .hyperlink-social-row {
+        display: flex;
+        flex-direction: row;
+      }
 }

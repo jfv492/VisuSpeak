@@ -5,7 +5,7 @@ import NavButton from "../components/NavButton.js";
 
 const Navbar = () => {
   return (
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary shadow">
       <div class="container-fluid">
         <Link className="navbar-brand mx-3" to="/">
           <img src={ColourLogo} alt="VisuSpeak Logo" height="50" />

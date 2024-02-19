@@ -1,44 +1,54 @@
-.App {
-  text-align: center;
+/* ***************ABOUT US STYLE*************** */
+.about-us-sections {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 50px;
+  margin-right: 50px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.row-reverse {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  flex-direction: row-reverse;
+  background-color: #eee;
+}
+
+.accordion-button:focus, .accordion-button:not(.collapsed)  {
+  background-color: #809f9f !important;
+  border-color: #809f9f !important;
   color: white;
+  font-weight: bold;
 }
 
-.App-link {
-  color: #61dafb;
+.feature-icon-small {
+  width: 50px;
+  height: 50px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
-
+.hyperlink-social {
+  text-decoration: none;
+  text-emphasis: none;
 }
 
+.text-bg-primary {
+  background-color: #006262 !important;
+}
+
+.text-bg-primary:hover {
+  background-color: #023e3d !important;
+}
+
+.social {
+  background-color: #eee;
+}
+
+.hyperlink-social-row {
+  display: flex;
+  flex-direction: row;
+}
+
+/* ***************FORM STYLE*************** */
 .form-link {
   color: #006262;
   font-weight: bold;
@@ -60,7 +70,7 @@
   max-width: 900px;
   position: absolute;
   right: 50%;
-  top: 50%;
+  top: 47%;
   transform: translate(50%, -50%);
   background: white;
 }
@@ -726,6 +736,7 @@
   background-color: #000;
   color: white;
   padding: 20px 0;
+  z-index: 10;
 }
 
 .footer-container {
