@@ -1,8 +1,10 @@
 import "./App.css";
+import { ChakraProvider } from "@chakra-ui/react";
 import Login from "./modules/Login.js";
 import SignUp from "./modules/SignUp.js";
+import Footer from "./modules/Footer.js";
 
-import Footer from "./components/Footer.js";
+
 import Header from "./components/Header.js";
 import Home from "./components/Home.js";
 
@@ -32,9 +34,10 @@ function App() {
 
   return (
     <>
+    
       <BrowserRouter>
         <div className="page-container">
-          <div className="content-wrap">
+          <div className="">
             <Header />
             <Alert alert={alert} />
             <Routes>
@@ -63,7 +66,7 @@ function App() {
               <Route exact path="/speechtest" element={<SpeechTest />} />
             </Routes>
           </div>
-          {/* <Footer /> */}
+          <Footer />
         </div>
       </BrowserRouter>
     </>

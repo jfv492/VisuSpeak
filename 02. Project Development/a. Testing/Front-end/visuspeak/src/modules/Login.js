@@ -46,7 +46,7 @@ const Login = (props) => {
       });
   };
   return (
-    <div class="login-container">
+    <div class="background-container">
       <form
         className="container login-form shadow-lg rounded-4 p-5"
         onSubmit={handleSubmit}
@@ -66,7 +66,7 @@ const Login = (props) => {
           </p>
         </div>
 
-        <div className="row  mb-4">
+        <div className="row mb-4">
           <label htmlFor="username" className="form-label mt-1">
             Username:
           </label>

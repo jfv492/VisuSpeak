@@ -17,16 +17,16 @@ export default function Home() {
   };
 
   return (
-    <>
+    <div class="background-container">
       <div className="hero text-center shadow-lg p-3 mb-5 bg-body-tertiary rounded">
         <h1 className="display-3 mt-5 fw-bold ">Welcome to VisuSpeak</h1>
         <div className="col-sm-6 mx-auto">
           <h1 className="display-5 text-body-emphasis">Your ASL Companion</h1>
           {localStorage.getItem("username") == null ? (
-            <div className="d-flex gap-4 d-sm-flex justify-content-center mt-5">
+            <div className="d-grid gap-2 d-md-flex justify-content-md-center mt-5 mb-lg-3">
               <Link
                 to="/login"
-                className="btn btn-lg button-style"
+                className="btn btn-lg home-button-style"
                 tabIndex="1"
                 role="button"
               >
@@ -34,7 +34,7 @@ export default function Home() {
               </Link>
               <Link
                 to="/signup"
-                className="btn btn-lg button-style"
+                className="btn btn-lg home-button-style"
                 tabIndex="2"
                 role="button"
               >
@@ -57,9 +57,6 @@ export default function Home() {
           )}
         </div>
       </div>
-      <div>
-        <Background />
-      </div>
-    </>
+    </div>
   );
 }

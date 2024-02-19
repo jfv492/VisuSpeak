@@ -49,8 +49,7 @@
   font-weight: bold;
 }
 
-.login-container,
-.signup-container {
+.background-container {
   background-image: url('/src/assets/images/ASLBackgroundSigns.png');
   height: 100%;
   background-position: center;
@@ -101,15 +100,18 @@
 
 .hero {
   min-height: 400px;
+  min-width: 90%;
+  right: 50%;
+  top: 35%;
+  transform: translate(50%, -50%);
+  position: absolute;
   justify-content: center;
-  /* Center horizontally */
   align-items: center;
-  /* Center vertically */
   text-align: center;
-  /* Ensure text is centered if it wraps */
+  border-color: #ddd;
 }
 
-.button-style {
+.button-style, .home-button-style {
   background-color: #006262;
   color: white;
   width: 150px;
@@ -242,15 +244,6 @@
 
 .nav-link {
   color: black;
-}
-
-footer {
-  color: white;
-  background-color: black;
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 6rem;
 }
 
 .hyperlink {
@@ -751,6 +744,13 @@ footer {
     text-align: start;
   }
 
+  .home-button-style {
+    background-color: #006262;
+    color: white;
+    width: 100%;
+    font-size: medium;
+  }
+
   .button-style {
     background-color: #006262;
     color: white;
@@ -764,4 +764,72 @@ footer {
     width: 100px;
     font-size: medium;
   }
+
+  /* ***************Footer Style*************** */
+  .footer-container {
+    flex-direction:column;
+    align-items: center;
+  }
+
+  .menu {
+    flex-direction: row;
+    align-items: center;
+    font-size: small;
+    padding: 10px;
+  }
+
+  .menu-item {
+    margin: 5px 0;
+  }
+
+  .social-media {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  .rights {
+    margin-top: 10px;
+  }
+}
+
+/* ***************Footer Style*************** */
+
+.footer {
+  background-color: #000;
+  color: white;
+  padding: 20px 0;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 0 20px;
+}
+
+.menu {
+  display: flex;
+}
+
+.menu-item {
+  margin: 0 10px;
+  color: white;
+  text-decoration: none;
+}
+
+.social-media {
+  display: flex;
+}
+
+.social-icon {
+  margin-left: 10px;
+  color: white;
+  text-decoration: none;
+}
+
+.rights {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 0.75em;
 }

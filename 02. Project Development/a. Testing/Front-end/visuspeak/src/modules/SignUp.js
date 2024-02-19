@@ -154,7 +154,7 @@ const SignUp = (props) => {
     </div>
   );
   return (
-    <div class="signup-container">
+    <div class="background-container">
       <form
         className="container signup-form shadow-lg rounded-4 p-5"
         onSubmit={handleSubmit}
@@ -191,7 +191,7 @@ const SignUp = (props) => {
                 <label className="" htmlFor="agreeTerms">
                   <input
                     type="checkbox"
-                    className="form-check-input me-2"
+                    className="form-check-input"
                     id="agreeTerms"
                     name="agreeTerms"
                     checked={formData.agreeTerms}
