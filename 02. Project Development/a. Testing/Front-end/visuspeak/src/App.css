@@ -39,7 +39,7 @@
 
 }
 
-.signup-link {
+.form-link {
   color: #006262;
   font-weight: bold;
 }
@@ -49,7 +49,8 @@
   font-weight: bold;
 }
 
-.login-container {
+.login-container,
+.signup-container {
   background-image: url('/src/assets/images/ASLBackgroundSigns.png');
   height: 100%;
   background-position: center;
@@ -59,14 +60,24 @@
   max-width: 800px;
   position: absolute;
   right: 50%;
-  top: 45%;
+  top: 50%;
   transform: translate(50%, -50%);
   background: white;
 }
 
-.form-label{
+.signup-form {
+  max-width: 1000px;
+  position: absolute;
+  right: 50%;
+  top: 50%;
+  transform: translate(50%, -50%);
+  background: white;
+}
+
+.form-label {
   font-size: larger;
   font-weight: bold;
+  /* text-align: end; */
 }
 
 .form-control {
@@ -79,8 +90,8 @@
 }
 
 .form-check-input {
-  height: 30px;
-  width: 30px;
+  height: 20px;
+  width: 20px;
   border-color: #000000;
 }
 
@@ -93,19 +104,38 @@
   padding-right: 12px !important;
 }
 
+.form-signup-submit-row {
+  padding-right: 0px !important;
+}
+
 @media screen and (max-width: 600px) {
   .login-form {
-      width: 90%;
-      top: 53%;
-      text-align:start;
+    width: 90%;
+    top: 53%;
+    text-align: start;
+  }
+
+  .signup-form {
+    width: 90%;
+    top: 53%;
+    text-align: start;
+  }
+
+  .form-label {
+    font-size: larger;
+    font-weight: bold;
+    text-align: start;
   }
 }
 
 .hero {
   min-height: 400px;
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
-  text-align: center; /* Ensure text is centered if it wraps */
+  justify-content: center;
+  /* Center horizontally */
+  align-items: center;
+  /* Center vertically */
+  text-align: center;
+  /* Ensure text is centered if it wraps */
 }
 
 .button-style {
@@ -130,21 +160,19 @@
   font-size: x-large;
 }
 
-.cancel-button-style {  
+.cancel-button-style {
   width: 50px;
   font-size: x-large;
 }
 
-.cancel-button-style:hover {  
+.cancel-button-style:hover {
   width: 50px;
   font-size: x-large;
   color: #fff;
   background-color: #023e3d;
 }
 
-.cancel-button-style:se
-
-.btn:hover {
+.cancel-button-style:se .btn:hover {
   background-color: #006262;
 }
 
@@ -235,7 +263,8 @@
   background-color: #006262;
 }
 
-.nav-link:hover, .nav-link:focus {
+.nav-link:hover,
+.nav-link:focus {
   background-color: #023e3d;
   color: white;
 }
@@ -296,11 +325,11 @@ footer {
 }
 
 .camera-button {
-  min-width: 220px; 
+  min-width: 220px;
 }
 
 .wider-button {
-  min-width: 300px; 
+  min-width: 300px;
 }
 
 .chatbox-scrollable {
@@ -328,15 +357,15 @@ footer {
 }
 
 .chat-header {
-  display: flex; 
+  display: flex;
   align-items: center;
 }
 
 .action-buttons {
   background-color: #ddd;
   min-height: 470px;
-  justify-content: center; 
-  align-items: center; 
+  justify-content: center;
+  align-items: center;
 }
 
 .action-button-style {
@@ -358,8 +387,10 @@ footer {
 }
 
 .vertical {
-  writing-mode: bt-lr; /* IE */
-  -webkit-appearance: slider-vertical; /* WebKit */
+  writing-mode: bt-lr;
+  /* IE */
+  -webkit-appearance: slider-vertical;
+  /* WebKit */
 }
 
 
@@ -369,7 +400,7 @@ footer {
 
 .slider-label {
   position: absolute;
-  margin-left: -10px; 
+  margin-left: -10px;
 }
 
 .slider-style {
@@ -415,16 +446,16 @@ footer {
   display: inline-block;
 }
 
-.messages-heading{
+.messages-heading {
   height: 55px;
 }
 
 .strike-through {
   display: block;
-  width: 100px; 
-  height: 2px; 
-  background-color: black; 
-  margin: 10px 0; 
+  width: 100px;
+  height: 2px;
+  background-color: black;
+  margin: 10px 0;
 }
 
 .alert {
@@ -437,12 +468,15 @@ footer {
 }
 
 .camera-placeholder {
-  width: 100%; 
+  width: 100%;
   display: flex;
   margin-left: 0px;
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
-  text-align: center; /* Ensure text is centered if it wraps */
+  justify-content: center;
+  /* Center horizontally */
+  align-items: center;
+  /* Center vertically */
+  text-align: center;
+  /* Ensure text is centered if it wraps */
   color: #006262;
 }
 
@@ -450,7 +484,7 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%; 
+  height: 100%;
 }
 
 .list-group-search {
@@ -467,7 +501,7 @@ footer {
 
 .video-canvas {
   padding: 0px !important;
-  
+
 }
 
 .video-style {
@@ -525,8 +559,9 @@ footer {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background-color: green; /* Green indicates active */
-  position:absolute;
+  background-color: green;
+  /* Green indicates active */
+  position: absolute;
   top: 13;
   left: 11;
 }
@@ -535,8 +570,9 @@ footer {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background-color: green; /* Green indicates active */
-  position:absolute;
+  background-color: green;
+  /* Green indicates active */
+  position: absolute;
   top: 0;
   left: 0;
 }
@@ -548,10 +584,11 @@ footer {
 
 @keyframes glow {
   from {
-      box-shadow: 0 0 10px #006262;
+    box-shadow: 0 0 10px #006262;
   }
+
   to {
-      box-shadow: 0 0 50px #023e3d;
+    box-shadow: 0 0 50px #023e3d;
   }
 }
 
@@ -569,8 +606,10 @@ footer {
 }
 
 .avatar {
-  width: 40px; /* Adjust size as needed */
-  height: 40px; /* Adjust size as needed */
+  width: 40px;
+  /* Adjust size as needed */
+  height: 40px;
+  /* Adjust size as needed */
   border-radius: 50%;
   margin: 5px;
 }
@@ -643,10 +682,13 @@ footer {
   justify-content: space-between;
   align-items: flex-end;
   /* padding: 5px; */
-  background: #FFFFFF; /* Replace with the desired color of the container */
+  background: #FFFFFF;
+  /* Replace with the desired color of the container */
   border-radius: 10px;
-  box-shadow: 0px 3px 6px #00000029; /* Adjust for desired shadow */
-  width:100%; /* Adjust as per requirement */
+  box-shadow: 0px 3px 6px #00000029;
+  /* Adjust for desired shadow */
+  width: 100%;
+  /* Adjust as per requirement */
 }
 
 .icon-container {
@@ -654,46 +696,58 @@ footer {
   display: flex;
   align-items: center;
   cursor: pointer;
-  justify-content: center; /* Centers the icon horizontally */
+  justify-content: center;
+  /* Centers the icon horizontally */
   height: 100%;
   width: 35px;
 }
 
 .icon-container span {
-  font-size: 24px; /* Adjust the size of the icon as needed */
-  margin-bottom: 8px; /* Pushes the icon down to align with the bottom of the textarea */
+  font-size: 24px;
+  /* Adjust the size of the icon as needed */
+  margin-bottom: 8px;
+  /* Pushes the icon down to align with the bottom of the textarea */
 }
 
-.microphone-icon{
+.microphone-icon {
   color: #006262;
 }
 
 .microphone-icon:hover {
-  color: #809f9f; 
+  color: #809f9f;
 }
 
 .icon-container span {
-  font-size: 20px; /* Adjust the size of the icon as needed */
+  font-size: 20px;
+  /* Adjust the size of the icon as needed */
 }
 
 .chat-input {
   border: none;
   outline: none;
   padding: 10px;
-  margin-left: 5px; /* Space from the microphone icon */
-  width: 100%; /* Make textarea take the remaining width */
-  font-size: 16px; /* Adjust as per requirement */
-  resize: none; /* Prevent manual resizing */
-  overflow: hidden; /* Hide the scrollbar */
-  min-height: 5px; /* Minimum height to start with */
-  line-height: 20px; /* Adjust line height as per requirement */
+  margin-left: 5px;
+  /* Space from the microphone icon */
+  width: 100%;
+  /* Make textarea take the remaining width */
+  font-size: 16px;
+  /* Adjust as per requirement */
+  resize: none;
+  /* Prevent manual resizing */
+  overflow: hidden;
+  /* Hide the scrollbar */
+  min-height: 5px;
+  /* Minimum height to start with */
+  line-height: 20px;
+  /* Adjust line height as per requirement */
   margin-bottom: 8px;
 }
 
 .send-button {
   background: none;
   border: none;
-  font-size: 24px; /* Adjust as per requirement */
+  font-size: 24px;
+  /* Adjust as per requirement */
   cursor: pointer;
   color: #006262;
 }

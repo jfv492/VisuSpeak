@@ -1,9 +1,12 @@
 import "./App.css";
+import Login from "./modules/Login.js";
+import SignUp from "./modules/SignUp.js";
+
 import Footer from "./components/Footer.js";
 import Header from "./components/Header.js";
 import Home from "./components/Home.js";
-import Login from "./modules/Login.js";
-import SignUp from "./components/SignUp.js";
+
+
 import Alert from "./components/Alert.js";
 import Chat from "./components/Chat.js";
 import NewChat from "./components/ChatContainer.js";

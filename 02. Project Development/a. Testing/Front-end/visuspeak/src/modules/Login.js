@@ -52,12 +52,12 @@ const Login = (props) => {
         onSubmit={handleSubmit}
       >
         <div className="row  mb-4">
-          <h1> Login</h1>
+          <h1> {props.heading}</h1>
           <p class="lead">
           <label className="">Don't have an account?</label>
           <Link
             to="/signup"
-            className="ms-2 signup-link"
+            className="ms-2 form-link"
             tabIndex="2"
             role="button"
           >
@@ -67,10 +67,10 @@ const Login = (props) => {
         </div>
 
         <div className="row  mb-4">
-          <label htmlFor="username" className="col-sm-2 form-label mt-1">
+          <label htmlFor="username" className="form-label mt-1">
             Username:
           </label>
-          <div className="col-sm-10">
+          <div className="">
             <input
               type="text"
               className="form-control"
@@ -81,11 +81,11 @@ const Login = (props) => {
             />
           </div>
         </div>
-        <div className="row  mb-4">
-          <label htmlFor="password" className="col-sm-2 form-label mt-1">
+        <div className="row">
+          <label htmlFor="password" className="form-label mt-1">
             Password:
           </label>
-          <div className="col-sm-10">
+          <div className="">
             <input
               type="password"
               className="form-control"
