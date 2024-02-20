@@ -348,15 +348,6 @@ const TestChat = (props) => {
           </div>
         </div>
       </div>
-
-      <div>
-        <div className="shadow-before-background"></div>
-        <img
-          src={HandGestureBG}
-          alt="Hand Gesture Background"
-          className="hand-gesture-background"
-        />
-      </div>
     </>
   );
 };

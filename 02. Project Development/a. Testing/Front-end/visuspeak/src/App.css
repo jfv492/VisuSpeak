@@ -1,3 +1,9 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
 /* ***************ABOUT US STYLE*************** */
 .about-us-sections {
   margin-top: 10px;
@@ -14,7 +20,8 @@
   background-color: #eee;
 }
 
-.accordion-button:focus, .accordion-button:not(.collapsed)  {
+.accordion-button:focus,
+.accordion-button:not(.collapsed) {
   background-color: #809f9f !important;
   border-color: #809f9f !important;
   color: white;
@@ -82,7 +89,7 @@
 }
 
 .form-control {
-  border-color: #000000;
+  border-color: #aaa;
 }
 
 .form-control:focus {
@@ -109,6 +116,17 @@
   padding-right: 12px !important;
 }
 
+/* ***************MODAL STYLE*************** */
+.modal-backdrop {
+  display: none;
+}
+
+.modal-dialog {
+  width: 100%;
+  height: 100%;
+}
+
+/* ***************HERO STYLE*************** */
 .hero {
   min-height: 400px;
   min-width: 90%;
@@ -120,6 +138,43 @@
   align-items: center;
   text-align: center;
   border-color: #ddd;
+}
+
+.menu-hero {
+  min-height: 400px;
+  min-width: 90%;
+  right: 50%;
+  top: 35%;
+  transform: translate(50%, -50%);
+  position: absolute;
+  border-color: #ddd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ***************CHAT MENU BUTTON STYLE*************** */
+.menu-button-style {
+  background-color: #006262;
+  color: white;
+  max-width: 400px;
+  height: 100px;
+  font-size: x-large;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.menu-button-style:hover {
+  background-color: #023e3d;
+  color: white;
+  font-size: x-large;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .button-style,
@@ -170,29 +225,7 @@
   background-color: #006262;
 }
 
-.large-button-style {
-  background-color: #006262;
-  color: white;
-  min-width: 300px;
-  min-height: 100px;
-  font-size: x-large;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
 
-.large-button-style:hover {
-  background-color: #023e3d;
-  color: white;
-  font-size: x-large;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-}
 
 .button-style:hover {
   background-color: #023e3d;
@@ -238,11 +271,14 @@
 
 .page-container {
   position: relative;
+  /* display: flex; */
+  flex-direction: column;
   min-height: 100vh;
 }
 
 .content-wrap {
-  padding-bottom: 6rem;
+  flex: 1;
+  /* padding-bottom: 100px; */
 }
 
 .hyperlink {
@@ -296,8 +332,20 @@
 }
 
 .chatbox-scrollable {
-  height: 430px;
+  padding-top: 10px;
+  height: 440px;
+  margin: 15px;
   overflow-y: auto;
+  /* scrollbar-width: thin; */
+}
+
+.chatbox-scrollable::-webkit-scrollbar {
+  width: 5px; 
+}
+
+.chatbox-scrollable::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  border-radius: 10px;
 }
 
 .list-group-item:hover {
@@ -319,10 +367,7 @@
   overflow-y: auto;
 }
 
-.chat-header {
-  display: flex;
-  align-items: center;
-}
+
 
 .action-buttons {
   background-color: #ddd;
@@ -393,7 +438,6 @@
 .chat-box {
   background: #eee;
   min-height: 650px;
-  /* border-left: 10px solid #eee; */
 }
 
 .message-preview-chat-box {
@@ -459,7 +503,8 @@
 }
 
 .input-area {
-  width: 100%
+  width: 100%;
+  border-color: #000000;
 }
 
 .video-canvas {
@@ -518,30 +563,20 @@
   color: black;
 }
 
-.status-indicator-chat-user {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background-color: green;
-  /* Green indicates active */
-  position: absolute;
-  top: 13;
-  left: 11;
-}
-
 .status-indicator {
   width: 10px;
   height: 10px;
   border-radius: 50%;
   background-color: green;
   /* Green indicates active */
-  position: absolute;
-  top: 0;
-  left: 0;
+  position: relative;
+  top: -20;
+  left: -10;
 }
 
 .glowing {
   border-radius: 10px;
+  border-color: white;
   animation: glow 1s ease-in-out infinite alternate;
 }
 
@@ -555,12 +590,48 @@
   }
 }
 
+/* ***************CHAT STYLE*************** */
 .chat-container {
   width: 100%;
   margin: auto;
   border-radius: 8px;
   overflow: hidden;
 }
+
+.chat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  background-color: #fff;
+  color: black;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.user-name {
+  margin: 0;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.chat-actions button {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
 
 .chat-messages {
   padding: 20px;
@@ -607,12 +678,12 @@
 .message p {
   margin: 0;
   padding: 10px;
-  border-radius: 20px;
+  border-radius: 10px;
   display: inline-block;
   word-wrap: break-word;
   word-break: break-word;
   max-width: 70%;
-  /* flex-shrink: 1; */
+  min-width: 40%;
 }
 
 .mine {
@@ -620,12 +691,13 @@
 }
 
 .mine p {
-  background-color: #dcf8c6;
+  background-color: #006262;
+  color: white;
 }
 
 .theirs p {
-  background-color: #006262;
-  color: white;
+  background-color: #ddd;
+  color: black;
 }
 
 .time {
@@ -646,73 +718,63 @@
   align-items: flex-end;
   /* padding: 5px; */
   background: #FFFFFF;
-  /* Replace with the desired color of the container */
   border-radius: 10px;
-  box-shadow: 0px 3px 6px #00000029;
-  /* Adjust for desired shadow */
+  border: #000000;
+  border-width: 5px;
+  /* box-shadow: 0px 3px 6px #00000029; */
   width: 100%;
-  /* Adjust as per requirement */
-}
 
-.icon-container {
-  padding: 0 10px;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  justify-content: center;
-  /* Centers the icon horizontally */
-  height: 100%;
-  width: 35px;
-}
-
-.icon-container span {
-  font-size: 24px;
-  /* Adjust the size of the icon as needed */
-  margin-bottom: 8px;
-  /* Pushes the icon down to align with the bottom of the textarea */
 }
 
 .microphone-icon {
-  color: #006262;
+  color: #7d255b;
+  width: 55;
 }
 
 .microphone-icon:hover {
   color: #809f9f;
+  cursor: pointer;
 }
 
-.icon-container span {
-  font-size: 20px;
-  /* Adjust the size of the icon as needed */
+.input-group-text {
+  border: none;
+  background-color: transparent;
+}
+
+.input-group {
+  border-color: #aaa !important;
+  background-color: white;
+}
+
+.input-group:focus-within {
+  border-color: #006262 !important;
+  border-width: 0.2rem !important;
 }
 
 .chat-input {
-  border: none;
-  outline: none;
+  border: transparent;
   padding: 10px;
   margin-left: 5px;
-  /* Space from the microphone icon */
   width: 100%;
-  /* Make textarea take the remaining width */
   font-size: 16px;
-  /* Adjust as per requirement */
   resize: none;
-  /* Prevent manual resizing */
   overflow: hidden;
-  /* Hide the scrollbar */
   min-height: 5px;
-  /* Minimum height to start with */
   line-height: 20px;
-  /* Adjust line height as per requirement */
   margin-bottom: 8px;
+}
+
+.input-group textarea:focus {
+  outline: none;
+  box-shadow: none;
 }
 
 .send-button {
   background: none;
   border: none;
   font-size: 24px;
-  /* Adjust as per requirement */
   cursor: pointer;
-  color: #006262;
+  color: #7d255b;
 }
 
 /* Optional: Add some hover effect for the button */
@@ -733,10 +795,13 @@
 /* ***************FOOTER STYLE*************** */
 
 .footer {
-  background-color: #000;
-  color: white;
-  padding: 20px 0;
-  z-index: 10;
+  background-color: #222;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    position: relative;
+    height: 110px;
+    clear: both;
 }
 
 .footer-container {

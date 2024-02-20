@@ -3,7 +3,8 @@ import FooterLogo from "../assets/logos/VisuSpeakWhiteLogo.png";
 
 const Footer = () => {
   return (
-    <footer className="footer">
+    <>
+    <footer className="footer sticky-bottom">
       <div className="footer-container">
         <div className="logo mx-3">
           <img src={FooterLogo} height="50" />
@@ -37,6 +38,9 @@ const Footer = () => {
         </div>
       </div>
     </footer>
+
+
+</>
   );
 };
 

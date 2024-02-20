@@ -82,47 +82,37 @@ function InputArea({ onSendMessage, isFetchingEnabled, fetchInterval }) {
   }, [listening, stop]);
 
   return (
-    <div className="input-area text-center pb-2">
-      <div className="text-center container mt-4">
-        <div class="row">
-          <div class="col">
-            <div class="hand-detected-alert justify-content-center mb-2">
-              <span class="badge text-bg-danger">
-                {!isHandDetected && `Error fetching predictions`}
-              </span>
-            </div>
-            <div class=" chat-input-area">
-              <div class="icon-container" style={{ flexShrink: 0 }}>
-                {listening ? (
-                  <span onClick={stop}>
-                    <i className="fa-solid fa-microphone-slash microphone-icon"></i>
-                  </span>
-                ) : (
-                  <span onClick={listen}>
-                    <i className="fa-solid fa-microphone microphone-icon"></i>
-                  </span>
-                )}
-              </div>
-              <textarea
-                type="text"
-                placeholder="Your message..."
-                class="chat-input"
-                id="autoExpandingTextarea"
-                value={message}
-                onChange={handleInputChange}
-                onKeyPress={handleKeyPress}
-                style={{ height: textareaHeight }}
-                onInput={handleHeightAdjustment}
-              ></textarea>
-              <button
-                class="send-button py-2 rounded-2"
-                onClick={handleSendClick}
-              >
-                <i class="fa-solid fa-paper-plane"></i>
-              </button>
-            </div>
-          </div>
-        </div>
+    <div className="input-area text-center px-2">
+      <div class="input-group border rounded shadow">
+        <span class="input-group-text microphone-icon">
+          {listening ? (
+            <i
+              onClick={stop}
+              className="fa-solid fa-microphone-slash fa-xl "
+            ></i>
+          ) : (
+            <i
+              onClick={listen}
+              className="fa-solid fa-microphone fa-xl"
+            ></i>
+          )}
+        </span>
+        <textarea
+          type="text"
+          placeholder="Your message..."
+          class="form-control chat-input"
+          id="autoExpandingTextarea"
+          value={message}
+          onChange={handleInputChange}
+          onKeyPress={handleKeyPress}
+          style={{ height: textareaHeight }}
+          onInput={handleHeightAdjustment}
+        ></textarea>
+        <span class="input-group-text">
+          <button class="send-button py-2 rounded-2" onClick={handleSendClick}>
+            <i class="fa-solid fa-paper-plane"></i>
+          </button>
+        </span>
       </div>
     </div>
   );

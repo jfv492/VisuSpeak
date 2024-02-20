@@ -11,6 +11,15 @@ const NavButton = () => {
 
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const mobileView = windowWidth < 600;
+  
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
   return (
     <>
       <div
