@@ -25,6 +25,7 @@ const ASLChat = () => {
           <ChatBox />
         </div>
         <div class="col-sm-7">
+          {/* <div class="visually-hidden"><EditChatName /></div> */}
           {!mobileView && <ASLVideo /> }
         </div>
       </div>

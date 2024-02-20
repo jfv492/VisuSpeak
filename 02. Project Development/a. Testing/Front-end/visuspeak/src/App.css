@@ -225,7 +225,11 @@ html, body {
   background-color: #006262;
 }
 
-
+.speed-button-style {
+  background-color: #006262;
+  color: white;
+  min-width: 70px;
+}
 
 .button-style:hover {
   background-color: #023e3d;
@@ -371,10 +375,10 @@ html, body {
 
 .action-buttons {
   background-color: #ddd;
-  width: 100%;
+  min-width: 100%;
   /* min-height: 470px; */
-  justify-content: center;
-  align-items: center;
+  /* justify-content: center; */
+  /* align-items: center; */
 }
 
 .action-button-style {
@@ -477,14 +481,12 @@ html, body {
 
 .camera-placeholder {
   width: 100%;
+  min-height: 470px; 
   display: flex;
   margin-left: 0px;
   justify-content: center;
-  /* Center horizontally */
   align-items: center;
-  /* Center vertically */
   text-align: center;
-  /* Ensure text is centered if it wraps */
   color: #006262;
 }
 
@@ -514,15 +516,12 @@ html, body {
 }
 
 .video-style {
-  border-color: #fff !important;
+  max-width: 656px;
 }
 
 .overlay {
   position: absolute;
   top: 500;
-  /* left: 0; */
-  /* width: 100%; */
-  /* height: 100%; */
   color: white;
   display: flex;
   justify-content: center;
