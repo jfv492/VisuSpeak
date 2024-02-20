@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom"; // For routing
 import EditChatName from "../components/EditChatName.js";
-import MessageList from "../components/MessageList.js";
 import ChatBox from "../components/ChatBox.js";
+import ASLVideo from "../components/ASLVideo.js";
 
 const ASLChat = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -26,7 +25,7 @@ const ASLChat = () => {
           <ChatBox />
         </div>
         <div class="col-sm-7">
-          
+          {!mobileView && <ASLVideo /> }
         </div>
       </div>
     </div>

@@ -371,7 +371,8 @@ html, body {
 
 .action-buttons {
   background-color: #ddd;
-  min-height: 470px;
+  width: 100%;
+  /* min-height: 470px; */
   justify-content: center;
   align-items: center;
 }
@@ -412,11 +413,11 @@ html, body {
 }
 
 .slider-style {
-  background-color: #7d255b;
-  padding-top: 15px;
+  /* background-color: #7d255b; */
+  /* padding-top: 15px;
   padding-bottom: 15px;
   padding-right: 10px;
-  padding-left: 0px;
+  padding-left: 0px; */
   width: 60px;
 }
 

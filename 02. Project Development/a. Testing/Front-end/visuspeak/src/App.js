@@ -64,7 +64,7 @@ function App() {
 
             <Route
               exact
-              path="/aslchat"
+              path="/aslchattest"
               element={<ASLChatTest showAlert={showAlert} />}
             />
 
