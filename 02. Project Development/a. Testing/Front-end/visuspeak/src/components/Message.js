@@ -1,22 +1,23 @@
 import React from "react";
 
 function Message({ username, text, timestamp }) {
+  // console.log("Timestamp in component:", timestamp);
   return (
     <>
       <div className={`chat`}>
-        <div class="chat-messages">
-          <div class="message mine">
-            <div class="message-content">
-              <span class="username">{username}</span>
+        <div className="chat-messages">
+          <div className="message mine">
+            <div className="message-content">
+              <span className="username">{username}</span>
               <p>{text}</p>
             </div>
           </div>
-          <span class="time mine">{new Date(timestamp).toLocaleString()}</span>
+          <span className="time mine">{new Date(timestamp).toLocaleString()}</span>
 
-          <div class="message theirs">
-            <i class="rounded-circle fa-solid fa-circle-user fa-2xl avatar pt-4"></i>
-            <div class="message-content">
-              <span class="username">Username</span>
+          {/* <div className="message theirs">
+            <i className="rounded-circle fa-solid fa-circle-user fa-2xl avatar pt-4"></i>
+            <div className="message-content">
+              <span className="username">Username</span>
               <p>
                 This is a placeholder text from admin. This is a placeholder
                 This is a placeholder text from admin. text from admin. This is
@@ -25,7 +26,7 @@ function Message({ username, text, timestamp }) {
               </p>
             </div>
           </div>
-          <span class="time theirs">5:30 PM</span>
+          <span className="time theirs">5:30 PM</span> */}
         </div>
       </div>
     </>

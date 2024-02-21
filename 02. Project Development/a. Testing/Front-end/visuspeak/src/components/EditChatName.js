@@ -23,18 +23,18 @@ const EditChatName = () => {
     }
   };
   return (
-    <div class="d-flex align-items-center link-body-emphasis messages-heading my-3">
+    <div className="d-flex align-items-center link-body-emphasis messages-heading my-3">
       <button
-        class="btn back-button-style bg-gradient"
+        className="btn back-button-style bg-gradient"
         type="button"
         aria-expanded="false"
         onClick={endChatSession}
       >
-        <i class="fa-solid fa-angle-left"></i>
+        <i className="fa-solid fa-angle-left"></i>
       </button>
-      <p class="h2 ms-3 mt-2 border-bottom">New Chat</p>
+      <p className="h2 ms-3 mt-2 border-bottom">New Chat</p>
       <i
-        class="fa-solid fa-pen fa-xl ms-2 me-5"
+        className="fa-solid fa-pen fa-xl ms-2 me-5"
         style={{ color: "#000000;" }}
       ></i>
     </div>

@@ -18,10 +18,10 @@ const About = (props) => {
   }, [location]);
   return (
     <div>
-      <div class="container my-5">
+      <div className="container my-5">
         <h1> {props.heading}</h1>
         <AboutSections />
-        <div class="row about-us-sections">
+        <div className="row about-us-sections">
           <h4>Features</h4>
           <AboutFeatures />
         </div>

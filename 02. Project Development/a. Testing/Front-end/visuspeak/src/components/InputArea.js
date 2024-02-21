@@ -83,8 +83,8 @@ function InputArea({ onSendMessage, isFetchingEnabled, fetchInterval }) {
 
   return (
     <div className="input-area text-center px-2">
-      <div class="input-group border rounded shadow rounded-4">
-        <span class="input-group-text microphone-icon">
+      <div className="input-group border rounded shadow rounded-4">
+        <span className="input-group-text microphone-icon">
           {listening ? (
             <i
               onClick={stop}
@@ -100,7 +100,7 @@ function InputArea({ onSendMessage, isFetchingEnabled, fetchInterval }) {
         <textarea
           type="text"
           placeholder="Your message..."
-          class="form-control chat-input"
+          className="form-control chat-input"
           id="autoExpandingTextarea"
           value={message}
           onChange={handleInputChange}
@@ -108,9 +108,9 @@ function InputArea({ onSendMessage, isFetchingEnabled, fetchInterval }) {
           style={{ height: textareaHeight }}
           onInput={handleHeightAdjustment}
         ></textarea>
-        <span class="input-group-text">
-          <button class="send-button py-2 rounded-2" onClick={handleSendClick}>
-            <i class="fa-solid fa-paper-plane"></i>
+        <span className="input-group-text">
+          <button className="send-button py-2 rounded-2" onClick={handleSendClick}>
+            <i className="fa-solid fa-paper-plane"></i>
           </button>
         </span>
       </div>

@@ -52,46 +52,46 @@ const TranscriptHistory = () => {
   };
 
   return (
-    <div class="container transcript-page my-5">
+    <div className="container transcript-page my-5">
       <h1>Transcript History</h1>
-      <div class="row row-cols-sm-2 row-cols-1 ">
-        <div class="col-sm-4">
-          <div class="input-group my-3">
-            <span class="input-group-text" id="basic-addon1">
-              <i class="fa-solid fa-magnifying-glass fa-xl" style={{ color: "#7d255b" }}></i>
+      <div className="row row-cols-sm-2 row-cols-1 ">
+        <div className="col-sm-4">
+          <div className="input-group my-3">
+            <span className="input-group-text" id="basic-addon1">
+              <i className="fa-solid fa-magnifying-glass fa-xl" style={{ color: "#7d255b" }}></i>
             </span>
             <input
               type="text"
-              class="form-control"
+              className="form-control"
               placeholder="Find a chat"
               aria-describedby="basic-addon1"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
-          <div class="list-group list-group-flush border-bottom rounded-5">
-            <div class="row align-items-end justify-content-between"></div>
-            <p class="lead">Previous Chat</p>
-            <div class="transcript-list rounded-start">
+          <div className="list-group list-group-flush border-bottom rounded-5">
+            <div className="row align-items-end justify-content-between"></div>
+            <p className="lead">Previous Chat</p>
+            <div className="transcript-list rounded-start">
               {sessions
                 .filter((session) => session.id.toString().includes(searchTerm))
                 .map((session) => (
                   <a
                     href="#"
-                    class={`list-group-item list-group-item-action py-3 lh-sm ${
+                    className={`list-group-item list-group-item-action py-3 lh-sm ${
                       session.id === selectedSessionId ? "active" : ""
                     }`}
                     aria-current="true"
                     key={session.id}
                     onClick={() => handleSessionClick(session.id)}
                   >
-                    <div class="d-flex w-100 align-items-center justify-content-between">
-                      <strong class="mb-1">Chat {session.id}</strong>
+                    <div className="d-flex w-100 align-items-center justify-content-between">
+                      <strong className="mb-1">Chat {session.id}</strong>
                       <small>
                         {new Date(session.start_timestamp).toLocaleString()}
                       </small>
                     </div>
-                    <div class="col-10 mb-1 small">
+                    <div className="col-10 mb-1 small">
                       Some placeholder content in a paragraph below the heading
                       and date.
                     </div>
@@ -100,35 +100,35 @@ const TranscriptHistory = () => {
             </div>
           </div>
         </div>
-        <div class="col-sm-8">
+        <div className="col-sm-8">
           {selectedSessionId ? (
             <>
-              <div class="row align-items-end justify-content-between ">
-                <div class="col ">
-                  <div class="d-flex align-items-center link-body-emphasis messages-heading pt-4">
-                    <p class="h2 mt-2">New Chat</p>
+              <div className="row align-items-end justify-content-between ">
+                <div className="col ">
+                  <div className="d-flex align-items-center link-body-emphasis messages-heading pt-4">
+                    <p className="h2 mt-2">New Chat</p>
                     <i
-                      class="fa-solid fa-pen fa-xl ms-2 me-5"
+                      className="fa-solid fa-pen fa-xl ms-2 me-5"
                       style={{ color: "#000000;" }}
                     ></i>
                   </div>
                 </div>
                 <button
-                  class="btn cancel-button-style"
+                  className="btn cancel-button-style"
                   type="button"
                   aria-expanded="false"
                   onClick={handleCancelClick}
                 >
-                  <i class="fa-solid fa-xmark"></i>
+                  <i className="fa-solid fa-xmark"></i>
                 </button>
               </div>
-              <hr class="border-2" />
-              <div class="message-preview">
+              <hr className="border-2" />
+              <div className="message-preview">
                 <MessageList messages={messages} />
               </div>
             </>
           ) : (
-            <div class="centered-text lead p-3">
+            <div className="centered-text lead p-3">
               Click on a chat to preview messages
             </div>
           )}

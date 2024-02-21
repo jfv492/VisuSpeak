@@ -36,13 +36,13 @@ const HomeNavigation = () => {
         </div>
       ) : (
         <div className="d-flex gap-4 d-sm-flex justify-content-center mt-5">
-          <p class="lead">
+          <p className="lead">
             You are logged in as{" "}
             <b style={{ color: "#006262" }}>
               {localStorage.getItem("username")}
             </b>
             . To use a different account please{" "}
-            <Link class="hyperlink" onClick={handleSignOut} to="/">
+            <Link className="hyperlink" onClick={handleSignOut} to="/">
               logout
             </Link>
           </p>
