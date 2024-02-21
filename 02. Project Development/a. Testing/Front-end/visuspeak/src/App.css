@@ -374,6 +374,9 @@ html, body {
   overflow-y: auto;
 }
 
+.transcript-page {
+  min-height: 600px;
+}
 
 
 .action-buttons {
@@ -932,3 +935,4 @@ iframe {
   display: flex;
 }
 
+/*Transcript*/

@@ -44,11 +44,11 @@ const NavButton = () => {
             <li class="nav-item">
               <Link
                 className={`nav-link ${
-                  location.pathname === "/chat" ? "active" : ""
+                  location.pathname === "/home" ? "active" : ""
                 } ${
                   localStorage.getItem("username") === null ? "disabled" : ""
                 }`}
-                to="/chat"
+                to="/home"
                 role="button"
                 aria-expanded="false"
               >

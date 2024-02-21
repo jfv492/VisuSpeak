@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 import YouTube from "../assets/icons/YouTubeIcon.png"; // YouTube logo for external link
 import GitHub from "../assets/icons/GitHubIcon.png"; // GitHub logo for external link
 import { useLocation } from "react-router-dom"; // Hook from React Router for accessing location object
-import Background from "../components/Background.js"; // Importing a background component
+
 import AboutSections from "../components/AboutSections.js";
 import AboutFeatures from "../components/AboutFeatures.js";
 import AboutFeaturesGrid from "../components/AboutSocial.js";
