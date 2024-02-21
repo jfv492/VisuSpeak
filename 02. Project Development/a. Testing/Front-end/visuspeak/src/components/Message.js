@@ -1,7 +1,8 @@
 import React from "react";
 
 function Message({ username, text, timestamp }) {
-  // console.log("Timestamp in component:", timestamp);
+  console.log("Received date:", timestamp);
+
   return (
     <>
       <div className={`chat`}>
