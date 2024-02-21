@@ -335,21 +335,24 @@ html, body {
   min-width: 300px;
 }
 
+.chatbox-scrollable::-webkit-scrollbar {
+  width: 5px; 
+}
+
+/* For WebKit (Chrome, Safari, etc.) */
+.chatbox-scrollable::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  border-radius: 10px;
+}
+
 .chatbox-scrollable {
   padding-top: 10px;
   height: 440px;
   margin: 15px;
   overflow-y: auto;
-  /* scrollbar-width: thin; */
-}
-
-.chatbox-scrollable::-webkit-scrollbar {
-  width: 5px; 
-}
-
-.chatbox-scrollable::-webkit-scrollbar-thumb {
-  background-color: darkgrey;
-  border-radius: 10px;
+  /* For Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: darkgrey transparent;
 }
 
 .list-group-item:hover {
@@ -374,8 +377,11 @@ html, body {
 
 
 .action-buttons {
-  background-color: #ddd;
-  min-width: 100%;
+  background-color: #eee;
+  max-width: 800px;
+  margin-left: 0.1px;
+  margin-right: 0.1px;
+  
   /* min-height: 470px; */
   /* justify-content: center; */
   /* align-items: center; */
@@ -387,6 +393,10 @@ html, body {
   min-height: 70px;
   min-width: 70px;
   border-color: #000000 !important;
+}
+
+.interval-style {
+  text-align: end;
 }
 
 .speed-slider {
@@ -430,6 +440,8 @@ html, body {
   width: 60px;
   border-color: transparent !important;
   background-color: #ddd;
+  color: #006262;
+  font-weight: bold;
 }
 
 .camera-button-style:hover {
@@ -442,7 +454,11 @@ html, body {
 
 .chat-box {
   background: #eee;
-  min-height: 650px;
+  min-height: 657px;
+}
+
+.video-box {
+  max-height: 650px;
 }
 
 .message-preview-chat-box {
@@ -479,15 +495,28 @@ html, body {
   overflow-y: auto;
 }
 
-.camera-placeholder {
+iframe {
   width: 100%;
-  min-height: 470px; 
-  display: flex;
-  margin-left: 0px;
+  height: 500px;
+}
+
+.video-placeholder {
+  min-height:500px;
   justify-content: center;
   align-items: center;
   text-align: center;
+}
+
+.camera-placeholder {
+  width: 100%;
+  min-height:530px; 
+  display: flex;
+  margin-left: 0.1px;
+  margin-right: 0.1px;
+  justify-content: center;
+  align-items: center;
   color: #006262;
+  /* background-color: #ddd; */
 }
 
 .centered-text {
@@ -510,13 +539,11 @@ html, body {
   border-color: #000000;
 }
 
-.video-canvas {
-  padding: 0px !important;
-
-}
-
 .video-style {
   max-width: 656px;
+  /* margin-top: 100px; */
+  border-color: #ddd;
+  border-width: 2px;
 }
 
 .overlay {
@@ -591,6 +618,11 @@ html, body {
 }
 
 /* ***************CHAT STYLE*************** */
+.chat-page{
+  /* background-color: #d4d3d3; */
+  min-height: 800px;
+}
+
 .chat-container {
   width: 100%;
   margin: auto;
@@ -879,3 +911,24 @@ html, body {
 .nav-link {
   color: black;
 }
+
+/*Countdown*/
+@keyframes slideDown {
+  0% {
+    transform: translateY(-100%); /* Start above the original position */
+    opacity: 0;
+  }
+  50% {
+    opacity: 1; /* Make it fully visible as it moves */
+  }
+  100% {
+    transform: translateY(0); /* End at the original position */
+    opacity: 1;
+  }
+}
+
+.countdown-animation {
+  animation: slideDown 0.5s ease-out;
+  display: flex;
+}
+

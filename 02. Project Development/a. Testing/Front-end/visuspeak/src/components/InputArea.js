@@ -83,7 +83,7 @@ function InputArea({ onSendMessage, isFetchingEnabled, fetchInterval }) {
 
   return (
     <div className="input-area text-center px-2">
-      <div class="input-group border rounded shadow">
+      <div class="input-group border rounded shadow rounded-4">
         <span class="input-group-text microphone-icon">
           {listening ? (
             <i
