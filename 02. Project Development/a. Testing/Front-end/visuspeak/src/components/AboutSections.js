@@ -5,8 +5,8 @@ import ConversationImage from "../assets/images/Conversation.jpg";
 const AboutSections = (props) => {
   return (
     <div>
-      <div className="row about-us-sections align-items-center ">
-      <div className="col-sm-4">
+      <div class="row about-us-sections align-items-center ">
+      <div class="col-sm-4">
           <img
             src={Hands}
             className="rounded-4 mx-auto d-block"
@@ -15,8 +15,8 @@ const AboutSections = (props) => {
             style={{ justifyContent: "end" }}
           />
         </div>
-        <div className="col-sm-8 lead">
-          <h3 className="about-us-headers border-bottom pb-2">Project Idea</h3>
+        <div class="col-sm-8 lead">
+          <h3 class="about-us-headers border-bottom pb-2">Project Idea</h3>
           This project aims to create an innovative ASL-English bidirectional
           translation application to bridge the communication gap between ASL
           users and English speakers. This application will enable seamless
@@ -26,8 +26,8 @@ const AboutSections = (props) => {
         </div>
       </div>
       <hr />
-      <div className="row about-us-sections align-items-center row-reverse rounded-4">
-      <div className="col-sm-4">
+      <div class="row about-us-sections align-items-center row-reverse rounded-4">
+      <div class="col-sm-4">
           <img
             src={ConversationImage}
             className="rounded-4 mx-auto d-block"
@@ -36,8 +36,8 @@ const AboutSections = (props) => {
             style={{ justifyContent: "end" }}
           />
         </div>
-        <div className="col-sm-8 lead">
-          <h3 className="about-us-headers border-bottom pb-2">Project Background</h3>
+        <div class="col-sm-8 lead">
+          <h3 class="about-us-headers border-bottom pb-2">Project Background</h3>
           Many people with special needs, particularly those with vocal and
           hearing impairments, rely on American Sign Language (ASL) as their
           primary mode of communication. However, there is frequently a
@@ -48,8 +48,8 @@ const AboutSections = (props) => {
         </div>
       </div>
       <hr />
-      <div className="row about-us-sections align-items-center">
-      <div className="col-sm-4">
+      <div class="row about-us-sections align-items-center">
+      <div class="col-sm-4">
           <img
             src={Hands}
             className="rounded-4 mx-auto d-block"
@@ -58,8 +58,8 @@ const AboutSections = (props) => {
             style={{ justifyContent: "end" }}
           />
         </div>
-        <div className="col-sm-8 lead">
-          <h3 className="about-us-headers border-bottom pb-2">About VisuSpeak</h3>
+        <div class="col-sm-8 lead">
+          <h3 class="about-us-headers border-bottom pb-2">About VisuSpeak</h3>
           VisuSpeak is an application which contains a number of features that
           aim to make communication between ASL speakers and English speakers
           more seamless, meaningful, and natural. With customizable chatting

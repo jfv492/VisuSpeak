@@ -162,7 +162,7 @@ const SignUp = (props) => {
       >
         <div className="row mb-4">
           <h1> {props.heading}</h1>
-          <p className="lead">
+          <p class="lead">
             <label className="">Don't have an account?</label>
             <Link
               to="/login"
@@ -224,7 +224,7 @@ const SignUp = (props) => {
                 onClick={prevStep}
               >
                 <i
-                  className="fa-solid fa-arrow-left"
+                  class="fa-solid fa-arrow-left"
                   style={{ color: "#ffffff;" }}
                 ></i>
               </button>
@@ -233,7 +233,7 @@ const SignUp = (props) => {
             {mobileView && currentStep === 1 ? (
               <button type="submit" className="btn back-button-style ms-auto">
                 <i
-                  className="fa-solid fa-arrow-right"
+                  class="fa-solid fa-arrow-right"
                   style={{ color: "#ffffff;" }}
                 ></i>
               </button>

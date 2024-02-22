@@ -28,11 +28,11 @@ const Footer = () => {
 
         <div className="social-media mx-3">
           <i
-            className="fa-brands fa-github fa-2xl me-3"
+            class="fa-brands fa-github fa-2xl me-3"
             style={{ color: "#ffffff;" }}
           ></i>
           <i
-            className="fa-brands fa-youtube fa-2xl"
+            class="fa-brands fa-youtube fa-2xl"
             style={{ color: "#ffffff;" }}
           ></i>
         </div>

@@ -151,19 +151,19 @@ const ASLChat = () => {
   }, []);
 
   return (
-    <div className="container chat-page text-begin py-3">
-      <div className="row">
+    <div class="container chat-page text-begin py-3">
+      <div class="row">
         <div className="col-sm-6">
           <EditChatName />
         </div>
         <div className="col-sm-6"></div>
       </div>
-      <div className="row">
-        <div className="col-sm-5">
-          <div className="chat-box rounded-4">
+      <div class="row">
+        <div class="col-sm-5">
+          <div class="chat-box rounded-4">
             <ChatHeader />
-            <div className="row">
-              <div className="col chatbox-scrollable">
+            <div class="row">
+              <div class="col chatbox-scrollable">
                 <MessageList messages={messages} />
               </div>
             </div>
@@ -175,8 +175,8 @@ const ASLChat = () => {
             />
           </div>
         </div>
-        <div className="col-sm-7 video-box">
-          <div className="row">
+        <div class="col-sm-7 video-box">
+          <div class="row">
             <div className="col-sm-1">
               <div className="fs-3 lead">
                 <p>
@@ -194,7 +194,7 @@ const ASLChat = () => {
             </div>
           </div>
           <div
-            className="row camera-placeholder rounded-4"
+            class="row camera-placeholder rounded-4"
             style={{ overflowX: "hidden" }}
           >
             {isSigning ? (
@@ -210,19 +210,19 @@ const ASLChat = () => {
                   overflowX: "hidden",
                 }}
                 scrolling="no"
-                className="align-self-center"
+                class="align-self-center"
               ></iframe>
             ) : (
               <div className="video-placeholder centered-text">
                 {loading ? (
-                  <div className="spinner-border text-success" role="status">
-                    <span className="visually-hidden">Loading...</span>
+                  <div class="spinner-border text-success" role="status">
+                    <span class="visually-hidden">Loading...</span>
                   </div>
                 ) : (
-                  <p className="lead">
+                  <p class="lead">
                     Click on the camera icon{" "}
                     <i
-                      className="fa-solid fa-video me-2"
+                      class="fa-solid fa-video me-2"
                       style={{ color: "#006262" }}
                     ></i>{" "}
                     to start signing
@@ -241,12 +241,12 @@ const ASLChat = () => {
                 >
                   {isSigning ? (
                     <i
-                      className="fa-solid fa-video-slash fa-xl"
+                      class="fa-solid fa-video-slash fa-xl"
                       style={{ color: "#ffffff" }}
                     ></i>
                   ) : (
                     <i
-                      className="fa-solid fa-video fa-xl"
+                      class="fa-solid fa-video fa-xl"
                       style={{ color: "#006262" }}
                     ></i>
                   )}
