@@ -37,7 +37,7 @@ const Login = (props) => {
         localStorage.setItem("username", json.username);
         localStorage.setItem("userID", json.userID);
         localStorage.setItem("authtoken", json.authtoken);
-        navigate("/chat");
+        navigate("/home");
       })
       .catch((error) => {
         console.error("Login failed", error);

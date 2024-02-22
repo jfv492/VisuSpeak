@@ -21,19 +21,19 @@ const User = () => {
           data-bs-display="static"
           aria-expanded="false"
         >
-          <div class="">
+          <div className="">
             <i
-              class="rounded-circle fa-solid fa-circle-user fa-2xl me-2"
+              className="rounded-circle fa-solid fa-circle-user fa-2xl me-2"
               style={{ color: "#000000" }}
             ></i>
-            <div class="status-indicator glowing"></div>
+            <div className="status-indicator glowing"></div>
           </div>
           <strong className="me-2">{localStorage.getItem("username")}</strong>
         </Link>
         <ul className="dropdown-menu dropdown-menu-lg-end p-2 shadow-lg">
           <li>
             <Link className="dropdown-item" to="/">
-              <i class="fa-solid fa-gear me-3" style={{ color: "#000000" }}></i>
+              <i className="fa-solid fa-gear me-3" style={{ color: "#000000" }}></i>
               Account Settings
             </Link>
           </li>
@@ -43,7 +43,7 @@ const User = () => {
           <li>
             <Link className="dropdown-item" onClick={handleSignOut} to="/">
               <i
-                class="fa-solid fa-right-from-bracket me-3"
+                className="fa-solid fa-right-from-bracket me-3"
                 style={{ color: "#000000" }}
               ></i>
               Logout

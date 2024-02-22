@@ -20,33 +20,33 @@ const MenuInfo = () => {
         <div>
           <button
             type="button"
-            class="btn"
+            className="btn"
             data-bs-toggle="modal"
             data-bs-target="#exampleModal"
           >
-            <i class="fa-solid fa-circle-info fa-2xl"></i>
+            <i className="fa-solid fa-circle-info fa-2xl"></i>
           </button>
           <div
-            class="modal fade"
+            className="modal fade"
             id="exampleModal"
             tabindex="-1"
             aria-labelledby="exampleModalLabel"
             aria-hidden="true"
           >
-            <div class="modal-dialog modal-fullscreen">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="exampleModalLabel">
+            <div className="modal-dialog modal-fullscreen">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h1 className="modal-title fs-5" id="exampleModalLabel">
                     Responsive left-aligned hero with image
                   </h1>
                   <button
                     type="button"
-                    class="btn-close"
+                    className="btn-close"
                     data-bs-dismiss="modal"
                     aria-label="Close"
                   ></button>
                 </div>
-                <div class="modal-body">
+                <div className="modal-body">
                   Quickly design and customize responsive mobile-first sites
                   with Bootstrap, the world’s most popular front-end open source
                   toolkit, featuring Sass variables and mixins, responsive grid
@@ -58,21 +58,21 @@ const MenuInfo = () => {
           </div>
         </div>
       ) : (
-        <div class="m-3">
-          <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">
+        <div className="m-3">
+          <h1 className="display-5 fw-bold text-body-emphasis lh-1 mb-3">
             Responsive left-aligned hero with image
           </h1>
-          <p class="lead">
+          <p className="lead">
             Quickly design and customize responsive mobile-first sites with
             Bootstrap, the world’s most popular front-end open source toolkit,
             featuring Sass variables and mixins, responsive grid system,
             extensive prebuilt components, and powerful JavaScript plugins.
           </p>
-          <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-            <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">
+          <div className="d-grid gap-2 d-md-flex justify-content-md-start">
+            <button type="button" className="btn btn-primary btn-lg px-4 me-md-2">
               Primary
             </button>
-            <button type="button" class="btn btn-outline-secondary btn-lg px-4">
+            <button type="button" className="btn btn-outline-secondary btn-lg px-4">
               Default
             </button>
           </div>

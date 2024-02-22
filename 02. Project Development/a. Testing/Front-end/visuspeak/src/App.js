@@ -10,7 +10,7 @@ import About from "./modules/About.js";
 import HomeMenu from "./modules/HomeMenu.js";
 import ASLChat from "./modules/ASLChat.js";
 
-import ASLChatTest from "./components/ASLChat.js";
+import TranscriptHistory from "./modules/TranscriptHistory.js";
 
 import Alert from "./components/Alert.js";
 
@@ -18,7 +18,7 @@ import NewChat from "./components/ChatContainer.js";
 
 import Resources from "./components/Resources.js";
 
-import TranscriptHistory from "./components/TranscriptHistory.js";
+
 import SpeechTest from "./components/SpeechTest.js";
 import React, { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -55,17 +55,11 @@ function App() {
               element={<SignUp heading="Sign Up" showAlert={showAlert} />}
             />
             <Route exact path="/about" element={<About heading="About Us" />} />
-            <Route exact path="/chat" element={<HomeMenu />} />
+            <Route exact path="/home" element={<HomeMenu />} />
             <Route
               exact
               path="/aslchat"
               element={<ASLChat showAlert={showAlert} />}
-            />
-
-            <Route
-              exact
-              path="/aslchattest"
-              element={<ASLChatTest showAlert={showAlert} />}
             />
 
             <Route exact path="/resources" element={<Resources />} />

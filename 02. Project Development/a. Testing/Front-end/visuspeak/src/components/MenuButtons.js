@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import Background from "./Background.js";
 import serverUrl from "../Server-env.js";
 
 export default function Login(props) {
@@ -32,26 +31,26 @@ export default function Login(props) {
   };
 
   return (
-    <div class="d-flex flex-column justify-content-center row-gap-5">
+    <div className="d-flex flex-column justify-content-center row-gap-5">
       <Link
-        to="/aslchat"
-        class="btn menu-button-style btn-lg"
+        to="/newchat"
+        className="btn menu-button-style btn-lg"
         type="button"
         onClick={startNewChatSession}
       >
         <i
-          class="fa-solid fa-message fa-xl me-4"
+          className="fa-solid fa-message fa-xl me-4"
           style={{ color: "#ffffff" }}
         ></i>
         Start New Chat
       </Link>
       <Link
         to="/history"
-        class="btn menu-button-style btn-lg mt-auto"
+        className="btn menu-button-style btn-lg mt-auto"
         type="button"
       >
         <i
-          class="fa-solid fa-clock-rotate-left fa-2xl me-4"
+          className="fa-solid fa-clock-rotate-left fa-2xl me-4"
           style={{ color: "#ffffff" }}
         ></i>
         View Transcript History
