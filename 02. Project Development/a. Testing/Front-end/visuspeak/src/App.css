@@ -4,6 +4,11 @@ html, body {
   height: 100%;
 }
 
+body {
+  display: flex;
+  flex-direction: column;
+}
+
 /* ***************ABOUT US STYLE*************** */
 .about-us-sections {
   margin-top: 10px;
@@ -275,7 +280,7 @@ html, body {
 
 .page-container {
   position: relative;
-  /* display: flex; */
+  display: block;
   flex-direction: column;
   min-height: 100vh;
 }
@@ -335,6 +340,8 @@ html, body {
   min-width: 300px;
 }
 
+
+
 .chatbox-scrollable::-webkit-scrollbar {
   width: 5px; 
 }
@@ -374,14 +381,11 @@ html, body {
   overflow-y: auto;
 }
 
-
-
 .action-buttons {
   background-color: #eee;
   max-width: 800px;
   margin-left: 0.1px;
   margin-right: 0.1px;
-  
   /* min-height: 470px; */
   /* justify-content: center; */
   /* align-items: center; */
@@ -427,8 +431,8 @@ html, body {
 }
 
 .slider-style {
-  /* background-color: #7d255b; */
-  /* padding-top: 15px;
+  /* background-color: #7d255b; 
+  padding-top: 15px;
   padding-bottom: 15px;
   padding-right: 10px;
   padding-left: 0px; */
@@ -621,6 +625,12 @@ iframe {
 .chat-page{
   /* background-color: #d4d3d3; */
   min-height: 800px;
+  max-width: 1300px;
+  position: absolute;
+  right: 50%;
+  top: 50%;
+  transform: translate(50%, -50%);
+  background: white;
 }
 
 .chat-container {

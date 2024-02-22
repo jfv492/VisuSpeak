@@ -151,109 +151,110 @@ const ASLChat = () => {
   }, []);
 
   return (
-    <div class="container chat-page text-begin py-3">
-      <div class="row">
-        <div className="col-sm-6">
-          <EditChatName />
+    // <div className="background-container">
+      <div class="container  text-begin shadow my-5 rounded-4 p-3">
+        <div class="row">
+          <div className="col-sm-6">
+            <EditChatName />
+          </div>
+          <div className="col-sm-6"></div>
         </div>
-        <div className="col-sm-6"></div>
-      </div>
-      <div class="row">
-        <div class="col-sm-5">
-          <div class="chat-box rounded-4">
-            <ChatHeader />
-            <div class="row">
-              <div class="col chatbox-scrollable">
-                <MessageList messages={messages} />
+        <div class="row">
+          <div class="col-sm-5">
+            <div class="chat-box rounded-4">
+              <ChatHeader />
+              <div class="row">
+                <div class="col chatbox-scrollable">
+                  <MessageList messages={messages} />
+                </div>
               </div>
-            </div>
 
-            <InputArea
-              onSendMessage={handleSendMessage}
-              isFetchingEnabled={isSigning}
-              fetchInterval={fetchInterval}
-            />
-          </div>
-        </div>
-        <div class="col-sm-7 video-box">
-          <div class="row">
-            <div className="col-sm-1">
-              <div className="fs-3 lead">
-                <p>
-                  <i className="fa-solid fa-stopwatch fa-xl mt-3 ms-3"></i>
-                </p>
-              </div>
-            </div>
-            <div className="col-sm-2">
-              <div className="d-flex fs-3 lead">
-                {/* <p><i className="fa-solid fa-stopwatch"></i></p> */}
-                <p key={countdown} className="countdown-animation">
-                  {countdown} s
-                </p>
-              </div>
+              <InputArea
+                onSendMessage={handleSendMessage}
+                isFetchingEnabled={isSigning}
+                fetchInterval={fetchInterval}
+              />
             </div>
           </div>
-          <div
-            class="row camera-placeholder rounded-4"
-            style={{ overflowX: "hidden" }}
-          >
-            {isSigning ? (
-              <iframe
-                src="https://archishab.github.io/VisuSpeak-MediaPipe-Model/"
-                allow="camera *; microphone *"
-                style={{
-                  border: "none",
-                  // width: "700",
-                  // height: "500",
-                  "-ms-overflow-style": "none" /* IE and Edge */,
-                  "scrollbar-width": "none" /* Firefox */,
-                  overflowX: "hidden",
-                }}
-                scrolling="no"
-                class="align-self-center"
-              ></iframe>
-            ) : (
-              <div className="video-placeholder centered-text">
-                {loading ? (
-                  <div class="spinner-border text-success" role="status">
-                    <span class="visually-hidden">Loading...</span>
-                  </div>
-                ) : (
-                  <p class="lead">
-                    Click on the camera icon{" "}
-                    <i
-                      class="fa-solid fa-video me-2"
-                      style={{ color: "#006262" }}
-                    ></i>{" "}
-                    to start signing
+          <div class="col-sm-7 video-box">
+            <div class="row">
+              <div className="col-sm-1">
+                <div className="fs-3 lead">
+                  <p>
+                    <i className="fa-solid fa-stopwatch fa-xl mt-3 ms-3"></i>
                   </p>
-                )}
+                </div>
               </div>
-            )}
-            <div className="row align-items-center py-2 justify-content-start action-buttons rounded-4 mt-3">
-              <div className="col justify-content-start">
-                <button
-                  type="button"
-                  className={`{btn camera-button-style btn-lg border border-3 rounded-3 ${
-                    isSigning ? "active" : ""
-                  }`}
-                  onClick={toggleSigning}
-                >
-                  {isSigning ? (
-                    <i
-                      class="fa-solid fa-video-slash fa-xl"
-                      style={{ color: "#ffffff" }}
-                    ></i>
+              <div className="col-sm-2">
+                <div className="d-flex fs-3 lead">
+                  {/* <p><i className="fa-solid fa-stopwatch"></i></p> */}
+                  <p key={countdown} className="countdown-animation">
+                    {countdown} s
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div
+              class="row camera-placeholder rounded-4"
+              style={{ overflowX: "hidden" }}
+            >
+              {isSigning ? (
+                <iframe
+                  src="https://archishab.github.io/VisuSpeak-MediaPipe-Model/"
+                  allow="camera *; microphone *"
+                  style={{
+                    border: "none",
+                    // width: "700",
+                    // height: "500",
+                    "-ms-overflow-style": "none" /* IE and Edge */,
+                    "scrollbar-width": "none" /* Firefox */,
+                    overflowX: "hidden",
+                  }}
+                  scrolling="no"
+                  class="align-self-center"
+                ></iframe>
+              ) : (
+                <div className="video-placeholder centered-text">
+                  {loading ? (
+                    <div class="spinner-border text-success" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                    </div>
                   ) : (
-                    <i
-                      class="fa-solid fa-video fa-xl"
-                      style={{ color: "#006262" }}
-                    ></i>
+                    <p class="lead">
+                      Click on the camera icon{" "}
+                      <i
+                        class="fa-solid fa-video me-2"
+                        style={{ color: "#006262" }}
+                      ></i>{" "}
+                      to start signing
+                    </p>
                   )}
-                </button>
-              </div>
-              <div className="col interval-style">
-                {/* <input
+                </div>
+              )}
+              <div className="row align-items-center py-2 justify-content-start action-buttons rounded-4 mt-3">
+                <div className="col justify-content-start">
+                  <button
+                    type="button"
+                    className={`{btn camera-button-style btn-lg border border-3 rounded-3 ${
+                      isSigning ? "active" : ""
+                    }`}
+                    onClick={toggleSigning}
+                  >
+                    {isSigning ? (
+                      <i
+                        class="fa-solid fa-video-slash fa-xl"
+                        style={{ color: "#ffffff" }}
+                      ></i>
+                    ) : (
+                      <i
+                        class="fa-solid fa-video fa-xl"
+                        style={{ color: "#006262" }}
+                      ></i>
+                    )}
+                  </button>
+                </div>
+                <div className="col interval-style">
+                  {/* <input
                   type="range"
                   min="5000"
                   max="15000"
@@ -263,33 +264,34 @@ const ASLChat = () => {
                   className=""
                   // orient="vertical"
                 /> */}
-                <button
-                  type="button"
-                  className="btn camera-button-style m-1"
-                  onClick={() => handleSpeedChange(5000)}
-                >
-                  5s
-                </button>
-                <button
-                  type="button"
-                  className="btn camera-button-style m-1"
-                  onClick={() => handleSpeedChange(10000)}
-                >
-                  10s
-                </button>
-                <button
-                  type="button"
-                  className="btn camera-button-style m-1"
-                  onClick={() => handleSpeedChange(15000)}
-                >
-                  15s
-                </button>
+                  <button
+                    type="button"
+                    className="btn camera-button-style m-1"
+                    onClick={() => handleSpeedChange(5000)}
+                  >
+                    5s
+                  </button>
+                  <button
+                    type="button"
+                    className="btn camera-button-style m-1"
+                    onClick={() => handleSpeedChange(10000)}
+                  >
+                    10s
+                  </button>
+                  <button
+                    type="button"
+                    className="btn camera-button-style m-1"
+                    onClick={() => handleSpeedChange(15000)}
+                  >
+                    15s
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    // </div>
   );
 };
 
