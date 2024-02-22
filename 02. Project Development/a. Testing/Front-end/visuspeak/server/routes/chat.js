@@ -10,7 +10,7 @@ router.post("/messages", (req, res) => {
 
   // SQL statement to insert a new message into the 'messages' table
   const sql =
-    "INSERT INTO messages (userID, username, text, timestamp, type, status, sessionID) VALUES (?, ?, ?, NOW(), ?, ?, ?)";
+    "INSERT INTO messages_single (userID, username, text, timestamp, type, status, sessionID) VALUES (?, ?, ?, NOW(), ?, ?, ?)";
 
   // Executing the SQL query
   db.query(
@@ -47,7 +47,7 @@ router.get("/getmessages/:userId", (req, res) => {
 
   // SQL query to fetch messages for a specific user and session
   const sql =
-    "SELECT * FROM messages WHERE userID = ? AND sessionID = ? ORDER BY timestamp ASC";
+    "SELECT * FROM messages_single WHERE userID = ? AND sessionID = ? ORDER BY timestamp ASC";
 
   // Executing the SQL query
   db.query(sql, [userId, sessionId], (err, results) => {
@@ -69,8 +69,8 @@ router.post("/startsession", (req, res) => {
   // Extracting userID from the request body
   const { userID } = req.body;
 
-  // SQL statement to create a new record in the 'chat_sessions' table
-  const sql = "INSERT INTO chat_sessions (userID) VALUES (?)";
+  // SQL statement to create a new record in the 'chat_session_single' table
+  const sql = "INSERT INTO chat_session_single (userID) VALUES (?)";
 
   // Executing the SQL query
   db.query(sql, [userID], (err, results) => {
@@ -92,9 +92,9 @@ router.post("/endsession", (req, res) => {
   // Extracting sessionId from the request body
   const { sessionId } = req.body;
 
-  // SQL statement to update the 'chat_sessions' table to mark a session as ended
+  // SQL statement to update the 'chat_session_single' table to mark a session as ended
   const sql =
-    'UPDATE chat_sessions SET end_timestamp = NOW(), status = "ended" WHERE id = ?';
+    'UPDATE chat_session_single SET end_timestamp = NOW(), status = "ended" WHERE id = ?';
 
   // Executing the SQL query
   db.query(sql, [sessionId], (err, results) => {
@@ -117,7 +117,7 @@ router.get("/chatsessions/:userId", (req, res) => {
   const { userId } = req.params;
 
   // SQL query to fetch all chat sessions for a specific user
-  const sql = "SELECT * FROM chat_sessions WHERE userID = ?";
+  const sql = "SELECT * FROM chat_session_single WHERE userID = ?";
 
   // Executing the SQL query
   db.query(sql, [userId], (err, results) => {

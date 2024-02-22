@@ -13,7 +13,7 @@ function Message({ username, text, timestamp }) {
           </div>
           <span class="time mine">{new Date(timestamp).toLocaleString()}</span>
 
-          <div class="message theirs">
+          {/* <div class="message theirs">
             <i class="rounded-circle fa-solid fa-circle-user fa-2xl avatar pt-4"></i>
             <div class="message-content">
               <span class="username">Username</span>
@@ -24,7 +24,7 @@ function Message({ username, text, timestamp }) {
                 admin. This is a placeholder text from admin.
               </p>
             </div>
-          </div>
+          </div> */}
           <span class="time theirs">5:30 PM</span>
         </div>
       </div>

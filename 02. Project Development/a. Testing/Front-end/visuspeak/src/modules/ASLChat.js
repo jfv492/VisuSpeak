@@ -44,8 +44,13 @@ const ASLChat = () => {
   };
 
   // Function to handle speed change in slider
-  const handleSpeedChange = (event) => {
-    const newInterval = event.target.value;
+  // const handleSpeedChange = (event) => {
+  //   const newInterval = event.target.value;
+  //   setFetchInterval(newInterval);
+  //   setCountdown(newInterval / 1000); // Reset countdown timer
+  // };
+
+  const handleSpeedChange = (newInterval) => {
     setFetchInterval(newInterval);
     setCountdown(newInterval / 1000); // Reset countdown timer
   };
@@ -261,21 +266,21 @@ const ASLChat = () => {
                 <button
                   type="button"
                   className="btn camera-button-style m-1"
-                  onClick={() => setFetchInterval(5000)}
+                  onClick={() => handleSpeedChange(5000)}
                 >
                   5s
                 </button>
                 <button
                   type="button"
                   className="btn camera-button-style m-1"
-                  onClick={() => setFetchInterval(10000)}
+                  onClick={() => handleSpeedChange(10000)}
                 >
                   10s
                 </button>
                 <button
                   type="button"
                   className="btn camera-button-style m-1"
-                  onClick={() => setFetchInterval(15000)}
+                  onClick={() => handleSpeedChange(15000)}
                 >
                   15s
                 </button>
