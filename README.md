@@ -21,8 +21,6 @@ Our project vlogs are available in our [playlist](https://youtube.com/playlist?l
 ## 👥 Team Members
 ![Updated Github Teams-4](https://github.com/jfv492/VisuSpeak/assets/98986952/a0290ad0-37ae-4547-b44b-1909c2fd9eec)
 
-
-
 ## 📝 License 
 [Read the License agreement here](https://github.com/jfv492/VisuSpeak/blob/main/LICENSE)
 
