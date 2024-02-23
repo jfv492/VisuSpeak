@@ -1,5 +1,6 @@
 import "./App.css";
 import "./Mobile.css";
+import "./User.css";
 
 import Login from "./modules/Login.js";
 import SignUp from "./modules/SignUp.js";
@@ -23,6 +24,9 @@ import SpeechTest from "./components/SpeechTest.js";
 import React, { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
+import AccountSettings from "./user/AccountSettings.js";
+
+
 function App() {
   const [alert, setAlert] = useState(null);
   const showAlert = (message, type) => {
@@ -32,51 +36,57 @@ function App() {
     });
     setTimeout(() => {
       setAlert(null);
-    }, 3000);
+    }, 10000);
   };
 
   return (
     <>
       <BrowserRouter>
         <div className="page-container">
-        {/* <div className="content-wrap"> */}
-          <Navbar />
-          <Alert alert={alert} />
-          <Routes>
-            <Route exact path="/" element={<Home />} />
-            <Route
-              exact
-              path="/login"
-              element={<Login heading="Login" showAlert={showAlert} />}
-            />
-            <Route
-              exact
-              path="/signup"
-              element={<SignUp heading="Sign Up" showAlert={showAlert} />}
-            />
-            <Route exact path="/about" element={<About heading="About Us" />} />
-            <Route exact path="/chat" element={<HomeMenu />} />
-            <Route
-              exact
-              path="/aslchat"
-              element={<ASLChat showAlert={showAlert} />}
-            />
+          <div className="content-wrap">
+            <Navbar />
+            <Alert alert={alert} />
+            <Routes>
+              <Route exact path="/" element={<Home />} />
+              <Route
+                exact
+                path="/login"
+                element={<Login heading="Login" showAlert={showAlert} />}
+              />
+              <Route
+                exact
+                path="/signup"
+                element={<SignUp heading="Sign Up" showAlert={showAlert} />}
+              />
+              <Route
+                exact
+                path="/about"
+                element={<About heading="About Us" />}
+              />
+              <Route exact path="/chat" element={<HomeMenu />} />
+              <Route
+                exact
+                path="/aslchat"
+                element={<ASLChat showAlert={showAlert} />}
+              />
 
-            <Route
-              exact
-              path="/aslchattest"
-              element={<ASLChatTest showAlert={showAlert} />}
-            />
+              <Route
+                exact
+                path="/aslchattest"
+                element={<ASLChatTest showAlert={showAlert} />}
+              />
 
-            <Route exact path="/resources" element={<Resources />} />
-            <Route exact path="/newchat" element={<NewChat />} />
+              <Route exact path="/resources" element={<Resources />} />
+              <Route exact path="/newchat" element={<NewChat />} />
 
-            <Route exact path="/history" element={<TranscriptHistory />} />
-            <Route exact path="/speechtest" element={<SpeechTest />} />
-          </Routes>
-          {/* </div> */}
-          <Footer />
+              <Route exact path="/history" element={<TranscriptHistory />} />
+              <Route exact path="/speechtest" element={<SpeechTest />} />
+
+              <Route exact path="/settings" element={<AccountSettings />} />
+            </Routes>
+          </div>
         </div>
+        <Footer />
       </BrowserRouter>
     </>
   );

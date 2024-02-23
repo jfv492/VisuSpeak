@@ -2,11 +2,39 @@ html, body {
   margin: 0;
   padding: 0;
   height: 100%;
+  font-family: "SF Pro Text", "SF Pro Icons", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
 }
 
 body {
   display: flex;
   flex-direction: column;
+}
+
+.apple-card {
+  background-color: #757c7c;
+}
+
+.howto-icon {
+  color: #757c7c !important;
+}
+
+/* ***************ALERT STYLE*************** */
+.alert-style {
+  /* max-width: 100%; */
+  min-height: 50px;
+  position: relative;
+  /* right: 50%; */
+  /* top: 47%; */
+  transform: translate(50%, -50%);
+  /* background: white; */
+}
+
+.toast-success {
+  color: #77bb41;
+}
+
+.toast-danger {
+  color: #ca4c4c;
 }
 
 /* ***************ABOUT US STYLE*************** */

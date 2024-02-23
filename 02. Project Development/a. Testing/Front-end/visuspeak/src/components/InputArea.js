@@ -105,7 +105,8 @@ function InputArea({ onSendMessage, isFetchingEnabled, fetchInterval }) {
           value={message}
           onChange={handleInputChange}
           onKeyPress={handleKeyPress}
-          style={{ height: textareaHeight }}
+          // style={{ height: textareaHeight }}
+          style={{ height: "100px" }}
           onInput={handleHeightAdjustment}
         ></textarea>
         <span class="input-group-text">

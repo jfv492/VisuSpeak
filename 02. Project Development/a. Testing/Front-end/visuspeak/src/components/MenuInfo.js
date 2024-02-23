@@ -37,7 +37,8 @@ const MenuInfo = () => {
               <div class="modal-content">
                 <div class="modal-header">
                   <h1 class="modal-title fs-5" id="exampleModalLabel">
-                    Responsive left-aligned hero with image
+                  <i class="fa-solid fa-lightbulb me-2" style={{color: "#000000;"}}></i>
+                  Disclaimer
                   </h1>
                   <button
                     type="button"
@@ -47,11 +48,12 @@ const MenuInfo = () => {
                   ></button>
                 </div>
                 <div class="modal-body">
-                  Quickly design and customize responsive mobile-first sites
-                  with Bootstrap, the world’s most popular front-end open source
-                  toolkit, featuring Sass variables and mixins, responsive grid
-                  system, extensive prebuilt components, and powerful JavaScript
-                  plugins.
+                The predicted words provided by the AI model are generated based on
+            a trained dataset. While we strive for accuracy, we cannot guarantee
+            the precise interpretation of signed words. Users should exercise
+            discretion when relying on the predicted words and understand that
+            the accuracy may vary. We do not assume responsibility for any
+            inaccuracies in the predictions.
                 </div>
               </div>
             </div>
@@ -60,22 +62,25 @@ const MenuInfo = () => {
       ) : (
         <div class="m-3">
           <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">
-            Responsive left-aligned hero with image
+          <i class="fa-solid fa-lightbulb me-2" style={{color: "#000000;"}}></i>
+          Disclaimer
           </h1>
           <p class="lead">
-            Quickly design and customize responsive mobile-first sites with
-            Bootstrap, the world’s most popular front-end open source toolkit,
-            featuring Sass variables and mixins, responsive grid system,
-            extensive prebuilt components, and powerful JavaScript plugins.
+            The predicted words provided by the AI model are generated based on
+            a trained dataset. While we strive for accuracy, we cannot guarantee
+            the precise interpretation of signed words. Users should exercise
+            discretion when relying on the predicted words and understand that
+            the accuracy may vary. We do not assume responsibility for any
+            inaccuracies in the predictions.
           </p>
-          <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+          {/* <div class="d-grid gap-2 d-md-flex justify-content-md-start">
             <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">
               Primary
             </button>
             <button type="button" class="btn btn-outline-secondary btn-lg px-4">
               Default
             </button>
-          </div>
+          </div> */}
         </div>
       )}
     </div>
