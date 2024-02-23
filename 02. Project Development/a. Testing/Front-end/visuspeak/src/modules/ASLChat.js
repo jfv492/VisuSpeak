@@ -65,7 +65,7 @@ const ASLChat = () => {
   const [messages, setMessages] = useState([]); // State for storing messages
 
   const [countdown, setCountdown] = useState(fetchInterval / 1000); // Countdown timer
-  const [animate, setAnimate] = useState(true);
+  const [iconClass, setIconClass] = useState("");
 
   // Function to introduce delay
   function delay(ms) {
@@ -120,15 +120,27 @@ const ASLChat = () => {
     }
   };
 
-  // Function to handle countdown
+  // // Function to handle countdown
+  // const handleCountdown = () => {
+  //   setCountdown((prevCountdown) => {
+  //     if (prevCountdown <= 1) {
+  //       return fetchInterval / 1000; // Reset countdown
+  //     } else {
+  //       // setAnimate(!animate);// Toggle animation state
+  //       return prevCountdown - 1;
+  //     }
+  //   });
+  // };
+
   const handleCountdown = () => {
     setCountdown((prevCountdown) => {
-      if (prevCountdown <= 1) {
-        return fetchInterval / 1000; // Reset countdown
-      } else {
-        // setAnimate(!animate);// Toggle animation state
-        return prevCountdown - 1;
+      let newClass = "";
+      if (prevCountdown <= 4) {
+        newClass = "shaking"; // This is the class name for shaking effect
       }
+      setIconClass(newClass);
+
+      return prevCountdown <= 1 ? fetchInterval / 1000 : prevCountdown - 1;
     });
   };
 
@@ -227,7 +239,17 @@ const ASLChat = () => {
             <div className="col-sm-1">
               <div className="fs-3 lead">
                 <p>
-                  <i className="fa-solid fa-stopwatch fa-xl mt-3 ms-3"></i>
+                  <i
+                    className={`fa-solid fa-stopwatch fa-xl mt-3 ms-3 ${iconClass}`}
+                    style={{
+                      color:
+                        countdown <= 4
+                          ? countdown <= 2
+                            ? "red"
+                            : "orange"
+                          : "initial",
+                    }}
+                  ></i>
                 </p>
               </div>
             </div>
