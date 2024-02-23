@@ -1,5 +1,4 @@
 import React from "react";
-import Background from "./Background.js";
 import Hello from "../assets/images/Hello.jpg";
 import Please from "../assets/images/Please.jpg";
 import ThankYou from "../assets/images/ThankYou.png";
@@ -100,9 +99,6 @@ export default function Resources() {
             </div>
           </div>
         </div>
-      </div>
-      <div>
-        <Background />
       </div>
     </>
   );

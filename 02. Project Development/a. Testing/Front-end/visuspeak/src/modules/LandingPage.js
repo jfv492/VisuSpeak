@@ -1,5 +1,5 @@
 import React from "react";
-import HomeNavigation from "../components/HomeNavigation.js";
+import HomeNavigation from "../components/landing_page/HomeNavigation.js";
 
 export default function Home() {
   return (

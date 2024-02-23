@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios"; // For making HTTP requests
-import serverUrl from "../Server-env.js"; // URL of the server
+import serverUrl from "../../Server-env.js"; // URL of the server
 
 const EditChatName = () => {
   let navigate = useNavigate(); // Hook for navigation

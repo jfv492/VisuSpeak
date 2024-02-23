@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import MessageList from "./MessageList.js";
+import MessageList from "../components/chat/MessageList.js";
 import serverUrl from "../Server-env.js";
 import HandGestureBG from "../assets/images/ASLBackgroundSigns.png"; // Background image
 

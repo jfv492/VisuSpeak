@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import ColourLogo from "../assets/logos/VisuSpeakPrimaryLogo.png";
-import NavButton from "../components/NavButton.js";
+import NavButton from "../components/navbar/NavButton.js";
 
 const Navbar = () => {
   return (

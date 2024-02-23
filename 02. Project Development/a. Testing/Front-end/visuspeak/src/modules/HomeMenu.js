@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import MenuButtons from "../components/MenuButtons.js";
-import MenuInfo from "../components/MenuInfo.js";
+import MenuButtons from "../components/landing_page/MenuButtons.js";
+import MenuInfo from "../components/landing_page/MenuInfo.js";
 
 const HomeMenu = () => {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);

@@ -1,6 +1,6 @@
 import React from "react";
-import Hands from "../assets/images/Hands.jpg";
-import ConversationImage from "../assets/images/Conversation.jpg";
+import Hands from "../../assets/images/Hands.jpg";
+import ConversationImage from "../../assets/images/Conversation.jpg";
 
 const AboutSections = (props) => {
   return (

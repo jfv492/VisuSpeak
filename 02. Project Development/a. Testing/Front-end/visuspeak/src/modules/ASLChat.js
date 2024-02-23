@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios"; // For making HTTP requests
 import serverUrl from "../Server-env.js"; // URL of the server
-import MessageList from "../components/MessageList.js"; // Component to display list of messages
-import InputArea from "../components/InputArea.js"; // Component for input area
-import ChatHeader from "../components/ChatHeader.js";
-import EditChatName from "../components/EditChatName.js";
-import HowToModal from "../components/HowToModal.js";
+import MessageList from "../components/chat/MessageList.js"; // Component to display list of messages
+import InputArea from "../components/chat/InputArea.js"; // Component for input area
+import ChatHeader from "../components/chat/ChatHeader.js";
+import EditChatName from "../components/chat/EditChatName.js";
+import HowToModal from "../components/asl_chat/HowToModal.js";
 import Popover from "@mui/material/Popover";
 import Typography from "@mui/material/Typography";
 

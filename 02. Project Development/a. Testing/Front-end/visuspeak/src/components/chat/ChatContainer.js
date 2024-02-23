@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import MessageList from "./MessageList.js";
 import InputArea from "./InputArea.js";
-import ActionBar from "./ActionBar.js";
-import serverUrl from "../Server-env.js";
+import ActionBar from "../about/ActionBar.js";
+import serverUrl from "../../Server-env.js";
 
 const ChatContainer = () => {
   let userId = localStorage.getItem("userID");
