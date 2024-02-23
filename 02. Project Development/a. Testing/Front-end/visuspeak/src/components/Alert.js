@@ -28,7 +28,7 @@ export default function Alert(props) {
               ) : (
                 <i className="fa-solid fa-circle-exclamation me-2 fa-xl"></i>
               )}
-              <strong className="me-auto">{capitalize(props.alert.type)}</strong>
+              <strong className="me-auto fs-5">{capitalize(props.alert.type)}</strong>
               <small></small>
               <button
                 type="button"
@@ -37,7 +37,7 @@ export default function Alert(props) {
                 aria-label="Close"
               ></button>
             </div>
-            <div className="toast-body">{props.alert.msg}</div>
+            <div className="toast-body fs-6">{props.alert.msg}</div>
           </div>
         </div>
       )}
