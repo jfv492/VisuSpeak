@@ -4,7 +4,9 @@
 
 **Objective:** Evaluate the UI/UX design and assess the performance and accuracy of the AI model.
 
-**Participants:** Saskatchewan Deaf and Hard of Hearing Services (SDHHS) Team, Jasmine Owens (Accessibility Officer - U of R Accessibility Centre)
+**Participants:** 
+- Saskatchewan Deaf and Hard of Hearing Services (SDHHS) Team 
+- Jasmine Owens (Accessibility Officer - U of R Accessibility Centre)
 
 **Methods:**
 - Think-aloud testing: Participants verbalize their thoughts and actions as they interact with the UI/UX and AI features.
@@ -22,7 +24,8 @@
 
 **Objective:** Evaluate the effectiveness and user-friendliness of the chat functionality integrated with the AI model.
 
-**Participants:** SDHHS, U of R Accessibility Centre, ASL Students(U of R)
+**Participants:** 
+- Saskatchewan Deaf and Hard of Hearing Services (SDHHS) Team
 
 **Methods:**
 - Scenario-based testing: Present participants with typical chat scenarios to assess how well the system responds.
@@ -39,7 +42,10 @@
 
 **Objective:** Validate the overall functionality, integration, and user experience of the entire application.
 
-**Participants:** Saskatchewan Deaf and Hard of Hearing Services (SDHHS), Jasmine Owens (Accessibility Officer - U of R Accessibility Centre), ASL Students(U of R)
+**Participants:** 
+- Saskatchewan Deaf and Hard of Hearing Services (SDHHS), 
+- Robert Anderson (Manager, Mobility and Innovative Solution - SaskPower), 
+- Jasmine Owens (Accessibility Officer - U of R Accessibility Centre)
 
 **Methods:**
 - End-to-end testing: Simulate real-world user journeys covering all features and functionalities.
