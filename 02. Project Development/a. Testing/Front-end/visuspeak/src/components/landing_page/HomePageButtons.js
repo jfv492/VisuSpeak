@@ -33,27 +33,27 @@ export default function Login(props) {
   return (
     <div class="d-flex flex-column justify-content-center row-gap-5">
       <Link
-        to="/aslchat"
+        to="/adminchat"
         class="btn menu-button-style btn-lg"
         type="button"
         onClick={startNewChatSession}
       >
         <i
-          class="fa-solid fa-message fa-xl me-4"
+          class="fa-solid fa-message fa-xl me-3"
           style={{ color: "#ffffff" }}
         ></i>
-        Start New Chat
+        Admin Chat
       </Link>
       <Link
-        to="/history"
+        to="/aslchat"
         class="btn menu-button-style btn-lg mt-auto"
         type="button"
       >
         <i
-          class="fa-solid fa-clock-rotate-left fa-2xl me-4"
+          class="fa-solid fa-hand fa-2xl me-3"
           style={{ color: "#ffffff" }}
         ></i>
-        View Transcript History
+        ASL Chat
       </Link>
     </div>
   );

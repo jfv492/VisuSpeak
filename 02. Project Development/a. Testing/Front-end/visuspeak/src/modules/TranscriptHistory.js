@@ -83,7 +83,7 @@ const TranscriptHistory = () => {
                     .map((session) => (
                       <a
                         href="#"
-                        class={`list-group-item list-group-item-action py-3 lh-sm ${
+                        class={`list-group-item chat-list list-group-item-action py-3 lh-sm ${
                           session.id === selectedSessionId ? "active" : ""
                         }`}
                         aria-current="true"

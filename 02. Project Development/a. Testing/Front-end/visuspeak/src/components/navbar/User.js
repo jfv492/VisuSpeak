@@ -1,10 +1,15 @@
-import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { signOut } from "firebase/auth";
+import React, { useContext, useState } from "react";
+import { Link, useNavigate, } from "react-router-dom";
+import { auth } from "../../firebase";
+import { AuthContext } from "../../context/AuthContext.js";
 
 const User = () => {
+  const {currentUser} = useContext(AuthContext)
   let navigate = useNavigate();
   const handleSignOut = () => {
     localStorage.clear();
+    signOut(auth);
     navigate("/");
   };
   return (

@@ -1,35 +1,44 @@
-import React from "react";
+import React, { useContext, useRef, useEffect } from "react";
+import { AuthContext } from "../../context/AuthContext";
+import { ChatContext } from "../../context/ChatContext";
 
-function Message({ username, text, timestamp }) {
+const Message = ({ message }) => {
+  const { currentUser } = useContext(AuthContext);
+  const { data } = useContext(ChatContext);
+
+  const ref = useRef();
+
+  useEffect(() => {
+    ref.current?.scrollIntoView({ behavior: "smooth" });
+  }, [message]);
+
+  const messageDate = message.date
+    ? new Date(message.date.seconds * 1000)
+    : new Date();
+  const timeOptions = { hour: "2-digit", minute: "2-digit" };
+  const dateString = messageDate.toLocaleTimeString([], timeOptions);
   return (
     <>
-      <div className={`chat`}>
-        <div class="chat-messages">
-          <div class="message mine">
-            <div class="message-content">
-              <span class="username">{username}</span>
-              <p>{text}</p>
-            </div>
-          </div>
-          <span class="time mine">{new Date(timestamp).toLocaleTimeString()}</span>
-          
-          {/* <div class="message theirs">
-            <i class="rounded-circle fa-solid fa-circle-user fa-2xl avatar pt-4"></i>
-            <div class="message-content">
-              <span class="username">Username</span>
-              <p>
-                This is a placeholder text from admin. This is a placeholder
-                This is a placeholder text from admin. text from admin. This is
-                a placeholder text from admin. This is a placeholder text from
-                admin. This is a placeholder text from admin.
-              </p>
-            </div>
-          </div>
-          <span class="time theirs">5:30 PM</span> */}
+      <div
+        ref={ref}
+        class={`message ${
+          message.senderId === currentUser.uid ? "mine" : "theirs"
+        }`}
+      >
+        <div class="message-content">
+          <span class="username">{message.senderDisplayName}</span>
+          <p>{message.text}</p>
         </div>
       </div>
+      <span
+        class={`time ${
+          message.senderId === currentUser.uid ? "mine" : "theirs"
+        }`}
+      >
+        {dateString}
+      </span>
     </>
   );
-}
+};
 
 export default Message;

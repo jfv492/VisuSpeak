@@ -68,18 +68,18 @@ router.post("/signup", async (req, res) => {
 
 // ROUTE 2: User login endpoint at POST "/api/auth/login". No login is required for this route.
 router.post("/login", async (req, res) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
 
-  // Check if both username and password are provided
-  if (!username || !password) {
+  // Check if both email and password are provided
+  if (!email || !password) {
     return res
       .status(400)
-      .json({ error: "Username and password cannot be empty" });
+      .json({ error: "Email and password cannot be empty" });
   }
 
   // SQL query to find user by username
-  const sql = "SELECT * FROM user WHERE Username = ?";
-  db.query(sql, [username], async (err, data) => {
+  const sql = "SELECT * FROM user WHERE Email = ?";
+  db.query(sql, [email], async (err, data) => {
     // Error handling for database query during login
     if (err) {
       console.error("Error during login: " + err.message);
@@ -104,12 +104,14 @@ router.post("/login", async (req, res) => {
       const data = {
         user: {
           id: user.userID,
+          username: user.Username
         },
       };
       const authtoken = jwt.sign(data, JWT_SECRET);
       return res.status(200).json({
         message: "User logged in successfully",
-        username: username,
+        email: user.Email,
+        username: user.Username,
         authtoken: authtoken,
         userID: user.userID,
       });

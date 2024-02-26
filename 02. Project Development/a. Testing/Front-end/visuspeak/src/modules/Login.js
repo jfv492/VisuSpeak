@@ -1,14 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { auth, storage, db } from "../firebase.js";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import axios from "axios";
 import serverUrl from "../Server-env.js";
+import defaultProfilePicture from "../assets/images/AccountSettingsHeadshot.jpg"
 
 const Login = (props) => {
   const loginUrl = `${serverUrl}/auth/login`;
   let navigate = useNavigate();
+  const [err, setErr] = useState(false);
 
   const [formData, setFormData] = useState({
-    username: "",
+    email: "",
     password: "",
   });
 
@@ -21,8 +25,20 @@ const Login = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.username || !formData.password) {
-      setError("Username and password cannot be empty.");
+
+    const email = formData.email;
+    const password = formData.password;
+    //Firebase Authentication
+    try {
+      await signInWithEmailAndPassword(auth, email, password)
+    } catch (err) {
+      setErr(false);
+      console.log("Firebase error: ", err);
+      props.showAlert("Firebase Login failed. Please try again", "danger");
+    }
+
+    if (!formData.email || !formData.password) {
+      setError("Email and password cannot be empty.");
       return;
     }
 
@@ -34,14 +50,15 @@ const Login = (props) => {
         setError();
 
         const json = response.data;
+        localStorage.setItem("email", json.email);
         localStorage.setItem("username", json.username);
         localStorage.setItem("userID", json.userID);
         localStorage.setItem("authtoken", json.authtoken);
-        navigate("/chat");
+        navigate("/");
       })
       .catch((error) => {
-        console.error("Login failed", error);
-        props.showAlert("Login failed.", "danger");
+        console.error("Login failed. Please try again", error);
+        props.showAlert("Login failed. Please try again.", "danger");
         setError("Invalid credentials. Please try again.");
       });
   };
@@ -67,16 +84,16 @@ const Login = (props) => {
         </div>
 
         <div className="row mb-4">
-          <label htmlFor="username" className="form-label mt-1">
-            Username:
+          <label htmlFor="email" className="form-label mt-1">
+            Email:
           </label>
           <div className="">
             <input
               type="text"
               className="form-control"
-              id="username"
-              name="username"
-              value={formData.username}
+              id="email"
+              name="email"
+              value={formData.email}
               onChange={handleChange}
             />
           </div>

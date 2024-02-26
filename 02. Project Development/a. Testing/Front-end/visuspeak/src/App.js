@@ -2,31 +2,31 @@ import "./App.css";
 import "./Mobile.css";
 import "./User.css";
 
+import Alert from "./components/Alert.js";
 import Login from "./modules/Login.js";
 import SignUp from "./modules/SignUp.js";
 import Footer from "./modules/Footer.js";
 import Navbar from "./modules/Navbar.js";
-import Home from "./modules/LandingPage.js";
+import Home from "./modules/Home.js";
 import About from "./modules/About.js";
-import HomeMenu from "./modules/HomeMenu.js";
+import AdminChat from "./modules/AdminChat.js";
+
+
 import ASLChat from "./modules/ASLChat.js";
-
-
-import Alert from "./components/Alert.js";
-
-import NewChat from "./components/chat/ChatContainer.js";
 
 import Resources from "./modules/Resources.js";
 
 import TranscriptHistory from "./modules/TranscriptHistory.js";
-import SpeechTest from "./components/SpeechTest.js";
-import React, { useState } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+
+import React, { useContext, useState } from "react";
+import { BrowserRouter, useNavigate, Route, Routes } from "react-router-dom";
 
 import AccountSettings from "./user/AccountSettings.js";
+import { AuthContext } from "./context/AuthContext.js";
 
 
 function App() {
+  const {currentUser} = useContext(AuthContext)
   const [alert, setAlert] = useState(null);
   const showAlert = (message, type) => {
     setAlert({
@@ -62,18 +62,17 @@ function App() {
                 path="/about"
                 element={<About heading="About Us" />}
               />
-              <Route exact path="/chat" element={<HomeMenu />} />
+              <Route exact path="/adminchat" element={<AdminChat heading="Previous Chat Sessions"/>} />
+              
               <Route
                 exact
                 path="/aslchat"
                 element={<ASLChat showAlert={showAlert} />}
               />
-
+              
               <Route exact path="/resources" element={<Resources />} />
-              <Route exact path="/newchat" element={<NewChat />} />
 
               <Route exact path="/history" element={<TranscriptHistory />} />
-              <Route exact path="/speechtest" element={<SpeechTest />} />
 
               <Route exact path="/settings" element={<AccountSettings />} />
             </Routes>

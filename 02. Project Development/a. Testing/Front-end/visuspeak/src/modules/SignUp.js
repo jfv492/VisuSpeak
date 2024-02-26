@@ -1,11 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { auth, storage, db } from "../firebase.js";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { doc, setDoc } from "firebase/firestore"; 
 import axios from "axios";
 import serverUrl from "../Server-env.js";
+import defaultProfilePicture from "../assets/images/AccountSettingsHeadshot.jpg"
 
 const SignUp = (props) => {
   const signupUrl = `${serverUrl}/auth/signup`;
   let navigate = useNavigate();
+  const [errors, setErrors] = useState({});
+  const [err, setErr] = useState(false);
+  const [success, setSuccess] = useState("");
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [currentStep, setCurrentStep] = useState(1);
+  const mobileView = windowWidth < 600;
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -16,12 +27,6 @@ const SignUp = (props) => {
     confirmPassword: "",
     agreeTerms: false,
   });
-
-  const [errors, setErrors] = useState({});
-  const [success, setSuccess] = useState("");
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const [currentStep, setCurrentStep] = useState(1);
-  const mobileView = windowWidth < 600;
 
   useEffect(() => {
     const handleResize = () => {
@@ -43,8 +48,66 @@ const SignUp = (props) => {
     setErrors({ ...errors, [name]: "" });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    const displayName = formData.username;
+    const email = formData.email;
+    const password = formData.password;
+    //Firebase Authentication
+    try {
+      const res = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      console.log("User registered on firebase:", formData.email);
+
+      fetch(defaultProfilePicture)
+        .then((res) => res.blob())
+        .then((blob) => {
+            const file = new File([blob], "profile_picture.jpg", { type: "image/jpeg" });
+
+            const storageRef = ref(storage, formData.username);
+            const uploadTask = uploadBytesResumable(storageRef, file);
+
+            uploadTask.on(
+                "state_changed",
+                (snapshot) => {
+                    // Handle progress
+                    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    console.log('Upload is ' + progress + '% done');
+                },
+                (error) => {
+                    // Handle unsuccessful uploads
+                    console.log(error);
+                },
+                () => {
+                    // Handle successful uploads on complete
+                    getDownloadURL(uploadTask.snapshot.ref).then( async(downloadURL) => {
+                        await updateProfile(res.user,{
+                          displayName: formData.username,
+                          photoURL: downloadURL
+                        });
+                        await setDoc(doc(db, "users", res.user.uid), {
+                          uid: res.user.uid,
+                          displayName,
+                          email,
+                          photoURL: downloadURL
+                        });
+                        await setDoc(doc(db, "userChats", res.user.uid), {});
+                    });
+                }
+            );
+        })
+        .catch((error) => {
+            console.error("Error fetching the image as blob:", error);
+        });
+    } catch (err) {
+      setErr(false);
+      console.log("Firebase error: ", err);
+      props.showAlert("Signup failed. Please try again", "danger");
+    }
+
     let currentErrors = {};
     let formIsValid = true;
 
@@ -102,7 +165,7 @@ const SignUp = (props) => {
         })
         .catch((error) => {
           console.error("Signup failed", error);
-          props.showAlert("Signup failed.", "danger");
+          props.showAlert("Signup failed. Please try again", "danger");
           // Update the state with the error message from the server
           if (error.response && error.response.data) {
             // Handle the case where there's a response with a data payload

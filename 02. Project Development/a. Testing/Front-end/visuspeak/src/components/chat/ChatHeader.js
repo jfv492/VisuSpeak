@@ -1,11 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
+import ChatAlert from "../ChatAlert";
+import ChatActions from "./ChatActions.js";
 
-const ChatHeader = () => {
+const ChatHeader = (props) => {
+  const [alert, setAlert] = useState(null);
+  const showAlert = (message, type) => {
+    setAlert({
+      msg: message,
+      type: type,
+    });
+    setTimeout(() => {
+      setAlert(null);
+    }, 5000);
+  };
   return (
-    <div class="messages-heading row align-items-end mb-1">
-      <div class="col text-center fw-lighter align-items-end">
+    <div class="messages-heading row align-items-end mb-1 z-3 position-relative">
+      <div class="">
         <div className="chat-header rounded-4 bg-gradient shadow">
-          <div className="user-info d-flex">
+          <div className="user-info">
             <div class="">
               <i
                 class="rounded-circle fa-solid fa-circle-user fa-2xl me-2"
@@ -13,9 +25,10 @@ const ChatHeader = () => {
               ></i>
               <div class="status-indicator glowing"></div>
             </div>
-            <h3 className="user-name">Admin</h3>
+            <h3 className="user-name">{props.user}</h3>
           </div>
-          <div className="chat-actions"></div>
+          <ChatAlert alert={alert}/>
+          <ChatActions showAlert={showAlert}/>
         </div>
       </div>
     </div>
