@@ -2,7 +2,6 @@ import React, { useState, useCallback, useEffect, useContext } from "react";
 import { ChatContext } from "../context/ChatContext.js";
 import Search from "../components/chat/Search.js";
 import Chats from "../components/chat/Chats.js";
-import serverUrl from "../Server-env.js"; // URL of the server
 import axios from "axios"; // For making HTTP requests
 import ChatHeader from "../components/chat/ChatHeader.js";
 import MessageList from "../components/chat/MessageList.js";
@@ -15,6 +14,7 @@ import modelChatUrl from "../Chat-env.js"
 const ASLChat = () => {
   const { data } = useContext(ChatContext);
   let displayName = data.user?.displayName;
+  let photo = data.user?.photoURL;
   const [leftWidth, setLeftWidth] = useState(35); // Percentage
   const [isDragging, setIsDragging] = useState(false);
 
@@ -93,8 +93,6 @@ const ASLChat = () => {
   const openCameraButtonPopover = Boolean(anchorElCameraButton);
   const openSpeedButtonPopover = Boolean(anchorEl5sSpeedButton);
 
-  const sendMessageUrl = `${serverUrl}/chat/messages`; // URL to send messages
-
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [currentStep, setCurrentStep] = useState(1);
   const mobileView = windowWidth < 600;
@@ -140,39 +138,6 @@ const ASLChat = () => {
     setFetchInterval(newInterval);
     setCountdown(newInterval / 1000); // Reset countdown timer
   };
-
-  // Function to handle sending a new message
-  const handleSendMessage = async (newMessage) => {
-    try {
-      const response = await axios.post(sendMessageUrl, {
-        userID: localStorage.getItem("userID"),
-        username: localStorage.getItem("username"),
-        text: newMessage,
-        type: "text",
-        status: "sent",
-        sessionID: localStorage.getItem("sessionId"),
-      });
-
-      if (response.status === 201) {
-        console.log("Message stored", response.data);
-        setMessages([...messages, response.data]);
-      }
-    } catch (error) {
-      console.error("Error sending message:", error);
-    }
-  };
-
-  // // Function to handle countdown
-  // const handleCountdown = () => {
-  //   setCountdown((prevCountdown) => {
-  //     if (prevCountdown <= 1) {
-  //       return fetchInterval / 1000; // Reset countdown
-  //     } else {
-  //       // setAnimate(!animate);// Toggle animation state
-  //       return prevCountdown - 1;
-  //     }
-  //   });
-  // };
 
   const handleCountdown = () => {
     setCountdown((prevCountdown) => {
@@ -260,7 +225,7 @@ const ASLChat = () => {
           <div className="asl-chat-box rounded-4 mt-3">
             {displayName ? (
               <div className="asl-chat-box rounded-4">
-                <ChatHeader user={displayName} />
+                <ChatHeader user={displayName} photo={photo}/>
 
                 <div class="asl-chatbox-scrollable">
                   <MessageList />

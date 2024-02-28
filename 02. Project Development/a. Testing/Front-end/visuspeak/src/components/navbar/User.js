@@ -1,21 +1,28 @@
 import { signOut } from "firebase/auth";
 import React, { useContext, useState } from "react";
-import { Link, useNavigate, } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../../firebase";
 import { AuthContext } from "../../context/AuthContext.js";
+import { setUserOffline } from "../../utils/UserPresence.js";
 
 const User = () => {
-  const {currentUser} = useContext(AuthContext)
+  const { currentUser } = useContext(AuthContext);
   let navigate = useNavigate();
-  const handleSignOut = () => {
+  const handleSignOut = async () => {
+    // Set user status to offline
+    if (currentUser && currentUser.uid) {
+      await setUserOffline(currentUser.uid);
+    }
+    // Clear local storage and sign out
     localStorage.clear();
-    signOut(auth);
+    await signOut(auth);
     navigate("/");
   };
+
   return (
     <div>
       <div
-        className={`nav-item dropdown mt-2 verticalLine ${
+        className={`nav-item dropdown verticalLine ${
           localStorage.getItem("username") === null ? "d-none" : ""
         }`}
       >
@@ -26,14 +33,29 @@ const User = () => {
           data-bs-display="static"
           aria-expanded="false"
         >
-          <div class="">
+          <div style={{ position: "relative", display: "inline-block" }}>
+            <img
+              src={currentUser?.photoURL}
+              alt="User"
+              className="rounded-circle"
+              style={{ width: "45px", height: "45px", objectFit: "cover" }}
+            />
             <i
-              class="rounded-circle fa-solid fa-circle-user fa-2xl me-2"
-              style={{ color: "#000000" }}
-            ></i>
-            <div class="status-indicator glowing"></div>
+              className="fa-solid fa-circle-check"
+              style={{
+                position: "absolute",
+                bottom: 0,
+                right: 0,
+                color: "#77bb41",
+                backgroundColor: "white",
+                borderRadius: "50%",
+                padding: "3px",
+                transform: "translate(30%, 30%)",
+              }}
+            />
           </div>
-          <strong className="me-2">{localStorage.getItem("username")}</strong>
+
+          <strong className="mx-2">{localStorage.getItem("username")}</strong>
         </Link>
         <ul className="dropdown-menu dropdown-menu-lg-end p-2 shadow-lg">
           <li>

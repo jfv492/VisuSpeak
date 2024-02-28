@@ -1,15 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { auth, storage, db } from "../firebase.js";
+import { auth, db } from "../firebase.js";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import axios from "axios";
-import serverUrl from "../Server-env.js";
-import defaultProfilePicture from "../assets/images/AccountSettingsHeadshot.jpg"
+import { doc, getDoc } from "firebase/firestore";
+import { setUserOnline } from "../utils/UserPresence.js"; // Make sure to import this
 
 const Login = (props) => {
-  const loginUrl = `${serverUrl}/auth/login`;
   let navigate = useNavigate();
-  const [err, setErr] = useState(false);
 
   const [formData, setFormData] = useState({
     email: "",
@@ -26,41 +23,39 @@ const Login = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const email = formData.email;
-    const password = formData.password;
-    //Firebase Authentication
-    try {
-      await signInWithEmailAndPassword(auth, email, password)
-    } catch (err) {
-      setErr(false);
-      console.log("Firebase error: ", err);
-      props.showAlert("Firebase Login failed. Please try again", "danger");
-    }
-
     if (!formData.email || !formData.password) {
       setError("Email and password cannot be empty.");
       return;
     }
 
-    axios
-      .post(loginUrl, formData)
-      .then((response) => {
-        console.log("Login successful", response.data);
-        props.showAlert("Login successful.", "success");
-        setError();
+    //Firebase Authentication
+    try {
+      const res = await signInWithEmailAndPassword(
+        auth,
+        formData.email,
+        formData.password
+      );
+      setUserOnline(res.user.uid); // Set user online after successful login
 
-        const json = response.data;
-        localStorage.setItem("email", json.email);
-        localStorage.setItem("username", json.username);
-        localStorage.setItem("userID", json.userID);
-        localStorage.setItem("authtoken", json.authtoken);
-        navigate("/");
-      })
-      .catch((error) => {
-        console.error("Login failed. Please try again", error);
-        props.showAlert("Login failed. Please try again.", "danger");
-        setError("Invalid credentials. Please try again.");
-      });
+      const userDocRef = doc(db, "users", res.user.uid);
+      const userDocSnap = await getDoc(userDocRef);
+
+      if (userDocSnap.exists()) {
+        // Set local storage items
+        localStorage.setItem("username", userDocSnap.data().displayName);
+        // ... set other required items
+      } else {
+        console.log("No such document in Firestore!");
+      }
+
+      props.showAlert("Login successful.", "success");
+
+      navigate("/");
+    } catch (err) {
+      console.log("Firebase error: ", err);
+      props.showAlert("Login failed. Please try again.", "danger");
+      setError("Invalid credentials. Please try again."); // Set error for display
+    }
   };
   return (
     <div className="background-container">

@@ -4,12 +4,10 @@ import { auth, storage, db } from "../firebase.js";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { doc, setDoc } from "firebase/firestore"; 
-import axios from "axios";
-import serverUrl from "../Server-env.js";
+import { initializeUserPresence } from "../utils/UserPresence.js"
 import defaultProfilePicture from "../assets/images/AccountSettingsHeadshot.jpg"
 
 const SignUp = (props) => {
-  const signupUrl = `${serverUrl}/auth/signup`;
   let navigate = useNavigate();
   const [errors, setErrors] = useState({});
   const [err, setErr] = useState(false);
@@ -52,61 +50,9 @@ const SignUp = (props) => {
     e.preventDefault();
     const displayName = formData.username;
     const email = formData.email;
+    const firstName = formData.firstName;
+    const lastName = formData.lastName;
     const password = formData.password;
-    //Firebase Authentication
-    try {
-      const res = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-      console.log("User registered on firebase:", formData.email);
-
-      fetch(defaultProfilePicture)
-        .then((res) => res.blob())
-        .then((blob) => {
-            const file = new File([blob], "profile_picture.jpg", { type: "image/jpeg" });
-
-            const storageRef = ref(storage, formData.username);
-            const uploadTask = uploadBytesResumable(storageRef, file);
-
-            uploadTask.on(
-                "state_changed",
-                (snapshot) => {
-                    // Handle progress
-                    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                    console.log('Upload is ' + progress + '% done');
-                },
-                (error) => {
-                    // Handle unsuccessful uploads
-                    console.log(error);
-                },
-                () => {
-                    // Handle successful uploads on complete
-                    getDownloadURL(uploadTask.snapshot.ref).then( async(downloadURL) => {
-                        await updateProfile(res.user,{
-                          displayName: formData.username,
-                          photoURL: downloadURL
-                        });
-                        await setDoc(doc(db, "users", res.user.uid), {
-                          uid: res.user.uid,
-                          displayName,
-                          email,
-                          photoURL: downloadURL
-                        });
-                        await setDoc(doc(db, "userChats", res.user.uid), {});
-                    });
-                }
-            );
-        })
-        .catch((error) => {
-            console.error("Error fetching the image as blob:", error);
-        });
-    } catch (err) {
-      setErr(false);
-      console.log("Firebase error: ", err);
-      props.showAlert("Signup failed. Please try again", "danger");
-    }
 
     let currentErrors = {};
     let formIsValid = true;
@@ -147,41 +93,70 @@ const SignUp = (props) => {
     setErrors(currentErrors);
 
     if (!formIsValid) {
-      // If the form is not valid, display the errors without making a request to the server.
+      // If the form is not valid, display the errors without adding user to firebase.
       setErrors(currentErrors);
     } else {
-      // If the form is valid, proceed with making the request to the server.
-      axios
-        .post(signupUrl, formData)
-        .then((response) => {
-          console.log("Signup successful.", response.data);
-          props.showAlert("Signup successful.", "success");
-          // Update the state with the success message from the server
-          setErrors({});
-          // Optionally, include a state to manage success messages
-          setSuccess(response.data.message);
-          // Redirect or show success message
-          navigate("/login");
-        })
-        .catch((error) => {
-          console.error("Signup failed", error);
-          props.showAlert("Signup failed. Please try again", "danger");
-          // Update the state with the error message from the server
-          if (error.response && error.response.data) {
-            // Handle the case where there's a response with a data payload
-            setErrors({ form: error.response.data.error });
-            props.showAlert(error.response.data.error, "danger");
-          } else {
-            // Handle the case where the error doesn't have a response (e.g., network error)
-            setErrors({
-              form: "An unexpected error occurred. Please try again later.",
-            });
-            props.showAlert(
-              "An unexpected error occurred. Please try again later.",
-              "danger"
-            );
-          }
-        });
+      // If the form is valid, proceed with authenticating user with firebase.
+      try {
+        const res = await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+        console.log("User registered on firebase:", formData.email);
+  
+        fetch(defaultProfilePicture)
+          .then((res) => res.blob())
+          .then((blob) => {
+              const file = new File([blob], "profile_picture.jpg", { type: "image/jpeg" });
+  
+              const storageRef = ref(storage, formData.username);
+              const uploadTask = uploadBytesResumable(storageRef, file);
+  
+              uploadTask.on(
+                  "state_changed",
+                  (snapshot) => {
+                      // Handle progress
+                      const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                      console.log('Upload is ' + progress + '% done');
+                  },
+                  (error) => {
+                      // Handle unsuccessful uploads
+                      console.log(error);
+                  },
+                  () => {
+                      // Handle successful uploads on complete
+                      getDownloadURL(uploadTask.snapshot.ref).then( async(downloadURL) => {
+                          await updateProfile(res.user,{
+                            displayName: formData.username,
+                            firstName: formData.firstName,
+                            lastName: formData.lastName,
+                            photoURL: downloadURL
+                          });
+                          await setDoc(doc(db, "users", res.user.uid), {
+                            uid: res.user.uid,
+                            displayName,
+                            firstName,
+                            lastName,
+                            email,
+                            photoURL: downloadURL
+                          });
+                          await setDoc(doc(db, "userChats", res.user.uid), {});
+                          initializeUserPresence(res.user.uid);
+                      });
+                  }
+              );
+          })
+          .catch((error) => {
+              console.error("Error fetching the image as blob:", error);
+          });
+          props.showAlert("Signup successful", "success");
+          navigate("/login")
+      } catch (err) {
+        setErr(false);
+        console.log("Firebase error: ", err);
+        props.showAlert("Signup failed. Please try again", "danger");
+      }
     }
   };
 

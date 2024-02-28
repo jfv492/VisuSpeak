@@ -18,11 +18,12 @@ import Resources from "./modules/Resources.js";
 
 import TranscriptHistory from "./modules/TranscriptHistory.js";
 
-import React, { useContext, useState } from "react";
-import { BrowserRouter, useNavigate, Route, Routes } from "react-router-dom";
+import React, { useContext, useState, useEffect } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import AccountSettings from "./user/AccountSettings.js";
 import { AuthContext } from "./context/AuthContext.js";
+import { refreshUserOnlineStatus } from "./utils/UserPresence.js"
 
 
 function App() {
@@ -37,6 +38,16 @@ function App() {
       setAlert(null);
     }, 8000);
   };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (currentUser?.uid) {
+        refreshUserOnlineStatus(currentUser.uid);
+      }
+    }, 60000); // refresh status every 60 seconds
+  
+    return () => clearInterval(interval); // Cleanup the interval on component unmount
+  }, [currentUser?.uid]);
 
   return (
     <>

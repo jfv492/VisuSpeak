@@ -640,9 +640,6 @@ iframe {
 .status-indicator {
   width: 10px;
   height: 10px;
-  border-radius: 50%;
-  background-color: green;
-  /* Green indicates active */
   position: relative;
   top: -20;
   left: -10;
@@ -656,7 +653,7 @@ iframe {
 
 @keyframes glow {
   from {
-    box-shadow: 0 0 10px #006262;
+    box-shadow: 0 0 500px #006262;
   }
 
   to {
@@ -722,6 +719,11 @@ iframe {
   padding: 20px;
   /* height: 400px; */
   overflow-y: auto;
+}
+
+.last-message {
+  font-size: 0.9em; /* Adjust the size as needed */
+  color: #555; /* A lighter text color for the message */
 }
 
 .avatar {

@@ -7,11 +7,12 @@ import ChatHeader from "./ChatHeader";
 const Chat = () => {
   const { data } = useContext(ChatContext);
   let displayName = data.user?.displayName;
+  let photo = data.user?.photoURL;
   return (
     <div className="admin-chat-box rounded-4">
       {displayName ? (
         <>
-          <ChatHeader user={displayName} />
+          <ChatHeader user={displayName} photo={photo}/>
 
           <div class="chatbox-scrollable">
             <MessageList />

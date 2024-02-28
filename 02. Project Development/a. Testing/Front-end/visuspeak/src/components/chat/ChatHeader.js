@@ -19,11 +19,12 @@ const ChatHeader = (props) => {
         <div className="chat-header rounded-4 bg-gradient shadow">
           <div className="user-info">
             <div class="">
-              <i
-                class="rounded-circle fa-solid fa-circle-user fa-2xl me-2"
-                style={{ color: "#000" }}
-              ></i>
-              <div class="status-indicator glowing"></div>
+            <img
+                  src={props.photo}
+                  alt="User"
+                  className="rounded-circle me-2"
+                  style={{ width: "40px", height: "40px", objectFit: "cover" }}
+                />
             </div>
             <h3 className="user-name">{props.user}</h3>
           </div>

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import MessageList from "../components/chat/MessageList.js";
-import serverUrl from "../Server-env.js";
 import HandGestureBG from "../assets/images/ASLBackgroundSigns.png"; // Background image
 
 const TranscriptHistory = () => {
@@ -12,39 +11,8 @@ const TranscriptHistory = () => {
   const [messages, setMessages] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
 
-  const getChatSessionsUrl = `${serverUrl}/chat/chatsessions/${userId}`;
-  const getMessagesUrl = `${serverUrl}/chat/getmessages/${userId}`;
-
-  useEffect(() => {
-    const fetchChatSessions = async () => {
-      try {
-        const response = await axios.get(getChatSessionsUrl);
-        if (response.status === 200) {
-          setSessions(response.data);
-        }
-      } catch (error) {
-        console.error("Error fetching chat sessions:", error);
-      }
-    };
-    fetchChatSessions();
-  }, [userId]);
-
-  const fetchMessages = async (sessionId) => {
-    try {
-      const response = await axios.get(getMessagesUrl, {
-        params: { sessionId },
-      });
-      if (response.status === 200) {
-        setMessages(response.data);
-      }
-    } catch (error) {
-      console.error("Error fetching messages:", error);
-    }
-  };
-
   const handleSessionClick = (sessionId) => {
     setSelectedSessionId(sessionId);
-    fetchMessages(sessionId);
   };
 
   const handleCancelClick = () => {
