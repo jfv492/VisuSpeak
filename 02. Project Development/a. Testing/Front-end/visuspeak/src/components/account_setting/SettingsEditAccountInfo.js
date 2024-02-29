@@ -5,52 +5,61 @@ import { updatePassword, updateProfile } from "firebase/auth";
 import { doc, updateDoc } from "firebase/firestore";
 
 const SettingsEditAccountInfo = (props) => {
-  const { currentUser } = useContext(AuthContext);
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    password: "",
-    organizationName: "",
-  });
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.id]: e.target.value });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setSuccess("");
-    setError("");
-
-    // Update Firestore user details
-    const userDoc = doc(db, "users", currentUser.uid);
-    try {
-      await updateDoc(userDoc, {
-        displayName: `${formData.firstName} ${formData.lastName}`,
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        organizationName: formData.organizationName,
-      });
-
-      // Update Firebase Auth displayName
-      if (formData.firstName || formData.lastName) {
-        await updateProfile(currentUser, {
-          displayName: `${formData.firstName} ${formData.lastName}`,
+    const { currentUser, updateCurrentUser } = useContext(AuthContext);
+    const [formData, setFormData] = useState({
+      firstName: "",
+      lastName: "",
+      password: "",
+      organizationName: "",
+    });
+    const [error, setError] = useState("");
+    const [success, setSuccess] = useState("");
+  
+    const handleChange = (e) => {
+      setFormData({ ...formData, [e.target.id]: e.target.value });
+    };
+  
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      setSuccess("");
+      setError("");
+  
+      try {
+        // Update Firestore user details
+        let newDisplayName = `${formData.firstName} ${formData.lastName}`;
+        const userDoc = doc(db, "users", currentUser.uid);
+        await updateDoc(userDoc, {
+            displayName: newDisplayName,
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          organizationName: formData.organizationName,
         });
+  
+        // Update Firebase Auth displayName
+        
+        await updateProfile(currentUser, {
+          displayName: newDisplayName,
+        });
+  
+        // Update Firebase Auth password if provided
+        if (formData.password) {
+            try {
+                await updatePassword(currentUser, formData.password);
+            } catch (error) {
+                setError("An error occurred while changing password. Please try again later");
+            }
+          
+        }
+  
+        // Update the current user in AuthContext
+        updateCurrentUser({ ...currentUser, displayName: newDisplayName });
+  
+        setSuccess("Account information updated successfully.");
+      } catch (error) {
+        setError("An error occurred while updating account information.");
+        console.error(error);
       }
-
-      // Update Firebase Auth password
-      if (formData.password) {
-        await updatePassword(currentUser, formData.password);
-      }
-
-      setSuccess("Account information updated successfully.");
-    } catch (error) {
-      setError("An error occurred while updating account information.");
-    }
-  };
+    };
 
   return (
     <form onSubmit={handleSubmit}>
