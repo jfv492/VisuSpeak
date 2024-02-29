@@ -1,5 +1,5 @@
 import { signOut } from "firebase/auth";
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../../firebase";
 import { AuthContext } from "../../context/AuthContext.js";
@@ -7,7 +7,16 @@ import { setUserOffline } from "../../utils/UserPresence.js";
 
 const User = () => {
   const { currentUser } = useContext(AuthContext);
+  const [displayName, setDisplayName] = useState("");
   let navigate = useNavigate();
+
+  useEffect(() => {
+    // Update the display name when currentUser changes
+    if (currentUser) {
+      setDisplayName(currentUser.displayName || '');
+    }
+  }, [currentUser]);
+
   const handleSignOut = async () => {
     // Set user status to offline
     if (currentUser && currentUser.uid) {
@@ -55,7 +64,7 @@ const User = () => {
             />
           </div>
 
-          <strong className="mx-2">{localStorage.getItem("username")}</strong>
+          <strong className="mx-2">{displayName}</strong>
         </Link>
         <ul className="dropdown-menu dropdown-menu-lg-end p-2 shadow-lg">
           <li>
