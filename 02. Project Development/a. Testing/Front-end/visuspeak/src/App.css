@@ -1204,10 +1204,12 @@ iframe {
 }
 
 .change-user-profile-icon {
-  color: #006262;
-  background-color: white !important;
-  padding-top: 25px;
-  padding-bottom: 25px;
+  color: white;
+  background-color: #006262;
+  border-color: white !important;
+  border-width: 2px !important;
+  padding-top: 20px;
+  padding-bottom: 20px;
   padding-left: 10px;
   padding-right: 10px;
   cursor: pointer;

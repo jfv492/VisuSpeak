@@ -19,7 +19,7 @@ const SettingsUserInfo = (props) => {
               style={{ justifyContent: "end" }}
             />
             <i
-              className="fa-solid fa-camera fa-2xl change-user-profile-icon rounded-circle shadow"
+              className="fa-solid fa-camera fa-xl change-user-profile-icon rounded-circle shadow border"
               style={{
                 position: "absolute",
                 bottom: 25,
@@ -32,7 +32,7 @@ const SettingsUserInfo = (props) => {
           <h3 className="user-name-text border-bottom pb-2">
             {localStorage.getItem("username")}
           </h3>
-          <Typography variant="overline" display="block" gutterBottom>
+          <Typography variant="caption" display="block" gutterBottom style={{ fontSize: '15px' }}>
             {email}
           </Typography>
         </div>

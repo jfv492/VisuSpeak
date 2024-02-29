@@ -17,7 +17,7 @@ const AccountSettings = (props) => {
       <div className="container account-settings-form shadow-lg rounded-4">
         <SettingsUserInfo/>
         <div className="row about-us-sections">
-          <div className="lead">Update Your Profile</div>
+          
           <SettingsEditAccountInfo />
         </div>
       </div>
