@@ -13,11 +13,11 @@ const AccountSettings = (props) => {
     console.log(location.pathname);
   }, [location]);
   return (
-    <div>
-      <div className="container my-5">
+    <div className="background-container">
+      <div className="container account-settings-form shadow-lg rounded-4">
         <SettingsUserInfo/>
         <div className="row about-us-sections">
-          <h4 className="">Edit Account Information</h4>
+          <div className="lead">Update Your Profile</div>
           <SettingsEditAccountInfo />
         </div>
       </div>

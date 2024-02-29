@@ -1168,3 +1168,79 @@ iframe {
   scrollbar-width: thin;
   scrollbar-color: darkgrey transparent;
 }
+
+/* ***************ACCOUNT SETTINGS STYLE*************** */
+.account-settings-form {
+  width: 90%;
+  position: absolute;
+  right: 50%;
+  top: 47%;
+  transform: translate(50%, -50%);
+  background: white;
+}
+
+.account-settings-user-info {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 50px;
+  margin-right: 50px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.user-profile-picture {
+  width: 200px;
+  height: 200px;
+  border-color: #023e3d;
+}
+
+.user-name-text {
+  font-weight: bold;
+}
+
+.user-email-text {
+  font-weight: bold;
+  color: #023e3d;
+}
+
+.change-user-profile-icon {
+  color: #006262;
+  background-color: white !important;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  padding-left: 10px;
+  padding-right: 10px;
+  cursor: pointer;
+}
+
+.settings-form {
+  margin-top: 10px;
+  padding-top: 20px;
+  padding-bottom: 30px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 15px;
+  background-color: #eee;
+}
+
+.settings-submit-button {
+  background-color: #006262;
+  color: white;
+  font-size: large;
+  font-weight: bold;
+}
+
+.settings-submit-button:hover {
+  background-color: #023e3d;
+  color: white;
+  font-size: large;
+  font-weight: bold;
+}
+
+.settings-container {
+  margin-top: 10px;
+  margin-left: 50px;
+  margin-right: 50px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}

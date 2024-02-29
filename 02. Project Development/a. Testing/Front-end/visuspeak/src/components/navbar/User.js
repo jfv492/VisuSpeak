@@ -64,7 +64,7 @@ const User = () => {
             />
           </div>
 
-          <strong className="mx-2">{displayName}</strong>
+          <strong className="mx-2">{localStorage.getItem("username")}</strong>
         </Link>
         <ul className="dropdown-menu dropdown-menu-lg-end p-2 shadow-lg">
           <li>

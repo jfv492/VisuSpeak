@@ -63,6 +63,8 @@ const Chats = () => {
         }
       });
 
+      
+
       // Cleanup subscription on unmount
       return () => unsub();
     }
@@ -116,19 +118,18 @@ const Chats = () => {
                   />
                   {chat.status == "offline" ? (
                     <i
-                    className="fa-solid fa-clock"
-                    style={{
-                      position: "absolute",
-                      bottom: 0,
-                      right: 0,
-                      color: "#fec700",
-                      backgroundColor: "white",
-                      borderRadius: "50%",
-                      padding: "3px",
-                      transform: "translate(30%, 30%)",
-                    }}
-                  />
-                    
+                      className="fa-solid fa-clock"
+                      style={{
+                        position: "absolute",
+                        bottom: 0,
+                        right: 0,
+                        color: "#fec700",
+                        backgroundColor: "white",
+                        borderRadius: "50%",
+                        padding: "3px",
+                        transform: "translate(30%, 30%)",
+                      }}
+                    />
                   ) : (
                     <i
                       className="fa-solid fa-circle-check"
@@ -147,11 +148,11 @@ const Chats = () => {
                 </div>
                 <div>
                   <div className="d-flex">
-                    <h5 className="mb-0">{chat.userInfo.displayName}</h5>
+                    <h5 className="mb-0">{chat.userInfo?.uid}</h5>
                   </div>
                   <div className="last-message">
-                    <strong>{chat.lastSender.lastSenderName}: </strong>
-                    {chat.lastMessage.text}
+                    <strong>{chat.lastSender?.lastSenderName}: </strong>
+                    {chat.lastMessage?.text}
                   </div>
                 </div>
               </div>

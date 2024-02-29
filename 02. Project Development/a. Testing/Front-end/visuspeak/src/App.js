@@ -1,6 +1,6 @@
 import "./App.css";
 import "./Mobile.css";
-import "./User.css";
+// import "./User.css";
 
 import Alert from "./components/Alert.js";
 import Login from "./modules/Login.js";
