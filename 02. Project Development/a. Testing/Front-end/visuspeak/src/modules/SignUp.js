@@ -19,10 +19,10 @@ const SignUp = (props) => {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
-    username: "",
     email: "",
     password: "",
     confirmPassword: "",
+    organizationName: "", // Added organizationName field
     agreeTerms: false,
   });
 
@@ -42,17 +42,15 @@ const SignUp = (props) => {
     const { name, value, type, checked } = e.target;
     const newValue = type === "checkbox" ? checked : value;
     setFormData({ ...formData, [name]: newValue });
-    // Reset individual field error
     setErrors({ ...errors, [name]: "" });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const displayName = formData.username;
+    const displayName = `${formData.firstName} ${formData.lastName}`;
     const email = formData.email;
-    const firstName = formData.firstName;
-    const lastName = formData.lastName;
     const password = formData.password;
+    const organizationName = formData.organizationName;
 
     let currentErrors = {};
     let formIsValid = true;
@@ -65,7 +63,6 @@ const SignUp = (props) => {
     // Check for blank fields
     for (const [key, value] of Object.entries(formData)) {
       if (!value && key !== "agreeTerms") {
-        // agreeTerms is a boolean, it should be checked separately
         formIsValid = false;
         currentErrors[key] = "This field cannot be blank.";
       }
@@ -93,10 +90,8 @@ const SignUp = (props) => {
     setErrors(currentErrors);
 
     if (!formIsValid) {
-      // If the form is not valid, display the errors without adding user to firebase.
       setErrors(currentErrors);
     } else {
-      // If the form is valid, proceed with authenticating user with firebase.
       try {
         const res = await createUserWithEmailAndPassword(
           auth,
@@ -110,37 +105,38 @@ const SignUp = (props) => {
           .then((blob) => {
               const file = new File([blob], "profile_picture.jpg", { type: "image/jpeg" });
   
-              const storageRef = ref(storage, formData.username);
+              const storageRef = ref(storage, `${formData.firstName}_${formData.lastName}`);
               const uploadTask = uploadBytesResumable(storageRef, file);
   
               uploadTask.on(
                   "state_changed",
                   (snapshot) => {
-                      // Handle progress
                       const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
                       console.log('Upload is ' + progress + '% done');
                   },
                   (error) => {
-                      // Handle unsuccessful uploads
                       console.log(error);
                   },
                   () => {
-                      // Handle successful uploads on complete
                       getDownloadURL(uploadTask.snapshot.ref).then( async(downloadURL) => {
                           await updateProfile(res.user,{
-                            displayName: formData.username,
-                            firstName: formData.firstName,
-                            lastName: formData.lastName,
-                            photoURL: downloadURL
-                          });
-                          await setDoc(doc(db, "users", res.user.uid), {
-                            uid: res.user.uid,
                             displayName,
-                            firstName,
-                            lastName,
-                            email,
                             photoURL: downloadURL
                           });
+                          try {
+                            await setDoc(doc(db, "users", res.user.uid), {
+                              uid: res.user.uid,
+                              displayName,
+                              firstName: formData.firstName,
+                              lastName: formData.lastName,
+                              email,
+                              organizationName,
+                              photoURL: downloadURL
+                            });
+                          } catch (error) {
+                            console.error("Error adding user to Firestore:", error);
+                            // Handle the error appropriately
+                          }
                           await setDoc(doc(db, "userChats", res.user.uid), {});
                           initializeUserPresence(res.user.uid);
                       });
@@ -160,7 +156,6 @@ const SignUp = (props) => {
     }
   };
 
-  // Form input fields
   const formField = (name, label, type = "text", isCheckbox = false) => (
     <div className="col-sm-6">
       <label
@@ -191,6 +186,7 @@ const SignUp = (props) => {
       </div>
     </div>
   );
+
   return (
     <div className="background-container">
       <form
@@ -217,7 +213,7 @@ const SignUp = (props) => {
             <>
               {formField("firstName", "First Name")}
               {formField("lastName", "Last Name")}
-              {formField("username", "Username")}
+              {formField("organizationName", "Organization Name")}
             </>
           )}
           {(!mobileView || currentStep === 2) && (
@@ -225,6 +221,7 @@ const SignUp = (props) => {
               {formField("email", "Email")}
               {formField("password", "Password", "password")}
               {formField("confirmPassword", "Confirm Password", "password")}
+              
               <div className="col-sm-6">
                 <label className="" htmlFor="agreeTerms">
                   <input
