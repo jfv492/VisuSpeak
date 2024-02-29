@@ -2,8 +2,8 @@
 import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom"; // Hook from React Router for accessing location object
 
-import SettingsUserInfo from "./SettingsUserInfo.js";
-import SettingsEditAccountInfo from "./SettingsEditAccountInfo.js";
+import SettingsUserInfo from "../components/account_setting/SettingsUserInfo.js";
+import SettingsEditAccountInfo from "../components/account_setting/SettingsEditAccountInfo.js";
 
 const AccountSettings = (props) => {
   let location = useLocation();
@@ -21,12 +21,6 @@ const AccountSettings = (props) => {
           <SettingsEditAccountInfo />
         </div>
       </div>
-      <img
-            src=""
-            alt="..."
-            width="100%"
-            style={{ justifyContent: "end" }}
-          />
     </div>
   );
 };

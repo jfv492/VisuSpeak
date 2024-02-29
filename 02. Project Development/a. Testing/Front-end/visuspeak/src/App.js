@@ -10,9 +10,9 @@ import Navbar from "./modules/Navbar.js";
 import Home from "./modules/Home.js";
 import About from "./modules/About.js";
 import AdminChat from "./modules/AdminChat.js";
-
-
 import ASLChat from "./modules/ASLChat.js";
+import AccountSettings from "./modules/AccountSettings.js";
+
 
 import Resources from "./modules/Resources.js";
 
@@ -21,7 +21,7 @@ import TranscriptHistory from "./modules/TranscriptHistory.js";
 import React, { useContext, useState, useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import AccountSettings from "./components/account_setting/AccountSettings.js";
+
 import { AuthContext } from "./context/AuthContext.js";
 import { refreshUserOnlineStatus } from "./utils/UserPresence.js"
 
@@ -85,7 +85,7 @@ function App() {
 
               <Route exact path="/history" element={<TranscriptHistory />} />
 
-              <Route exact path="/settings" element={<AccountSettings />} />
+              <Route exact path="/accountsettings" element={<AccountSettings />} />
             </Routes>
           </div>
         </div>

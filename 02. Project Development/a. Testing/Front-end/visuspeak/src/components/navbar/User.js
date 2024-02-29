@@ -59,7 +59,7 @@ const User = () => {
         </Link>
         <ul className="dropdown-menu dropdown-menu-lg-end p-2 shadow-lg">
           <li>
-            <Link className="dropdown-item" to="/">
+            <Link className="dropdown-item" to="/accountsettings">
               <i class="fa-solid fa-gear me-3" style={{ color: "#000000" }}></i>
               Account Settings
             </Link>
