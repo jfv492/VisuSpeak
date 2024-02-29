@@ -2,10 +2,8 @@
 import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom"; // Hook from React Router for accessing location object
 
-import ASLSignsBackground from "../assets/images/ASLBackgroundSigns.png";
-
-import SettingsUserInfo from "../user/SettingsUserInfo.js";
-import SettingsEditAccountInfo from "../user/SettingsEditAccountInfo.js";
+import SettingsUserInfo from "./SettingsUserInfo.js";
+import SettingsEditAccountInfo from "./SettingsEditAccountInfo.js";
 
 const AccountSettings = (props) => {
   let location = useLocation();
@@ -24,7 +22,7 @@ const AccountSettings = (props) => {
         </div>
       </div>
       <img
-            src={ASLSignsBackground}
+            src=""
             alt="..."
             width="100%"
             style={{ justifyContent: "end" }}

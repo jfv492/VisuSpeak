@@ -21,7 +21,7 @@ import TranscriptHistory from "./modules/TranscriptHistory.js";
 import React, { useContext, useState, useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import AccountSettings from "./user/AccountSettings.js";
+import AccountSettings from "./components/account_setting/AccountSettings.js";
 import { AuthContext } from "./context/AuthContext.js";
 import { refreshUserOnlineStatus } from "./utils/UserPresence.js"
 

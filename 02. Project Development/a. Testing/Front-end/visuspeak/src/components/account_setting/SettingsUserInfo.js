@@ -1,5 +1,5 @@
 import React from "react";
-import Headshot from "../assets/images/AccountSettingsHeadshot.jpg";
+import Headshot from "../../assets/images/AccountSettingsHeadshot.jpg";
 
 const SettingsUserInfo = (props) => {
   return (
