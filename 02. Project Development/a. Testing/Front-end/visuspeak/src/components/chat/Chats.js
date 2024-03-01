@@ -14,15 +14,15 @@ const Chats = () => {
   const { data, dispatch } = useContext(ChatContext);
   const [selectedChat, setSelectedChat] = useState(null);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (currentUser?.uid) {
-        refreshUserOnlineStatus(currentUser.uid);
-      }
-    }, 5000);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     if (currentUser?.uid) {
+  //       refreshUserOnlineStatus(currentUser.uid);
+  //     }
+  //   }, 5000);
 
-    return () => clearInterval(interval);
-  }, [currentUser?.uid]);
+  //   return () => clearInterval(interval);
+  // }, [currentUser?.uid]);
 
   useEffect(() => {
     if (currentUser?.uid) {

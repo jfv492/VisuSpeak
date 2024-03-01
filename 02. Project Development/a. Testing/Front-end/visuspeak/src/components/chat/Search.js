@@ -10,6 +10,12 @@ import {
 } from "firebase/firestore";
 import { AuthContext } from "../../context/AuthContext.js";
 import { doc, setDoc, updateDoc } from "firebase/firestore";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import Avatar from "@mui/material/Avatar";
+import ListItemText from "@mui/material/ListItemText";
+import Typography from "@mui/material/Typography";
 
 const Search = () => {
   const [username, setUsername] = useState("");
@@ -94,17 +100,27 @@ const Search = () => {
           onKeyDown={handleKey}
           onChange={(e) => setUsername(e.target.value)}
         />
-      </div>
+      
+      {user && (
+      // <List sx={{ width: "100%", bgcolor: "background.paper", borderRadius: '16px'}}>
+      // <ListItem  onClick={handleSelect}>
+      //     <ListItemAvatar>
+      //       <Avatar alt={user.displayName} src={user.photoURL} />
+      //     </ListItemAvatar>
+      //     <ListItemText
+      //       primary={user.displayName}
+      //     />
+      //   </ListItem>
+      // </List>
       <ul className="list-group list-group-flush">
-        {user && (
-          <li class="list-group-item search-field">
+      <li class="list-group-item search-field">
             <div class="btn" onClick={handleSelect}>
               <span>{user.displayName}</span>
             </div>
           </li>
-        )}
-        {err && <span>User not found</span>}
       </ul>
+      )}
+      </div>
     </>
   );
 };
