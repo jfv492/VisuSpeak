@@ -36,6 +36,19 @@ body {
   height: 1.2em; 
 }
 
+/* ***************HOME PAGE STYLE*************** */
+.hero-section {
+  background-image: url('/src/assets/images/ASLBackgroundSigns.png');
+  height: 100%;
+  background-color: rgba(00, 00, 00, 0.50);
+  color: white;
+  padding: 100px 0;
+}
+
+.card-container {
+  padding: 50px 0;
+}
+
 /* ***************ALERT STYLE*************** */
 .alert-style {
   /* max-width: 100%; */
@@ -400,7 +413,7 @@ body {
 
 .chatbox-scrollable {
   padding-top: 10px;
-  height: 500px;
+  max-height: 510px;
   margin: 15px;
   overflow-y: auto;
   /* For Firefox */
@@ -1067,6 +1080,10 @@ iframe {
   overflow: hidden;
 }
 
+.chat-list-item {
+  min-height: 85px;
+}
+
 .chat-list-item:hover {
   background-color: #809f9f;
   color: white
@@ -1157,7 +1174,7 @@ iframe {
 
 .asl-chat-box {
   background: white;
-  min-height: 600px;
+  min-height: 617px;
 }
 
 .asl-chatbox-scrollable::-webkit-scrollbar {
@@ -1175,7 +1192,7 @@ iframe {
   height: 500px;
   margin: 15px;
   overflow-y: auto;
-  max-height: 440px;
+  max-height: 455px;
   /* For Firefox */
   scrollbar-width: thin;
   scrollbar-color: darkgrey transparent;

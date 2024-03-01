@@ -43,15 +43,15 @@ const AdminChat = (props) => {
     [isDragging]
   );
 
-    useEffect(() => {
-      const handleResize = () => {
-        setWindowWidth(window.innerWidth);
-      };
-  
-      window.addEventListener("resize", handleResize);
-      return () => window.removeEventListener("resize", handleResize);
-    }, []);
-  
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <div className="background-container">
       <div className="admin-chat-container resizable-container shadow rounded-4">
@@ -66,28 +66,27 @@ const AdminChat = (props) => {
           className="resizable-left-panel p-3"
           style={{ width: `${leftWidth}%` }}
         >
-            <Search />
-            <Chats />
-          </div>
-          <div className="resizable-divider " onMouseDown={startDragging}>
+          <Search />
+          <Chats />
+        </div>
+        <div className="resizable-divider " onMouseDown={startDragging}>
           <i class="fa-solid fa-ellipsis-vertical fa-xl resize-icon border shadow"></i>
         </div>
         <div
           className="resizable-right-panel p-3"
           style={{ width: `${100 - leftWidth}%` }}
         >
-            <Chat />
-          </div>
-          {isDragging && (
+          <Chat />
+        </div>
+        {isDragging && (
           <div
             className="resizable-dragging-overlay"
             onMouseMove={onDrag}
             onMouseUp={stopDragging}
           />
         )}
-        </div>
       </div>
-    
+    </div>
   );
 };
 

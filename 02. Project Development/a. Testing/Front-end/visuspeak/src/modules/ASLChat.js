@@ -9,7 +9,7 @@ import InputArea from "../components/chat/Input.js";
 import Popover from "@mui/material/Popover";
 import Typography from "@mui/material/Typography";
 import HowToModal from "../components/asl_chat/HowToModal.js";
-import modelChatUrl from "../Chat-env.js"
+import modelChatUrl from "../Chat-env.js";
 
 const ASLChat = () => {
   const { data } = useContext(ChatContext);
@@ -221,11 +221,10 @@ const ASLChat = () => {
           style={{ width: `${leftWidth}%` }}
         >
           <Search />
-
           <div className="asl-chat-box rounded-4 mt-3">
             {displayName ? (
               <div className="asl-chat-box rounded-4">
-                <ChatHeader user={displayName} photo={photo}/>
+                <ChatHeader user={displayName} photo={photo} />
 
                 <div class="asl-chatbox-scrollable">
                   <MessageList />

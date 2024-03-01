@@ -18,6 +18,8 @@ import Resources from "./modules/Resources.js";
 
 import TranscriptHistory from "./modules/TranscriptHistory.js";
 
+import Test from "./components/test/CustomerSignin.js";
+
 import React, { useContext, useState, useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
@@ -82,6 +84,8 @@ function App() {
               />
               
               <Route exact path="/resources" element={<Resources />} />
+
+              <Route exact path="/test" element={<Test showAlert={showAlert}/>} />
 
               <Route exact path="/history" element={<TranscriptHistory />} />
 

@@ -44,7 +44,7 @@ const ChatActions = (props) => {
     dispatch({ type: "RESET_CHAT" });
   };
   return (
-    <div className="chat-actions">
+    <div className="row chat-actions">
       <button
         class="btn chat-action-button bg-gradient me-2"
         type="button"
@@ -54,7 +54,7 @@ const ChatActions = (props) => {
         <i class="fa-regular fa-copy"></i>
       </button>
       <button
-        class="btn chat-action-button bg-gradient"
+        class="btn chat-action-button bg-gradient me-2"
         type="button"
         aria-expanded="false"
         onClick={handleCancelClick}
