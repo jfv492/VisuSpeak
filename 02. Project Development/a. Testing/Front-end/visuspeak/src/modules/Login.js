@@ -43,6 +43,7 @@ const Login = (props) => {
       if (userDocSnap.exists()) {
         // Set local storage items
         localStorage.setItem("username", userDocSnap.data().displayName);
+        localStorage.setItem("organizationName", userDocSnap.data().organizationName)
         // ... set other required items
       } else {
         console.log("No such document in Firestore!");

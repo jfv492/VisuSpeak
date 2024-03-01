@@ -95,17 +95,24 @@ const SettingsEditAccountInfo = () => {
 
   return (
     <form className="settings-form" onSubmit={handleSubmit}>
-      <div className="lead mb-3">
-        Update Your Profile{" "}
+      <div className="row mb-3">
+        <div className="col-sm-3">
+        <h4>Update Your Password</h4>
+        </div>
+        <div className="col-sm-3">
         {!editMode && (
-          <button
+          <Link
             type="button"
-            className="btn settings-edit-button"
+            className=" hyperlink "
             onClick={handleEdit}
           >
-            <i class="fa-solid fa-user-pen fa-xl"></i>
-          </button>
+            {/* <i class="fa-solid fa-user-pen fa-xl"></i>  */}
+            Edit
+          </Link>
         )}
+        </div>
+        
+        
       </div>
       <div className="row ">
         {formField("password", "Password", "password", false, !editMode)}

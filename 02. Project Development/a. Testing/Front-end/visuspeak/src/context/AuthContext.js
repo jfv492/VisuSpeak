@@ -15,12 +15,8 @@ export const AuthContextProvider = ({ children }) => {
     return () => unsub();
   }, []);
 
-  const updateCurrentUser = (updatedUser) => {
-    setCurrentUser(updatedUser);
-  };
-
   return (
-    <AuthContext.Provider value={{ currentUser, updateCurrentUser }}>
+    <AuthContext.Provider value={{ currentUser }}>
       {children}
     </AuthContext.Provider>
   );

@@ -6,6 +6,7 @@ import Typography from "@mui/material/Typography";
 const SettingsUserInfo = (props) => {
   const { currentUser } = useContext(AuthContext);
   const email = currentUser?.email;
+  const organizationName = localStorage.getItem("organizationName");
   return (
     <div>
       <div className="row account-settings-user-info align-items-center ">
@@ -32,9 +33,20 @@ const SettingsUserInfo = (props) => {
           <h3 className="user-name-text border-bottom pb-2">
             {localStorage.getItem("username")}
           </h3>
-          <Typography variant="caption" display="block" gutterBottom style={{ fontSize: '15px' }}>
-            {email}
+          <div className="row">
+            <div className="col-sm-3">
+            <Typography variant="caption" display="block" gutterBottom style={{ fontSize: '15px' }}>
+          <i class="fa-solid fa-envelope me-2" style={{color: "#006262"}}></i>{email}
           </Typography>
+            </div>
+            <div className="col-sm-6">
+            <Typography variant="caption" display="block" gutterBottom style={{ fontSize: '15px' }}>
+          <i class="fa-solid fa-briefcase me-2" style={{color: "#006262"}}></i>{organizationName}
+          </Typography>
+              </div>
+          </div>
+          
+          
         </div>
       </div>
       <hr />

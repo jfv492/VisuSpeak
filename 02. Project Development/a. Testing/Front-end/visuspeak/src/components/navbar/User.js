@@ -10,13 +10,6 @@ const User = () => {
   const [displayName, setDisplayName] = useState("");
   let navigate = useNavigate();
 
-  useEffect(() => {
-    // Update the display name when currentUser changes
-    if (currentUser) {
-      setDisplayName(currentUser.displayName || '');
-    }
-  }, [currentUser]);
-
   const handleSignOut = async () => {
     // Set user status to offline
     if (currentUser && currentUser.uid) {

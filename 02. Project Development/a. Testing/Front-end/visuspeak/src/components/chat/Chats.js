@@ -148,7 +148,7 @@ const Chats = () => {
                 </div>
                 <div>
                   <div className="d-flex">
-                    <h5 className="mb-0">{chat.userInfo?.uid}</h5>
+                    <h5 className="mb-0">{chat.userInfo?.displayName}</h5>
                   </div>
                   <div className="last-message">
                     <strong>{chat.lastSender?.lastSenderName}: </strong>
