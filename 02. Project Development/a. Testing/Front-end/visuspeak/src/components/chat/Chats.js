@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { doc, getDoc, onSnapshot } from "firebase/firestore";
+import { doc, getDoc, onSnapshot, collection } from "firebase/firestore";
 import { AuthContext } from "../../context/AuthContext.js";
 import { ChatContext } from "../../context/ChatContext.js";
 import { db } from "../../firebase.js";
@@ -14,31 +14,38 @@ const Chats = () => {
   const { data, dispatch } = useContext(ChatContext);
   const [selectedChat, setSelectedChat] = useState(null);
 
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     if (currentUser?.uid) {
-  //       refreshUserOnlineStatus(currentUser.uid);
-  //     }
-  //   }, 5000);
-
-  //   return () => clearInterval(interval);
-  // }, [currentUser?.uid]);
-
   useEffect(() => {
+    let interval;
+    let unsubFromUserChats = () => {};
+
+    const fetchUsersPhotoUrl = async (uid) => {
+      const userDoc = await getDoc(doc(db, 'users', uid));
+      return userDoc.exists() ? userDoc.data().photoURL : '';
+    };
+  
+
     if (currentUser?.uid) {
-      const unsub = onSnapshot(doc(db, "userChats", currentUser.uid), (doc) => {
+      interval = setInterval(() => {
+        refreshUserOnlineStatus(currentUser.uid);
+      }, 10000); // Increase interval to reduce frequency
+
+      unsubFromUserChats = onSnapshot(doc(db, 'userChats', currentUser.uid), async (doc) => {
         const chatsData = doc.data();
         if (chatsData) {
-          let chatsArray = Object.entries(chatsData).map(([id, chatInfo]) => ({
-            id,
-            ...chatInfo,
-            status: "offline", // Default to offline until the real status is fetched
+          let chatsArray = await Promise.all(Object.entries(chatsData).map(async ([id, chatInfo]) => {
+            const photoURL = await fetchUsersPhotoUrl(chatInfo.userInfo.uid);
+            return {
+              id,
+              ...chatInfo,
+              status: 'offline', // Default to offline until the real status is fetched
+              userInfo: {
+                ...chatInfo.userInfo,
+                photoURL, // Add photoURL to userInfo
+              },
+            };
           }));
 
-          // Sort the chats in descending order of the last message timestamp
-          // Sort the chats in descending order of the last message timestamp
           chatsArray.sort((a, b) => {
-            // If b.date or a.date is null/undefined, treat it as a date very far in the past
             const dateB = b.date ? b.date.seconds : 0;
             const dateA = a.date ? a.date.seconds : 0;
             return dateB - dateA;
@@ -46,7 +53,6 @@ const Chats = () => {
 
           setChatsWithStatus(chatsArray);
 
-          // Fetch user information for each chat
           chatsArray.forEach((chat) => {
             onUserStatusChanged(chat.userInfo.uid, (status) => {
               setChatsWithStatus((prevChats) => {
@@ -61,9 +67,12 @@ const Chats = () => {
           });
         }
       });
-
-      return () => unsub();
     }
+
+    return () => {
+      clearInterval(interval);
+      unsubFromUserChats();
+    };
   }, [currentUser?.uid]);
 
   useEffect(() => {
@@ -71,30 +80,6 @@ const Chats = () => {
       setSelectedChat(null);
     }
   }, [data.chatId]);
-
-  // This useEffect is responsible for enriching the chat data with user information from the users collection
-  useEffect(() => {
-    const fetchUserDetails = async () => {
-      const updatedChats = await Promise.all(
-        chatsWithStatus.map(async (chat) => {
-          const userDocRef = doc(db, "users", chat.userInfo.uid);
-          const userDocSnap = await getDoc(userDocRef);
-          if (userDocSnap.exists()) {
-            const userData = userDocSnap.data();
-            return { ...chat, userInfo: { ...chat.userInfo, ...userData } };
-          } else {
-            return chat; // Leave the chat as is if the user data doesn't exist
-          }
-        })
-      );
-
-      setChatsWithStatus(updatedChats);
-    };
-
-    if (chatsWithStatus.length > 0) {
-      fetchUserDetails();
-    }
-  }, [chatsWithStatus]);
 
   const handleSelect = (chat) => {
     dispatch({ type: "CHANGE_USER", payload: chat.userInfo });
@@ -126,7 +111,7 @@ const Chats = () => {
                   style={{ position: "relative", display: "inline-block" }}
                 >
                   <img
-                    src={chat.userInfo?.photoURL}
+                    src={chat.userInfo.photoURL || 'default-image-url-if-needed'}
                     alt="User"
                     className="rounded-circle"
                     style={{
