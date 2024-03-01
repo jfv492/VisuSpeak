@@ -25,6 +25,17 @@ body {
   height: 2.4em; 
 }
 
+.chat-name-ellipsis {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  line-height: 1.2em; 
+  height: 1.2em; 
+}
+
 /* ***************ALERT STYLE*************** */
 .alert-style {
   /* max-width: 100%; */
@@ -404,7 +415,7 @@ body {
 
 .chat-list.active {
   background-color: #006262 !important;
-  color: #ffffff;
+  color: #ffffff !important;
 }
 
 .transcript-box {
@@ -723,7 +734,8 @@ iframe {
 
 .last-message {
   font-size: 0.9em; /* Adjust the size as needed */
-  color: #555; /* A lighter text color for the message */
+  /* color: #555; A lighter text color for the message */
+  min-height: 30px;
 }
 
 .avatar {

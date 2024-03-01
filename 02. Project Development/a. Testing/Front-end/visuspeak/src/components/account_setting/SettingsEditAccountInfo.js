@@ -4,6 +4,7 @@ import { auth } from "../../firebase";
 import { AuthContext } from "../../context/AuthContext.js";
 import { setUserOffline } from "../../utils/UserPresence.js";
 import { updatePassword,signOut } from "firebase/auth";
+import Alert from '@mui/material/Alert';
 
 
 const SettingsEditAccountInfo = () => {
@@ -11,6 +12,7 @@ const SettingsEditAccountInfo = () => {
   const [editMode, setEditMode] = useState(false);
   const [formData, setFormData] = useState({
     password: "",
+    confirmPassword: ""
   });
   const [initialFormData, setInitialFormData] = useState({ ...formData });
   const [error, setError] = useState("");
@@ -28,6 +30,7 @@ const SettingsEditAccountInfo = () => {
   const handleCancel = () => {
     setFormData(initialFormData);
     setEditMode(false);
+    setError(null);
   };
 
   const handleSignOut = async () => {
@@ -45,13 +48,31 @@ const SettingsEditAccountInfo = () => {
     e.preventDefault();
     setSuccess("");
     setError("");
+    let currentErrors = {};
+    let formIsValid = true;
+
+    if (formData.password !== formData.confirmPassword) {
+      formIsValid = false;
+      setError("Passwords do not match.");
+    }
+
+    if (formData.password == null || formData.confirmPassword == null || formData.password == "" || formData.confirmPassword == "") {
+      formIsValid = false;
+      setError("Fields cannot be empty.");
+    }
+
+    if (formData.password <= 6 || formData.confirmPassword <= 6) {
+      formIsValid = false;
+      setError("Fields cannot be empty.");
+    }
 
     try {
       // Update Firebase Auth password if provided
-      if (formData.password) {
+      if (formData.password && formIsValid) {
         try {
           await updatePassword(currentUser, formData.password);
           setSuccess("Account information updated successfully.");
+          setEditMode(false);
           handleSignOut();
         } catch (error) {
           setError(
@@ -60,7 +81,7 @@ const SettingsEditAccountInfo = () => {
           console.error(error);
         }
       }
-      setEditMode(false);
+     
     } catch (error) {
       setError("An error occurred while updating account information.");
       console.error(error);
@@ -106,7 +127,6 @@ const SettingsEditAccountInfo = () => {
             className=" hyperlink "
             onClick={handleEdit}
           >
-            {/* <i class="fa-solid fa-user-pen fa-xl"></i>  */}
             Edit
           </Link>
         )}
@@ -117,17 +137,16 @@ const SettingsEditAccountInfo = () => {
       <div className="row ">
         {formField("password", "Password", "password", false, !editMode)}
         {formField(
-          "cpassword",
+          "confirmPassword",
           "Confirm Password",
           "password",
           false,
           !editMode
         )}
       </div>
-      <div className="row profile-action" style={{ minHeight: "65px" }}>
-        <div className="col-sm-12 gy-4">
-          {error && <div className="alert alert-danger">{error}</div>}
-          {success && <div className="alert alert-success">{success}</div>}
+      <div className="d-flex row mt-3" >
+        <div className="col-sm-3">
+          
           {editMode && (
             <>
               <button type="submit" className="btn settings-submit-button">
@@ -143,6 +162,10 @@ const SettingsEditAccountInfo = () => {
             </>
           )}
         </div>
+        <div className="col-sm-9">
+          {error && <Alert severity="error">{error}</Alert>}
+          {success && <Alert severity="success">{success}</Alert>}
+          </div>
       </div>
     </form>
   );

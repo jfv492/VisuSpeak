@@ -1,32 +1,70 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Headshot from "../../assets/images/AccountSettingsHeadshot.jpg";
 import { AuthContext } from "../../context/AuthContext.js";
 import Typography from "@mui/material/Typography";
+// Import necessary Firebase utilities
+import { updateProfile } from "firebase/auth";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { storage, auth, db } from "../../firebase"; // Ensure you have these exports in your firebase.js
+import { doc, updateDoc } from "firebase/firestore";
 
 const SettingsUserInfo = (props) => {
   const { currentUser } = useContext(AuthContext);
   const email = currentUser?.email;
   const organizationName = localStorage.getItem("organizationName");
+  
+  // State for handling file selection
+  const [selectedFile, setSelectedFile] = useState(null);
+
+  // Handle file input change
+  const handleFileChange = (event) => {
+    if (event.target.files[0]) {
+      setSelectedFile(event.target.files[0]);
+      uploadProfilePicture(event.target.files[0]);
+    }
+  };
+
+  // Upload profile picture
+  const uploadProfilePicture = async (file) => {
+    const fileRef = ref(storage, `profilePictures/${currentUser.uid}`);
+    try {
+      // Upload file to Firebase Storage
+      await uploadBytes(fileRef, file);
+      // Get file URL
+      const photoURL = await getDownloadURL(fileRef);
+      // Update profile in Firebase Authentication
+      await updateProfile(currentUser, { photoURL });
+      // Update photoURL in Firestore (adjust path as necessary)
+      const userDocRef = doc(db, "users", currentUser.uid);
+      await updateDoc(userDocRef, { photoURL });
+      // Optional: Update context or local state as needed to reflect changes in the UI
+      alert("Profile picture updated successfully!");
+    } catch (error) {
+      console.error("Error updating profile picture: ", error);
+      alert("Error updating profile picture.");
+    }
+  };
+
   return (
     <div>
       <div className="row account-settings-user-info align-items-center ">
         <div className="col-sm-3">
           <div style={{ position: "relative", display: "inline-block" }}>
             <img
-              src={Headshot}
+              src={currentUser?.photoURL || Headshot} // Display user's photoURL or default
               className="user-profile-picture rounded-circle img-thumbnail"
               alt="..."
               width="100%"
               style={{ justifyContent: "end" }}
             />
-            <i
-              className="fa-solid fa-camera fa-xl change-user-profile-icon rounded-circle shadow border"
-              style={{
+            <label htmlFor="file-upload" className="fa-solid fa-camera fa-xl change-user-profile-icon rounded-circle shadow border" style={{
                 position: "absolute",
                 bottom: 25,
                 right: 3,
-              }}
-            />
+                cursor: "pointer", // Change cursor to indicate clickable
+              }}>
+              <input id="file-upload" type="file" style={{ display: "none" }} onChange={handleFileChange} accept="image/*" />
+            </label>
           </div>
         </div>
         <div className="col-sm-9">
@@ -35,18 +73,16 @@ const SettingsUserInfo = (props) => {
           </h3>
           <div className="row">
             <div className="col-sm-3">
-            <Typography variant="caption" display="block" gutterBottom style={{ fontSize: '15px' }}>
-          <i class="fa-solid fa-envelope me-2" style={{color: "#006262"}}></i>{email}
-          </Typography>
+              <Typography variant="caption" display="block" gutterBottom style={{ fontSize: '15px' }}>
+                <i className="fa-solid fa-envelope me-2" style={{color: "#006262"}}></i>{email}
+              </Typography>
             </div>
             <div className="col-sm-6">
-            <Typography variant="caption" display="block" gutterBottom style={{ fontSize: '15px' }}>
-          <i class="fa-solid fa-briefcase me-2" style={{color: "#006262"}}></i>{organizationName}
-          </Typography>
-              </div>
+              <Typography variant="caption" display="block" gutterBottom style={{ fontSize: '15px' }}>
+                <i className="fa-solid fa-briefcase me-2" style={{color: "#006262"}}></i>{organizationName}
+              </Typography>
+            </div>
           </div>
-          
-          
         </div>
       </div>
       <hr />

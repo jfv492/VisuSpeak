@@ -1,158 +1,147 @@
-import React, { useEffect, useState, useContext } from "react";
-import { doc, onSnapshot } from "firebase/firestore";
-import { AuthContext } from "../../context/AuthContext.js";
-import { ChatContext } from "../../context/ChatContext.js";
-import { db, realtimeDb } from "../../firebase.js";
+import React, { useEffect, useState, useContext } from 'react';
+import { doc, getDoc, onSnapshot } from 'firebase/firestore';
+import { AuthContext } from '../../context/AuthContext.js';
+import { ChatContext } from '../../context/ChatContext.js';
+import { db } from '../../firebase.js';
 import {
   onUserStatusChanged,
   refreshUserOnlineStatus,
-} from "../../utils/UserPresence.js";
+} from '../../utils/UserPresence.js';
 
 const Chats = () => {
-  const [chats, setChats] = useState([]);
-  const [selectedChat, setSelectedChat] = useState(null);
   const [chatsWithStatus, setChatsWithStatus] = useState([]);
   const { currentUser } = useContext(AuthContext);
   const { data, dispatch } = useContext(ChatContext);
+  const [selectedChat, setSelectedChat] = useState(null);
 
   useEffect(() => {
     const interval = setInterval(() => {
       if (currentUser?.uid) {
         refreshUserOnlineStatus(currentUser.uid);
       }
-    }, 5000); // refresh status every 60 seconds
+    }, 5000);
 
-    return () => clearInterval(interval); // Cleanup the interval on component unmount
+    return () => clearInterval(interval);
   }, [currentUser?.uid]);
 
+  // This useEffect handles fetching the chat data and the user statuses
   useEffect(() => {
-    // Listen for changes to the user's chats
-    if (currentUser && currentUser.uid) {
-      const unsub = onSnapshot(doc(db, "userChats", currentUser.uid), (doc) => {
+    if (currentUser?.uid) {
+      const unsub = onSnapshot(doc(db, 'userChats', currentUser.uid), (doc) => {
         const chatsData = doc.data();
         if (chatsData) {
-          // Store the chat data and set up listeners for each user's online status
-          const statusListeners = Object.entries(chatsData).map(
-            ([chatId, chatInfo]) => {
-              return onUserStatusChanged(chatInfo.userInfo.uid, (status) => {
-                setChatsWithStatus((prevChats) => {
-                  return prevChats.map((c) => {
-                    if (c.id === chatId) {
-                      return { ...c, status: status.state };
-                    }
-                    return c;
-                  });
+          const chatsArray = Object.entries(chatsData).map(([id, chatInfo]) => ({
+            id,
+            ...chatInfo,
+            status: 'offline', // Default to offline until the real status is fetched
+          }));
+
+          setChatsWithStatus(chatsArray);
+
+          // Fetch user information for each chat
+          chatsArray.forEach((chat) => {
+            onUserStatusChanged(chat.userInfo.uid, (status) => {
+              setChatsWithStatus((prevChats) => {
+                return prevChats.map((c) => {
+                  if (c.id === chat.id) {
+                    return { ...c, status: status.state };
+                  }
+                  return c;
                 });
               });
-            }
-          );
-
-          // Set the initial chats with the offline status as default
-          setChatsWithStatus(
-            Object.entries(chatsData).map(([id, chatInfo]) => ({
-              id,
-              ...chatInfo,
-              status: "offline", // Default to offline until the real status is fetched
-            }))
-          );
-
-          // Return a cleanup function that unsubscribes from all listeners
-          return () => {
-            statusListeners.forEach((unsub) => unsub());
-          };
+            });
+          });
         }
       });
 
-      
-
-      // Cleanup subscription on unmount
       return () => unsub();
     }
-  }, [currentUser.uid]);
+  }, [currentUser?.uid]);
 
   useEffect(() => {
-    // Reset selectedChat when the chat is reset in the context
-    if (data.chatId === "null") {
+    if (data.chatId === 'null') {
       setSelectedChat(null);
     }
   }, [data.chatId]);
 
-  const handleSelect = (u) => {
-    dispatch({ type: "CHANGE_USER", payload: u });
-    setSelectedChat(u.uid); // Update the selected chat
+  // This useEffect is responsible for enriching the chat data with user information from the users collection
+  useEffect(() => {
+    const fetchUserDetails = async () => {
+      const updatedChats = await Promise.all(
+        chatsWithStatus.map(async (chat) => {
+          const userDocRef = doc(db, 'users', chat.userInfo.uid);
+          const userDocSnap = await getDoc(userDocRef);
+          if (userDocSnap.exists()) {
+            const userData = userDocSnap.data();
+            return { ...chat, userInfo: { ...chat.userInfo, ...userData } };
+          } else {
+            return chat; // Leave the chat as is if the user data doesn't exist
+          }
+        })
+      );
+
+      setChatsWithStatus(updatedChats);
+    };
+
+    if (chatsWithStatus.length > 0) {
+      fetchUserDetails();
+    }
+  }, [chatsWithStatus]);
+
+  const handleSelect = (chat) => {
+    dispatch({ type: 'CHANGE_USER', payload: chat.userInfo });
+    setSelectedChat(chat.userInfo.uid);
   };
 
-  console.log(Object.entries[chats]);
   return (
-    <div className="list-group list-group-flush rounded-4 admin-chat-list">
+    <div className='list-group list-group-flush rounded-4 admin-chat-list'>
       {chatsWithStatus.map((chat) => {
-        const date = chat.date
-          ? new Date(chat.date.seconds * 1000)
-          : new Date();
-        const formattedDate = date.toLocaleString();
-        const isActive = chat.uid === selectedChat; // Ensure that selectedChat is tracking the right identifier
+        const date = chat.date ? new Date(chat.date.seconds * 1000) : new Date();
+        const options = { weekday: 'short', month: 'short', day: 'numeric' };
+        const formattedDate = date.toLocaleString('en-us', options);
+        const isActive = chat.userInfo.uid === selectedChat;
 
         return (
           <a
-            className={`list-group-item list-group-item-action chat-list-item bg-gradient ${
-              isActive ? "active" : ""
-            }`}
-            key={chat.id} // Ensure that each chat has a unique identifier
-            onClick={() => handleSelect(chat.userInfo)}
+            className={`list-group-item list-group-item-action chat-list-item bg-gradient ${isActive ? 'active' : ''}`}
+            key={chat.id}
+            onClick={() => handleSelect(chat)}
           >
-            <div className="d-flex w-100 justify-content-between align-items-center">
-              <div className="d-flex align-items-center">
+            <div className='d-flex w-100 justify-content-between align-items-center'>
+              <div className='d-flex align-items-center'>
                 <div
-                  className="me-3"
-                  style={{ position: "relative", display: "inline-block" }}
+                  className='me-3'
+                  style={{ position: 'relative', display: 'inline-block' }}
                 >
                   <img
-                    src={currentUser?.photoURL}
-                    alt="User"
-                    className="rounded-circle"
+                    src={chat.userInfo?.photoURL}
+                    alt='User'
+                    className='rounded-circle'
+                    style={{ width: '45px', height: '45px', objectFit: 'cover' }}
+                  />
+                  <i
+                    className={`fa-solid ${chat.status === "offline" ? "fa-clock" : "fa-circle-check"}`}
                     style={{
-                      width: "45px",
-                      height: "45px",
-                      objectFit: "cover",
+                      position: "absolute",
+                      bottom: 0,
+                      right: 0,
+                      color: chat.status === "offline" ? "#fec700" : "#77bb41",
+                      backgroundColor: "white",
+                      borderRadius: "50%",
+                      padding: "3px",
+                      transform: "translate(30%, 30%)",
                     }}
                   />
-                  {chat.status == "offline" ? (
-                    <i
-                      className="fa-solid fa-clock"
-                      style={{
-                        position: "absolute",
-                        bottom: 0,
-                        right: 0,
-                        color: "#fec700",
-                        backgroundColor: "white",
-                        borderRadius: "50%",
-                        padding: "3px",
-                        transform: "translate(30%, 30%)",
-                      }}
-                    />
-                  ) : (
-                    <i
-                      className="fa-solid fa-circle-check"
-                      style={{
-                        position: "absolute",
-                        bottom: 0,
-                        right: 0,
-                        color: "#77bb41",
-                        backgroundColor: "white",
-                        borderRadius: "50%",
-                        padding: "3px",
-                        transform: "translate(30%, 30%)",
-                      }}
-                    />
-                  )}
                 </div>
                 <div>
-                  <div className="d-flex">
-                    <h5 className="mb-0">{chat.userInfo?.displayName}</h5>
-                  </div>
+                  <h5 className="mb-0 chat-name-ellipsis">{chat.userInfo?.displayName}</h5>
                   <div className="last-message">
-                    <strong>{chat.lastSender?.lastSenderName}: </strong>
-                    {chat.lastMessage?.text}
+                    {chat.lastMessage?.text != null && (
+                      <>
+                        <strong>{chat.lastSender?.lastSenderName}: </strong>
+                        {chat.lastMessage?.text}
+                      </>
+                    )}
                   </div>
                 </div>
               </div>

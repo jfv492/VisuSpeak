@@ -63,7 +63,7 @@ const NavButton = () => {
                 aria-current="page"
                 to="/resources"
               >
-                Resource
+                Resources
               </Link>
             </li>
             <li class="nav-item">
