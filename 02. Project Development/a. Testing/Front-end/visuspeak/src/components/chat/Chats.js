@@ -1,12 +1,12 @@
-import React, { useEffect, useState, useContext } from 'react';
-import { doc, getDoc, onSnapshot } from 'firebase/firestore';
-import { AuthContext } from '../../context/AuthContext.js';
-import { ChatContext } from '../../context/ChatContext.js';
-import { db } from '../../firebase.js';
+import React, { useEffect, useState, useContext } from "react";
+import { doc, getDoc, onSnapshot } from "firebase/firestore";
+import { AuthContext } from "../../context/AuthContext.js";
+import { ChatContext } from "../../context/ChatContext.js";
+import { db } from "../../firebase.js";
 import {
   onUserStatusChanged,
   refreshUserOnlineStatus,
-} from '../../utils/UserPresence.js';
+} from "../../utils/UserPresence.js";
 
 const Chats = () => {
   const [chatsWithStatus, setChatsWithStatus] = useState([]);
@@ -24,17 +24,25 @@ const Chats = () => {
     return () => clearInterval(interval);
   }, [currentUser?.uid]);
 
-  // This useEffect handles fetching the chat data and the user statuses
   useEffect(() => {
     if (currentUser?.uid) {
-      const unsub = onSnapshot(doc(db, 'userChats', currentUser.uid), (doc) => {
+      const unsub = onSnapshot(doc(db, "userChats", currentUser.uid), (doc) => {
         const chatsData = doc.data();
         if (chatsData) {
-          const chatsArray = Object.entries(chatsData).map(([id, chatInfo]) => ({
+          let chatsArray = Object.entries(chatsData).map(([id, chatInfo]) => ({
             id,
             ...chatInfo,
-            status: 'offline', // Default to offline until the real status is fetched
+            status: "offline", // Default to offline until the real status is fetched
           }));
+
+          // Sort the chats in descending order of the last message timestamp
+          // Sort the chats in descending order of the last message timestamp
+          chatsArray.sort((a, b) => {
+            // If b.date or a.date is null/undefined, treat it as a date very far in the past
+            const dateB = b.date ? b.date.seconds : 0;
+            const dateA = a.date ? a.date.seconds : 0;
+            return dateB - dateA;
+          });
 
           setChatsWithStatus(chatsArray);
 
@@ -59,7 +67,7 @@ const Chats = () => {
   }, [currentUser?.uid]);
 
   useEffect(() => {
-    if (data.chatId === 'null') {
+    if (data.chatId === "null") {
       setSelectedChat(null);
     }
   }, [data.chatId]);
@@ -69,7 +77,7 @@ const Chats = () => {
     const fetchUserDetails = async () => {
       const updatedChats = await Promise.all(
         chatsWithStatus.map(async (chat) => {
-          const userDocRef = doc(db, 'users', chat.userInfo.uid);
+          const userDocRef = doc(db, "users", chat.userInfo.uid);
           const userDocSnap = await getDoc(userDocRef);
           if (userDocSnap.exists()) {
             const userData = userDocSnap.data();
@@ -89,38 +97,48 @@ const Chats = () => {
   }, [chatsWithStatus]);
 
   const handleSelect = (chat) => {
-    dispatch({ type: 'CHANGE_USER', payload: chat.userInfo });
+    dispatch({ type: "CHANGE_USER", payload: chat.userInfo });
     setSelectedChat(chat.userInfo.uid);
   };
 
   return (
-    <div className='list-group list-group-flush rounded-4 admin-chat-list'>
+    <div className="list-group list-group-flush rounded-4 admin-chat-list">
       {chatsWithStatus.map((chat) => {
-        const date = chat.date ? new Date(chat.date.seconds * 1000) : new Date();
-        const options = { weekday: 'short', month: 'short', day: 'numeric' };
-        const formattedDate = date.toLocaleString('en-us', options);
+        const date = chat.date
+          ? new Date(chat.date.seconds * 1000)
+          : new Date();
+        const options = { weekday: "short", month: "short", day: "numeric" };
+        const formattedDate = date.toLocaleString("en-us", options);
         const isActive = chat.userInfo.uid === selectedChat;
 
         return (
           <a
-            className={`list-group-item list-group-item-action chat-list-item bg-gradient ${isActive ? 'active' : ''}`}
+            className={`list-group-item list-group-item-action chat-list-item bg-gradient ${
+              isActive ? "active" : ""
+            }`}
             key={chat.id}
             onClick={() => handleSelect(chat)}
           >
-            <div className='d-flex w-100 justify-content-between align-items-center'>
-              <div className='d-flex align-items-center'>
+            <div className="d-flex w-100 justify-content-between align-items-center">
+              <div className="d-flex align-items-center">
                 <div
-                  className='me-3'
-                  style={{ position: 'relative', display: 'inline-block' }}
+                  className="me-3"
+                  style={{ position: "relative", display: "inline-block" }}
                 >
                   <img
                     src={chat.userInfo?.photoURL}
-                    alt='User'
-                    className='rounded-circle'
-                    style={{ width: '45px', height: '45px', objectFit: 'cover' }}
+                    alt="User"
+                    className="rounded-circle"
+                    style={{
+                      width: "45px",
+                      height: "45px",
+                      objectFit: "cover",
+                    }}
                   />
                   <i
-                    className={`fa-solid ${chat.status === "offline" ? "fa-clock" : "fa-circle-check"}`}
+                    className={`fa-solid ${
+                      chat.status === "offline" ? "fa-clock" : "fa-circle-check"
+                    }`}
                     style={{
                       position: "absolute",
                       bottom: 0,
@@ -134,7 +152,9 @@ const Chats = () => {
                   />
                 </div>
                 <div>
-                  <h5 className="mb-0 chat-name-ellipsis">{chat.userInfo?.displayName}</h5>
+                  <h5 className="mb-0 chat-name-ellipsis">
+                    {chat.userInfo?.displayName}
+                  </h5>
                   <div className="last-message">
                     {chat.lastMessage?.text != null && (
                       <>

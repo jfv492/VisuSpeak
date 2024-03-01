@@ -39,6 +39,7 @@ const SettingsUserInfo = (props) => {
       await updateDoc(userDocRef, { photoURL });
       // Optional: Update context or local state as needed to reflect changes in the UI
       alert("Profile picture updated successfully!");
+      window.location.reload();
     } catch (error) {
       console.error("Error updating profile picture: ", error);
       alert("Error updating profile picture.");
