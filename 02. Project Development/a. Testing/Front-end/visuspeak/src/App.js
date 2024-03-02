@@ -13,23 +13,18 @@ import AdminChat from "./modules/AdminChat.js";
 import ASLChat from "./modules/ASLChat.js";
 import AccountSettings from "./modules/AccountSettings.js";
 
-
 import Resources from "./modules/Resources.js";
 
-import TranscriptHistory from "./modules/TranscriptHistory.js";
-
-import Test from "./components/customer/CustomerSignin.js";
 
 import React, { useContext, useState, useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-
 import { AuthContext } from "./context/AuthContext.js";
-import { refreshUserOnlineStatus } from "./utils/UserPresence.js"
-
+import { refreshUserOnlineStatus } from "./utils/UserPresence.js";
+import Dashboard from "./components/admin/Dashboard.js";
 
 function App() {
-  const {currentUser} = useContext(AuthContext)
+  const { currentUser } = useContext(AuthContext);
   const [alert, setAlert] = useState(null);
   const showAlert = (message, type) => {
     setAlert({
@@ -47,7 +42,7 @@ function App() {
         refreshUserOnlineStatus(currentUser.uid);
       }
     }, 60000); // refresh status every 60 seconds
-  
+
     return () => clearInterval(interval); // Cleanup the interval on component unmount
   }, [currentUser?.uid]);
 
@@ -75,21 +70,32 @@ function App() {
                 path="/about"
                 element={<About heading="About Us" />}
               />
-              <Route exact path="/adminchat" element={<AdminChat heading="Previous Chat Sessions"/>} />
-              
-              <Route
+
+              {localStorage.getItem("accountType") === "admin" ? (
+                <Route
                 exact
-                path="/aslchat"
-                element={<ASLChat showAlert={showAlert} />}
+                path="/chat"
+                element={<AdminChat heading="Previous Chat Sessions" />}
               />
-              
+              ) : (
+                <Route
+                  exact
+                  path="/chat"
+                  element={<ASLChat showAlert={showAlert} />}
+                />
+              )}
+
               <Route exact path="/resources" element={<Resources />} />
 
-              <Route exact path="/test" element={<Test showAlert={showAlert}/>} />
+              
 
-              <Route exact path="/history" element={<TranscriptHistory />} />
+              <Route exact path="/dashboard" element={<Dashboard />} />
 
-              <Route exact path="/accountsettings" element={<AccountSettings />} />
+              <Route
+                exact
+                path="/accountsettings"
+                element={<AccountSettings showAlert={showAlert}/>}
+              />
             </Routes>
           </div>
         </div>

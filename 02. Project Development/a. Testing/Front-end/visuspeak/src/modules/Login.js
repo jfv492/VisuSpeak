@@ -55,7 +55,7 @@ const Login = (props) => {
 
       props.showAlert("Login successful.", "success");
 
-      navigate("/");
+      navigate("/chat");
     } catch (err) {
       console.log("Firebase error: ", err);
       props.showAlert("Login failed. Please try again.", "danger");

@@ -26,7 +26,7 @@ export default function Home() {
             <div className="d-flex justify-content-between align-items-end">
               <CustomerSignin />
               <i
-                class="fa-solid fa-question fa-2xl help-icon"
+                class="fa-solid fa-question fa-2xl btn-raised help-icon shadow"
                 style={{ color: "#ffffff" }}
               ></i>
             </div>

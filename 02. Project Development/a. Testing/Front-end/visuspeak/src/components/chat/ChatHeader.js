@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ChatAlert from "../ChatAlert";
 import ChatActions from "./ChatActions.js";
+import defaultProfilePicture from "../../assets/images/AccountSettingsHeadshot.jpg";
 
 const ChatHeader = (props) => {
   const [alert, setAlert] = useState(null);
@@ -19,7 +20,7 @@ const ChatHeader = (props) => {
         <div className="chat-header rounded-4 bg-gradient shadow">
           <div className="user-info col-sm-8">
             <img
-              src={props.photo}
+              src={props.photo || defaultProfilePicture}
               alt="User"
               className="rounded-circle me-2"
               style={{ width: "40px", height: "40px", objectFit: "cover" }}

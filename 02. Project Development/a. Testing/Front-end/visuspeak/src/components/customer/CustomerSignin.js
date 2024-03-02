@@ -53,7 +53,7 @@ const CustomerSignin = (props) => {
       initializeUserPresence(user.uid);
 
       // Redirect to chat or perform other actions as needed
-      navigate("/aslchat"); // Make sure you have a route set up to handle this path
+      navigate("/chat"); // Make sure you have a route set up to handle this path
     } catch (error) {
       console.error("Error signing in anonymously:", error);
       props.showAlert("Anonymous sign-in failed. Please try again", "danger");

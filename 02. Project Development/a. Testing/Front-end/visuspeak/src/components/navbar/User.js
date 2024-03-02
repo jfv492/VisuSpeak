@@ -81,19 +81,7 @@ const User = () => {
           </li>
         </ul>
       </div>
-      <Link
-        className={`btn button-style ${
-          localStorage.getItem("accountType") === "admin" || localStorage.getItem("username") === null? "d-none" : ""
-        }`}
-        onClick={handleSignOut}
-        to="/"
-      >
-        <i
-          class="fa-solid fa-right-from-bracket me-3"
-          style={{ color: "#000000" }}
-        ></i>
-        Logout
-      </Link>
+      
     </div>
   );
 };
