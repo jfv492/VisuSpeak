@@ -36,6 +36,14 @@ const HomeNavigation = () => {
           >
             Sign Up
           </Link>
+          <Link
+            to="/test"
+            className="btn btn-lg home-button-style"
+            tabIndex="2"
+            role="button"
+          >
+            Test
+          </Link>
         </div>
       </div>
     </div>

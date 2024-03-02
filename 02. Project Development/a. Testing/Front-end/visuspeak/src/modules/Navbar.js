@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import ColourLogo from "../assets/logos/VisuSpeakPrimaryLogo.png";
-import NavButton from "../components/navbar/NavButton.js";
+import NavLinks from "../components/navbar/NavLinks.js";
 
 const Navbar = () => {
   return (
@@ -20,7 +20,7 @@ const Navbar = () => {
         >
           <span class="navbar-toggler-icon"></span>
         </button>
-        <NavButton />
+        <NavLinks />
       </div>
     </nav>
   );

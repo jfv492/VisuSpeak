@@ -40,13 +40,13 @@ const AboutSections = (props) => {
           <h3 class="about-us-headers border-bottom pb-2">
             Project Background
           </h3>
-          Many people with special needs, particularly those with vocal and
-          hearing impairments, rely on American Sign Language (ASL) as their
-          primary mode of communication. However, there is frequently a
-          significant communication gap between ASL users and those who speak or
-          understand English primarily. This gap can lead to misunderstandings,
-          limited opportunities, and exclusion for ASL users in various areas,
-          such as education, employment, healthcare, and social interactions.
+          Many people with hearing loss and non-vocal individuals, rely on
+          American Sign Language (ASL) as their language of communication.
+          However, there is frequently a significant communication gap between
+          ASL users and those who speak or understand English primarily. This
+          gap can lead to misunderstandings, limited opportunities, and
+          exclusion for ASL users in various areas, such as education,
+          employment, healthcare, and social interactions.
         </div>
       </div>
       <hr />

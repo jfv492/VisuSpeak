@@ -43,7 +43,11 @@ const Login = (props) => {
       if (userDocSnap.exists()) {
         // Set local storage items
         localStorage.setItem("username", userDocSnap.data().displayName);
-        localStorage.setItem("organizationName", userDocSnap.data().organizationName)
+        localStorage.setItem(
+          "organizationName",
+          userDocSnap.data().organizationName
+        );
+        localStorage.setItem("accountType", userDocSnap.data().type);
         // ... set other required items
       } else {
         console.log("No such document in Firestore!");
@@ -60,70 +64,76 @@ const Login = (props) => {
   };
   return (
     <div className="background-container">
-      <form
-        className="container login-form shadow-lg rounded-4 p-5"
-        onSubmit={handleSubmit}
-      >
-        <div className="row  mb-4">
-          <h1> {props.heading}</h1>
-          <p class="lead">
-            <label className="">Don't have an account?</label>
-            <Link
-              to="/signup"
-              className="ms-2 form-link"
-              tabIndex="2"
-              role="button"
+      <div class="container h-100">
+        <div class="row align-items-center justify-content-center">
+          {/* <div class="col-sm-12"> */}
+            <form
+              className="login-form shadow-lg rounded-4 p-5"
+              onSubmit={handleSubmit}
             >
-              Sign Up
-            </Link>
-          </p>
-        </div>
+              <div className="row  mb-4">
+                <h1> {props.heading}</h1>
+                <p class="lead">
+                  <label className="">Don't have an account?</label>
+                  <Link
+                    to="/signup"
+                    className="ms-2 form-link"
+                    tabIndex="2"
+                    role="button"
+                  >
+                    Sign Up
+                  </Link>
+                </p>
+              </div>
 
-        <div className="row mb-4">
-          <label htmlFor="email" className="form-label mt-1">
-            Email:
-          </label>
-          <div className="">
-            <input
-              type="text"
-              className="form-control"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-            />
+              <div className="row mb-4">
+                <label htmlFor="email" className="form-label mt-1">
+                  Email:
+                </label>
+                <div className="">
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                  />
+                </div>
+              </div>
+              <div className="row">
+                <label htmlFor="password" className="form-label mt-1">
+                  Password:
+                </label>
+                <div className="">
+                  <input
+                    type="password"
+                    className="form-control"
+                    id="password"
+                    name="password"
+                    value={formData.password}
+                    onChange={handleChange}
+                  />
+                  <div className="text-start form-error mt-1">
+                    {error && (
+                      <i
+                        className="fa-solid fa-circle-exclamation me-2"
+                        style={{ color: "#ca4c4c" }}
+                      ></i>
+                    )}
+                    {error}
+                  </div>
+                </div>
+              </div>
+              <div className="row form-submit-row justify-content-end">
+                <button type="submit" className="btn button-style">
+                  Login
+                </button>
+              </div>
+            </form>
           </div>
         </div>
-        <div className="row">
-          <label htmlFor="password" className="form-label mt-1">
-            Password:
-          </label>
-          <div className="">
-            <input
-              type="password"
-              className="form-control"
-              id="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-            />
-            <div className="text-start form-error mt-1">
-              {error && (
-                <i
-                  className="fa-solid fa-circle-exclamation me-2"
-                  style={{ color: "#ca4c4c" }}
-                ></i>
-              )}
-              {error}
-            </div>
-          </div>
-        </div>
-        <div className="row form-submit-row justify-content-end">
-          <button type="submit" className="btn button-style">
-            Login
-          </button>
-        </div>
-      </form>
+      {/* </div> */}
     </div>
   );
 };

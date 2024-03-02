@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
+import defaultProfilePicture from "../../assets/images/AccountSettingsHeadshot.jpg"
 import { doc, getDoc, onSnapshot, collection } from "firebase/firestore";
 import { AuthContext } from "../../context/AuthContext.js";
 import { ChatContext } from "../../context/ChatContext.js";
@@ -45,7 +46,7 @@ const Chats = () => {
             // Since this is async, we use 'let' to define chatsArray
             chatsArray = await Promise.all(
               Object.entries(chatsData).map(async ([id, chatInfo]) => {
-                let photoURL = "default-image-url-if-needed"; // Default image URL in case userInfo is undefined
+                let photoURL = defaultProfilePicture; // Default image URL in case userInfo is undefined
                 if (chatInfo.userInfo && chatInfo.userInfo.uid) {
                     photoURL = await fetchUsersPhotoUrl(chatInfo.userInfo.uid);
                 }
@@ -140,8 +141,8 @@ const Chats = () => {
                 className="me-3"
                 style={{ position: "relative", display: "inline-block" }}
               >
-                <img
-                  src={chat.userInfo.photoURL || "default-image-url-if-needed"}
+                {chat.userInfo?.photoURL == "" ? (<img
+                  src={defaultProfilePicture}
                   alt="User"
                   className="rounded-circle"
                   style={{
@@ -149,7 +150,17 @@ const Chats = () => {
                     height: "45px",
                     objectFit: "cover",
                   }}
-                />
+                />) : (<img
+                  src={chat.userInfo?.photoURL}
+                  alt="User"
+                  className="rounded-circle"
+                  style={{
+                    width: "45px",
+                    height: "45px",
+                    objectFit: "cover",
+                  }}
+                />)}
+                
                 <i
                   className={`fa-solid ${
                     chat.status === "offline" ? "fa-clock" : "fa-circle-check"

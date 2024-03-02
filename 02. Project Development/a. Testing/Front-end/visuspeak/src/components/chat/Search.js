@@ -10,12 +10,6 @@ import {
 } from "firebase/firestore";
 import { AuthContext } from "../../context/AuthContext.js";
 import { doc, setDoc, updateDoc } from "firebase/firestore";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemAvatar from "@mui/material/ListItemAvatar";
-import Avatar from "@mui/material/Avatar";
-import ListItemText from "@mui/material/ListItemText";
-import Typography from "@mui/material/Typography";
 
 const Search = () => {
   const [username, setUsername] = useState("");
@@ -71,7 +65,7 @@ const Search = () => {
         await updateDoc(doc(db, "userChats", user.uid), {
           [combinedId + ".userInfo"]: {
             uid: currentUser.uid,
-            displayName: currentUser.displayName,
+            displayName: currentUser.displayName || localStorage.getItem("username"),
             photoURL: currentUser.photoURL,
           },
           [combinedId + ".date"]: serverTimestamp(),

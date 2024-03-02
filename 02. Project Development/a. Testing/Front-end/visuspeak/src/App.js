@@ -18,7 +18,7 @@ import Resources from "./modules/Resources.js";
 
 import TranscriptHistory from "./modules/TranscriptHistory.js";
 
-import Test from "./components/test/CustomerSignin.js";
+import Test from "./components/customer/CustomerSignin.js";
 
 import React, { useContext, useState, useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";

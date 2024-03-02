@@ -46,13 +46,15 @@ const Input = ({ onSendMessage, isFetchingEnabled, fetchInterval }) => {
       return;
     }
 
+    let lastSenderName = currentUser.displayName || localStorage.getItem("username");
+
     try {
       await updateDoc(doc(db, "chats", data.chatId), {
         messages: arrayUnion({
           id: uuid(),
           text,
           senderId: currentUser.uid,
-          senderDisplayName: currentUser.displayName,
+          senderDisplayName: lastSenderName,
           date: Timestamp.now(),
         }),
       });
@@ -61,7 +63,7 @@ const Input = ({ onSendMessage, isFetchingEnabled, fetchInterval }) => {
       console.error("Error sending message:", error);
       // Handle the error appropriately
     }
-    let lastSenderName = currentUser.displayName;
+    
     await updateDoc(doc(db, "userChats", currentUser.uid), {
       [data.chatId + ".lastMessage"]: {
         text,

@@ -129,6 +129,7 @@ const SignUp = (props) => {
                               displayName,
                               firstName: formData.firstName,
                               lastName: formData.lastName,
+                              type: "admin",
                               email,
                               organizationName,
                               photoURL: downloadURL

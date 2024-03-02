@@ -1,10 +1,24 @@
 @media screen and (max-width: 600px) {
 
+    .background-container {
+        background-image: url('/src/assets/images/ASLBackgroundSigns.png');
+        height: 150vh;
+        padding: 100px 0;
+      }
+
+      .hero-section {
+        background-image: url('/src/assets/images/ASLBackgroundSigns.png');
+        height: 150vh;
+        background-color: rgba(00, 00, 00, 0.50);
+        color: white;
+        padding: 100px 0;
+      }
+
     .login-form,
     .signup-form {
         width: 90%;
-        top: 40%;
         text-align: start;
+        padding-bottom: 100px;
     }
 
     .form-label {

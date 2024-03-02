@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../../firebase";
 import { AuthContext } from "../../context/AuthContext.js";
 import { setUserOffline } from "../../utils/UserPresence.js";
+import defaultProfilePicture from "../../assets/images/AccountSettingsHeadshot.jpg";
 
 const User = () => {
   const { currentUser } = useContext(AuthContext);
@@ -37,7 +38,7 @@ const User = () => {
         >
           <div style={{ position: "relative", display: "inline-block" }}>
             <img
-              src={currentUser?.photoURL}
+              src={currentUser?.photoURL || defaultProfilePicture}
               alt="User"
               className="rounded-circle"
               style={{ width: "45px", height: "45px", objectFit: "cover" }}
@@ -80,6 +81,19 @@ const User = () => {
           </li>
         </ul>
       </div>
+      <Link
+        className={`btn button-style ${
+          localStorage.getItem("accountType") === "admin" || localStorage.getItem("username") === null? "d-none" : ""
+        }`}
+        onClick={handleSignOut}
+        to="/"
+      >
+        <i
+          class="fa-solid fa-right-from-bracket me-3"
+          style={{ color: "#000000" }}
+        ></i>
+        Logout
+      </Link>
     </div>
   );
 };
