@@ -126,7 +126,7 @@ const Login = (props) => {
                 </div>
               </div>
               <div className="row form-submit-row justify-content-end">
-                <button type="submit" className="btn button-style">
+                <button type="submit" className="btn login-button-style btn-raised rounded-pill">
                   Login
                 </button>
               </div>

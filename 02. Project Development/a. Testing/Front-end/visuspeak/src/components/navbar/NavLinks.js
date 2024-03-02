@@ -52,12 +52,12 @@ const NavButton = () => {
           <li class="nav-item">
             <Link
               className={`nav-link ${
-                location.pathname === "/" &&
+                location.pathname === "/chat" &&
                 localStorage.getItem("username") != null
                   ? "active"
                   : ""
               } ${localStorage.getItem("username") === null ? "d-none" : ""}`}
-              to="/"
+              to="/chat"
               role="button"
               aria-expanded="false"
             >

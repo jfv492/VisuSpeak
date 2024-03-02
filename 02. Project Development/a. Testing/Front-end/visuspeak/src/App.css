@@ -36,6 +36,8 @@ body {
   height: 1.2em; 
 }
 
+
+/* ***************BUTTON STYLE*************** */
 .btn-raised {
   transition: box-shadow 0.3s ease, transform 0.3s ease;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -217,6 +219,21 @@ body {
 
 .form-signup-submit-row {
   padding-right: 12px !important;
+}
+
+.login-button-style {
+  background-color: #006262;
+  color: white;
+  padding-left: 2.5vh;
+  padding-right: 2.5vh;
+  width: 10rem;
+  font-size: x-large;
+  font-weight: bold;
+}
+
+.login-button-style:hover {
+  background-color: #023e3d;
+  color: white;
 }
 
 /* ***************MODAL STYLE*************** */
@@ -1119,8 +1136,9 @@ iframe {
 }
 
 .search-field {
-  background-color: transparent;
+  background-color: white;
   padding-bottom: 20px;
+  border-color: #999 !important;
 }
 
 .search-input {

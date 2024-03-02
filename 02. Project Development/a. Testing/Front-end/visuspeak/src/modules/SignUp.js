@@ -3,9 +3,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { auth, storage, db } from "../firebase.js";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { doc, setDoc } from "firebase/firestore"; 
-import { initializeUserPresence } from "../utils/UserPresence.js"
-import defaultProfilePicture from "../assets/images/AccountSettingsHeadshot.jpg"
+import { doc, setDoc } from "firebase/firestore";
+import { initializeUserPresence } from "../utils/UserPresence.js";
+import defaultProfilePicture from "../assets/images/AccountSettingsHeadshot.jpg";
 
 const SignUp = (props) => {
   let navigate = useNavigate();
@@ -23,6 +23,7 @@ const SignUp = (props) => {
     password: "",
     confirmPassword: "",
     organizationName: "", // Added organizationName field
+    primaryLanguage: "",
     agreeTerms: false,
   });
 
@@ -51,6 +52,7 @@ const SignUp = (props) => {
     const email = formData.email;
     const password = formData.password;
     const organizationName = formData.organizationName;
+    const primaryLanguage = formData.primaryLanguage;
 
     let currentErrors = {};
     let formIsValid = true;
@@ -81,6 +83,11 @@ const SignUp = (props) => {
       currentErrors.confirmPassword = "Passwords do not match.";
     }
 
+    if (formData.primaryLanguage == "" || formData.primaryLanguage == null) {
+      formIsValid = false;
+      currentErrors.primaryLanguage = "Please select your primary language.";
+    }
+
     // Check if terms and conditions are agreed to
     if (!formData.agreeTerms) {
       formIsValid = false;
@@ -93,62 +100,67 @@ const SignUp = (props) => {
       setErrors(currentErrors);
     } else {
       try {
-        const res = await createUserWithEmailAndPassword(
-          auth,
-          email,
-          password
-        );
+        const res = await createUserWithEmailAndPassword(auth, email, password);
         console.log("User registered on firebase:", formData.email);
-  
+
         fetch(defaultProfilePicture)
           .then((res) => res.blob())
           .then((blob) => {
-              const file = new File([blob], "profile_picture.jpg", { type: "image/jpeg" });
-  
-              const storageRef = ref(storage, `${formData.firstName}_${formData.lastName}`);
-              const uploadTask = uploadBytesResumable(storageRef, file);
-  
-              uploadTask.on(
-                  "state_changed",
-                  (snapshot) => {
-                      const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                      console.log('Upload is ' + progress + '% done');
-                  },
-                  (error) => {
-                      console.log(error);
-                  },
-                  () => {
-                      getDownloadURL(uploadTask.snapshot.ref).then( async(downloadURL) => {
-                          await updateProfile(res.user,{
-                            displayName,
-                            photoURL: downloadURL
-                          });
-                          try {
-                            await setDoc(doc(db, "users", res.user.uid), {
-                              uid: res.user.uid,
-                              displayName,
-                              firstName: formData.firstName,
-                              lastName: formData.lastName,
-                              type: "admin",
-                              email,
-                              organizationName,
-                              photoURL: downloadURL
-                            });
-                          } catch (error) {
-                            console.error("Error adding user to Firestore:", error);
-                            // Handle the error appropriately
-                          }
-                          await setDoc(doc(db, "userChats", res.user.uid), {});
-                          initializeUserPresence(res.user.uid);
+            const file = new File([blob], "profile_picture.jpg", {
+              type: "image/jpeg",
+            });
+
+            const storageRef = ref(
+              storage,
+              `${formData.firstName}_${formData.lastName}`
+            );
+            const uploadTask = uploadBytesResumable(storageRef, file);
+
+            uploadTask.on(
+              "state_changed",
+              (snapshot) => {
+                const progress =
+                  (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                console.log("Upload is " + progress + "% done");
+              },
+              (error) => {
+                console.log(error);
+              },
+              () => {
+                getDownloadURL(uploadTask.snapshot.ref).then(
+                  async (downloadURL) => {
+                    await updateProfile(res.user, {
+                      displayName,
+                      photoURL: downloadURL,
+                    });
+                    try {
+                      await setDoc(doc(db, "users", res.user.uid), {
+                        uid: res.user.uid,
+                        displayName,
+                        firstName: formData.firstName,
+                        lastName: formData.lastName,
+                        type: "admin",
+                        email,
+                        organizationName,
+                        primaryLanguage,
+                        photoURL: downloadURL,
                       });
+                    } catch (error) {
+                      console.error("Error adding user to Firestore:", error);
+                      // Handle the error appropriately
+                    }
+                    await setDoc(doc(db, "userChats", res.user.uid), {});
+                    initializeUserPresence(res.user.uid);
                   }
-              );
+                );
+              }
+            );
           })
           .catch((error) => {
-              console.error("Error fetching the image as blob:", error);
+            console.error("Error fetching the image as blob:", error);
           });
-          props.showAlert("Signup successful", "success");
-          navigate("/login")
+        props.showAlert("Signup successful", "success");
+        navigate("/login");
       } catch (err) {
         setErr(false);
         console.log("Firebase error: ", err);
@@ -215,15 +227,83 @@ const SignUp = (props) => {
               {formField("firstName", "First Name")}
               {formField("lastName", "Last Name")}
               {formField("organizationName", "Organization Name")}
+              {formField("email", "Email")}
             </>
           )}
           {(!mobileView || currentStep === 2) && (
             <>
-              {formField("email", "Email")}
               {formField("password", "Password", "password")}
               {formField("confirmPassword", "Confirm Password", "password")}
-              
-              <div className="col-sm-6">
+              <div className="col-sm-6 my-2">
+                <div
+                  className={` d-flex align-items-start ${
+                    mobileView ? "flex-column" : ""
+                  }`}
+                >
+                  <label className="form-label me-2">Primary Language:</label>
+                  <div className="form-check form-check-inline">
+                    <input
+                      className="form-check-input"
+                      type="radio"
+                      name="primaryLanguage"
+                      id="primaryLanguageASL"
+                      value="ASL"
+                      checked={formData.primaryLanguage === "ASL"}
+                      onChange={handleChange}
+                    />
+                    <label
+                      className="form-check-label"
+                      htmlFor="primaryLanguageASL"
+                    >
+                      ASL
+                    </label>
+                  </div>
+                  <div className="form-check form-check-inline">
+                    <input
+                      className="form-check-input"
+                      type="radio"
+                      name="primaryLanguage"
+                      id="primaryLanguageEnglish"
+                      value="English"
+                      checked={formData.primaryLanguage === "English"}
+                      onChange={handleChange}
+                    />
+                    <label
+                      className="form-check-label"
+                      htmlFor="primaryLanguageEnglish"
+                    >
+                      English
+                    </label>
+                  </div>
+                  <div className="form-check form-check-inline">
+                    <input
+                      className="form-check-input"
+                      type="radio"
+                      name="primaryLanguage"
+                      id="primaryLanguageFrench"
+                      value="French"
+                      checked={formData.primaryLanguage === "French"}
+                      onChange={handleChange}
+                    />
+                    <label
+                      className="form-check-label"
+                      htmlFor="primaryLanguageFrench"
+                    >
+                      French
+                    </label>
+                  </div>
+                </div>
+                <div className="text-start form-error">
+                  {errors.primaryLanguage && (
+                    <i
+                      className="fa-solid fa-circle-exclamation me-2"
+                      style={{ color: "#ca4c4c" }}
+                    ></i>
+                  )}
+                  {errors.primaryLanguage}
+                </div>
+              </div>
+              <div className="col-sm-6 my-2">
                 <label className="" htmlFor="agreeTerms">
                   <input
                     type="checkbox"

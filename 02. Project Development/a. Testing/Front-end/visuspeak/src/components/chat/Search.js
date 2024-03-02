@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { db } from "../../firebase.js";
 import {
   collection,
@@ -8,38 +8,46 @@ import {
   getDocs,
   serverTimestamp,
 } from "firebase/firestore";
-import { AuthContext } from "../../context/AuthContext.js";
 import { doc, setDoc, updateDoc } from "firebase/firestore";
+import { AuthContext } from "../../context/AuthContext.js";
+import defaultProfilePicture from "../../assets/images/AccountSettingsHeadshot.jpg";
 
 const Search = () => {
   const [username, setUsername] = useState("");
-  const [user, setUser] = useState("");
+  const [users, setUsers] = useState([]);
   const [err, setErr] = useState(false);
 
   const { currentUser } = useContext(AuthContext);
 
-  const handleSearch = async () => {
-    const q = query(
-      collection(db, "users"),
-      where("displayName", "==", username)
-    );
+  useEffect(() => {
+    const fetchUsers = async () => {
+      if (username.trim() === "") {
+        setUsers([]);
+        return;
+      }
 
-    try {
-      const querySnapshot = await getDocs(q);
-      querySnapshot.forEach((doc) => {
-        setUser(doc.data());
-      });
-    } catch (error) {
-      setErr(true);
-    }
-  };
+      const q = query(
+        collection(db, "users"),
+        where("displayName", ">=", username),
+        where("displayName", "<=", username + "\uf8ff")
+      );
 
-  const handleKey = (e) => {
-    e.code === "Enter" && handleSearch();
-  };
+      try {
+        const querySnapshot = await getDocs(q);
+        const fetchedUsers = [];
+        querySnapshot.forEach((doc) => {
+          fetchedUsers.push(doc.data());
+        });
+        setUsers(fetchedUsers);
+      } catch (error) {
+        setErr(true);
+      }
+    };
 
-  const handleSelect = async () => {
-    //check whether group (chats in firestore) exists or not, if not create
+    fetchUsers();
+  }, [username]);
+
+  const handleSelect = async (user) => {
     const combinedId =
       currentUser.uid > user.uid
         ? currentUser.uid + user.uid
@@ -48,11 +56,11 @@ const Search = () => {
     try {
       const chatRef = doc(db, "chats", combinedId);
       const res = await getDoc(doc(db, "chats", combinedId));
-      console.log(res.exists());
-      if (res.exists() == false) {
+
+      if (res.exists() === false) {
         await setDoc(chatRef, { messages: [] });
 
-        //create user chats
+        // Create user chats
         await updateDoc(doc(db, "userChats", currentUser.uid), {
           [combinedId + ".userInfo"]: {
             uid: user.uid,
@@ -71,51 +79,65 @@ const Search = () => {
           [combinedId + ".date"]: serverTimestamp(),
         });
       }
-    } catch (error) {}
-    setUser("");
+    } catch (error) {
+      console.error("Error selecting user:", error);
+    }
+    setUsername(""); // Reset input
+    setUsers([]); // Clear suggestions
   };
 
   return (
-    <>
-      <div class="input-group border rounded mb-4">
-        <span class="input-group-text input-icon">
+    <div
+      className="search-container"
+      style={{ position: "relative", width: "100%" }}
+    >
+      <div className="input-group border rounded mb-4">
+        <span className="input-group-text input-icon">
           <i
-            class="fa-solid fa-magnifying-glass search-icon fa-xl"
+            className="fa-solid fa-magnifying-glass search-icon fa-xl"
             style={{ color: "#006262" }}
           ></i>
         </span>
-
         <input
           type="search"
-          class="form-control search-input"
+          className="form-control search-input"
           aria-label="Search"
           placeholder="Find a user"
-          list="list-user"
-          onKeyDown={handleKey}
+          value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
-      
-      {user && (
-      // <List sx={{ width: "100%", bgcolor: "background.paper", borderRadius: '16px'}}>
-      // <ListItem  onClick={handleSelect}>
-      //     <ListItemAvatar>
-      //       <Avatar alt={user.displayName} src={user.photoURL} />
-      //     </ListItemAvatar>
-      //     <ListItemText
-      //       primary={user.displayName}
-      //     />
-      //   </ListItem>
-      // </List>
-      <ul className="list-group list-group-flush">
-      <li class="list-group-item search-field">
-            <div class="btn" onClick={handleSelect}>
-              <span>{user.displayName}</span>
-            </div>
-          </li>
-      </ul>
-      )}
       </div>
-    </>
+      {users.length > 0 && (
+        <ul
+          className="list-group list-group-flush"
+          style={{
+            position: "absolute",
+            width: "calc(100% - 2px)",
+            zIndex: 1000,
+            top: "100%",
+            left: 0,
+            margin: "0 -1px",
+          }}
+        >
+          {users.map((user, index) => (
+            <li
+              key={index}
+              className="list-group-item search-field border"
+              onClick={() => handleSelect(user)}
+              style={{ cursor: "pointer" }}
+            >
+              <img
+              src={user.photoURL || defaultProfilePicture}
+              alt="User"
+              className="rounded-circle me-2"
+              style={{ width: "40px", height: "40px", objectFit: "cover" }}
+            />
+              <span>{user.displayName}</span>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
   );
 };
 
