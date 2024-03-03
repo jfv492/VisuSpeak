@@ -56,7 +56,7 @@ const CustomerSignin = (props) => {
       navigate("/chat"); // Make sure you have a route set up to handle this path
     } catch (error) {
       console.error("Error signing in anonymously:", error);
-      props.showAlert("Anonymous sign-in failed. Please try again", "danger");
+      alert("Anonymous sign-in failed. Please try again", "danger");
     }
   };
 

@@ -19,10 +19,10 @@ export default function Home() {
     // </div>
 
     <div class="hero-section">
-      <div class="container h-100">
+      <div class="h-100 mx-5">
         <div class="row align-items-center">
           {localStorage.getItem("accountType") != "admin" ? (
-            <div class="col-sm-9 text-begin landing-page rounded-4 shadow-lg">
+            <div class=" col-sm-12 text-begin landing-page rounded-4 shadow-lg">
               <h1 class="text-white">Welcome to VisuSpeak</h1>
               <p class="lead text-white">Your ASL Companion</p>
               <div className="d-flex justify-content-between align-items-end">
