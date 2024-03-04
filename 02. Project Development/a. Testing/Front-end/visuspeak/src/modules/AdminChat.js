@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback } from "react";
 
 import Search from "../components/chat/Search.js";
 import Chats from "../components/chat/Chats.js";
@@ -7,7 +7,6 @@ import Chat from "../components/chat/Chat.js";
 const AdminChat = (props) => {
   const [leftWidth, setLeftWidth] = useState(35); // Percentage
   const [isDragging, setIsDragging] = useState(false);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   const startDragging = useCallback(() => {
     setIsDragging(true);
@@ -43,18 +42,9 @@ const AdminChat = (props) => {
     [isDragging]
   );
 
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
   return (
-    <div className="background-container">
-      <div className="admin-chat-container resizable-container shadow rounded-4">
+
+      <div className="admin-chat-container resizable-container">
         {/* <div className="row text-begin align-items-center">
           <div className="col-sm-4">
             <h3> {props.heading}</h3>
@@ -86,7 +76,7 @@ const AdminChat = (props) => {
           />
         )}
       </div>
-    </div>
+
   );
 };
 

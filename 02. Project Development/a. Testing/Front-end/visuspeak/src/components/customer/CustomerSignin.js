@@ -1,12 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { auth, storage, db } from "../../firebase.js";
-import {
-  createUserWithEmailAndPassword,
-  updateProfile,
-  signInAnonymously,
-} from "firebase/auth";
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { auth, db } from "../../firebase.js";
+import { signInAnonymously } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { initializeUserPresence } from "../../utils/UserPresence.js";
 import defaultProfilePicture from "../../assets/images/AccountSettingsHeadshot.jpg";
@@ -25,13 +20,6 @@ const CustomerSignin = (props) => {
       // Combine first and last name for display name
       const displayName =
         `${anonymousFirstName} ${anonymousLastName}`.trim() || "Guest";
-
-      // Set user info including the display name
-      const userInfo = {
-        uid: user.uid,
-        displayName: displayName,
-        photoURL: defaultProfilePicture, // You can use the default profile picture or set a specific one for guests
-      };
 
       // Create a new user document for the anonymous user
       await setDoc(doc(db, "users", user.uid), {
@@ -63,7 +51,7 @@ const CustomerSignin = (props) => {
   return (
     <div>
       <button
-        className="btn landing-button-style btn-raised rounded-pill"
+        className="btn landing-button-style btn-raised rounded-pill shadow-lg"
         type="button"
         data-bs-toggle="modal"
         data-bs-target="#startConversationModal"

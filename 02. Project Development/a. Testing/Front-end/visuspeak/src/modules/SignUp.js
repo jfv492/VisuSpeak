@@ -10,8 +10,6 @@ import defaultProfilePicture from "../assets/images/AccountSettingsHeadshot.jpg"
 const SignUp = (props) => {
   let navigate = useNavigate();
   const [errors, setErrors] = useState({});
-  const [err, setErr] = useState(false);
-  const [success, setSuccess] = useState("");
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [currentStep, setCurrentStep] = useState(1);
   const mobileView = windowWidth < 600;
@@ -83,7 +81,7 @@ const SignUp = (props) => {
       currentErrors.confirmPassword = "Passwords do not match.";
     }
 
-    if (formData.primaryLanguage == "" || formData.primaryLanguage == null) {
+    if (formData.primaryLanguage === "" || formData.primaryLanguage == null) {
       formIsValid = false;
       currentErrors.primaryLanguage = "Please select your primary language.";
     }
@@ -162,7 +160,7 @@ const SignUp = (props) => {
         props.showAlert("Signup successful", "success");
         navigate("/login");
       } catch (err) {
-        setErr(false);
+        setErrors(err);
         console.log("Firebase error: ", err);
         props.showAlert("Signup failed. Please try again", "danger");
       }

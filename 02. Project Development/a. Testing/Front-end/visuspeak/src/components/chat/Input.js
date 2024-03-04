@@ -33,12 +33,17 @@ const Input = ({ onSendMessage, isFetchingEnabled, fetchInterval }) => {
   });
 
   const handleKeyPress = (e) => {
-    if (e.key === "Enter") {
-      handleSend();
-    }
+      if (e.key === "Enter") {
+        handleSend();
+      }
   };
 
   const handleSend = async () => {
+    // Prevent sending if text is empty or only contains whitespace
+    if (!text.trim()) {
+      return;
+    }
+
     // Check if chatId is valid
     if (!data.chatId || data.chatId === "null") {
       console.error("No chat selected");
@@ -141,7 +146,7 @@ const Input = ({ onSendMessage, isFetchingEnabled, fetchInterval }) => {
           onChange={(e) => setText(e.target.value)}
           onKeyPress={handleKeyPress}
           value={text}
-          style={{ height: "55px" }}
+          style={{ minHeight: "20%" }}
         ></textarea>
         <span class="input-group-text input-icon">
           <button class="send-button py-2 " onClick={handleSend}>

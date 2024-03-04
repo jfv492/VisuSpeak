@@ -21,7 +21,7 @@ export default function Home() {
     <div class="hero-section">
       <div class="h-100 mx-5">
         <div class="row align-items-center">
-          {localStorage.getItem("accountType") != "admin" ? (
+          {localStorage.getItem("accountType") !== "admin" ? (
             <div class=" col-sm-12 text-begin landing-page rounded-4 shadow-lg">
               <h1 class="text-white">Welcome to VisuSpeak</h1>
               <p class="lead text-white">Your ASL Companion</p>

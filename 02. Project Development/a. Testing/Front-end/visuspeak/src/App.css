@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   height: 100%;
@@ -21,8 +22,8 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: normal;
-  line-height: 1.2em; 
-  height: 2.4em; 
+  line-height: 1.2em;
+  height: 2.4em;
 }
 
 .chat-name-ellipsis {
@@ -32,15 +33,15 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: normal;
-  line-height: 1.2em; 
-  height: 1.2em; 
+  line-height: 1.2em;
+  height: 1.2em;
 }
 
 
 /* ***************BUTTON STYLE*************** */
 .btn-raised {
   transition: box-shadow 0.3s ease, transform 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); */
 }
 
 .btn-raised:hover {
@@ -178,7 +179,7 @@ body {
 .background-container {
   background-image: url('/src/assets/images/ASLBackgroundSigns.png');
   height: 100vh;
-  padding: 100px 0;
+  padding: 10vh 0;
 }
 
 .login-form,
@@ -470,7 +471,7 @@ body {
 
 
 .chatbox-scrollable::-webkit-scrollbar {
-  width: 5px; 
+  width: 5px;
 }
 
 /* For WebKit (Chrome, Safari, etc.) */
@@ -481,7 +482,7 @@ body {
 
 .chatbox-scrollable {
   padding-top: 10px;
-  max-height: 510px;
+  height: 75vh;
   margin: 15px;
   overflow-y: auto;
   /* For Firefox */
@@ -634,7 +635,7 @@ iframe {
 }
 
 .video-placeholder {
-  min-height:500px;
+  min-height: 500px;
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -642,7 +643,7 @@ iframe {
 
 .camera-placeholder {
   width: 100%;
-  min-height:530px; 
+  min-height: 530px;
   display: flex;
   margin-left: 0.1px;
   margin-right: 0.1px;
@@ -754,7 +755,7 @@ iframe {
 }
 
 /* ***************CHAT STYLE*************** */
-.chat-page{
+.chat-page {
   /* background-color: #d4d3d3; */
   min-height: 800px;
   max-width: 1300px;
@@ -814,7 +815,8 @@ iframe {
 }
 
 .last-message {
-  font-size: 0.9em; /* Adjust the size as needed */
+  font-size: 0.9em;
+  /* Adjust the size as needed */
   /* color: #555; A lighter text color for the message */
   min-height: 30px;
 }
@@ -907,7 +909,7 @@ iframe {
 
 }
 
-.input-icon{
+.input-icon {
   color: #7d255b;
   width: 55;
   border: none;
@@ -983,12 +985,12 @@ iframe {
 
 .footer {
   background-color: #222;
-    color: white;
-    text-align: center;
-    padding: 20px 0;
-    position: relative;
-    height: 110px;
-    clear: both;
+  color: white;
+  text-align: center;
+  padding: 20px 0;
+  position: relative;
+  height: 110px;
+  clear: both;
 }
 
 .footer-container {
@@ -1070,14 +1072,19 @@ iframe {
 /* ***************STOPWATCH STYLE*************** */
 @keyframes slideDown {
   0% {
-    transform: translateY(-100%); /* Start above the original position */
+    transform: translateY(-100%);
+    /* Start above the original position */
     opacity: 0;
   }
+
   50% {
-    opacity: 1; /* Make it fully visible as it moves */
+    opacity: 1;
+    /* Make it fully visible as it moves */
   }
+
   100% {
-    transform: translateY(0); /* End at the original position */
+    transform: translateY(0);
+    /* End at the original position */
     opacity: 1;
   }
 }
@@ -1088,17 +1095,49 @@ iframe {
 }
 
 @keyframes shake {
-  0% { transform: translate(1px, 1px) rotate(0deg); }
-  10% { transform: translate(-1px, -2px) rotate(-1deg); }
-  20% { transform: translate(-3px, 0px) rotate(1deg); }
-  30% { transform: translate(3px, 2px) rotate(0deg); }
-  40% { transform: translate(1px, -1px) rotate(1deg); }
-  50% { transform: translate(-1px, 2px) rotate(-1deg); }
-  60% { transform: translate(-3px, 1px) rotate(0deg); }
-  70% { transform: translate(3px, 1px) rotate(-1deg); }
-  80% { transform: translate(-1px, -1px) rotate(1deg); }
-  90% { transform: translate(1px, 2px) rotate(0deg); }
-  100% { transform: translate(1px, -2px) rotate(-1deg); }
+  0% {
+    transform: translate(1px, 1px) rotate(0deg);
+  }
+
+  10% {
+    transform: translate(-1px, -2px) rotate(-1deg);
+  }
+
+  20% {
+    transform: translate(-3px, 0px) rotate(1deg);
+  }
+
+  30% {
+    transform: translate(3px, 2px) rotate(0deg);
+  }
+
+  40% {
+    transform: translate(1px, -1px) rotate(1deg);
+  }
+
+  50% {
+    transform: translate(-1px, 2px) rotate(-1deg);
+  }
+
+  60% {
+    transform: translate(-3px, 1px) rotate(0deg);
+  }
+
+  70% {
+    transform: translate(3px, 1px) rotate(-1deg);
+  }
+
+  80% {
+    transform: translate(-1px, -1px) rotate(1deg);
+  }
+
+  90% {
+    transform: translate(1px, 2px) rotate(0deg);
+  }
+
+  100% {
+    transform: translate(1px, -2px) rotate(-1deg);
+  }
 }
 
 .shaking {
@@ -1108,12 +1147,8 @@ iframe {
 
 /* ***************ADMIN CHAT STYLE*************** */
 .admin-chat-container {
-  min-height: 700px;
+  min-height: 100vh;
   min-width: 95%;
-  right: 50%;
-  top: 55%;
-  transform: translate(50%, -50%);
-  position: absolute;
   justify-content: center;
   align-items: center;
   border-color: #ddd;
@@ -1126,7 +1161,7 @@ iframe {
 
 .admin-chat-box {
   background: white;
-  min-height: 670px;
+  min-height: 100vh;
 }
 
 .admin-chat-list {
@@ -1171,20 +1206,20 @@ iframe {
 
 .resizable-left-panel,
 .resizable-right-panel {
-    flex-grow: 1;
-    overflow: auto;
+  flex-grow: 1;
+  overflow: auto;
 }
 
 .resizable-divider {
-    background: #999;
-    width: 3.9px;
-    user-select: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
+  background: #999;
+  width: 3.9px;
+  user-select: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
 }
 
 .resize-icon {
@@ -1201,12 +1236,12 @@ iframe {
 }
 
 .resizable-dragging-overlay {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    cursor: ew-resize;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  cursor: ew-resize;
 }
 
 /* ***************ASL CHAT STYLE*************** */
@@ -1232,7 +1267,7 @@ iframe {
 }
 
 .asl-chat-list::-webkit-scrollbar {
-  width: 5px; 
+  width: 5px;
 }
 
 /* For WebKit (Chrome, Safari, etc.) */
@@ -1247,7 +1282,7 @@ iframe {
 }
 
 .asl-chatbox-scrollable::-webkit-scrollbar {
-  width: 5px; 
+  width: 5px;
 }
 
 /* For WebKit (Chrome, Safari, etc.) */

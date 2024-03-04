@@ -176,3 +176,11 @@
         padding: 5px;
     }
 }
+
+@media screen and (max-width: 600px) {
+    .background-container {
+        background-image: url('/src/assets/images/ASLBackgroundSigns.png');
+        height: 300vh;
+        padding: 100px 0;
+      }
+}

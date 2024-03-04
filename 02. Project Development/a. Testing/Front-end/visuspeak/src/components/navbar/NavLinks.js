@@ -40,18 +40,34 @@ const NavButton = () => {
       </div>
       <div class="offcanvas-body">
         <ul class="navbar-nav nav nav-pills nav-pills-link-active-color ms-auto justify-content-end flex-grow-1 pe-3">
-        { localStorage.getItem("username") === null && <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Admin
-          </a>
-          <ul class="dropdown-menu">
-            <li><Link class="dropdown-item" to="/login">Login</Link></li>
-            <li><Link class="dropdown-item" to="/signup">Sign Up</Link></li>
-          </ul>
-        </li>}
+          {localStorage.getItem("username") === null && (
+            <li class="nav-item dropdown">
+              <Link
+                class="nav-link dropdown-toggle btn-raised"
+                to="/"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Admin
+              </Link>
+              <ul class="dropdown-menu">
+                <li>
+                  <Link class="dropdown-item" to="/login">
+                    Login
+                  </Link>
+                </li>
+                <li>
+                  <Link class="dropdown-item" to="/signup">
+                    Sign Up
+                  </Link>
+                </li>
+              </ul>
+            </li>
+          )}
           <li class="nav-item">
             <Link
-              className={`nav-link ${
+              className={`nav-link btn-raised ${
                 location.pathname === "/chat" &&
                 localStorage.getItem("username") != null
                   ? "active"
@@ -66,7 +82,7 @@ const NavButton = () => {
           </li>
           <li class="nav-item">
             <Link
-              className={`nav-link ${
+              className={`nav-link btn-raised ${
                 location.pathname === "/resources" ? "active" : ""
               }`}
               aria-current="page"
@@ -77,7 +93,7 @@ const NavButton = () => {
           </li>
           <li class="nav-item">
             <Link
-              className={`nav-link ${
+              className={`nav-link btn-raised ${
                 location.pathname === "/about" ? "active" : ""
               }`}
               to="/about"
