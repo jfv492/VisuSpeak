@@ -31,7 +31,7 @@ const Message = ({ message }) => {
         </div>
       </div>
       <span
-        class={`time ${
+        class={`time mb-4 ${
           message.senderId === currentUser.uid ? "mine" : "theirs"
         }`}
       >

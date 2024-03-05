@@ -64,7 +64,7 @@ const Login = (props) => {
   };
   return (
     <div className="background-container">
-      <div class="container h-100">
+      <div class="container">
         <div class="row align-items-center justify-content-center">
           {/* <div class="col-sm-12"> */}
             <form

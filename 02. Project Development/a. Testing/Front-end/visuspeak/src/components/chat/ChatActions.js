@@ -45,14 +45,14 @@ const ChatActions = (props) => {
   };
   return (
     <div className="row chat-actions">
-      <button
-        class="btn chat-action-button bg-gradient me-2"
+      {localStorage.getItem("admin") && <button
+        class="btn chat-action-button bg-gradient me-1"
         type="button"
         aria-expanded="false"
         onClick={copyMessagesToClipboard}
       >
         <i class="fa-regular fa-copy"></i>
-      </button>
+      </button>}
       <button
         class="btn chat-action-button bg-gradient me-2"
         type="button"

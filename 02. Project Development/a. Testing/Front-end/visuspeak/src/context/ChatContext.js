@@ -14,6 +14,7 @@ export const ChatContextProvider = ({ children }) => {
   const INITIAL_STATE = {
     chatId: "null",
     user: {},
+    sortOrder: "mostRecent", // Default sort order
   };
 
   const chatReducer = (state, action) => {
@@ -31,6 +32,11 @@ export const ChatContextProvider = ({ children }) => {
           ...state,
           user: {},
           chatId: "null",
+        };
+      case "CHANGE_SORT_ORDER": // New case for changing sort order
+        return {
+          ...state,
+          sortOrder: action.payload, // Assuming payload is either 'mostRecent' or 'leastRecent'
         };
       default:
         return state;

@@ -19,24 +19,23 @@ export default function Home() {
     // </div>
 
     <div class="hero-section">
-      <div class="h-100 mx-5">
-        <div class="row align-items-center">
-          {localStorage.getItem("accountType") !== "admin" ? (
-            <div class=" col-sm-12 text-begin landing-page rounded-4 shadow-lg">
+      <div class="row align-items-center mx-3">
+        {localStorage.getItem("accountType") !== "admin" ? (
+          <div class="col-sm-12 text-begin landing-page rounded-4 shadow-lg">
+            <div className="d-flex justify-content-between align-items-start">
               <h1 class="text-white">Welcome to VisuSpeak</h1>
-              <p class="lead text-white">Your ASL Companion</p>
-              <div className="d-flex justify-content-between align-items-end">
-                <CustomerSignin />
-                <i
-                  class="fa-solid fa-question fa-2xl btn-raised help-icon shadow"
-                  style={{ color: "#ffffff" }}
-                ></i>
-              </div>
+              <i
+                class="fa-solid fa-question help-icon"
+                style={{ color: "#ffffff" }}
+              ></i>
             </div>
-          ) : (
-            <Dashboard />
-          )}
-        </div>
+            <p class="lead text-white">Your ASL Companion</p>
+
+            <CustomerSignin />
+          </div>
+        ) : (
+          <Dashboard />
+        )}
       </div>
       <div id="content"></div>
     </div>

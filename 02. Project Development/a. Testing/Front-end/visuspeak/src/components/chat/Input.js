@@ -11,7 +11,7 @@ import {
 import { v4 as uuid } from "uuid";
 import { doc } from "firebase/firestore";
 import { db } from "../../firebase.js";
-import modelChatUrl from "../../Chat-env.js"
+import modelChatUrl from "../../Chat-env.js";
 
 const Input = ({ onSendMessage, isFetchingEnabled, fetchInterval }) => {
   const [text, setText] = useState("");
@@ -33,9 +33,9 @@ const Input = ({ onSendMessage, isFetchingEnabled, fetchInterval }) => {
   });
 
   const handleKeyPress = (e) => {
-      if (e.key === "Enter") {
-        handleSend();
-      }
+    if (e.key === "Enter") {
+      handleSend();
+    }
   };
 
   const handleSend = async () => {
@@ -51,7 +51,8 @@ const Input = ({ onSendMessage, isFetchingEnabled, fetchInterval }) => {
       return;
     }
 
-    let lastSenderName = currentUser.displayName || localStorage.getItem("username");
+    let lastSenderName =
+      currentUser.displayName || localStorage.getItem("username");
 
     try {
       await updateDoc(doc(db, "chats", data.chatId), {
@@ -68,7 +69,7 @@ const Input = ({ onSendMessage, isFetchingEnabled, fetchInterval }) => {
       console.error("Error sending message:", error);
       // Handle the error appropriately
     }
-    
+
     await updateDoc(doc(db, "userChats", currentUser.uid), {
       [data.chatId + ".lastMessage"]: {
         text,
@@ -126,13 +127,13 @@ const Input = ({ onSendMessage, isFetchingEnabled, fetchInterval }) => {
   }, [listening, stop]);
 
   return (
-    <div className="input-area text-center px-2">
-      <div class="input-group border rounded shadow rounded-4">
+    <div className="input-area text-center shadow">
+      <div class="input-group border shadow rounded-3">
         <span class="input-group-text input-icon">
           {listening ? (
             <i
               onClick={stop}
-              className="fa-solid fa-microphone-slash fa-xl "
+              className="fa-solid fa-microphone-slash fa-xl"
             ></i>
           ) : (
             <i onClick={listen} className="fa-solid fa-microphone fa-xl"></i>
@@ -146,7 +147,7 @@ const Input = ({ onSendMessage, isFetchingEnabled, fetchInterval }) => {
           onChange={(e) => setText(e.target.value)}
           onKeyPress={handleKeyPress}
           value={text}
-          style={{ minHeight: "20%" }}
+          style={{ height: "80px" }}
         ></textarea>
         <span class="input-group-text input-icon">
           <button class="send-button py-2 " onClick={handleSend}>

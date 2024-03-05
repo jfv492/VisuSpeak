@@ -234,7 +234,7 @@ const SignUp = (props) => {
               {formField("confirmPassword", "Confirm Password", "password")}
               <div className="col-sm-6 my-2">
                 <div
-                  className={` d-flex align-items-start ${
+                  className={` d-flex align-items-center ${
                     mobileView ? "flex-column" : ""
                   }`}
                 >
@@ -250,7 +250,7 @@ const SignUp = (props) => {
                       onChange={handleChange}
                     />
                     <label
-                      className="form-check-label"
+                      className="form-check-label mt-1"
                       htmlFor="primaryLanguageASL"
                     >
                       ASL
@@ -267,7 +267,7 @@ const SignUp = (props) => {
                       onChange={handleChange}
                     />
                     <label
-                      className="form-check-label"
+                      className="form-check-label mt-1"
                       htmlFor="primaryLanguageEnglish"
                     >
                       English
@@ -284,7 +284,7 @@ const SignUp = (props) => {
                       onChange={handleChange}
                     />
                     <label
-                      className="form-check-label"
+                      className="form-check-label mt-1"
                       htmlFor="primaryLanguageFrench"
                     >
                       French
@@ -302,22 +302,24 @@ const SignUp = (props) => {
                 </div>
               </div>
               <div className="col-sm-6 my-2">
-                <label className="" htmlFor="agreeTerms">
-                  <input
-                    type="checkbox"
-                    className="form-check-input"
-                    id="agreeTerms"
-                    name="agreeTerms"
-                    checked={formData.agreeTerms}
-                    onChange={handleChange}
-                  />{" "}
+
+              <input
+                  type="checkbox"
+                  className="form-check-input"
+                  id="agreeTerms"
+                  name="agreeTerms"
+                  checked={formData.agreeTerms}
+                  onChange={handleChange}
+                />
+                <label className="ms-1" htmlFor="agreeTerms">
                   Do you agree with the
                   <Link className="hyperlink ms-1" to="/">
                     terms and conditions
                   </Link>
                   ?
                 </label>
-                <div className="text-start form-error">
+
+                <div className="text-start form-error mt-2">
                   {errors.agreeTerms && (
                     <i
                       className="fa-solid fa-circle-exclamation me-2"

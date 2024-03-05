@@ -8,7 +8,7 @@ const Navbar = () => {
     <nav class="navbar navbar-expand-lg bg-body-tertiary shadow">
       <div class="container-fluid">
         <Link className="navbar-brand mx-3" to="/">
-          <img src={ColourLogo} alt="VisuSpeak Logo" height="50" />
+          <img src={ColourLogo} className="navbar-logo" alt="VisuSpeak Logo" height="45"/>
         </Link>
         <button
           class="navbar-toggler mx-3"

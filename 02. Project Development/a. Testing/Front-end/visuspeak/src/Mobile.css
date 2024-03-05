@@ -2,16 +2,31 @@
 
     .background-container {
         background-image: url('/src/assets/images/ASLBackgroundSigns.png');
-        height: 150vh;
+        height: 100vh;
         padding: 100px 0;
-      }
+    }
 
-      .hero-section {
+    .hero-section {
         background-image: url('/src/assets/images/ASLBackgroundSigns.png');
-        height: 150vh;
+        height: 100vh;
         background-color: rgba(00, 00, 00, 0.50);
         color: white;
         padding: 100px 0;
+        flex-direction: row;
+    }
+
+    .landing-page h1 {
+        font-size: 6vh;
+      }
+
+      .landing-page p {
+        font-size: 4vh;
+        margin-bottom: 2rem;
+      }
+
+      .landing-page i {
+        cursor: help;
+        font-size: 3vh;
       }
 
     .login-form,
@@ -29,8 +44,8 @@
 
     .info-icon {
         display: flex;
-        align-items: end;
-        justify-content: end;
+        align-items: flex-end;
+        justify-content: flex-end;
         text-align: end;
     }
 
@@ -175,12 +190,17 @@
     .chat-messages {
         padding: 5px;
     }
+
+    /* ***************RESIZABLE COLUMNS*************** */
+.resizable-container {
+    flex-direction: column;
+  }
 }
 
 @media screen and (max-width: 600px) {
     .background-container {
         background-image: url('/src/assets/images/ASLBackgroundSigns.png');
-        height: 300vh;
+        height: 100vh;
         padding: 100px 0;
-      }
+    }
 }

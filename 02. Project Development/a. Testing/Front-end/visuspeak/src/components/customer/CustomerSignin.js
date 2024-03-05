@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth, db } from "../../firebase.js";
 import { signInAnonymously } from "firebase/auth";
@@ -8,9 +8,19 @@ import defaultProfilePicture from "../../assets/images/AccountSettingsHeadshot.j
 
 const CustomerSignin = (props) => {
   let navigate = useNavigate();
-  // Add these states in your SignUp component
   const [anonymousFirstName, setAnonymousFirstName] = useState("");
   const [anonymousLastName, setAnonymousLastName] = useState("");
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const mobileView = windowWidth < 600;
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const handleAnonymousSignIn = async () => {
     try {
@@ -65,9 +75,14 @@ const CustomerSignin = (props) => {
         aria-labelledby="startConversationModal"
         aria-hidden="true"
       >
-        <div className="modal-dialog modal-lg">
+        <div
+          className={`modal-dialog modal-xl ${
+            mobileView && "modal-dialog-centered"
+          }`}
+        >
           <div className="modal-content">
             <div className="modal-header">
+              <div className="fs-5 fw-bold">Enter your first and last name</div>
               <button
                 type="button"
                 className="btn-close"
@@ -76,9 +91,8 @@ const CustomerSignin = (props) => {
               ></button>
             </div>
             <div className="modal-body">
-              <div className="row my-3">
-                <h1 className="fs-5">Enter your first and last name</h1>
-                <div className="col">
+              <div className="row g-3 d-flex flex-wrap">
+                <div className="col-sm-6">
                   <input
                     type="text"
                     className="form-control"
@@ -88,7 +102,7 @@ const CustomerSignin = (props) => {
                     onChange={(e) => setAnonymousFirstName(e.target.value)}
                   />
                 </div>
-                <div className="col">
+                <div className="col-sm-6">
                   <input
                     type="text"
                     className="form-control"
@@ -111,6 +125,7 @@ const CustomerSignin = (props) => {
               <button
                 type="button"
                 className="btn modal-button-style btn-raised rounded-pill"
+                data-bs-dismiss="modal"
                 onClick={handleAnonymousSignIn}
               >
                 Start Chat as Guest

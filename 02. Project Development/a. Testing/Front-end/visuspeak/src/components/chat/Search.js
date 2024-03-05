@@ -10,14 +10,20 @@ import {
 } from "firebase/firestore";
 import { doc, setDoc, updateDoc } from "firebase/firestore";
 import { AuthContext } from "../../context/AuthContext.js";
+import { ChatContext } from "../../context/ChatContext.js";
 import defaultProfilePicture from "../../assets/images/AccountSettingsHeadshot.jpg";
 
 const Search = () => {
   const [username, setUsername] = useState("");
   const [users, setUsers] = useState([]);
   const [err, setErr] = useState(false);
+  // const [sortOrder, setSortOrder] = useState("mostRecent");
 
   const { currentUser } = useContext(AuthContext);
+  const { data, dispatch } = useContext(ChatContext);
+
+  const sortOrderText = data.sortOrder === 'mostRecent' ? 'Most Recent' : 'Least Recent';
+
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -26,11 +32,25 @@ const Search = () => {
         return;
       }
 
-      const q = query(
-        collection(db, "users"),
+      const usersRef = collection(db, "users");
+
+      let q = query(
+        usersRef,
+        where("displayName", "!=", currentUser.displayName),
         where("displayName", ">=", username),
         where("displayName", "<=", username + "\uf8ff")
       );
+
+      console.log("User list:", q);
+
+      if (localStorage.getItem("accountType") === "admin") {
+        q = query(
+          usersRef,
+          where("displayName", "!=", currentUser.displayName),
+          where("displayName", ">=", username),
+          where("displayName", "<=", username + "\uf8ff")
+        );
+      }
 
       try {
         const querySnapshot = await getDocs(q);
@@ -46,6 +66,10 @@ const Search = () => {
 
     fetchUsers();
   }, [username]);
+
+  const handleSortChange = (sortOrder) => {
+    dispatch({ type: "CHANGE_SORT_ORDER", payload: sortOrder });
+  };
 
   const handleSelect = async (user) => {
     const combinedId =
@@ -66,17 +90,22 @@ const Search = () => {
             uid: user.uid,
             displayName: user.displayName,
             photoURL: user.photoURL,
+            isArchive: true,
           },
           [combinedId + ".date"]: serverTimestamp(),
+          [combinedId + ".isArchive"]: true,
         });
 
         await updateDoc(doc(db, "userChats", user.uid), {
           [combinedId + ".userInfo"]: {
             uid: currentUser.uid,
-            displayName: currentUser.displayName || localStorage.getItem("username"),
+            displayName:
+              currentUser.displayName || localStorage.getItem("username"),
             photoURL: currentUser.photoURL,
+            isArchive: true,
           },
           [combinedId + ".date"]: serverTimestamp(),
+          [combinedId + ".isArchive"]: true,
         });
       }
     } catch (error) {
@@ -91,10 +120,10 @@ const Search = () => {
       className="search-container"
       style={{ position: "relative", width: "100%" }}
     >
-      <div className="input-group border rounded mb-4">
+      <div className="input-group border rounded">
         <span className="input-group-text input-icon">
           <i
-            className="fa-solid fa-magnifying-glass search-icon fa-xl"
+            className="fa-solid fa-magnifying-glass search-icon"
             style={{ color: "#006262" }}
           ></i>
         </span>
@@ -102,7 +131,7 @@ const Search = () => {
           type="search"
           className="form-control search-input"
           aria-label="Search"
-          placeholder="Find a user"
+          placeholder="Search user..."
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
@@ -127,16 +156,52 @@ const Search = () => {
               style={{ cursor: "pointer" }}
             >
               <img
-              src={user.photoURL || defaultProfilePicture}
-              alt="User"
-              className="rounded-circle me-2"
-              style={{ width: "40px", height: "40px", objectFit: "cover" }}
-            />
+                src={user.photoURL || defaultProfilePicture}
+                alt="User"
+                className="rounded-circle me-2"
+                style={{ width: "40px", height: "40px", objectFit: "cover" }}
+              />
               <span>{user.displayName}</span>
             </li>
           ))}
         </ul>
       )}
+      <div className="d-flex justify-content-between my-2 mx-1">
+        <div class="dropdown">
+          <div
+            class="dropdown-toggle fw-medium fs-6"
+            type="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            {sortOrderText}
+          </div>
+          <ul className="dropdown-menu" aria-labelledby="sortDropdown">
+            <li>
+              <a
+                className="dropdown-item"
+                href="#"
+                onClick={() => handleSortChange("mostRecent")}
+              >
+                Most Recent
+              </a>
+            </li>
+            <li>
+              <a
+                className="dropdown-item"
+                href="#"
+                onClick={() => handleSortChange("leastRecent")}
+              >
+                Least Recent
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="fw-medium fs-6" style={{ cursor: "pointer" }}>
+          <i class="fa-solid fa-box-archive me-2"></i>
+          Archive
+        </div>
+      </div>
     </div>
   );
 };

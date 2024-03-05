@@ -43,7 +43,7 @@ const NavButton = () => {
           {localStorage.getItem("username") === null && (
             <li class="nav-item dropdown">
               <Link
-                class="nav-link dropdown-toggle btn-raised"
+                class="nav-link dropdown-toggle btn-raised user-nav-link"
                 to="/"
                 role="button"
                 data-bs-toggle="dropdown"

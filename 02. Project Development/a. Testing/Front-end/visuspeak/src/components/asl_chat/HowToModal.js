@@ -18,33 +18,33 @@ const HowToModal = () => {
     <div>
       <button
         type="button"
-        class="btn fs-3 "
+        class="btn"
         data-bs-toggle="modal"
         data-bs-target="#helpModal"
       >
         <i
-          class="fa-solid fa-circle-question howto-icon fa-lg mt-4 "
+          class="fa-solid fa-circle-question howto-icon fs-2"
           style={{ color: "#006262;" }}
-          aria-owns={open ? 'mouse-over-popover' : undefined}
-        aria-haspopup="true"
-        onMouseEnter={handlePopoverOpen}
-        onMouseLeave={handlePopoverClose}
+          aria-owns={open ? "mouse-over-popover" : undefined}
+          aria-haspopup="true"
+          onMouseEnter={handlePopoverOpen}
+          onMouseLeave={handlePopoverClose}
         ></i>
       </button>
       <Popover
         id="mouse-over-popover"
         sx={{
-          pointerEvents: 'none',
+          pointerEvents: "none",
         }}
         open={open}
         anchorEl={anchorEl}
         anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'center',
+          vertical: "top",
+          horizontal: "center",
         }}
         transformOrigin={{
-          vertical: 'bottom',
-          horizontal: 'center',
+          vertical: "bottom",
+          horizontal: "center",
         }}
         onClose={handlePopoverClose}
         disableRestoreFocus
@@ -58,7 +58,7 @@ const HowToModal = () => {
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
-        <div class="modal-dialog text-start">
+        <div class="modal-dialog text-start modal-lg">
           <div class="modal-content">
             <div class="modal-header">
               <h1 class="modal-title fs-5" id="exampleModalLabel">
@@ -66,7 +66,7 @@ const HowToModal = () => {
                   class="fa-solid fa-message me-2"
                   style={{ color: "#000000;" }}
                 ></i>
-                How-to Chat
+                Help Section: ASL Interaction Feature
               </h1>
               <button
                 type="button"
@@ -76,35 +76,79 @@ const HowToModal = () => {
               ></button>
             </div>
             <div class="modal-body">
+              <h2>Help Section: ASL Interaction Feature</h2>
+              <h3>Activating ASL Mode</h3>
+              <p>
+                To interact using American Sign Language (ASL), first activate
+                the camera feature in the app. This allows you to sign words
+                directly into the camera for the AI model to recognize and
+                translate.
+              </p>
+              <h3>Steps for ASL Interaction</h3>
               <ol>
                 <li>
-                  Activate the camera for American Sign Language (ASL)
-                  interaction.
+                  <strong>Activate the Camera:</strong> Ensure your device's
+                  camera is enabled and positioned to capture your signing
+                  clearly.
                 </li>
                 <li>
-                  Sign one of the available words that can be recognized by the
-                  AI model into the camera window (Click here for list of
-                  supported words).
-                </li>
-                <li>The AI Model will detect and predict the signed word.</li>
-                <li>
-                  The predicted word will be translated from ASL to English and
-                  displayed in the text input field.
+                  <strong>Sign a Word:</strong> Refer to our{" "}
+                  <a href="#">list of supported words</a> and sign one of these
+                  words into the camera. Make sure your signs are clear and
+                  within the camera's view.
                 </li>
                 <li>
-                  If the predicted word matches the desired word, you can send
-                  it in the chat by clicking the send button.
+                  <strong>AI Recognition:</strong> Once you sign a word, our AI
+                  model will attempt to detect and predict the signed word.
                 </li>
                 <li>
-                  Adjust recognition speed using the slider/button [depending on
-                  what we choose]:
-                  <ul>
-                    <li>Select "5s" for a fast timer.</li>
-                    <li>Choose "10s" for a medium timer (default).</li>
-                    <li>Opt for "15s" for a slow timer.</li>
-                  </ul>
+                  <strong>Translation Display:</strong> The predicted word will
+                  be automatically translated from ASL to English and appear in
+                  the text input field of the chat.
+                </li>
+                <li>
+                  <strong>Sending Messages:</strong> If the AI correctly
+                  predicts the word you signed, simply click the{" "}
+                  <strong>Send</strong> button to include it in your chat
+                  conversation.
                 </li>
               </ol>
+              <h3>Adjusting Recognition Speed</h3>
+              <p>
+                To accommodate various signing speeds, you can adjust the AI's
+                recognition timing:
+              </p>
+              <ul>
+                <li>
+                  <strong>Fast Timer (5s):</strong> Select this for quicker
+                  recognition. Ideal for experienced signers.
+                </li>
+                <li>
+                  <strong>Medium Timer (10s):</strong> This is the default
+                  setting, offering a balanced speed.
+                </li>
+                <li>
+                  <strong>Slow Timer (15s):</strong> Choose this for a more
+                  relaxed recognition pace, allowing more time for signing.
+                </li>
+              </ul>
+              <div class="tips">
+                <h3>Tips for Accurate Recognition</h3>
+                <ul>
+                  <li>
+                    Ensure good lighting and a clear background to improve the
+                    AI's ability to recognize your signs.
+                  </li>
+                  <li>
+                    Practice the supported signs to become familiar with how the
+                    AI model recognizes different gestures.
+                  </li>
+                </ul>
+              </div>
+              <p>
+                For further assistance or to report any issues, please contact
+                our support team.
+              </p>
             </div>
           </div>
         </div>
