@@ -824,7 +824,7 @@ iframe {
   border-bottom: 1px solid #ddd;
   background-color: #fff;
   color: black;
-  min-height: 2cm;
+  max-height: 2cm;
 }
 
 .user-info {
@@ -1365,7 +1365,7 @@ iframe {
   flex-grow: 1; /* Takes up all available space */
   overflow-y: auto; /* Enable scroll if content is larger than the space */
   padding: 0.5cm;
-  padding-top: 1.5cm;
+  padding-top: 50px;
 
   /* For Firefox */
   scrollbar-width: thin;

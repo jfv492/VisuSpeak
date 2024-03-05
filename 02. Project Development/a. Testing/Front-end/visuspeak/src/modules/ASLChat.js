@@ -2,7 +2,6 @@ import React, { useState, useCallback, useEffect, useContext } from "react";
 import { ChatContext } from "../context/ChatContext.js";
 import Search from "../components/chat/Search.js";
 import Chats from "../components/chat/Chats.js";
-import axios from "axios"; // For making HTTP requests
 import ChatHeader from "../components/chat/ChatHeader.js";
 import MessageList from "../components/chat/MessageList.js";
 import InputArea from "../components/chat/Input.js";
