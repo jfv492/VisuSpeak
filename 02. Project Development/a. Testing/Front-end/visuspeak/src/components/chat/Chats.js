@@ -18,6 +18,12 @@ const Chats = () => {
   const sortOrder = data.sortOrder;
 
   useEffect(() => {
+    return () => {
+      dispatch({ type: "RESET_CHAT" });
+    };
+  }, [dispatch]);
+
+  useEffect(() => {
     let interval;
     let unsubFromUserChats = () => {};
 
@@ -72,7 +78,15 @@ const Chats = () => {
                 : dateB - dateA;
             });
 
-            setChatsWithStatus(chatsArray.filter(chat => showArchived ? chat.isArchive : !chat.isArchive));
+            if (localStorage.getItem("accountType") === "admin") {
+              setChatsWithStatus(
+                chatsArray.filter((chat) =>
+                  showArchived ? chat.isArchive : !chat.isArchive
+                )
+              );
+            } else {
+              setChatsWithStatus(chatsArray);
+            }
 
             chatsArray.forEach((chat) => {
               onUserStatusChanged(chat.userInfo.uid, (status) => {
@@ -181,11 +195,21 @@ const Chats = () => {
               </div>
               <div className="flex-fill">
                 <div className="d-flex">
-                  <div className="d-flex align-items-center justify-content-between w-100">
+                  <div className="d-flex align-items-center w-100">
+                    <span
+                      class={`badge rounded-pill me-1 ${
+                        chat.userInfo?.type === "admin"
+                          ? "text-bg-primary"
+                          : "text-bg-secondary"
+                      }`}
+                    >
+                      {chat.userInfo?.type}
+                    </span>
                     <h5 className="mb-1 chat-name-ellipsis">
                       {chat.userInfo?.displayName}
                     </h5>
-                    <small>{formattedDate}</small>
+
+                    <small className="ms-auto w-50 text-end">{formattedDate}</small>
                   </div>
                 </div>
                 <div className="last-message fw-light two-line-ellipsis">

@@ -423,6 +423,12 @@ body {
   font-size: larger;
 }
 
+.dropdown {
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+}
+
 .b-example-divider {
   background-color: #00000018;
   height: 50px;
@@ -950,6 +956,10 @@ iframe {
   /* box-shadow: 0px 3px 6px #00000029; */
   width: 100%;
 
+}
+
+.filter-input-icon {
+  background-color: transparent !important;
 }
 
 .input-icon {

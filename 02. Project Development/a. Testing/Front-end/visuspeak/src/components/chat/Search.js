@@ -89,6 +89,7 @@ const Search = () => {
             uid: user.uid,
             displayName: user.displayName,
             photoURL: user.photoURL,
+            type: user.type,
           },
           [combinedId + ".date"]: serverTimestamp(),
           [combinedId + ".isArchive"]: false,
@@ -100,10 +101,18 @@ const Search = () => {
             displayName:
               currentUser.displayName || localStorage.getItem("username"),
             photoURL: currentUser.photoURL,
+            type: currentUser.type || localStorage.getItem("accountType"),
           },
           [combinedId + ".date"]: serverTimestamp(),
           [combinedId + ".isArchive"]: false,
         });
+
+        console.log(
+          user.uid,
+          currentUser.displayName || localStorage.getItem("username"),
+          currentUser.photoURL,
+          currentUser.type
+        );
       }
     } catch (error) {
       console.error("Error selecting user:", error);
@@ -117,21 +126,55 @@ const Search = () => {
       className="search-container"
       style={{ position: "relative", width: "100%" }}
     >
-      <div className="input-group border rounded">
-        <span className="input-group-text input-icon">
+      <div className="d-flex align-items-center">
+        <div className="input-group border rounded">
+          <span className="input-group-text input-icon">
+            <i
+              className="fa-solid fa-magnifying-glass search-icon"
+              style={{ color: "#006262" }}
+            ></i>
+          </span>
+          <input
+            type="search"
+            className="form-control search-input"
+            aria-label="Search"
+            placeholder="Search user..."
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </div>
+        <div class="dropdown ">
           <i
-            className="fa-solid fa-magnifying-glass search-icon"
-            style={{ color: "#006262" }}
+            class="fa-solid fa-filter fs-4 ms-2"
+            type="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
           ></i>
-        </span>
-        <input
-          type="search"
-          className="form-control search-input"
-          aria-label="Search"
-          placeholder="Search user..."
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
+          <ul class="dropdown-menu fw-medium fs-6 p-2">
+            <li className="mb-2">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value=""
+                id="flexCheckDefault"
+              />
+              <label class="form-check-label ms-2 mt-1" for="flexCheckDefault">
+                Admin
+              </label>
+            </li>
+            <li>
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value=""
+                id="flexCheckDefault"
+              />
+              <label class="form-check-label ms-2 mt-1" for="flexCheckDefault">
+                Guest
+              </label>
+            </li>
+          </ul>
+        </div>
       </div>
       {users.length > 0 && (
         <ul
@@ -164,14 +207,40 @@ const Search = () => {
         </ul>
       )}
       <div className="d-flex justify-content-between my-2 mx-1">
-        <div class="dropdown">
+        {localStorage.getItem("accountType") === "admin" && (
           <div
-            class="dropdown-toggle fw-medium fs-6"
+            class="fw-medium fs-6"
+            style={{ cursor: "pointer" }}
+            onClick={() => {
+              toggleShowArchived();
+            }}
+          >
+            {data.showArchived ? (
+              <>
+                <i class="fa-solid fa-arrow-left me-2"></i>
+                Back
+              </>
+            ) : (
+              <>
+                <i class="fa-solid fa-box-archive me-2"></i>
+                Archive
+              </>
+            )}
+          </div>
+        )}
+        <div class="dropdown" style={{ cursor: "pointer" }}>
+          <div
+            class="fw-medium fs-6"
             type="button"
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            {sortOrderText}
+            {sortOrderText}{" "}
+            {sortOrderText == "Most Recent" ? (
+              <i class="fa-solid fa-arrow-down-short-wide"></i>
+            ) : (
+              <i class="fa-solid fa-arrow-up-wide-short"></i>
+            )}
           </div>
           <ul className="dropdown-menu" aria-labelledby="sortDropdown">
             <li>
@@ -193,25 +262,6 @@ const Search = () => {
               </a>
             </li>
           </ul>
-        </div>
-        <div
-          class="fw-medium fs-6"
-          style={{ cursor: "pointer" }}
-          onClick={() => {
-            toggleShowArchived();
-          }}
-        >
-          {data.showArchived ? (
-            <>
-              <i class="fa-solid fa-arrow-left me-2"></i>
-              Back
-            </>
-          ) : (
-            <>
-              <i class="fa-solid fa-box-archive me-2"></i>
-              Archive
-            </>
-          )}
         </div>
       </div>
     </div>

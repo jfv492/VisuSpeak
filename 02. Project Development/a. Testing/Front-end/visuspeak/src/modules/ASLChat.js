@@ -220,14 +220,14 @@ const ASLChat = () => {
           class="resizable-left-panel p-3"
           style={{ width: `${leftWidth}%` }}
         >
-          {!displayName ? (
+          
             <div className="asl-chats">
               <Search />
               <div className=" rounded-3 my-3">
                 <Chats />
               </div>
             </div>
-          ) : (
+            {displayName && (
             <>
               <ChatHeader user={displayName} photo={photo} />
 

@@ -43,6 +43,7 @@ const ChatActions = (props) => {
   const handleCancelClick = () => {
     dispatch({ type: "RESET_CHAT" });
   };
+  
   return (
     <div className="row chat-actions">
       {localStorage.getItem("admin") && <button

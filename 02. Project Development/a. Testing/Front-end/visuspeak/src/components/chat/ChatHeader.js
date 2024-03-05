@@ -70,23 +70,26 @@ const ChatHeader = (props) => {
   };
 
   const handleClick = async () => {
-    // Check if chatId is valid
     if (!data.chatId || data.chatId === "null") {
       console.error("No chat selected");
-      // You can also set an error message state and display it to the user
       return;
     }
-
+  
     const status = await fetchIsArchiveStatus(currentUser.uid, data.user.uid);
-    setIsArchived(status);
-
+    setIsArchived(status); // Update the state for future renders, but don't rely on it immediately.
+  
+    // Use `status` directly for your update logic, since it reflects the current fetched state.
     await updateDoc(doc(db, "userChats", currentUser.uid), {
-      [data.chatId + ".isArchive"]: !isArchived,
+      [`${data.chatId}.isArchive`]: !status,
     });
-
+  
     await updateDoc(doc(db, "userChats", data.user.uid), {
-      [data.chatId + ".isArchive"]: !isArchived,
+      [`${data.chatId}.isArchive`]: !status,
     });
+  
+    // Optionally, you might want to update the state to reflect the change immediately.
+    // This is useful if the UI needs to react to this state change right away.
+    setIsArchived(!status);
   };
   return (
     <div class="messages-heading row mb-1 z-3 position-relative ">
@@ -101,7 +104,7 @@ const ChatHeader = (props) => {
             />
 
             <h4 className="user-name chat-name-ellipsis">{props.user}</h4>
-            <div>
+            {localStorage.getItem("accountType") === "admin" && <div>
             <button
               class="btn chat-action-button bg-gradient mx-2"
               type="button"
@@ -132,7 +135,7 @@ const ChatHeader = (props) => {
             >
               <Typography sx={{ p: 1 }}>Archive Chat</Typography>
             </Popover>
-            </div>
+            </div>}
           </div>
           <ChatAlert alert={alert} />
           <ChatActions showAlert={showAlert} />
