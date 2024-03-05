@@ -14,6 +14,7 @@ const Chats = () => {
   const { currentUser } = useContext(AuthContext);
   const { data, dispatch } = useContext(ChatContext);
   const [selectedChat, setSelectedChat] = useState(null);
+  const showArchived = data.showArchived;
   const sortOrder = data.sortOrder;
 
   useEffect(() => {
@@ -71,7 +72,7 @@ const Chats = () => {
                 : dateB - dateA;
             });
 
-            setChatsWithStatus(chatsArray.filter(chat => chat.isArchive));
+            setChatsWithStatus(chatsArray.filter(chat => showArchived ? chat.isArchive : !chat.isArchive));
 
             chatsArray.forEach((chat) => {
               onUserStatusChanged(chat.userInfo.uid, (status) => {
@@ -102,7 +103,7 @@ const Chats = () => {
       clearInterval(interval);
       unsubFromUserChats();
     };
-  }, [currentUser, sortOrder]);
+  }, [currentUser, sortOrder, showArchived]);
 
   useEffect(() => {
     if (data.chatId === "null") {

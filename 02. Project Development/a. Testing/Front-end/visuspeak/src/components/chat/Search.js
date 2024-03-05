@@ -17,13 +17,12 @@ const Search = () => {
   const [username, setUsername] = useState("");
   const [users, setUsers] = useState([]);
   const [err, setErr] = useState(false);
-  // const [sortOrder, setSortOrder] = useState("mostRecent");
 
   const { currentUser } = useContext(AuthContext);
-  const { data, dispatch } = useContext(ChatContext);
+  const { data, dispatch, toggleShowArchived } = useContext(ChatContext);
 
-  const sortOrderText = data.sortOrder === 'mostRecent' ? 'Most Recent' : 'Least Recent';
-
+  const sortOrderText =
+    data.sortOrder === "mostRecent" ? "Most Recent" : "Least Recent";
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -90,10 +89,9 @@ const Search = () => {
             uid: user.uid,
             displayName: user.displayName,
             photoURL: user.photoURL,
-            isArchive: true,
           },
           [combinedId + ".date"]: serverTimestamp(),
-          [combinedId + ".isArchive"]: true,
+          [combinedId + ".isArchive"]: false,
         });
 
         await updateDoc(doc(db, "userChats", user.uid), {
@@ -102,10 +100,9 @@ const Search = () => {
             displayName:
               currentUser.displayName || localStorage.getItem("username"),
             photoURL: currentUser.photoURL,
-            isArchive: true,
           },
           [combinedId + ".date"]: serverTimestamp(),
-          [combinedId + ".isArchive"]: true,
+          [combinedId + ".isArchive"]: false,
         });
       }
     } catch (error) {
@@ -197,9 +194,24 @@ const Search = () => {
             </li>
           </ul>
         </div>
-        <div class="fw-medium fs-6" style={{ cursor: "pointer" }}>
-          <i class="fa-solid fa-box-archive me-2"></i>
-          Archive
+        <div
+          class="fw-medium fs-6"
+          style={{ cursor: "pointer" }}
+          onClick={() => {
+            toggleShowArchived();
+          }}
+        >
+          {data.showArchived ? (
+            <>
+              <i class="fa-solid fa-arrow-left me-2"></i>
+              Back
+            </>
+          ) : (
+            <>
+              <i class="fa-solid fa-box-archive me-2"></i>
+              Archive
+            </>
+          )}
         </div>
       </div>
     </div>

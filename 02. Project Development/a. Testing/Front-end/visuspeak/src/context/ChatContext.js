@@ -14,7 +14,8 @@ export const ChatContextProvider = ({ children }) => {
   const INITIAL_STATE = {
     chatId: "null",
     user: {},
-    sortOrder: "mostRecent", // Default sort order
+    sortOrder: "mostRecent",
+    showArchived: false,
   };
 
   const chatReducer = (state, action) => {
@@ -29,14 +30,17 @@ export const ChatContextProvider = ({ children }) => {
         };
       case "RESET_CHAT":
         return {
-          ...state,
-          user: {},
-          chatId: "null",
+          ...INITIAL_STATE,
         };
-      case "CHANGE_SORT_ORDER": // New case for changing sort order
+      case "CHANGE_SORT_ORDER":
         return {
           ...state,
-          sortOrder: action.payload, // Assuming payload is either 'mostRecent' or 'leastRecent'
+          sortOrder: action.payload,
+        };
+      case "TOGGLE_SHOW_ARCHIVED":
+        return {
+          ...state,
+          showArchived: !state.showArchived,
         };
       default:
         return state;
@@ -44,8 +48,11 @@ export const ChatContextProvider = ({ children }) => {
   };
 
   const [state, dispatch] = useReducer(chatReducer, INITIAL_STATE);
+  const toggleShowArchived = () => {
+    dispatch({ type: "TOGGLE_SHOW_ARCHIVED" });
+  };
   return (
-    <ChatContext.Provider value={{ data: state, dispatch }}>
+    <ChatContext.Provider value={{ data: state, dispatch, toggleShowArchived }}>
       {children}
     </ChatContext.Provider>
   );
