@@ -46,7 +46,7 @@ const ChatActions = (props) => {
   
   return (
     <div className="row chat-actions">
-      {localStorage.getItem("admin") && <button
+      {localStorage.getItem("accountType") === "admin" && <button
         class="btn chat-action-button bg-gradient me-1"
         type="button"
         aria-expanded="false"

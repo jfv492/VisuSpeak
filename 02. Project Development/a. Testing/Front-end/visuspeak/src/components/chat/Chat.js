@@ -9,15 +9,15 @@ const Chat = () => {
   let displayName = data.user?.displayName;
   let photo = data.user?.photoURL;
   return (
-    <div className="admin-chat-box rounded-4">
+    <div className="">
       {displayName ? (
         <>
-          <ChatHeader user={displayName} photo={photo}/>
+          <ChatHeader user={displayName} photo={photo} />
 
-          <div class="chatbox-scrollable">
-            <MessageList />
+          <MessageList />
+          <div class="chat-input-container">
+            <Input />
           </div>
-          <Input />
         </>
       ) : (
         <div class="centered-text lead p-3">

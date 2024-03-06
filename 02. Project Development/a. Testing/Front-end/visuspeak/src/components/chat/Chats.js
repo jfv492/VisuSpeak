@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
+import { useLocation } from 'react-router-dom';
 import defaultProfilePicture from "../../assets/images/AccountSettingsHeadshot.jpg";
 import { doc, getDoc, onSnapshot, updateDoc } from "firebase/firestore";
 import { AuthContext } from "../../context/AuthContext.js";
@@ -10,19 +11,14 @@ import {
 } from "../../utils/UserPresence.js";
 
 const Chats = () => {
+  const location = useLocation();
   const [chatsWithStatus, setChatsWithStatus] = useState([]);
   const { currentUser } = useContext(AuthContext);
   const { data, dispatch } = useContext(ChatContext);
   const [selectedChat, setSelectedChat] = useState(null);
   const showArchived = data.showArchived;
   const sortOrder = data.sortOrder;
-
-  useEffect(() => {
-    return () => {
-      dispatch({ type: "RESET_CHAT" });
-    };
-  }, [dispatch]);
-
+  
   useEffect(() => {
     let interval;
     let unsubFromUserChats = () => {};

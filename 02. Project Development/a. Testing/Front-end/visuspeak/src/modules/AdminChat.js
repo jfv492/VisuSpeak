@@ -1,12 +1,29 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect, useContext } from "react";
+import { useNavigate } from 'react-router-dom';
+import { ChatContext } from '../context/ChatContext';
 
 import Search from "../components/chat/Search.js";
 import Chats from "../components/chat/Chats.js";
 import Chat from "../components/chat/Chat.js";
 
+import ChatHeader from "../components/chat/ChatHeader.js";
+import MessageList from "../components/chat/MessageList.js";
+import InputArea from "../components/chat/Input.js";
+
 const AdminChat = (props) => {
+  const { data, dispatch } = useContext(ChatContext);
+  let displayName = data.user?.displayName;
+  let photo = data.user?.photoURL;
   const [leftWidth, setLeftWidth] = useState(35); // Percentage
   const [isDragging, setIsDragging] = useState(false);
+
+  useEffect(() => {
+    // Function to run when component unmounts
+    return () => {
+      // Reset selected chat here
+      dispatch({ type: 'RESET_CHAT' });
+    };
+  }, [dispatch]);
 
   const startDragging = useCallback(() => {
     setIsDragging(true);
@@ -45,13 +62,6 @@ const AdminChat = (props) => {
   return (
 
       <div className="admin-chat-container resizable-container">
-        {/* <div className="row text-begin align-items-center">
-          <div className="col-sm-4">
-            <h3> {props.heading}</h3>
-          </div>
-          <div className="col-sm-8"></div>
-        </div> */}
-
         <div
           className="resizable-left-panel p-3"
           style={{ width: `${leftWidth}%` }}
@@ -66,7 +76,20 @@ const AdminChat = (props) => {
           className="resizable-right-panel p-3"
           style={{ width: `${100 - leftWidth}%` }}
         >
-          <Chat />
+          {displayName ? (
+        <>
+          <ChatHeader user={displayName} photo={photo} />
+
+          <MessageList />
+          <div class="chat-input-container">
+            <InputArea />
+          </div>
+        </>
+      ) : (
+        <div class="centered-text lead p-3">
+          Click on a chat to preview messages
+        </div>
+      )}
         </div>
         {isDragging && (
           <div

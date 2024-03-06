@@ -11,11 +11,13 @@ import HowToModal from "../components/asl_chat/HowToModal.js";
 import modelChatUrl from "../Chat-env.js";
 
 const ASLChat = () => {
-  const { data } = useContext(ChatContext);
+  const { data, dispatch } = useContext(ChatContext);
   let displayName = data.user?.displayName;
   let photo = data.user?.photoURL;
   const [leftWidth, setLeftWidth] = useState(35); // Percentage
   const [isDragging, setIsDragging] = useState(false);
+
+  // dispatch({ type: 'RESET_CHAT' });
 
   const startDragging = useCallback(() => {
     setIsDragging(true);
@@ -220,14 +222,13 @@ const ASLChat = () => {
           class="resizable-left-panel p-3"
           style={{ width: `${leftWidth}%` }}
         >
-          
-            <div className="asl-chats">
-              <Search />
-              <div className=" rounded-3 my-3">
+            {!displayName ? (
+              <div className="asl-chats rounded-3 my-3">
+                <Search />
                 <Chats />
               </div>
-            </div>
-            {displayName && (
+            ) : (
+            
             <>
               <ChatHeader user={displayName} photo={photo} />
 
