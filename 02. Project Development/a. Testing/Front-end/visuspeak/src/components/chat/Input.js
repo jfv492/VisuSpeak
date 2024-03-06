@@ -13,7 +13,7 @@ import { doc } from "firebase/firestore";
 import { db } from "../../firebase.js";
 import modelChatUrl from "../../Chat-env.js";
 
-const Input = ({ onSendMessage, isFetchingEnabled, fetchInterval }) => {
+const Input = ({ onSendMessage, isFetchingEnabled, fetchInterval, immediateWord, onImmediateSend }) => {
   const [text, setText] = useState("");
   const { currentUser } = useContext(AuthContext);
   const { data } = useContext(ChatContext);
@@ -22,6 +22,14 @@ const Input = ({ onSendMessage, isFetchingEnabled, fetchInterval }) => {
   const [lastFetchedWord, setLastFetchedWord] = useState("");
   const [isHandDetected, setIsHandDetected] = useState(true);
   const [isListening, setIsListening] = useState(false);
+
+  useEffect(() => {
+    if (immediateWord) {
+      setText((prev) => prev + " " + immediateWord);
+      // handleSend(); // You might adjust handleSend to optionally skip clearing the text if you wish
+      onImmediateSend(); // Call this to indicate the immediate send operation is complete
+    }
+  }, [immediateWord, onImmediateSend]);
 
   const { listen, listening, stop } = useSpeechRecognition({
     onResult: (result) => {

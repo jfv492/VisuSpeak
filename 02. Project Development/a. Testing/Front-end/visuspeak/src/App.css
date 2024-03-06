@@ -1371,6 +1371,13 @@ iframe {
   box-sizing: border-box;
 }
 
+.current-word {
+  background-color: #00626244;
+  padding: 10px;
+  border-radius: 10px;
+  min-height: 60px;
+}
+
 .messages {
   flex-grow: 1; /* Takes up all available space */
   overflow-y: auto; /* Enable scroll if content is larger than the space */

@@ -9,6 +9,9 @@ import Popover from "@mui/material/Popover";
 import Typography from "@mui/material/Typography";
 import HowToModal from "../components/asl_chat/HowToModal.js";
 import modelChatUrl from "../Chat-env.js";
+import Alert from '@mui/material/Alert';
+import CheckIcon from '@mui/icons-material/Check';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 
 const ASLChat = () => {
   const { data, dispatch } = useContext(ChatContext);
@@ -16,8 +19,18 @@ const ASLChat = () => {
   let photo = data.user?.photoURL;
   const [leftWidth, setLeftWidth] = useState(35); // Percentage
   const [isDragging, setIsDragging] = useState(false);
+  const [immediateWord, setImmediateWord] = useState("");
 
-  // dispatch({ type: 'RESET_CHAT' });
+  // Function to reset the counter and send the immediate word
+  const handleGoClick = () => {
+    setImmediateWord(gestureLabel); // Assuming gestureLabel holds the current word
+    setCountdown(fetchInterval / 1000); // Reset the countdown
+  };
+
+  // Method to be passed to InputArea to clear immediateWord after sending
+  const clearImmediateWord = () => {
+    setImmediateWord("");
+  };
 
   const startDragging = useCallback(() => {
     setIsDragging(true);
@@ -222,13 +235,12 @@ const ASLChat = () => {
           class="resizable-left-panel p-3"
           style={{ width: `${leftWidth}%` }}
         >
-            {!displayName ? (
-              <div className="asl-chats rounded-3 my-3">
-                <Search />
-                <Chats />
-              </div>
-            ) : (
-            
+          {!displayName ? (
+            <div className="asl-chats rounded-3 my-3">
+              <Search />
+              <Chats />
+            </div>
+          ) : (
             <>
               <ChatHeader user={displayName} photo={photo} />
 
@@ -237,6 +249,8 @@ const ASLChat = () => {
                 <InputArea
                   isFetchingEnabled={isSigning}
                   fetchInterval={fetchInterval}
+                  immediateWord={immediateWord}
+                  onImmediateSend={clearImmediateWord}
                 />
               </div>
             </>
@@ -312,7 +326,10 @@ const ASLChat = () => {
                 )}
               </div>
               <div className="row mx-2">
-                <div class="d-flex justify-content-between align-items-center action-buttons px-3 rounded-3 shadow" style={{ minHeight: "90px" }}>
+                <div
+                  class="d-flex justify-content-between align-items-center action-buttons px-3 rounded-3 shadow"
+                  style={{ minHeight: "90px" }}
+                >
                   <button
                     type="button"
                     className={`{btn camera-button-style btn-lg border border-3 rounded-3 ${
@@ -361,7 +378,19 @@ const ASLChat = () => {
                       } Camera`}</Typography>
                     </Popover>
                   </button>
-                  <div className="col-sm-9 interval-style">
+                  {gestureLabel && (
+                      <div className="go-button-container">
+                        {/* <Alert icon={false} severity={`${gestureLabel === "Error translating!" ? ("danger") : ("success")}`}>{gestureLabel}</Alert> */}
+                        <span className="current-word">Current Word: {gestureLabel}</span>
+                        <button
+                          className="btn camera-button-style btn-lg border border-3 rounded-3 ms-2"
+                          onClick={handleGoClick}
+                        >
+                          Go
+                        </button>
+                      </div>
+                    )}
+                  <div className="interval-style">
                     {/* <input
                 type="range"
                 min="5000"
