@@ -48,7 +48,7 @@ const SettingsUserInfo = (props) => {
 
   return (
     <div>
-      <div className="row account-settings-user-info align-items-center ">
+      <div className="row account-settings-user-info align-items-center rounded-3">
         <div className="col-sm-3">
           <div style={{ position: "relative", display: "inline-block" }}>
             <img

@@ -1402,10 +1402,6 @@ iframe {
 /* ***************ACCOUNT SETTINGS STYLE*************** */
 .account-settings-form {
   width: 90%;
-  position: absolute;
-  right: 50%;
-  top: 47%;
-  transform: translate(50%, -50%);
   background: white;
 }
 
@@ -1416,6 +1412,8 @@ iframe {
   margin-right: 50px;
   padding-top: 20px;
   padding-bottom: 20px;
+  background-color: white;
+  color: black;
 }
 
 .user-profile-picture {

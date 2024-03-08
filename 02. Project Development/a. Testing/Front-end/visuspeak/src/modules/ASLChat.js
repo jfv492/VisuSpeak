@@ -380,7 +380,6 @@ const ASLChat = () => {
                   </button>
                   {gestureLabel && (
                       <div className="go-button-container">
-                        {/* <Alert icon={false} severity={`${gestureLabel === "Error translating!" ? ("danger") : ("success")}`}>{gestureLabel}</Alert> */}
                         <span className="current-word">Current Word: {gestureLabel}</span>
                         <button
                           className="btn camera-button-style btn-lg border border-3 rounded-3 ms-2"
