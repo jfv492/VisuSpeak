@@ -113,7 +113,7 @@ const Input = ({
 
       try {
         await setDoc(notificationRef, {
-          text: `New message from ${lastSenderName}: ${text}`,
+          text: text,
           chatId: data.chatId, // Assuming this is the ID of the chat where the message was sent
           senderId: currentUser.uid,
           senderName: lastSenderName,

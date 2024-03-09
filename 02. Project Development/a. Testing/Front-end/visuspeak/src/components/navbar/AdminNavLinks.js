@@ -29,7 +29,7 @@ const AdminNavLinks = () => {
         ></button>
       </div>
       <div class="offcanvas-body">
-        <ul class="navbar-nav nav nav-pills nav-pills-link-active-color ms-auto justify-content-end flex-grow-1 pe-3">
+        <ul class="navbar-nav nav nav-pills nav-pills-link-active-color ms-auto justify-content-end flex-grow-1 gap-2">
           <li class="nav-item">
             <Link
               className={`nav-link btn-raised fs-3 ${
@@ -41,7 +41,7 @@ const AdminNavLinks = () => {
               <i class="fa-solid fa-comment"></i>
             </Link>
           </li>
-          <li class="nav-item dropdown">
+          <li class="nav-item dropdown-center">
             
               <NotificationsList userId={currentUser?.uid} />
           </li>

@@ -1136,6 +1136,43 @@ iframe {
   font-size: 17px;
 }
 
+.notification-list {
+  max-height: 300px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: darkgrey transparent;
+}
+
+.notification-list::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* For WebKit (Chrome, Safari, etc.) */
+.notification-list::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  border-radius: 5px;
+}
+
+.notification-list .dropdown-item:hover {
+  background-color: transparent !important;
+  color: black !important;
+}
+
+.notification-action {
+  cursor: pointer; 
+  color: #006262;
+}
+
+.notification-action:hover {
+  cursor: pointer; 
+  color: white;
+  background-color: #006262;
+}
+
+.notification-text {
+  font-size: 15px;
+}
+
 /* ***************STOPWATCH STYLE*************** */
 @keyframes slideDown {
   0% {
