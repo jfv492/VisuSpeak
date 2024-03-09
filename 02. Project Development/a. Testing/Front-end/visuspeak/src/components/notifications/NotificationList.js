@@ -82,7 +82,7 @@ const NotificationsList = ({ userId }) => {
   return (
     <>
       <button
-        class="nav-link  btn-raised"
+        class="nav-link btn-raised"
         href="#"
         role="button"
         data-bs-toggle="dropdown"

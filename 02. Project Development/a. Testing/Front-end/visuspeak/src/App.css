@@ -1114,7 +1114,7 @@ iframe {
 .nav-link:hover,
 .nav-link:focus {
   background-color: #023e3d;
-  color: white;
+  color: white !important;
 }
 
 .nav-link {
