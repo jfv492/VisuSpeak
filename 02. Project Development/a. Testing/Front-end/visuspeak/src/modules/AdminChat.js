@@ -5,7 +5,7 @@ import Chats from "../components/chat/Chats.js";
 import ChatHeader from "../components/chat/ChatHeader.js";
 import MessageList from "../components/chat/MessageList.js";
 import InputArea from "../components/chat/Input.js";
-import Alert from "../components/Alert.js"
+import Alert from "../components/notifications/Alert.js"
 
 const AdminChat = (props) => {
   const { data, dispatch } = useContext(ChatContext);

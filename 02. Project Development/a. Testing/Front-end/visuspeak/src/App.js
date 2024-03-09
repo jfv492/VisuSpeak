@@ -2,7 +2,7 @@ import "./App.css";
 import "./Mobile.css";
 // import "./User.css";
 
-import Alert from "./components/Alert.js";
+import Alert from "./components/notifications/Alert.js";
 import Login from "./modules/Login.js";
 import SignUp from "./modules/SignUp.js";
 import Footer from "./modules/Footer.js";

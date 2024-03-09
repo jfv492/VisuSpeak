@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import ColourLogo from "../assets/logos/VisuSpeakPrimaryLogo.png";
-import NavLinks from "../components/navbar/NavLinks.js";
+import LoggedOutNavLinks from "../components/navbar/LoggedOutNavLinks.js";
+import AdminNavLinks from "../components/navbar/AdminNavLinks.js";
 
 const Navbar = () => {
   return (
@@ -20,7 +21,8 @@ const Navbar = () => {
         >
           <span class="navbar-toggler-icon"></span>
         </button>
-        <NavLinks />
+        {localStorage.getItem("accountType") === null &&<LoggedOutNavLinks />}
+        {localStorage.getItem("accountType") === "admin" && <AdminNavLinks />}
       </div>
     </nav>
   );

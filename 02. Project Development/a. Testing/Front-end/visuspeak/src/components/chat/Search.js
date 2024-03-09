@@ -65,7 +65,7 @@ const Search = (props) => {
     };
 
     fetchUsers();
-  }, [username, currentUser.displayName, err]);
+  }, [username, currentUser?.displayName, err]);
 
   const handleSortChange = (sortOrder) => {
     dispatch({ type: "CHANGE_SORT_ORDER", payload: sortOrder });

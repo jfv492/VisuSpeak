@@ -4,6 +4,7 @@ import { doc, getDoc, onSnapshot } from "firebase/firestore";
 import { AuthContext } from "../../context/AuthContext.js";
 import { ChatContext } from "../../context/ChatContext.js";
 import { db } from "../../firebase.js";
+import Notification from "../notifications/NotificationList.js";
 import {
   onUserStatusChanged,
   refreshUserOnlineStatus,
@@ -14,9 +15,10 @@ const Chats = () => {
   const { currentUser } = useContext(AuthContext);
   const { data, dispatch } = useContext(ChatContext);
   const [selectedChat, setSelectedChat] = useState(null);
+  const [lastKnownChats, setLastKnownChats] = useState({});
   const showArchived = data.showArchived;
   const sortOrder = data.sortOrder;
-  
+
   useEffect(() => {
     let interval;
     let unsubFromUserChats = () => {};
@@ -40,8 +42,8 @@ const Chats = () => {
 
       unsubFromUserChats = onSnapshot(userChatsRef, async (docSnapshot) => {
         if (docSnapshot.exists()) {
-          const chatsData = docSnapshot.data(); // Define chatsData within this scope
-          let chatsArray = []; // Define chatsArray within this scope
+          const chatsData = docSnapshot.data();
+          let chatsArray = [];
 
           if (chatsData) {
             // Since this is async, we use 'let' to define chatsArray
@@ -72,10 +74,13 @@ const Chats = () => {
             });
 
             if (localStorage.getItem("accountType") === "admin") {
-              const filteredChats = chatsArray.filter(chat => {
-                const isUserTypeSelected = data.userTypes.includes(chat.userInfo?.type); 
-                const isArchiveStatusMatch = showArchived === Boolean(chat.isArchive); 
-                return isUserTypeSelected && isArchiveStatusMatch; 
+              const filteredChats = chatsArray.filter((chat) => {
+                const isUserTypeSelected = data.userTypes.includes(
+                  chat.userInfo?.type
+                );
+                const isArchiveStatusMatch =
+                  showArchived === Boolean(chat.isArchive);
+                return isUserTypeSelected && isArchiveStatusMatch;
               });
               setChatsWithStatus(filteredChats);
             } else {
@@ -125,102 +130,106 @@ const Chats = () => {
   };
 
   return (
-    <div className="list-group list-group-flush rounded-3 admin-chat-list">
-      {chatsWithStatus.map((chat) => {
-        const date = chat.date
-          ? new Date(chat.date.seconds * 1000)
-          : new Date();
-        const options = { weekday: "short", month: "short", day: "numeric" };
-        const formattedDate = date.toLocaleString("en-us", options);
-        const isActive = chat.userInfo.uid === selectedChat;
+    <>
+      <div className="list-group list-group-flush rounded-3 admin-chat-list">
+        {chatsWithStatus.map((chat) => {
+          const date = chat.date
+            ? new Date(chat.date.seconds * 1000)
+            : new Date();
+          const options = { weekday: "short", month: "short", day: "numeric" };
+          const formattedDate = date.toLocaleString("en-us", options);
+          const isActive = chat.userInfo.uid === selectedChat;
 
-        return (
-          <a
-            className={`list-group-item list-group-item-action chat-list-item bg-gradient ${
-              isActive ? "active" : ""
-            }`}
-            href="#"
-            key={chat.id}
-            onClick={() => handleSelect(chat)}
-          >
-            <div className="d-flex align-items-center">
-              <div
-                className="me-3"
-                style={{ position: "relative", display: "inline-block" }}
-              >
-                {chat.userInfo?.photoURL === "" ? (
-                  <img
-                    src={defaultProfilePicture}
-                    alt="User"
-                    className="rounded-circle shadow"
+          return (
+            <a
+              className={`list-group-item list-group-item-action chat-list-item bg-gradient ${
+                isActive ? "active" : ""
+              }`}
+              href="#"
+              key={chat.id}
+              onClick={() => handleSelect(chat)}
+            >
+              <div className="d-flex align-items-center">
+                <div
+                  className="me-3"
+                  style={{ position: "relative", display: "inline-block" }}
+                >
+                  {chat.userInfo?.photoURL === "" ? (
+                    <img
+                      src={defaultProfilePicture}
+                      alt="User"
+                      className="rounded-circle shadow"
+                      style={{
+                        width: "45px",
+                        height: "45px",
+                        objectFit: "cover",
+                      }}
+                    />
+                  ) : (
+                    <img
+                      src={chat.userInfo?.photoURL}
+                      alt="User"
+                      className="rounded-circle shadow"
+                      style={{
+                        width: "45px",
+                        height: "45px",
+                        objectFit: "cover",
+                      }}
+                    />
+                  )}
+
+                  <i
+                    className={`fa-solid ${
+                      chat.status === "offline" ? "fa-clock" : "fa-circle-check"
+                    }`}
                     style={{
-                      width: "45px",
-                      height: "45px",
-                      objectFit: "cover",
+                      position: "absolute",
+                      bottom: 0,
+                      right: 0,
+                      color: chat.status === "offline" ? "#fec700" : "#77bb41",
+                      backgroundColor: "white",
+                      borderRadius: "50%",
+                      padding: "3px",
+                      transform: "translate(30%, 30%)",
                     }}
                   />
-                ) : (
-                  <img
-                    src={chat.userInfo?.photoURL}
-                    alt="User"
-                    className="rounded-circle shadow"
-                    style={{
-                      width: "45px",
-                      height: "45px",
-                      objectFit: "cover",
-                    }}
-                  />
-                )}
+                </div>
+                <div className="flex-fill">
+                  <div className="d-flex">
+                    <div className="d-flex align-items-center w-100">
+                      <span
+                        class={`badge rounded-pill me-1 ${
+                          chat.userInfo?.type === "admin"
+                            ? "text-bg-primary"
+                            : "text-bg-secondary"
+                        }`}
+                      >
+                        {chat.userInfo?.type}
+                      </span>
+                      <h5 className="mb-1 chat-name-ellipsis">
+                        {chat.userInfo?.displayName}
+                      </h5>
 
-                <i
-                  className={`fa-solid ${
-                    chat.status === "offline" ? "fa-clock" : "fa-circle-check"
-                  }`}
-                  style={{
-                    position: "absolute",
-                    bottom: 0,
-                    right: 0,
-                    color: chat.status === "offline" ? "#fec700" : "#77bb41",
-                    backgroundColor: "white",
-                    borderRadius: "50%",
-                    padding: "3px",
-                    transform: "translate(30%, 30%)",
-                  }}
-                />
-              </div>
-              <div className="flex-fill">
-                <div className="d-flex">
-                  <div className="d-flex align-items-center w-100">
-                    <span
-                      class={`badge rounded-pill me-1 ${
-                        chat.userInfo?.type === "admin"
-                          ? "text-bg-primary"
-                          : "text-bg-secondary"
-                      }`}
-                    >
-                      {chat.userInfo?.type}
-                    </span>
-                    <h5 className="mb-1 chat-name-ellipsis">
-                      {chat.userInfo?.displayName}
-                    </h5>
-
-                    <small className="ms-auto w-50 text-end">{formattedDate}</small>
+                      <small className="ms-auto w-50 text-end">
+                        {formattedDate}
+                      </small>
+                    </div>
+                  </div>
+                  <div className="last-message fw-light two-line-ellipsis">
+                    {chat.lastMessage?.text != null && (
+                      <>
+                        <strong>{chat.lastSender?.lastSenderName}: </strong>
+                        {chat.lastMessage?.text}
+                      </>
+                    )}
                   </div>
                 </div>
-                <div className="last-message fw-light two-line-ellipsis">
-                  {chat.lastMessage?.text != null && (
-                    <>
-                      <strong>{chat.lastSender?.lastSenderName}: </strong>
-                      {chat.lastMessage?.text}
-                    </>
-                  )}
-                </div>
               </div>
-            </div>
-          </a>
-        );
-      })}
-    </div>
+            </a>
+          );
+        })}
+      </div>
+    </>
   );
 };
 

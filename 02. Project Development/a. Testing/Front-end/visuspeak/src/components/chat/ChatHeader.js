@@ -6,7 +6,7 @@ import { ChatContext } from "../../context/ChatContext.js";
 import { updateDoc, getDoc } from "firebase/firestore";
 import { doc } from "firebase/firestore";
 import { db } from "../../firebase.js";
-import ChatAlert from "../ChatAlert";
+import ChatAlert from "../notifications/ChatAlert";
 import ChatActions from "./ChatActions.js";
 import defaultProfilePicture from "../../assets/images/AccountSettingsHeadshot.jpg";
 

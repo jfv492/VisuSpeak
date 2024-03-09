@@ -7,13 +7,21 @@ import {
   serverTimestamp,
   arrayUnion,
   updateDoc,
+  collection,
+  setDoc
 } from "firebase/firestore";
 import { v4 as uuid } from "uuid";
 import { doc } from "firebase/firestore";
 import { db } from "../../firebase.js";
 import modelChatUrl from "../../Chat-env.js";
 
-const Input = ({ onSendMessage, isFetchingEnabled, fetchInterval, immediateWord, onImmediateSend }) => {
+const Input = ({
+  onSendMessage,
+  isFetchingEnabled,
+  fetchInterval,
+  immediateWord,
+  onImmediateSend,
+}) => {
   const [text, setText] = useState("");
   const { currentUser } = useContext(AuthContext);
   const { data } = useContext(ChatContext);
@@ -97,6 +105,28 @@ const Input = ({ onSendMessage, isFetchingEnabled, fetchInterval, immediateWord,
       },
       [data.chatId + ".date"]: serverTimestamp(),
     });
+
+    const recipientId = data.user.uid; // The ID of the user receiving the notification
+
+      // Now, create the notification for the recipient
+      const notificationRef = doc(db, "users", recipientId, "notifications", uuid());
+
+      try {
+        await setDoc(notificationRef, {
+          text: `New message from ${lastSenderName}: ${text}`,
+          chatId: data.chatId, // Assuming this is the ID of the chat where the message was sent
+          senderId: currentUser.uid,
+          senderName: lastSenderName,
+          date: serverTimestamp(),
+          read: false
+        });
+
+        setText(""); // Clear the input field after sending the message
+        // ... any other cleanup code ...
+      } catch (error) {
+        console.error("Error creating notification:", error);
+        // Handle the error appropriately
+      }
 
     setText("");
   };
