@@ -3,9 +3,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { auth, db } from "../firebase.js";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
-import { setUserOnline } from "../utils/UserPresence.js"; // Make sure to import this
+import { setUserOnline } from "../utils/UserPresence.js"; 
+import { useTranslation } from 'react-i18next';
 
 const Login = (props) => {
+  const { t } = useTranslation();
   let navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -72,23 +74,23 @@ const Login = (props) => {
               onSubmit={handleSubmit}
             >
               <div className="row  mb-4">
-                <h1> {props.heading}</h1>
+                <h1> {t('Login')}</h1>
                 <p class="lead">
-                  <label className="">Don't have an account?</label>
+                  <label className="">{t('Login Prompt')}</label>
                   <Link
                     to="/signup"
                     className="ms-2 form-link"
                     tabIndex="2"
                     role="button"
                   >
-                    Sign Up
+                    {t('Sign-up')}
                   </Link>
                 </p>
               </div>
 
               <div className="row mb-4">
                 <label htmlFor="email" className="form-label mt-1">
-                  Email:
+                {t('EmailLabel')}:
                 </label>
                 <div className="">
                   <input
@@ -103,7 +105,7 @@ const Login = (props) => {
               </div>
               <div className="row">
                 <label htmlFor="password" className="form-label mt-1">
-                  Password:
+                {t('PasswordLabel')}:
                 </label>
                 <div className="">
                   <input
@@ -127,7 +129,7 @@ const Login = (props) => {
               </div>
               <div className="row form-submit-row justify-content-end">
                 <button type="submit" className="btn login-button-style btn-raised rounded-pill">
-                  Login
+                {t('Login')}
                 </button>
               </div>
             </form>

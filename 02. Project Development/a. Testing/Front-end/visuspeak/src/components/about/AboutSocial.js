@@ -1,14 +1,14 @@
 import React from "react";
+import { useTranslation } from 'react-i18next';
 
 const AboutFeaturesGrid = () => {
+  const { t } = useTranslation();
   return (
     <div class="row about-us-sections social rounded-4">
-      <h3 class="pb-2 border-bottom">Learn More</h3>
+      <h3 class="pb-2 border-bottom">{t('Learn More')}</h3>
       <div class="col-sm-7">
         <p class="lead">
-          For more information on VisuSpeak and the development journey on this
-          product, please visit our GitHub Repository. If you would rather watch
-          the progression updates, then please visit our YouTube channel.
+        {t('Learn More Description')}
         </p>
       </div>
 

@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const NavButton = () => {
   let location = useLocation();
@@ -7,6 +8,8 @@ const NavButton = () => {
   useEffect(() => {
     console.log(location.pathname);
   }, [location]);
+
+  const { t } = useTranslation();
 
   return (
     <div
@@ -35,7 +38,7 @@ const NavButton = () => {
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              Admin
+              {t("Admin")}
             </Link>
             <ul class="dropdown-menu">
               <li>
@@ -58,7 +61,7 @@ const NavButton = () => {
               aria-current="page"
               to="/resources"
             >
-              Resources
+              {t("Resources")}
             </Link>
           </li>
           <li class="nav-item">
@@ -68,7 +71,7 @@ const NavButton = () => {
               }`}
               to="/about"
             >
-              About Us
+              {t("About Us")}
             </Link>
           </li>
         </ul>

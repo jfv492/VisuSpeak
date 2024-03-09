@@ -9,8 +9,11 @@ import {
   onUserStatusChanged,
   refreshUserOnlineStatus,
 } from "../../utils/UserPresence.js";
+import { useTranslation } from "react-i18next";
 
 const Chats = () => {
+  const { i18n } = useTranslation();
+  const currentLanguage = i18n.language;
   const [chatsWithStatus, setChatsWithStatus] = useState([]);
   const { currentUser } = useContext(AuthContext);
   const { data, dispatch } = useContext(ChatContext);
@@ -137,7 +140,12 @@ const Chats = () => {
             ? new Date(chat.date.seconds * 1000)
             : new Date();
           const options = { weekday: "short", month: "short", day: "numeric" };
-          const formattedDate = date.toLocaleString("en-us", options);
+          let formattedDate;
+          {
+            currentLanguage === "en"
+              ? (formattedDate = date.toLocaleString("en-ca", options))
+              : (formattedDate = date.toLocaleString("fr-ca", options));
+          }
           const isActive = chat.userInfo.uid === selectedChat;
 
           return (

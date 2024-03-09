@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import ColourLogo from "../assets/logos/VisuSpeakPrimaryLogo.png";
 import LoggedOutNavLinks from "../components/navbar/LoggedOutNavLinks.js";
 import AdminNavLinks from "../components/navbar/AdminNavLinks.js";
+import LanguageSwitcher from "../components/navbar/LanguageSwitcher.js";
 
 const Navbar = () => {
   return (
@@ -21,6 +22,7 @@ const Navbar = () => {
         >
           <span class="navbar-toggler-icon"></span>
         </button>
+        <LanguageSwitcher />
         {localStorage.getItem("accountType") === null &&<LoggedOutNavLinks />}
         {localStorage.getItem("accountType") === "admin" && <AdminNavLinks />}
       </div>
