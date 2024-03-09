@@ -73,13 +73,11 @@ const SettingsUserInfo = (props) => {
             {localStorage.getItem("username")}
           </h3>
           <div className="row">
-            <div className="col-sm-3">
-              <Typography variant="caption" display="block" gutterBottom style={{ fontSize: '15px' }}>
+            <div className="col-sm-6">
+              <Typography variant="caption" display="block" gutterBottom style={{ fontSize: '17px' }}>
                 <i className="fa-solid fa-envelope me-2" style={{color: "#006262"}}></i>{email}
               </Typography>
-            </div>
-            <div className="col-sm-6">
-              <Typography variant="caption" display="block" gutterBottom style={{ fontSize: '15px' }}>
+              <Typography variant="caption" display="block" gutterBottom style={{ fontSize: '17px' }}>
                 <i className="fa-solid fa-briefcase me-2" style={{color: "#006262"}}></i>{organizationName}
               </Typography>
             </div>

@@ -3,8 +3,10 @@ import { ChatContext } from "../../context/ChatContext";
 import MessageList from "./MessageList";
 import Input from "./Input";
 import ChatHeader from "./ChatHeader";
+import { useTranslation } from 'react-i18next';
 
 const Chat = () => {
+  const { t } = useTranslation();
   const { data } = useContext(ChatContext);
   let displayName = data.user?.displayName;
   let photo = data.user?.photoURL;
@@ -21,7 +23,7 @@ const Chat = () => {
         </>
       ) : (
         <div class="centered-text lead p-3">
-          Click on a chat to preview messages
+          {t('ChatPlaceholder')}
         </div>
       )}
     </div>

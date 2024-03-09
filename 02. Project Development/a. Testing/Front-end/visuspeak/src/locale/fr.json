@@ -42,6 +42,15 @@
         "FrenchLabel": "Français",
         "AgreeTerms": "Acceptez-vous les",
         "TermsAndConditions": "termes et conditions",
-        "SignUpButton": "S'inscrire"
+        "SignUpButton": "S'inscrire",
+
+        "SearchPlaceholder": "Rechercher un utilisateur...",
+        "Archive": "Archive",
+        "Back": "Retour",
+        "MostRecent": "Le plus récent",
+        "LeastRecent": "Le moins récent",
+        "ChatPlaceholder": "Cliquez sur un chat pour prévisualiser les messages",
+
+        "Guest": "Invité"
     }
 }

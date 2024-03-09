@@ -42,6 +42,15 @@
         "FrenchLabel": "French",
         "AgreeTerms": "Do you agree with the",
         "TermsAndConditions": "terms and conditions",
-        "SignUpButton": "Sign Up"
+        "SignUpButton": "Sign Up",
+
+        "SearchPlaceholder": "Search user...",
+        "Archive": "Archive",
+        "Back": "Back",
+        "MostRecent": "Most Recent",
+        "LeastRecent": "Least Recent",
+        "ChatPlaceholder": "Click on a chat to preview messages",
+
+        "Guest": "Guest"
     }
 }

@@ -24,6 +24,7 @@ import { AuthContext } from "./context/AuthContext.js";
 import { refreshUserOnlineStatus } from "./utils/UserPresence.js";
 import Dashboard from "./components/admin/Dashboard.js";
 
+
 function App() {
   const { currentUser } = useContext(AuthContext);
   const [alert, setAlert] = useState(null);
@@ -105,6 +106,7 @@ function App() {
                 path="/accountsettings"
                 element={<AccountSettings showAlert={showAlert}/>}
               />
+
             </Routes>
           </div>
         </div>
