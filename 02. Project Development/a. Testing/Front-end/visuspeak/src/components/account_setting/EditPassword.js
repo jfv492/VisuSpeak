@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { auth } from "../../firebase";
+import { auth } from "../../firebase.js";
 import { AuthContext } from "../../context/AuthContext.js";
 import { setUserOffline } from "../../utils/UserPresence.js";
 import { updatePassword,signOut } from "firebase/auth";

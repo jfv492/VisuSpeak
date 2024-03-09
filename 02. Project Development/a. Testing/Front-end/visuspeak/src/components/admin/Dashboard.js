@@ -4,7 +4,7 @@ import { ref, onValue } from "firebase/database";
 import { doc, getDoc } from "firebase/firestore";
 
 import defaultProfilePicture from "../../assets/images/AccountSettingsHeadshot.jpg";
-import SettingsUserInfo from "../account_setting/SettingsUserInfo.js"
+import SettingsUserInfo from "../account_setting/UserInfo.js"
 
 const Dashboard = () => {
   const [admins, setAdmins] = useState([]);
