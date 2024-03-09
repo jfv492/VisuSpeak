@@ -13,7 +13,7 @@ import { AuthContext } from "../../context/AuthContext.js";
 import { ChatContext } from "../../context/ChatContext.js";
 import defaultProfilePicture from "../../assets/images/AccountSettingsHeadshot.jpg";
 
-const Search = () => {
+const Search = (props) => {
   const [username, setUsername] = useState("");
   const [users, setUsers] = useState([]);
   const [err, setErr] = useState(false);
@@ -60,14 +60,27 @@ const Search = () => {
         setUsers(fetchedUsers);
       } catch (error) {
         setErr(true);
+        console.log(err)
       }
     };
 
     fetchUsers();
-  }, [username]);
+  }, [username, currentUser.displayName, err]);
 
   const handleSortChange = (sortOrder) => {
     dispatch({ type: "CHANGE_SORT_ORDER", payload: sortOrder });
+  };
+
+  const handleUserTypeChange = (e) => {
+    const userType = e.target.name; 
+    const isChecked = e.target.checked; 
+  
+    if (!isChecked && data.userTypes.length === 1 && data.userTypes.includes(userType)) {
+      props.showAlert("You must select at least one user type.", "danger");
+      return; // Exit without making changes
+    }
+
+    dispatch({ type: "TOGGLE_USER_TYPE", payload: userType });
   };
 
   const handleSelect = async (user) => {
@@ -143,7 +156,7 @@ const Search = () => {
             onChange={(e) => setUsername(e.target.value)}
           />
         </div>
-        <div class="dropdown ">
+        <div class="dropdown">
           <i
             class="fa-solid fa-filter fs-4 ms-2"
             type="button"
@@ -153,23 +166,23 @@ const Search = () => {
           <ul class="dropdown-menu fw-medium fs-6 p-2">
             <li className="mb-2">
               <input
-                class="form-check-input"
                 type="checkbox"
-                value=""
-                id="flexCheckDefault"
+                name="admin" // Use appropriate values for identifying user types
+                checked={data.userTypes.includes("admin")} // Ensure checkbox state reflects context
+                onChange={handleUserTypeChange}
               />
-              <label class="form-check-label ms-2 mt-1" for="flexCheckDefault">
+              <label class="form-check-label ms-2 mt-1" for="adminCheckbox">
                 Admin
               </label>
             </li>
             <li>
               <input
-                class="form-check-input"
                 type="checkbox"
-                value=""
-                id="flexCheckDefault"
+                name="guest"
+                checked={data.userTypes.includes("guest")}
+                onChange={handleUserTypeChange}
               />
-              <label class="form-check-label ms-2 mt-1" for="flexCheckDefault">
+              <label class="form-check-label ms-2 mt-1" for="guestCheckbox">
                 Guest
               </label>
             </li>
@@ -236,7 +249,7 @@ const Search = () => {
             aria-expanded="false"
           >
             {sortOrderText}{" "}
-            {sortOrderText == "Most Recent" ? (
+            {sortOrderText === "Most Recent" ? (
               <i class="fa-solid fa-arrow-down-short-wide"></i>
             ) : (
               <i class="fa-solid fa-arrow-up-wide-short"></i>

@@ -1,9 +1,7 @@
 import { AuthContext } from "./AuthContext.js";
 import {
   createContext,
-  useEffect,
   useReducer,
-  useState,
   useContext,
 } from "react";
 
@@ -16,6 +14,7 @@ export const ChatContextProvider = ({ children }) => {
     user: {},
     sortOrder: "mostRecent",
     showArchived: false,
+    userTypes: ["admin", "guest"],
   };
 
   const chatReducer = (state, action) => {
@@ -43,6 +42,17 @@ export const ChatContextProvider = ({ children }) => {
           ...state,
           showArchived: !state.showArchived,
         };
+        case "TOGGLE_USER_TYPE":
+          const newUserTypes = new Set(state.userTypes);
+          if (newUserTypes.has(action.payload)) {
+            newUserTypes.delete(action.payload);
+          } else {
+            newUserTypes.add(action.payload);
+          }
+          return {
+            ...state,
+            userTypes: Array.from(newUserTypes),
+          };        
       default:
         return state;
     }

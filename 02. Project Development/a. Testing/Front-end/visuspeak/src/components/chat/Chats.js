@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
-import { useLocation } from 'react-router-dom';
 import defaultProfilePicture from "../../assets/images/AccountSettingsHeadshot.jpg";
-import { doc, getDoc, onSnapshot, updateDoc } from "firebase/firestore";
+import { doc, getDoc, onSnapshot } from "firebase/firestore";
 import { AuthContext } from "../../context/AuthContext.js";
 import { ChatContext } from "../../context/ChatContext.js";
 import { db } from "../../firebase.js";
@@ -11,7 +10,6 @@ import {
 } from "../../utils/UserPresence.js";
 
 const Chats = () => {
-  const location = useLocation();
   const [chatsWithStatus, setChatsWithStatus] = useState([]);
   const { currentUser } = useContext(AuthContext);
   const { data, dispatch } = useContext(ChatContext);
@@ -24,7 +22,6 @@ const Chats = () => {
     let unsubFromUserChats = () => {};
 
     if (!currentUser || !currentUser.uid) {
-      // If there is no current user or the user does not have a uid, do not proceed.
       return;
     }
 
@@ -75,11 +72,12 @@ const Chats = () => {
             });
 
             if (localStorage.getItem("accountType") === "admin") {
-              setChatsWithStatus(
-                chatsArray.filter((chat) =>
-                  showArchived ? chat.isArchive : !chat.isArchive
-                )
-              );
+              const filteredChats = chatsArray.filter(chat => {
+                const isUserTypeSelected = data.userTypes.includes(chat.userInfo?.type); 
+                const isArchiveStatusMatch = showArchived === Boolean(chat.isArchive); 
+                return isUserTypeSelected && isArchiveStatusMatch; 
+              });
+              setChatsWithStatus(filteredChats);
             } else {
               setChatsWithStatus(chatsArray);
             }
@@ -113,7 +111,7 @@ const Chats = () => {
       clearInterval(interval);
       unsubFromUserChats();
     };
-  }, [currentUser, sortOrder, showArchived]);
+  }, [currentUser, sortOrder, showArchived, data.userTypes]);
 
   useEffect(() => {
     if (data.chatId === "null") {
@@ -141,6 +139,7 @@ const Chats = () => {
             className={`list-group-item list-group-item-action chat-list-item bg-gradient ${
               isActive ? "active" : ""
             }`}
+            href="#"
             key={chat.id}
             onClick={() => handleSelect(chat)}
           >
@@ -149,7 +148,7 @@ const Chats = () => {
                 className="me-3"
                 style={{ position: "relative", display: "inline-block" }}
               >
-                {chat.userInfo?.photoURL == "" ? (
+                {chat.userInfo?.photoURL === "" ? (
                   <img
                     src={defaultProfilePicture}
                     alt="User"

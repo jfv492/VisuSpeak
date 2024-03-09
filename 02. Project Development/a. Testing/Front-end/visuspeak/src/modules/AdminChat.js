@@ -1,14 +1,11 @@
 import React, { useState, useCallback, useEffect, useContext } from "react";
-import { useNavigate } from 'react-router-dom';
 import { ChatContext } from '../context/ChatContext';
-
 import Search from "../components/chat/Search.js";
 import Chats from "../components/chat/Chats.js";
-import Chat from "../components/chat/Chat.js";
-
 import ChatHeader from "../components/chat/ChatHeader.js";
 import MessageList from "../components/chat/MessageList.js";
 import InputArea from "../components/chat/Input.js";
+import Alert from "../components/Alert.js"
 
 const AdminChat = (props) => {
   const { data, dispatch } = useContext(ChatContext);
@@ -16,6 +13,17 @@ const AdminChat = (props) => {
   let photo = data.user?.photoURL;
   const [leftWidth, setLeftWidth] = useState(35); // Percentage
   const [isDragging, setIsDragging] = useState(false);
+  const [alert, setAlert] = useState(null);
+  
+  const showAlert = (message, type) => {
+    setAlert({
+      msg: message,
+      type: type,
+    });
+    setTimeout(() => {
+      setAlert(null);
+    }, 5000);
+  };
 
   useEffect(() => {
     // Function to run when component unmounts
@@ -66,7 +74,7 @@ const AdminChat = (props) => {
           className="resizable-left-panel p-3"
           style={{ width: `${leftWidth}%` }}
         >
-          <Search />
+          <Search showAlert={showAlert}/>
           <Chats />
         </div>
         <div className="resizable-divider " onMouseDown={startDragging}>
@@ -76,6 +84,7 @@ const AdminChat = (props) => {
           className="resizable-right-panel p-3"
           style={{ width: `${100 - leftWidth}%` }}
         >
+          <Alert alert={alert} />
           {displayName ? (
         <>
           <ChatHeader user={displayName} photo={photo} />

@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import Popover from "@mui/material/Popover";
 import Typography from "@mui/material/Typography";
 import { AuthContext } from "../../context/AuthContext.js";
@@ -12,7 +12,7 @@ import defaultProfilePicture from "../../assets/images/AccountSettingsHeadshot.j
 
 const ChatHeader = (props) => {
   const { currentUser } = useContext(AuthContext);
-  const { data } = useContext(ChatContext);
+  const { data, dispatch } = useContext(ChatContext);
   const [alert, setAlert] = useState(null);
   const [isArchived, setIsArchived] = useState(null);
   const showAlert = (message, type) => {
@@ -76,9 +76,8 @@ const ChatHeader = (props) => {
     }
   
     const status = await fetchIsArchiveStatus(currentUser.uid, data.user.uid);
-    setIsArchived(status); // Update the state for future renders, but don't rely on it immediately.
-  
-    // Use `status` directly for your update logic, since it reflects the current fetched state.
+    setIsArchived(status); 
+    
     await updateDoc(doc(db, "userChats", currentUser.uid), {
       [`${data.chatId}.isArchive`]: !status,
     });
@@ -86,14 +85,14 @@ const ChatHeader = (props) => {
     await updateDoc(doc(db, "userChats", data.user.uid), {
       [`${data.chatId}.isArchive`]: !status,
     });
-  
-    // Optionally, you might want to update the state to reflect the change immediately.
-    // This is useful if the UI needs to react to this state change right away.
+
     setIsArchived(!status);
+    console.log(isArchived);
+    dispatch({ type: "RESET_CHAT" });
   };
   return (
-    <div class="messages-heading row mb-1 z-3 position-relative ">
-      <div class="">
+    <div className="messages-heading row mb-1 z-3 position-relative ">
+      <div className="">
         <div className="chat-header rounded-3 bg-gradient shadow">
           <div className="user-info col-sm-8">
             <img
@@ -106,14 +105,14 @@ const ChatHeader = (props) => {
             <h4 className="user-name chat-name-ellipsis">{props.user}</h4>
             {localStorage.getItem("accountType") === "admin" && <div>
             <button
-              class="btn chat-action-button bg-gradient mx-2"
+              className="btn chat-action-button bg-gradient mx-2"
               type="button"
               aria-expanded="false"
               onClick={handleClick}
               onMouseEnter={handlePopoverOpen}
               onMouseLeave={handlePopoverClose}
             >
-              <i class="fa-solid fa-box-archive"></i>
+              <i className="fa-solid fa-box-archive"></i>
             </button>
             <Popover
               id="mouse-over-popover"

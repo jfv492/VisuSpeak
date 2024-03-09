@@ -232,9 +232,9 @@ const SignUp = (props) => {
             <>
               {formField("password", "Password", "password")}
               {formField("confirmPassword", "Confirm Password", "password")}
-              <div className="col-sm-6 my-2">
+              <div className="col-sm-6">
                 <div
-                  className={` d-flex align-items-center ${
+                  className={` d-flex align-items-start ${
                     mobileView ? "flex-column" : ""
                   }`}
                 >
@@ -301,7 +301,7 @@ const SignUp = (props) => {
                   {errors.primaryLanguage}
                 </div>
               </div>
-              <div className="col-sm-6 my-2">
+              <div className="d-flex col-sm-6">
 
               <input
                   type="checkbox"
@@ -332,7 +332,7 @@ const SignUp = (props) => {
             </>
           )}
 
-          <div className="d-flex">
+          <div className="d-flex mt-2">
             {mobileView && currentStep > 1 && (
               <button
                 type="button"
