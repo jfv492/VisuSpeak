@@ -150,7 +150,7 @@ const CustomerSignin = (props) => {
             <div className="modal-footer">
               <button
                 type="button"
-                className="btn btn-secondary btn-raised rounded-pill fw-bold"
+                className="btn "
                 data-bs-dismiss="modal"
               >
                 Cancel
