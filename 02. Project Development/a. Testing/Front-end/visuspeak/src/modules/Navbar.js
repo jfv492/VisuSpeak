@@ -16,7 +16,7 @@ const Navbar = () => {
         <Link className={`navbar-brand pe-3 ${localStorage.getItem("accountType") !== null && "border-end"} `} to="/">
           <img src={ColourLogo} className="navbar-logo" alt="VisuSpeak Logo" height="45"/>
         </Link>
-        {organizationName !== "null" && organizationName} 
+        {organizationName !== null && organizationName} 
         <button
           class="navbar-toggler mx-3"
           type="button"
@@ -28,7 +28,7 @@ const Navbar = () => {
           <span class="navbar-toggler-icon"></span>
         </button>
         <LanguageSwitcher />
-        {accountType == "null" && <LoggedOutNavLinks />}
+        {accountType === null && <LoggedOutNavLinks />}
         {accountType === "admin" && <AdminNavLinks />}
         {accountType === "guest" && <CustomerNavLinks />}
       </div>

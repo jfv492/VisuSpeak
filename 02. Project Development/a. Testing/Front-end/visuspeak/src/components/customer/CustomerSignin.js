@@ -79,7 +79,7 @@ const CustomerSignin = (props) => {
   return (
     <div>
       <button
-        className="btn landing-button-style btn-raised rounded-pill shadow-lg p-3"
+        className="btn landing-button-style btn-raised rounded-pill shadow-lg"
         type="button"
         data-bs-toggle="modal"
         data-bs-target="#startConversationModal"
