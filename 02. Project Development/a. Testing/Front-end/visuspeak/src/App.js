@@ -1,6 +1,6 @@
 import "./App.css";
 import "./Mobile.css";
-import './i18n'
+import "./i18n";
 
 import Alert from "./components/notifications/Alert.js";
 import Login from "./modules/Login.js";
@@ -15,6 +15,7 @@ import AccountSettings from "./modules/AccountSettings.js";
 
 import Resources from "./modules/Resources.js";
 
+import Support from "./modules/Support.js";
 
 import React, { useContext, useState, useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -22,13 +23,10 @@ import { useTranslation } from "react-i18next";
 import { AuthContext } from "./context/AuthContext.js";
 import { refreshUserOnlineStatus } from "./utils/UserPresence.js";
 
-
 import Dashboard from "./components/admin/Dashboard.js";
 import LanguageSetter from "./utils/LanguageSetter.js";
 
-
 function App() {
-  
   const { currentUser } = useContext(AuthContext);
   const [alert, setAlert] = useState(null);
   const showAlert = (message, type) => {
@@ -51,13 +49,16 @@ function App() {
     return () => clearInterval(interval); // Cleanup the interval on component unmount
   }, [currentUser?.uid]);
 
-  const { t, i18n: {changeLanguage, language} } = useTranslation();
- const [currentLanguage, setCurrentLanguage] = useState(language)
- const handleChangeLanguage = () => {
-   const newLanguage = currentLanguage === "en" ? "fr" : "en";
-   setCurrentLanguage(newLanguage);
-   changeLanguage(newLanguage);
- }
+  const {
+    t,
+    i18n: { changeLanguage, language },
+  } = useTranslation();
+  const [currentLanguage, setCurrentLanguage] = useState(language);
+  const handleChangeLanguage = () => {
+    const newLanguage = currentLanguage === "en" ? "fr" : "en";
+    setCurrentLanguage(newLanguage);
+    changeLanguage(newLanguage);
+  };
 
   return (
     <>
@@ -87,10 +88,10 @@ function App() {
 
               {localStorage.getItem("accountType") === "admin" ? (
                 <Route
-                exact
-                path="/chat"
-                element={<AdminChat heading="Previous Chat Sessions" />}
-              />
+                  exact
+                  path="/chat"
+                  element={<AdminChat heading="Previous Chat Sessions" />}
+                />
               ) : (
                 <Route
                   exact
@@ -99,14 +100,15 @@ function App() {
                 />
               )}
               <Route exact path="/resources" element={<Resources />} />
+
+              <Route exact path="/support" element={<Support />} />
               <Route exact path="/dashboard" element={<Dashboard />} />
 
               <Route
                 exact
                 path="/accountsettings"
-                element={<AccountSettings showAlert={showAlert}/>}
+                element={<AccountSettings showAlert={showAlert} />}
               />
-
             </Routes>
           </div>
         </div>

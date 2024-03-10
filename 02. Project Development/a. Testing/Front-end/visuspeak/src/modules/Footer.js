@@ -18,12 +18,12 @@ const Footer = () => {
           <a href="/" className="menu-item">
           {t('Home')}
           </a>
-          <a href="/accommodation" className="menu-item">
+          <a href="/resources" className="menu-item">
           {t('Resources')}
           </a>
-          <a href="/gallery" className="menu-item">
+          {/* <a href="/support" className="menu-item">
           {t('Support')}
-          </a>
+          </a> */}
           <a href="/local-attraction" className="menu-item">
           {t('About Us')}
           </a>
