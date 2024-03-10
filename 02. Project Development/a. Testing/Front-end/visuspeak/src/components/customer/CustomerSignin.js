@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth, db } from "../../firebase.js";
 import { signInAnonymously } from "firebase/auth";
 import { doc, setDoc, collection, query, where, getDocs } from "firebase/firestore";
-import { initializeUserPresence } from "../../utils/UserPresence.js";
+import { initializeUserPresence, setUserOnline } from "../../utils/UserPresence.js";
 import defaultProfilePicture from "../../assets/images/AccountSettingsHeadshot.jpg";
+import { AuthContext } from "../../context/AuthContext.js"
 
 const CustomerSignin = (props) => {
+  const { updateAccountType } = useContext(AuthContext);
   let navigate = useNavigate();
   const [anonymousFirstName, setAnonymousFirstName] = useState("");
   const [anonymousLastName, setAnonymousLastName] = useState("");
@@ -61,7 +63,9 @@ const CustomerSignin = (props) => {
       localStorage.setItem("username", displayName);
       localStorage.setItem("accountType", "guest");
       localStorage.setItem("organizationName", anonymousOrganizationName);
+      updateAccountType("guest");
       initializeUserPresence(user.uid);
+      setUserOnline(user.uid);
 
       navigate("/chat");
     } catch (error) {

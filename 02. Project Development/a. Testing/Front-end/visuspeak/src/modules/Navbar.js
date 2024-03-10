@@ -1,13 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext.js"
 import ColourLogo from "../assets/logos/VisuSpeakPrimaryLogo.png";
 import LoggedOutNavLinks from "../components/navbar/LoggedOutNavLinks.js";
 import AdminNavLinks from "../components/navbar/AdminNavLinks.js";
 import CustomerNavLinks from "../components/navbar/CustomerNavLinks.js";
 import LanguageSwitcher from "../components/navbar/LanguageSwitcher.js";
-import Divider from '@mui/material/Divider';
 
 const Navbar = () => {
+  const { accountType } = useContext(AuthContext);
   return (
     <nav class="navbar navbar-expand-lg bg-body-tertiary shadow px-3">
       <div class="container-fluid">
@@ -26,9 +27,9 @@ const Navbar = () => {
           <span class="navbar-toggler-icon"></span>
         </button>
         {/* <LanguageSwitcher /> */}
-        {localStorage.getItem("accountType") === null && <LoggedOutNavLinks />}
-        {localStorage.getItem("accountType") === "admin" && <AdminNavLinks />}
-        {localStorage.getItem("accountType") === "guest" && <CustomerNavLinks />}
+        {accountType === null && <LoggedOutNavLinks />}
+        {accountType === "admin" && <AdminNavLinks />}
+        {accountType === "guest" && <CustomerNavLinks />}
       </div>
     </nav>
   );
