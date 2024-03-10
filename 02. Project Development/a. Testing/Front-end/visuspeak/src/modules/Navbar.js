@@ -1,16 +1,22 @@
-import React, { useEffect } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext.js"
 import ColourLogo from "../assets/logos/VisuSpeakPrimaryLogo.png";
 import LoggedOutNavLinks from "../components/navbar/LoggedOutNavLinks.js";
 import AdminNavLinks from "../components/navbar/AdminNavLinks.js";
+import CustomerNavLinks from "../components/navbar/CustomerNavLinks.js";
+import LanguageSwitcher from "../components/navbar/LanguageSwitcher.js";
 
 const Navbar = () => {
+  const { accountType, organizationName } = useContext(AuthContext);
+  console.log("dd", accountType === "null")
   return (
-    <nav class="navbar navbar-expand-lg bg-body-tertiary shadow">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary shadow px-3">
       <div class="container-fluid">
-        <Link className="navbar-brand mx-3" to="/">
+        <Link className={`navbar-brand pe-3 ${localStorage.getItem("accountType") !== null && "border-end"} `} to="/">
           <img src={ColourLogo} className="navbar-logo" alt="VisuSpeak Logo" height="45"/>
         </Link>
+        {organizationName !== "null" && organizationName} 
         <button
           class="navbar-toggler mx-3"
           type="button"
@@ -21,8 +27,10 @@ const Navbar = () => {
         >
           <span class="navbar-toggler-icon"></span>
         </button>
-        {localStorage.getItem("accountType") === null &&<LoggedOutNavLinks />}
-        {localStorage.getItem("accountType") === "admin" && <AdminNavLinks />}
+        <LanguageSwitcher />
+        {accountType == "null" && <LoggedOutNavLinks />}
+        {accountType === "admin" && <AdminNavLinks />}
+        {accountType === "guest" && <CustomerNavLinks />}
       </div>
     </nav>
   );

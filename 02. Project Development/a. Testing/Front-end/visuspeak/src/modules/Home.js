@@ -114,7 +114,7 @@ export default function Home() {
       {localStorage.getItem("accountType") !== "admin" ? (
         <>
           <div className="visuspeak-hero">
-            <h1>Welcome to VisuSpeak Support</h1>
+            <h1>Welcome to VisuSpeak ASL Support</h1>
             <p className="asl-user-query">Looking to chat in ASL?</p>
             <p className ="connect-admin">Connect with our Administrators by clicking the button below</p>
             <CustomerSignin />

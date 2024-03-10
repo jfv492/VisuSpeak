@@ -6,6 +6,8 @@ export const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
+  const [accountType, setAccountType] = useState(localStorage.getItem("accountType"));
+  const [organizationName, setOrganizationName] = useState(localStorage.getItem("organizationName"));
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (user) => {
@@ -15,8 +17,18 @@ export const AuthContextProvider = ({ children }) => {
     return () => unsub();
   }, []);
 
+  const updateAccountType = (type) => {
+    localStorage.setItem("accountType", type);
+    setAccountType(type);
+  }
+
+  const updateOrganizationName = (name) => {
+    localStorage.setItem("organizationName", name);
+    setOrganizationName(name);
+  }
+
   return (
-    <AuthContext.Provider value={{ currentUser }}>
+    <AuthContext.Provider value={{ currentUser, accountType, updateAccountType, organizationName, updateOrganizationName }}>
       {children}
     </AuthContext.Provider>
   );

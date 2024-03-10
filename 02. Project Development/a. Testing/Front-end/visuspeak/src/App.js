@@ -1,6 +1,6 @@
 import "./App.css";
 import "./Mobile.css";
-// import "./User.css";
+import './i18n'
 
 import Alert from "./components/notifications/Alert.js";
 import Login from "./modules/Login.js";
@@ -19,12 +19,17 @@ import ASLDictionary from "./components/resources_page/ASLDictionary.js";
 
 import React, { useContext, useState, useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-
+import { useTranslation } from "react-i18next";
 import { AuthContext } from "./context/AuthContext.js";
 import { refreshUserOnlineStatus } from "./utils/UserPresence.js";
+
+
 import Dashboard from "./components/admin/Dashboard.js";
+import LanguageSetter from "./utils/LanguageSetter.js";
+
 
 function App() {
+  
   const { currentUser } = useContext(AuthContext);
   const [alert, setAlert] = useState(null);
   const showAlert = (message, type) => {
@@ -47,11 +52,20 @@ function App() {
     return () => clearInterval(interval); // Cleanup the interval on component unmount
   }, [currentUser?.uid]);
 
+  const { t, i18n: {changeLanguage, language} } = useTranslation();
+ const [currentLanguage, setCurrentLanguage] = useState(language)
+ const handleChangeLanguage = () => {
+   const newLanguage = currentLanguage === "en" ? "fr" : "en";
+   setCurrentLanguage(newLanguage);
+   changeLanguage(newLanguage);
+ }
+
   return (
     <>
       <BrowserRouter>
         <div className="page-container">
           <div className="content-wrap">
+            <LanguageSetter />
             <Navbar />
             <Alert alert={alert} />
             <Routes>
@@ -85,7 +99,6 @@ function App() {
                   element={<ASLChat showAlert={showAlert} />}
                 />
               )}
-
               <Route exact path="/resources" element={<Resources />} />
               <Route exact path="/asldictionary" element={<ASLDictionary />} />
 
@@ -98,6 +111,7 @@ function App() {
                 path="/accountsettings"
                 element={<AccountSettings showAlert={showAlert}/>}
               />
+
             </Routes>
           </div>
         </div>

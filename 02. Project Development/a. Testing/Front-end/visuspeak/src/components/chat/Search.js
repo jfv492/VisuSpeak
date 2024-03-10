@@ -12,8 +12,10 @@ import { doc, setDoc, updateDoc } from "firebase/firestore";
 import { AuthContext } from "../../context/AuthContext.js";
 import { ChatContext } from "../../context/ChatContext.js";
 import defaultProfilePicture from "../../assets/images/AccountSettingsHeadshot.jpg";
+import { useTranslation } from "react-i18next";
 
 const Search = (props) => {
+  const { t } = useTranslation();
   const [username, setUsername] = useState("");
   const [users, setUsers] = useState([]);
   const [err, setErr] = useState(false);
@@ -24,58 +26,56 @@ const Search = (props) => {
   const sortOrderText =
     data.sortOrder === "mostRecent" ? "Most Recent" : "Least Recent";
 
-  useEffect(() => {
-    const fetchUsers = async () => {
-      if (username.trim() === "") {
-        setUsers([]);
-        return;
-      }
-
-      const usersRef = collection(db, "users");
-
-      let q = query(
-        usersRef,
-        where("displayName", "!=", currentUser.displayName),
-        where("displayName", ">=", username),
-        where("displayName", "<=", username + "\uf8ff")
-      );
-
-      console.log("User list:", q);
-
-      if (localStorage.getItem("accountType") === "admin") {
-        q = query(
+    useEffect(() => {
+      const fetchUsers = async () => {
+        if (username.trim() === "") {
+          setUsers([]);
+          return;
+        }
+    
+        const usersRef = collection(db, "users");
+        // Fetch users based on displayName, but filter further in the application
+        let q = query(
           usersRef,
-          where("displayName", "!=", currentUser.displayName),
           where("displayName", ">=", username),
-          where("displayName", "<=", username + "\uf8ff")
+          where("displayName", "<=", username + "\uf8ff"),
         );
-      }
-
-      try {
-        const querySnapshot = await getDocs(q);
-        const fetchedUsers = [];
-        querySnapshot.forEach((doc) => {
-          fetchedUsers.push(doc.data());
-        });
-        setUsers(fetchedUsers);
-      } catch (error) {
-        setErr(true);
-        console.log(err)
-      }
-    };
-
-    fetchUsers();
-  }, [username, currentUser?.displayName, err]);
+    
+        try {
+          const querySnapshot = await getDocs(q);
+          const organizationName = localStorage.getItem("organizationName");
+          const fetchedUsers = [];
+          querySnapshot.forEach((doc) => {
+            const user = doc.data();
+            // Filter by type and organizationName in the application
+            if (user.type === "admin" && user.organizationName === organizationName) {
+              fetchedUsers.push(user);
+            }
+          });
+          setUsers(fetchedUsers);
+        } catch (error) {
+          console.error("Error fetching users:", error);
+          setErr(true);
+        }
+      };
+    
+      fetchUsers();
+    }, [username, currentUser?.displayName]);
+    
 
   const handleSortChange = (sortOrder) => {
     dispatch({ type: "CHANGE_SORT_ORDER", payload: sortOrder });
   };
 
   const handleUserTypeChange = (e) => {
-    const userType = e.target.name; 
-    const isChecked = e.target.checked; 
-  
-    if (!isChecked && data.userTypes.length === 1 && data.userTypes.includes(userType)) {
+    const userType = e.target.name;
+    const isChecked = e.target.checked;
+
+    if (
+      !isChecked &&
+      data.userTypes.length === 1 &&
+      data.userTypes.includes(userType)
+    ) {
       props.showAlert("You must select at least one user type.", "danger");
       return; // Exit without making changes
     }
@@ -151,7 +151,7 @@ const Search = (props) => {
             type="search"
             className="form-control search-input"
             aria-label="Search"
-            placeholder="Search user..."
+            placeholder={t("SearchPlaceholder")}
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
@@ -172,7 +172,7 @@ const Search = (props) => {
                 onChange={handleUserTypeChange}
               />
               <label class="form-check-label ms-2 mt-1" for="adminCheckbox">
-                Admin
+                {t("Admin")}
               </label>
             </li>
             <li>
@@ -183,7 +183,7 @@ const Search = (props) => {
                 onChange={handleUserTypeChange}
               />
               <label class="form-check-label ms-2 mt-1" for="guestCheckbox">
-                Guest
+                {t("Guest")}
               </label>
             </li>
           </ul>
@@ -231,12 +231,12 @@ const Search = (props) => {
             {data.showArchived ? (
               <>
                 <i class="fa-solid fa-arrow-left me-2"></i>
-                Back
+                {t("Back")}
               </>
             ) : (
               <>
                 <i class="fa-solid fa-box-archive me-2"></i>
-                Archive
+                {t("Archive")}
               </>
             )}
           </div>
@@ -248,11 +248,16 @@ const Search = (props) => {
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            {sortOrderText}{" "}
             {sortOrderText === "Most Recent" ? (
-              <i class="fa-solid fa-arrow-down-short-wide"></i>
+              <>
+                {t("MostRecent")}
+                <i class="fa-solid fa-arrow-down-short-wide ms-2"></i>
+              </>
             ) : (
-              <i class="fa-solid fa-arrow-up-wide-short"></i>
+              <>
+                {t("LeastRecent")}
+                <i class="fa-solid fa-arrow-up-wide-short ms-2"></i>
+              </>
             )}
           </div>
           <ul className="dropdown-menu" aria-labelledby="sortDropdown">
@@ -262,7 +267,7 @@ const Search = (props) => {
                 href="#"
                 onClick={() => handleSortChange("mostRecent")}
               >
-                Most Recent
+                {t("MostRecent")}
               </a>
             </li>
             <li>
@@ -271,7 +276,7 @@ const Search = (props) => {
                 href="#"
                 onClick={() => handleSortChange("leastRecent")}
               >
-                Least Recent
+                {t("LeastRecent")}
               </a>
             </li>
           </ul>

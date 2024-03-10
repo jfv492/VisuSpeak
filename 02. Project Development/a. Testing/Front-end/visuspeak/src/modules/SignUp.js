@@ -6,8 +6,11 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { doc, setDoc } from "firebase/firestore";
 import { initializeUserPresence } from "../utils/UserPresence.js";
 import defaultProfilePicture from "../assets/images/AccountSettingsHeadshot.jpg";
+import TermsAndConditions from "../components/TermsAndConditions.js"
+import { useTranslation } from 'react-i18next';
 
 const SignUp = (props) => {
+  const { t } = useTranslation();
   let navigate = useNavigate();
   const [errors, setErrors] = useState({});
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -64,7 +67,7 @@ const SignUp = (props) => {
     for (const [key, value] of Object.entries(formData)) {
       if (!value && key !== "agreeTerms") {
         formIsValid = false;
-        currentErrors[key] = "This field cannot be blank.";
+        currentErrors[key] = `${t('FieldBlank')}`;
       }
     }
 
@@ -72,24 +75,24 @@ const SignUp = (props) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(formData.email)) {
       formIsValid = false;
-      currentErrors.email = "Please enter a valid email address.";
+      currentErrors.email = `${t('InvalidEmail')}`;
     }
 
     // Check if passwords match
     if (formData.password !== formData.confirmPassword) {
       formIsValid = false;
-      currentErrors.confirmPassword = "Passwords do not match.";
+      currentErrors.confirmPassword = `${t('PasswordsNotMatch')}`;
     }
 
     if (formData.primaryLanguage === "" || formData.primaryLanguage == null) {
       formIsValid = false;
-      currentErrors.primaryLanguage = "Please select your primary language.";
+      currentErrors.primaryLanguage = `${t('LanguageNotSelected')}`;
     }
 
     // Check if terms and conditions are agreed to
     if (!formData.agreeTerms) {
       formIsValid = false;
-      currentErrors.agreeTerms = "You must agree to the terms and conditions.";
+      currentErrors.agreeTerms = `${t('TermsNotAgreed')}`;
     }
 
     setErrors(currentErrors);
@@ -157,12 +160,12 @@ const SignUp = (props) => {
           .catch((error) => {
             console.error("Error fetching the image as blob:", error);
           });
-        props.showAlert("Signup successful", "success");
+        props.showAlert(`${t("SuccessAlert")}`, "success");
         navigate("/login");
       } catch (err) {
         setErrors(err);
         console.log("Firebase error: ", err);
-        props.showAlert("Signup failed. Please try again", "danger");
+        props.showAlert(`${t("FailureAlert")}`, "danger");
       }
     }
   };
@@ -206,40 +209,40 @@ const SignUp = (props) => {
         novalidate
       >
         <div className="row mb-4">
-          <h1> {props.heading}</h1>
+          <h1> {t('SignUpHeading')}</h1>
           <p class="lead">
-            <label className="">Don't have an account?</label>
+            <label className="">{t('Signup Prompt')}</label>
             <Link
               to="/login"
               className="ms-2 form-link"
               tabIndex="2"
               role="button"
             >
-              Login
+              {t('Login')}
             </Link>
           </p>
         </div>
         <div className="row justify-content-between">
           {(!mobileView || currentStep === 1) && (
             <>
-              {formField("firstName", "First Name")}
-              {formField("lastName", "Last Name")}
-              {formField("organizationName", "Organization Name")}
-              {formField("email", "Email")}
+              {formField("firstName", `${t('FirstNameLabel')}`)}
+              {formField("lastName", `${t('LastNameLabel')}`)}
+              {formField("organizationName", `${t('OrganizationNameLabel')}`)}
+              {formField("email", `${t('EmailLabel')}`)}
             </>
           )}
           {(!mobileView || currentStep === 2) && (
             <>
-              {formField("password", "Password", "password")}
-              {formField("confirmPassword", "Confirm Password", "password")}
-              <div className="col-sm-6">
+              {formField("password", `${t('PasswordLabel')}`, "password")}
+              {formField("confirmPassword", `${t('ConfirmPasswordLabel')}`, "password")}
+              <div className="col-sm-6 mt-2">
                 <div
                   className={` d-flex align-items-start ${
                     mobileView ? "flex-column" : ""
                   }`}
                 >
-                  <label className="form-label me-2">Primary Language:</label>
-                  <div className="form-check form-check-inline">
+                  <label className="form-label me-2">{t('PrimaryLanguageLabel')}:</label>
+                  {/* <div className="form-check form-check-inline">
                     <input
                       className="form-check-input"
                       type="radio"
@@ -253,9 +256,9 @@ const SignUp = (props) => {
                       className="form-check-label mt-1"
                       htmlFor="primaryLanguageASL"
                     >
-                      ASL
+                      {t('ASLLabel')}
                     </label>
-                  </div>
+                  </div> */}
                   <div className="form-check form-check-inline">
                     <input
                       className="form-check-input"
@@ -270,7 +273,7 @@ const SignUp = (props) => {
                       className="form-check-label mt-1"
                       htmlFor="primaryLanguageEnglish"
                     >
-                      English
+                      {t('EnglishLabel')}
                     </label>
                   </div>
                   <div className="form-check form-check-inline">
@@ -287,7 +290,7 @@ const SignUp = (props) => {
                       className="form-check-label mt-1"
                       htmlFor="primaryLanguageFrench"
                     >
-                      French
+                      {t('FrenchLabel')}
                     </label>
                   </div>
                 </div>
@@ -301,21 +304,20 @@ const SignUp = (props) => {
                   {errors.primaryLanguage}
                 </div>
               </div>
-              <div className="d-flex col-sm-6">
+              <div className="d-flex flex-column col-sm-6 mt-2">
 
-              <input
+              
+                <label className="d-flex" htmlFor="agreeTerms">
+                <input
                   type="checkbox"
-                  className="form-check-input"
+                  className="form-check-input me-1"
                   id="agreeTerms"
                   name="agreeTerms"
                   checked={formData.agreeTerms}
                   onChange={handleChange}
                 />
-                <label className="ms-1" htmlFor="agreeTerms">
-                  Do you agree with the
-                  <Link className="hyperlink ms-1" to="/">
-                    terms and conditions
-                  </Link>
+                {t('AgreeTerms')}
+                <TermsAndConditions onAccept={() => setFormData({ ...formData, agreeTerms: true })} />
                   ?
                 </label>
 
@@ -354,8 +356,8 @@ const SignUp = (props) => {
                 ></i>
               </button>
             ) : (
-              <button type="submit" className="btn button-style ms-auto">
-                Sign Up
+              <button type="submit" className="btn form-button-style btn-raised rounded-pill ms-auto">
+                {t('SignUpButton')}
               </button>
             )}
           </div>

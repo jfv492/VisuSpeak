@@ -6,8 +6,10 @@ import ChatHeader from "../components/chat/ChatHeader.js";
 import MessageList from "../components/chat/MessageList.js";
 import InputArea from "../components/chat/Input.js";
 import Alert from "../components/notifications/Alert.js"
+import { useTranslation } from 'react-i18next';
 
-const AdminChat = (props) => {
+const AdminChat = () => {
+  const { t } = useTranslation();
   const { data, dispatch } = useContext(ChatContext);
   let displayName = data.user?.displayName;
   let photo = data.user?.photoURL;
@@ -96,7 +98,7 @@ const AdminChat = (props) => {
         </>
       ) : (
         <div class="centered-text lead p-3">
-          Click on a chat to preview messages
+          {t('ChatPlaceholder')}
         </div>
       )}
         </div>

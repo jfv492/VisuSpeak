@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 // Import necessary Firebase utilities
 import { updateProfile } from "firebase/auth";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { storage, auth, db } from "../../firebase"; // Ensure you have these exports in your firebase.js
+import { storage, auth, db } from "../../firebase.js"; // Ensure you have these exports in your firebase.js
 import { doc, updateDoc } from "firebase/firestore";
 
 const SettingsUserInfo = (props) => {
@@ -58,10 +58,10 @@ const SettingsUserInfo = (props) => {
               width="100%"
               style={{ justifyContent: "end" }}
             />
-            <label htmlFor="file-upload" className="fa-solid fa-camera fa-xl change-user-profile-icon rounded-circle shadow border" style={{
+            <label htmlFor="file-upload" className="fa-solid fa-camera change-user-profile-icon rounded-circle shadow border" style={{
                 position: "absolute",
-                bottom: 25,
-                right: 3,
+                bottom: "0vw",
+                right: "0vw",
                 cursor: "pointer", // Change cursor to indicate clickable
               }}>
               <input id="file-upload" type="file" style={{ display: "none" }} onChange={handleFileChange} accept="image/*" />
@@ -73,13 +73,11 @@ const SettingsUserInfo = (props) => {
             {localStorage.getItem("username")}
           </h3>
           <div className="row">
-            <div className="col-sm-3">
-              <Typography variant="caption" display="block" gutterBottom style={{ fontSize: '15px' }}>
+            <div className="col-sm-6 text-secondary">
+              <Typography variant="caption" display="block" gutterBottom style={{ fontSize: '17px' }}>
                 <i className="fa-solid fa-envelope me-2" style={{color: "#006262"}}></i>{email}
               </Typography>
-            </div>
-            <div className="col-sm-6">
-              <Typography variant="caption" display="block" gutterBottom style={{ fontSize: '15px' }}>
+              <Typography variant="caption" display="block" gutterBottom style={{ fontSize: '17px' }}>
                 <i className="fa-solid fa-briefcase me-2" style={{color: "#006262"}}></i>{organizationName}
               </Typography>
             </div>

@@ -216,20 +216,15 @@ body {
   min-height: 25px;
 }
 
-.form-submit-row {
-  padding-right: 12px !important;
-}
-
 .form-signup-submit-row {
   padding-right: 12px !important;
 }
 
-.login-button-style {
+.form-button-style {
   background-color: #006262;
   color: white;
   padding-left: 2.5vh;
   padding-right: 2.5vh;
-  width: 10rem;
   font-size: x-large;
   font-weight: bold;
 }
@@ -266,7 +261,7 @@ body {
   font-size: large;
 }
 
-.modal-body > h2, h3 {
+.modal-body > h2, h3, h4 {
   color: #555;
 }
 .modal-body > p, ul {
@@ -1121,6 +1116,14 @@ iframe {
   color: black;
 }
 
+.navbar-button-style {
+  background-color: #006262;
+  color: white !important;
+  padding-left: 2.5vh;
+  padding-right: 2.5vh;
+  font-weight: bold;
+}
+
 .nav-link.dropdown-toggle:focus, .nav-link.dropdown-toggle:active {
   color: white !important; /* White font color */
   background-color: #006262 !important; /* Specific background color */
@@ -1454,8 +1457,8 @@ iframe {
 }
 
 .user-profile-picture {
-  width: 200px;
-  height: 200px;
+  width: 15vw;
+  height: 15vw;
   border-color: #023e3d;
 }
 
@@ -1473,20 +1476,12 @@ iframe {
   background-color: #006262;
   border-color: white !important;
   border-width: 2px !important;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding: calc(5px + 0.1vw);
   cursor: pointer;
+  font-size: calc(12px + 1.5vw);
 }
 
 .settings-form {
-  margin-top: 10px;
-  padding-top: 20px;
-  padding-bottom: 30px;
-  padding-left: 20px;
-  padding-right: 20px;
-  border-radius: 15px;
   background-color: #eee;
 }
 
@@ -1510,6 +1505,16 @@ iframe {
   margin-right: 50px;
   padding-top: 20px;
   padding-bottom: 20px;
+}
+
+.account-button-style {
+  background-color: #006262;
+  color: white;
+  padding-left: 2.5vh;
+  padding-right: 2.5vh;
+  /* width: 12rem; */
+  font-size: large;
+  font-weight: bold;
 }
 
 /****************************** Resources Page ****************************/

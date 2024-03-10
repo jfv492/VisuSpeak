@@ -89,9 +89,11 @@ const NotificationsList = ({ userId }) => {
         aria-expanded="false"
       >
         <i class="fa-solid fa-bell fs-3"></i>
-        { unreadCount != 0 && <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger mt-1">
-          {unreadCount <= 10 ? unreadCount : "10+"}
-        </span>}
+        {unreadCount != 0 && (
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger mt-1">
+            {unreadCount <= 10 ? unreadCount : "10+"}
+          </span>
+        )}
       </button>
 
       <ul class="dropdown-menu dropdown-menu-end notification-list fs-6">
@@ -115,7 +117,9 @@ const NotificationsList = ({ userId }) => {
                       className="two-line-ellipsis notification-text col-sm-8 me-3"
                       style={{ width: "20rem" }}
                     >
-                      <span>New Message from <b>{notification.senderName}</b>:</span>
+                      <span>
+                        New Message from <b>{notification.senderName}</b>:
+                      </span>
                       <br />
                       {notification.text}
                     </div>
@@ -136,7 +140,7 @@ const NotificationsList = ({ userId }) => {
             ))}
           </>
         ) : (
-          <div className="fs-6">No new messages</div>
+          <div className="fs-6 text-center">No new messages</div>
         )}
       </ul>
     </>

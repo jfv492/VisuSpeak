@@ -1,18 +1,19 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { auth } from "../../firebase";
+import { auth } from "../../firebase.js";
 import { AuthContext } from "../../context/AuthContext.js";
 import { setUserOffline } from "../../utils/UserPresence.js";
-import { updatePassword,signOut } from "firebase/auth";
-import Alert from '@mui/material/Alert';
-
+import { updatePassword, signOut } from "firebase/auth";
+import Alert from "@mui/material/Alert";
+import { useTranslation } from 'react-i18next';
 
 const SettingsEditAccountInfo = () => {
+  const { t } = useTranslation();
   const { currentUser } = useContext(AuthContext);
   const [editMode, setEditMode] = useState(false);
   const [formData, setFormData] = useState({
     password: "",
-    confirmPassword: ""
+    confirmPassword: "",
   });
   const [initialFormData, setInitialFormData] = useState({ ...formData });
   const [error, setError] = useState("");
@@ -53,17 +54,22 @@ const SettingsEditAccountInfo = () => {
 
     if (formData.password !== formData.confirmPassword) {
       formIsValid = false;
-      setError("Passwords do not match.");
+      setError(`${t('PasswordsMismatchError')}`);
     }
 
-    if (formData.password == null || formData.confirmPassword == null || formData.password == "" || formData.confirmPassword == "") {
+    if (
+      formData.password == null ||
+      formData.confirmPassword == null ||
+      formData.password == "" ||
+      formData.confirmPassword == ""
+    ) {
       formIsValid = false;
-      setError("Fields cannot be empty.");
+      setError(`${t('FieldsEmptyError')}`);
     }
 
-    if (formData.password <= 6 || formData.confirmPassword <= 6) {
+    if (0 < formData.password <= 6 || 0 < formData.confirmPassword <= 6) {
       formIsValid = false;
-      setError("Fields cannot be empty.");
+      setError(`${t('PasswordLengthError')}`);
     }
 
     try {
@@ -76,14 +82,13 @@ const SettingsEditAccountInfo = () => {
           handleSignOut();
         } catch (error) {
           setError(
-            "An error occurred while changing password. Please try again later"
+            `${t('PasswordChangeError')}`
           );
           console.error(error);
         }
       }
-     
     } catch (error) {
-      setError("An error occurred while updating account information.");
+      setError(`${t('AccountUpdateError')}`);
       console.error(error);
     }
   };
@@ -115,59 +120,54 @@ const SettingsEditAccountInfo = () => {
   );
 
   return (
-    <form className="settings-form" onSubmit={handleSubmit}>
-      <div className="row mb-3">
-        <div className="col-sm-3">
-        <h4>Update Your Password</h4>
-        </div>
-        <div className="col-sm-3">
-        {!editMode && (
-          <Link
-            type="button"
-            className=" hyperlink "
-            onClick={handleEdit}
-          >
-            Edit
-          </Link>
-        )}
-        </div>
-        
-        
-      </div>
-      <div className="row ">
-        {formField("password", "Password", "password", false, !editMode)}
-        {formField(
-          "confirmPassword",
-          "Confirm Password",
-          "password",
-          false,
-          !editMode
-        )}
-      </div>
-      <div className="d-flex row mt-3" >
-        <div className="col-sm-3">
-          
-          {editMode && (
-            <>
-              <button type="submit" className="btn settings-submit-button">
-                Save Changes
-              </button>
-              <button
-                type="button"
-                className="btn settings-cancel-button"
-                onClick={handleCancel}
-              >
-                Cancel
-              </button>
-            </>
+    <>
+      <div className="d-flex align-items-center px-2">
+        <h4>{t('ChangePassword')}</h4>
+        <div className="ms-auto">
+          {!editMode && (
+            <button type="button" className="btn settings-cancel-button " onClick={handleEdit}>
+              {t('Edit')}
+            </button>
           )}
         </div>
-        <div className="col-sm-9">
-          {error && <Alert severity="error">{error}</Alert>}
-          {success && <Alert severity="success">{success}</Alert>}
-          </div>
       </div>
-    </form>
+      <form className="settings-form p-3 rounded-3" onSubmit={handleSubmit}>
+        <div className="row ">
+          {formField("password", `${t('PasswordLabel')}`, "password", false, !editMode)}
+          {formField(
+            "confirmPassword",
+            `${t('ConfirmPasswordLabel')}`,
+            "password",
+            false,
+            !editMode
+          )}
+        </div>
+        <div className="d-flex my-2 justify-content-between align-items-center" style={{minHeight: "50px"}}>
+        <div className="">
+            {error && <Alert severity="error">{error}</Alert>}
+            {success && <Alert severity="success">{success}</Alert>}
+          </div>
+          <div className="">
+            {editMode && (
+              <>
+                <button type="submit" className="btn account-button-style btn-raised rounded-pill">
+                {t('SaveChanges')}
+                </button>
+                <button
+                  type="button"
+                  className="btn settings-cancel-button"
+                  onClick={handleCancel}
+                >
+                  {t('Cancel')}
+                </button>
+              </>
+            )}
+          </div>
+          
+        </div>
+      </form>
+      
+    </>
   );
 };
 

@@ -1,17 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth, db } from "../../firebase.js";
 import { signInAnonymously } from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore";
-import { initializeUserPresence } from "../../utils/UserPresence.js";
+import { doc, setDoc, collection, query, where, getDocs } from "firebase/firestore";
+import { initializeUserPresence, setUserOnline } from "../../utils/UserPresence.js";
 import defaultProfilePicture from "../../assets/images/AccountSettingsHeadshot.jpg";
+import { AuthContext } from "../../context/AuthContext.js"
 import '../../App.css';
 
 const CustomerSignin = (props) => {
+  const { updateAccountType, updateOrganizationName } = useContext(AuthContext);
   let navigate = useNavigate();
   const [anonymousFirstName, setAnonymousFirstName] = useState("");
   const [anonymousLastName, setAnonymousLastName] = useState("");
+  const [anonymousOrganizationName, setAnonymousOrganizationName] = useState("");
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [organizationNames, setOrganizationNames] = useState([]);
   const mobileView = windowWidth < 600;
 
   useEffect(() => {
@@ -23,36 +27,49 @@ const CustomerSignin = (props) => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  useEffect(() => {
+    const fetchOrganizationNames = async () => {
+      const q = query(collection(db, "users"), where("type", "==", "admin"));
+      const querySnapshot = await getDocs(q);
+      const names = new Set();
+      querySnapshot.forEach((doc) => {
+        names.add(doc.data().organizationName);
+      });
+      setOrganizationNames([...names]);
+    };
+
+    fetchOrganizationNames();
+  }, []);
+
   const handleAnonymousSignIn = async () => {
     try {
       const { user } = await signInAnonymously(auth);
       console.log("Anonymous user signed in:", user.uid);
 
-      // Combine first and last name for display name
       const displayName =
         `${anonymousFirstName} ${anonymousLastName}`.trim() || "Guest";
 
-      // Create a new user document for the anonymous user
       await setDoc(doc(db, "users", user.uid), {
         uid: user.uid,
         displayName: displayName,
-        photoURL: "",
+        photoURL: defaultProfilePicture,
         firstName: anonymousFirstName,
         lastname: anonymousLastName,
         type: "guest",
         email: "",
-        organizationName: "",
+        organizationName: anonymousOrganizationName,
       });
 
-      // Create a new chat document for the anonymous user
       await setDoc(doc(db, "userChats", user.uid), {});
       localStorage.setItem("username", displayName);
       localStorage.setItem("accountType", "guest");
-      // Initialize user presence or perform other actions as needed
+      localStorage.setItem("organizationName", anonymousOrganizationName);
+      updateAccountType("guest");
+      updateOrganizationName(anonymousOrganizationName);
       initializeUserPresence(user.uid);
+      setUserOnline(user.uid);
 
-      // Redirect to chat or perform other actions as needed
-      navigate("/chat"); // Make sure you have a route set up to handle this path
+      navigate("/chat");
     } catch (error) {
       console.error("Error signing in anonymously:", error);
       alert("Anonymous sign-in failed. Please try again", "danger");
@@ -83,7 +100,7 @@ const CustomerSignin = (props) => {
         >
           <div className="modal-content">
             <div className="modal-header">
-              <div className="fs-5 fw-bold">Enter your first and last name</div>
+              <div className="fs-5 fw-bold">Connect with an Administrator</div>
               <button
                 type="button"
                 className="btn-close"
@@ -93,6 +110,9 @@ const CustomerSignin = (props) => {
             </div>
             <div className="modal-body">
               <div className="row g-3 d-flex flex-wrap">
+                <div className="fs-6">
+                  <i className="fa-solid fa-circle-info me-2 fs-6"></i>Please enter your details
+                </div>
                 <div className="col-sm-6">
                   <input
                     type="text"
@@ -113,12 +133,25 @@ const CustomerSignin = (props) => {
                     onChange={(e) => setAnonymousLastName(e.target.value)}
                   />
                 </div>
+                <div className="col-sm-12">
+                  <select
+                    className="form-select"
+                    aria-label="Default select example"
+                    value={anonymousOrganizationName}
+                    onChange={(e) => setAnonymousOrganizationName(e.target.value)}
+                  >
+                    <option selected>Select Organization</option>
+                    {organizationNames.map((name, index) => (
+                      <option key={index} value={name}>{name}</option>
+                    ))}
+                  </select>
+                </div>
               </div>
             </div>
             <div className="modal-footer">
               <button
                 type="button"
-                className="btn btn-secondary btn-raised rounded-pill fw-bold"
+                className="btn "
                 data-bs-dismiss="modal"
               >
                 Cancel
