@@ -18,8 +18,8 @@ const User = () => {
     }
     // Clear local storage and sign out
     localStorage.clear();
-    updateAccountType(null);
-    updateOrganizationName(null);
+    updateAccountType("");
+    updateOrganizationName("");
     await signOut(auth);
     navigate("/");
   };

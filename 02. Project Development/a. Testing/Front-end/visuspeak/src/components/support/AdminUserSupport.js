@@ -1,4 +1,6 @@
 import * as React from "react";
+import HowToAdminChatModal from "./HowToAdminChatModal.js";
+import HowToEditAccountSettingsModal from "./HowToEditAccountSettingsModal.js"
 
 const AdminUserSupport = (props) => {
   return (
@@ -13,7 +15,7 @@ const AdminUserSupport = (props) => {
                     Learn how to start a conversation with an ASL User so you can assist 
                     them with their customer service needs.
                 </p>
-                <a class="btn btn-lg button-style fs-6">Learn More</a>
+                <HowToAdminChatModal />
                 </div>
             </div>
 
@@ -23,7 +25,7 @@ const AdminUserSupport = (props) => {
               <p class="card-text py-3 large-text-style">
                 Learn how to edit your account setttings like passwords and profile picture from the Admin Dashboard. 
               </p>
-              <a class="btn btn-lg button-style fs-6">Learn More</a>
+              <HowToEditAccountSettingsModal />
             </div>
           </div>
         </div>

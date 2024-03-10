@@ -1,6 +1,8 @@
 import * as React from "react";
+import HowToASLChatModal from "./HowToASLChatModal.js";
+import HowToSignIntoCameraModal from "./HowToSignIntoCameraModal.js"
 
-const ASLUserSupport = () => {
+const ASLUserSupport = (props) => {
   return (
     <>
       <div className="support-cards-container-odd">
@@ -13,7 +15,7 @@ const ASLUserSupport = () => {
                 Learn how to start a conversation with an Admin so they can assist 
                 you with your customer service needs.
               </p>
-              <a class="btn btn-lg button-style fs-6">Learn More</a>
+              <HowToASLChatModal />
             </div>
           </div>
 
@@ -23,7 +25,7 @@ const ASLUserSupport = () => {
               <p class="card-text py-3 large-text-style">
                 Learn how to open the camera, allow permissions, and sign into the camera for sending ASL spoken messages.
               </p>
-              <a class="btn btn-lg button-style fs-6">Learn More</a>
+              <HowToSignIntoCameraModal />
             </div>
           </div>
         </div>

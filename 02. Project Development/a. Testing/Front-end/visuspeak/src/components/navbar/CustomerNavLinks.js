@@ -26,8 +26,8 @@ const CustomerNavLinks = () => {
     // Clear local storage and sign out
     localStorage.clear();
     await signOut(auth);
-    updateAccountType(null);
-    updateOrganizationName(null);
+    updateAccountType("");
+    updateOrganizationName("");
     navigate("/");
   };
 
