@@ -68,6 +68,26 @@
         "LoginFailed": "Échec de la connexion. Veuillez réessayer.",
         "InvalidCredentials": "Identifiants invalides. Veuillez réessayer.",
         "SuccessAlert": "Inscription réussie.",
-        "FailureAlert": "L'inscription a échoué. Veuillez réessayer."
+        "FailureAlert": "L'inscription a échoué. Veuillez réessayer.",
+        "TermsAndConditionsHeading": "Conditions Générales d'Utilisation",
+        "TermsAndConditionsTitle": "Conditions Générales d'Utilisation :",
+        "TermsIntro": "Ces conditions générales (\"Conditions\") régissent votre utilisation de VisuSpeak fourni par VisuSpeak (\"nous\", \"notre\"). En accédant ou en utilisant l'Application, vous acceptez d'être lié par ces Conditions. Si vous n'acceptez pas ces Conditions, vous ne pouvez pas accéder à l'Application ni l'utiliser.",
+        "UseOfApplication": "1. Utilisation de l'Application",
+        "UseOfApplicationDesc1": "1.1 Vous acceptez d'utiliser l'Application uniquement à des fins légales et conformément à ces Conditions.",
+        "UseOfApplicationDesc2": "1.2 Vous êtes responsable de l'exactitude et de la légalité de tout contenu que vous soumettez ou téléchargez sur l'Application.",
+        "IntellectualPropertyRights": "2. Droits de Propriété Intellectuelle",
+        "IntellectualPropertyRightsDesc1": "2.1 L'Application et son contenu original, ses fonctionnalités et sa fonctionnalité sont la propriété de VisuSpeak et sont protégés par les lois internationales sur le droit d'auteur, les marques commerciales, les brevets, les secrets commerciaux et d'autres droits de propriété intellectuelle ou lois sur les droits propriétaires.",
+        "IntellectualPropertyRightsDesc2": "2.2 Vous ne pouvez pas modifier, reproduire, distribuer, transmettre, afficher, exécuter, ou créer des œuvres dérivées à partir de tout contenu disponible via l'Application sans le consentement écrit préalable de VisuSpeak.",
+        "DisclaimerOfWarranties": "3. Avertissement de Garanties",
+        "DisclaimerOfWarrantiesDesc1": "3.1 L'Application est fournie sur une base \"en l'état\" et \"selon la disponibilité\". Nous ne faisons aucune représentation ou garantie de quelque nature que ce soit, expresse ou implicite, concernant l'exactitude, la fiabilité, ou la disponibilité de l'Application.",
+        "DisclaimerOfWarrantiesDesc2": "3.2 Nous déclinons toutes garanties, expresses ou implicites, y compris, mais sans s'y limiter, les garanties implicites de commercialité, d'adéquation à un usage particulier, et de non-contrefaçon.",
+        "DisclaimerOfWarrantiesDesc3": "3.3 Les mots prédits fournis par le modèle d'IA sont générés sur la base d'un ensemble de données entraîné. Bien que nous nous efforcions d'être précis, nous ne pouvons garantir l'interprétation précise des mots signés. Les utilisateurs doivent faire preuve de discrétion lorsqu'ils se fient aux mots prédits et comprendre que la précision peut varier. Nous n'assumons aucune responsabilité pour toute inexactitude dans les prédictions.",
+        "LimitationOfLiability": "4. Limitation de Responsabilité",
+        "LimitationOfLiabilityDesc": "4.1 En aucun cas VisuSpeak, ni ses directeurs, employés, partenaires, agents, fournisseurs ou affiliés, ne pourront être tenus responsables de tout dommage indirect, incident, spécial, consécutif ou punitif, y compris sans limitation, perte de profits, données, utilisation, bonne volonté, ou d'autres pertes immatérielles, résultant de (i) votre accès à ou utilisation de ou incapacité à accéder ou utiliser l'Application; (ii) tout comportement ou contenu de tout tiers sur l'Application.",
+        "GoverningLaw": "5. Loi Applicable",
+        "GoverningLawDesc1": "5.1 Ces Conditions seront régies par et interprétées conformément aux lois du Canada, sans tenir compte de ses dispositions sur les conflits de lois.",
+        "GoverningLawDesc2": "5.2 Les utilisateurs de juridictions internationales sont responsables de la conformité avec les lois locales concernant l'utilisation de l'Application.",
+        "ChangesToTerms": "6. Modifications des Conditions",
+        "ChangesToTermsDesc": "6.1 Nous nous réservons le droit, à notre seule discrétion, de modifier ou de remplacer ces Conditions à tout moment. Si une révision est matérielle, nous fournirons au moins 30 jours de préavis avant que les nouvelles conditions prennent effet."
     }
 }
