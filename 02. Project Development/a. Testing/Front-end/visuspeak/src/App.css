@@ -1517,7 +1517,6 @@ iframe {
   font-weight: bold;
 }
 
-<<<<<<< HEAD
 /* ***************SUPPORT STYLE*************** */
 
 .support-cards-container {
@@ -1562,7 +1561,6 @@ iframe {
   padding-top: 1%;
   padding-bottom: 1%;
 }
-=======
 /****************************** Resources Page ****************************/
 .resources-buttons {
   background-color: #006262;
@@ -1662,13 +1660,11 @@ iframe {
 
 .disclaimer-text {
   width: 100%;
-  background-color: #006262; /* Choose your color */
-  color: white; /* Choose your font color */
+  background-color: #006262;
+  color: white; 
   padding: 1rem;
   border-radius: 0.25rem;
   box-sizing: border-box;
-  margin-top: 1rem; /* Adjust as needed */
-  margin-bottom: 1rem; /* Adjust as needed */
 }
 
 .content-container{
@@ -1723,4 +1719,3 @@ h5 {
   gap: 10px;
   margin-bottom: 1rem;
 }
->>>>>>> 3bded0a1f1848eb5ddb6e6c80d713af01a137c49

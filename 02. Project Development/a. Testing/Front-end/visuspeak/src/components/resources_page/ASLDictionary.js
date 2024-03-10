@@ -86,8 +86,8 @@ const Grouped = () => {
 
   return (
     <div className="container my-5">
-      <h1 className="container my-5">ASL Dictionary</h1>
-      <p className="disclaimer-text p-3 rounded">
+      <h1 className="">ASL Dictionary</h1>
+      <p className="disclaimer-text p-3 rounded lead my-3">
         All ASL learning resources for this Dictionary are provided by Patti Spicer at SDDHS. 
         These resources are intended for learning purposes only and may not be 
         shared or distributed elsewhere without explicit permission.

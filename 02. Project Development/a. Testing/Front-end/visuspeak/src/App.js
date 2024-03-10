@@ -101,15 +101,12 @@ function App() {
                 />
               )}
               <Route exact path="/resources" element={<Resources />} />
-<<<<<<< HEAD
 
               <Route exact path="/support" element={<Support />} />
-=======
+
               <Route exact path="/asldictionary" element={<ASLDictionary />} />
 
               
-
->>>>>>> 3bded0a1f1848eb5ddb6e6c80d713af01a137c49
               <Route exact path="/dashboard" element={<Dashboard />} />
 
               <Route

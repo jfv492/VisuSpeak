@@ -44,7 +44,7 @@ import ResourceImage3 from "../assets/images/ASLNews.png";
 export default function Resources() {
   return (
     <div className="container my-5">
-      <h1 className="mb-4 lead">Resources</h1>
+      <h1 className="">Resources</h1>
       
       {/* First Section with Image on the left */}
       <div className="row about-us-sections align-items-center">
@@ -58,7 +58,7 @@ export default function Resources() {
           />
         </div>
         <div className="col-sm-8 lead">
-          <h3 className="about-us-headers border-bottom pb-2 lead">ASL Dictonary</h3>
+          <h3 className="about-us-headers border-bottom pb-2">ASL Dictonary</h3>
           <p>Our ASL Dictionary offers a curated selection of words supported by our application, available through an easy-to-use dropdown menu. Each entry is paired with a clear demonstration video, providing a visual guide to master the signs. This feature is designed to help users quickly learn and accurately replicate ASL signs, 
             enhancing their ability to communicate effectively with the ASL community.</p>
           <Link to="/asldictionary" className="btn btn-primary resources-buttons" role="button">
@@ -80,7 +80,7 @@ export default function Resources() {
           />
         </div>
         <div className="col-sm-8 lead order-sm-1">
-          <h3 className="about-us-headers border-bottom pb-2 lead">Learn ASL Professionally</h3>
+          <h3 className="about-us-headers border-bottom pb-2 ">Learn ASL Professionally</h3>
           <p>Elevate your American Sign Language skills with Saskatechwan Deaf and Hard of Hearing Services. Designed for immersive learning, these classes provide structured instruction from experienced sign language educators. Engage in interactive lessons that cover everything from fundamental signs to advanced communication techniques, 
             all aimed at building your proficiency and confidence in ASL.</p>
           <Link to="https://sdhhs.com/2020/12/09/american-sign-language-classes/" className="btn btn-primary resources-buttons" role="button">
@@ -102,10 +102,10 @@ export default function Resources() {
           />
         </div>
         <div className="col-sm-8 lead">
-          <h3 className="about-us-headers border-bottom pb-2 lead">National Deaf News</h3>
+          <h3 className="about-us-headers border-bottom pb-2">National Deaf News</h3>
           <p>Stay informed with National Deaf News, your go-to source for the latest happenings in the Deaf community. Our news section brings you up-to-the-minute reports, stories of empowerment, and key updates 
             from Deaf culture and events across the world.</p>
-          <Link to="/asldictionary" className="btn btn-primary resources-buttons" role="button">
+          <Link to="https://cad-asc.ca/" className="btn btn-primary resources-buttons" role="button">
             View Resource
           </Link>
         </div>
