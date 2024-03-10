@@ -5,6 +5,7 @@ import { signInAnonymously } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { initializeUserPresence } from "../../utils/UserPresence.js";
 import defaultProfilePicture from "../../assets/images/AccountSettingsHeadshot.jpg";
+import '../../App.css';
 
 const CustomerSignin = (props) => {
   let navigate = useNavigate();
@@ -61,7 +62,7 @@ const CustomerSignin = (props) => {
   return (
     <div>
       <button
-        className="btn landing-button-style btn-raised rounded-pill shadow-lg"
+        className="btn landing-button-style btn-raised rounded-pill shadow-lg p-3"
         type="button"
         data-bs-toggle="modal"
         data-bs-target="#startConversationModal"

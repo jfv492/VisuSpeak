@@ -14,6 +14,7 @@ import ASLChat from "./modules/ASLChat.js";
 import AccountSettings from "./modules/AccountSettings.js";
 
 import Resources from "./modules/Resources.js";
+import ASLDictionary from "./components/resources_page/ASLDictionary.js";
 
 
 import React, { useContext, useState, useEffect } from "react";
@@ -86,6 +87,7 @@ function App() {
               )}
 
               <Route exact path="/resources" element={<Resources />} />
+              <Route exact path="/asldictionary" element={<ASLDictionary />} />
 
               
 

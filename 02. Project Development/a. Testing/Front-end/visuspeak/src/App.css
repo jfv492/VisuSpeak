@@ -1511,3 +1511,164 @@ iframe {
   padding-top: 20px;
   padding-bottom: 20px;
 }
+
+/****************************** Resources Page ****************************/
+.resources-buttons {
+  background-color: #006262;
+  border: none; 
+  border-radius: 5px; 
+  color: #fff; 
+  transition: background-color 0.3s ease; 
+}
+
+.resources-buttons:hover {
+  background-color: #023e3d; 
+}
+
+
+
+/* ***************LANDING PAGE STYLE*************** */
+.visuspeak-hero {
+  background-image: url('../src/assets/images/bg3.png');
+  background-size: cover;
+  background-position: center;
+  text-align: center;
+  height: 500px; /* Set a specific height */
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Center content vertically */
+  align-items: center; /* Center content horizontally */
+}
+
+.content-container {
+  padding: 2rem;
+}
+
+.asl-user-query{
+  font-weight: bold; /* Makes the text bold */
+  font-size: 25px; /* Increases the font size */
+  margin-bottom: 0.5rem; /* Adds space below the paragraph */
+}
+.connect-admin {
+  font-weight: bold; /* Makes the text bold */
+  font-size: 25px; /* Increases the font size */
+  margin-bottom: 2rem; /* Adds space below the paragraph */
+}
+
+.service-info-section {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.service-card {
+  display: flex;
+  flex-direction: column;
+  width: 18rem; /* Set a fixed width */
+  margin: 1rem; /* Provide some space around the cards */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effect */
+  background-color: #006262;
+  color: white;
+  font-size: 18px;
+}
+
+.service-card .card-body {
+  flex: 1; /* Makes the card-body fill the available space */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Space content evenly */
+}
+
+.card-body {
+  display: flex; /* Enable flexbox */
+  flex-direction: column; /* Stack children vertically */
+  align-items: center; /* Center children horizontally */
+  justify-content: center; /* Center children vertically */
+  text-align: center; /* Center text */
+  flex: 1; /* Allow the body to fill the space */
+}
+
+.card-img-top {
+  width: 50%; /* Ensure the image takes up the card width */
+  height: 50; /* Maintain aspect ratio */
+  justify-content: center;
+}
+.card-img-top {
+  height: auto; /* Maintain aspect ratio */
+  max-width: 100%; /* Max width as 100% of the parent */
+  display: block; /* To remove bottom space under the image */
+  align-items: center;
+}
+
+/* Hover effect */
+.service-card:hover {
+  transform: translateY(-5px); /* Lifts the card up on hover */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Increases shadow to give "depth" */
+  background-color: #023e3d;
+}
+
+.disclaimer-text {
+  width: 100%;
+  background-color: #006262; /* Choose your color */
+  color: white; /* Choose your font color */
+  padding: 1rem;
+  border-radius: 0.25rem;
+  box-sizing: border-box;
+  margin-top: 1rem; /* Adjust as needed */
+  margin-bottom: 1rem; /* Adjust as needed */
+}
+
+.content-container{
+  width: 100%;
+  padding: 0;
+} 
+
+.video-responsive {
+  position: relative;
+  overflow: hidden;
+  padding-top: 56.25%; /* 16:9 Aspect Ratio */
+}
+
+.video-responsive iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+  
+
+/* ***************Dashboard PAGE STYLE*************** */
+.user-list-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.user-list-item img {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 0.5rem;
+}
+.user-list-item .fa-circle-check {
+  color: #77bb41;
+  background-color: white;
+  border-radius: 50%;
+  padding: 3px;
+}
+
+h5 {
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+.admin-list, .guest-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 1rem;
+}
