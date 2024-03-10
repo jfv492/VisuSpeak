@@ -89,9 +89,7 @@ const Grouped = () => {
     <div className="container my-5">
       <h1 className="">{t("ASLDictionary")}</h1>
       <p className="disclaimer-text p-3 rounded lead my-3">
-        All ASL learning resources for this Dictionary are provided by Patti Spicer at SDDHS. 
-        These resources are intended for learning purposes only and may not be 
-        shared or distributed elsewhere without explicit permission.
+      {t("ASLDictionaryDisclaimer")}
       </p>
 
       <Autocomplete
