@@ -14,6 +14,7 @@ import ASLChat from "./modules/ASLChat.js";
 import AccountSettings from "./modules/AccountSettings.js";
 
 import Resources from "./modules/Resources.js";
+import ASLDictionary from "./components/resources_page/ASLDictionary.js";
 
 import Support from "./modules/Support.js";
 
@@ -100,8 +101,15 @@ function App() {
                 />
               )}
               <Route exact path="/resources" element={<Resources />} />
+<<<<<<< HEAD
 
               <Route exact path="/support" element={<Support />} />
+=======
+              <Route exact path="/asldictionary" element={<ASLDictionary />} />
+
+              
+
+>>>>>>> 3bded0a1f1848eb5ddb6e6c80d713af01a137c49
               <Route exact path="/dashboard" element={<Dashboard />} />
 
               <Route

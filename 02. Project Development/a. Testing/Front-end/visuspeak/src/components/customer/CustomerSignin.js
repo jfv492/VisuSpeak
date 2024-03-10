@@ -6,6 +6,7 @@ import { doc, setDoc, collection, query, where, getDocs } from "firebase/firesto
 import { initializeUserPresence, setUserOnline } from "../../utils/UserPresence.js";
 import defaultProfilePicture from "../../assets/images/AccountSettingsHeadshot.jpg";
 import { AuthContext } from "../../context/AuthContext.js"
+import '../../App.css';
 
 const CustomerSignin = (props) => {
   const { updateAccountType, updateOrganizationName } = useContext(AuthContext);
@@ -78,7 +79,7 @@ const CustomerSignin = (props) => {
   return (
     <div>
       <button
-        className="btn landing-button-style btn-raised rounded-pill shadow-lg"
+        className="btn landing-button-style btn-raised rounded-pill shadow-lg p-3"
         type="button"
         data-bs-toggle="modal"
         data-bs-target="#startConversationModal"

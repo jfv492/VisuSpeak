@@ -15,7 +15,7 @@ const AboutSections = () => {
             alt="..."
             width="100%"
             style={{ justifyContent: "end" }}
-          />
+          /> 
         </div>
         <div class="col-sm-8 lead">
           <h3 class="about-us-headers border-bottom pb-2">{t('Project Idea')}</h3>
