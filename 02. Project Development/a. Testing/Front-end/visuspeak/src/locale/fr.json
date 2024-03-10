@@ -91,6 +91,31 @@
         "ChangesToTermsDesc": "6.1 Nous nous réservons le droit, à notre seule discrétion, de modifier ou de remplacer ces Conditions à tout moment. Si une révision est matérielle, nous fournirons au moins 30 jours de préavis avant que les nouvelles conditions prennent effet.",
         "Copyright": "© 2023-2024 Équipe VisuSpeak",
         "Home": "Accueil",
-        "Support": "Support"
+        "Support": "Support",
+        "ASLDictionary": "Dictionnaire ASL",
+        "ViewDictionary":"Voir le dictionnaire",
+        "ASLDictionaryDescription":"Notre dictionnaire ASL propose une sélection organisée de mots pris en charge par notre application, disponibles via un menu déroulant facile à utiliser. Chaque entrée est associée à une vidéo de démonstration claire, fournissant un guide visuel pour maîtriser les panneaux. Cette fonctionnalité est conçue pour aider les utilisateurs à apprendre rapidement et à reproduire avec précision les signes ASL, améliorant ainsi leur capacité à communiquer efficacement avec la communauté ASL.",
+        "LearnASLProfessionally":"Apprenez l'ASL de manière professionnelle",
+        "LearnASLProfessionallyDescription": "Élevez vos compétences en langue des signes américaine avec les services des sourds et des malentendants de la Saskatchewan. Conçus pour un apprentissage immersif, ces cours offrent un enseignement structuré dispensé par des éducateurs expérimentés en langue des signes. Participez à des leçons interactives qui couvrent tout, des signes fondamentaux aux techniques de communication avancées, toutes visant à renforcer votre maîtrise et votre confiance en l'ASL.",
+        "NationalDeafNews": "Nouvelles nationales des sourds",
+        "NationalDeafNewsDescription": "Restez informé avec National Deaf News, votre source incontournable pour les derniers événements dans la communauté sourde. Notre section d'actualités vous propose des rapports de dernière minute, des histoires d'autonomisation et des mises à jour clés sur la culture et les événements des Sourds à travers le monde.",
+        "ViewResource":"Afficher la ressource",
+        "ASLDictionaryDisclaimer":"Toutes les ressources d'apprentissage de l'ASL pour ce dictionnaire sont fournies par Patti Spicer du SDDHS. Ces ressources sont destinées uniquement à des fins d'apprentissage et ne peuvent être partagées ou distribuées ailleurs sans autorisation explicite.",
+        "LearnASL": "Apprendre l'ASL",
+        "NoASLWord":"Ce mot n'existe pas dans la bibliothèque",
+        "LearnToSign": "Apprendre à signer",
+        "LearnToSignDescription":"Regardez et apprenez à signer :",
+        "WelcomeNew": "Bienvenue dans l'assistance VisuSpeak ASL",
+        "SubWelcomeOne": "Vous cherchez à discuter en ASL?",
+        "SubWelcomeTwo": "Connectez-vous avec nos administrateurs en cliquant sur le bouton ci-dessous",
+        "LandingPageIconOne": "Conversations en tête-à-tête",
+        "LandingPageIconTwo": "Service rapide pour vos besoins",
+        "LandingPageIconThree": "Solutions efficaces",
+        "LandingPageIconFour": "Sûr et fiable",
+        "StartConversation": "Démarrer une conversation",
+        "Dashboard": "Tableau de bord",
+        "AdminUsers": "Utilisateurs administrateurs",
+        "GuestUsers": "Utilisateurs invités",
+        "SearchUsers": "Rechercher des utilisateurs"
     }
-}
+} 

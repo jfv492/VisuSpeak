@@ -10,7 +10,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import '../../App.css';
 
 import CardImageTop from '../../assets/images/Dictionary.png';
-
+import { useTranslation } from "react-i18next";
 const style = {
   position: 'fixed',
   top: '50%',
@@ -76,6 +76,7 @@ const options = [
 ];
 
 const Grouped = () => {
+  const { t } = useTranslation();
   const [selectedOption, setSelectedOption] = useState(null);
 
   // Function to find the video URL based on the selected option
@@ -86,7 +87,7 @@ const Grouped = () => {
 
   return (
     <div className="container my-5">
-      <h1 className="">ASL Dictionary</h1>
+      <h1 className="">{t("ASLDictionary")}</h1>
       <p className="disclaimer-text p-3 rounded lead my-3">
         All ASL learning resources for this Dictionary are provided by Patti Spicer at SDDHS. 
         These resources are intended for learning purposes only and may not be 
@@ -97,9 +98,9 @@ const Grouped = () => {
         id="grouped-demo"
         options={options.map((option) => option.label)}
         renderInput={(params) => (
-          <TextField {...params} label="Learn ASL" variant="outlined" fullWidth />
+          <TextField {...params} label={t("LearnASL")} variant="outlined" fullWidth />
         )}
-        noOptionsText="This word does not exist in this library"
+        noOptionsText={t("NoASLWord")}
         onChange={(event, value) => setSelectedOption(value)}
         className="mt-3"
       />
@@ -115,7 +116,7 @@ const Grouped = () => {
               <CloseIcon />
             </IconButton>
             <Typography variant="h5" component="div">
-              Learn to Sign {selectedOption}
+            {t("LearnToSign")} {selectedOption}
             </Typography>
             <div className="video-responsive">
               <iframe
@@ -127,7 +128,7 @@ const Grouped = () => {
               />
             </div>
             <Typography variant="body2" color="textSecondary" component="p">
-              Watch and learn how to sign '{selectedOption}' in ASL.
+            {t("LearnToSignDescription")} '{selectedOption}' 
             </Typography>
           </CardContent>
         </Card>

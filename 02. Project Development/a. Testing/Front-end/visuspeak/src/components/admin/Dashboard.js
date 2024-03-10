@@ -5,8 +5,10 @@ import { doc, getDoc } from "firebase/firestore";
 
 import defaultProfilePicture from "../../assets/images/AccountSettingsHeadshot.jpg";
 import SettingsUserInfo from "../account_setting/UserInfo.js"
+import { useTranslation } from "react-i18next";
 
 const Dashboard = () => {
+  const { t } = useTranslation();
   const [admins, setAdmins] = useState([]);
   const [guests, setGuests] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
@@ -64,7 +66,7 @@ const Dashboard = () => {
         <input
           type="text"
           className="form-control"
-          placeholder="Search users..."
+          placeholder={t("SearchUsers")}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
       </div>
@@ -72,7 +74,7 @@ const Dashboard = () => {
       <div className="row my-4">
         {/* Admin Users */}
         <div className="col-md-6">
-          <h2>Admin Users</h2>
+          <h2>{t("AdminUsers")}</h2>
           <div className="d-flex flex-wrap justify-content-left">
             {filteredAdmins.map((user) => (
               <div key={user.uid} className="text-center m-3">
@@ -90,7 +92,7 @@ const Dashboard = () => {
 
         {/* Guest Users */}
         <div className="col-md-6">
-          <h2>Guest Users</h2>
+          <h2>{t("GuestUsers")}</h2>
           <div className="d-flex flex-wrap justify-content-left">
             {filteredGuests.map((user) => (
               <div key={user.uid} className="text-center m-3">

@@ -7,8 +7,10 @@ import { initializeUserPresence, setUserOnline } from "../../utils/UserPresence.
 import defaultProfilePicture from "../../assets/images/AccountSettingsHeadshot.jpg";
 import { AuthContext } from "../../context/AuthContext.js"
 import '../../App.css';
+import { useTranslation } from "react-i18next";
 
 const CustomerSignin = (props) => {
+  const { t } = useTranslation();
   const { updateAccountType, updateOrganizationName } = useContext(AuthContext);
   let navigate = useNavigate();
   const [anonymousFirstName, setAnonymousFirstName] = useState("");
@@ -84,7 +86,7 @@ const CustomerSignin = (props) => {
         data-bs-toggle="modal"
         data-bs-target="#startConversationModal"
       >
-        Start Conversation
+        {t("StartConversation")}
       </button>
       <div
         className="modal"
