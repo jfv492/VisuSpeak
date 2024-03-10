@@ -9,7 +9,7 @@ import { signOut } from "firebase/auth";
 import { auth } from "../../firebase";
 
 const CustomerNavLinks = () => {
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser, updateAccountType, updateOrganizationName } = useContext(AuthContext);
   let location = useLocation();
 
   useEffect(() => {
@@ -26,6 +26,8 @@ const CustomerNavLinks = () => {
     // Clear local storage and sign out
     localStorage.clear();
     await signOut(auth);
+    updateAccountType(null);
+    updateOrganizationName(null);
     navigate("/");
   };
 

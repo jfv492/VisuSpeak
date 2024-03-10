@@ -7,7 +7,7 @@ import { setUserOffline } from "../../utils/UserPresence.js";
 import defaultProfilePicture from "../../assets/images/AccountSettingsHeadshot.jpg";
 
 const User = () => {
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser, updateAccountType, updateOrganizationName } = useContext(AuthContext);
   const [displayName, setDisplayName] = useState("");
   let navigate = useNavigate();
 
@@ -18,6 +18,8 @@ const User = () => {
     }
     // Clear local storage and sign out
     localStorage.clear();
+    updateAccountType(null);
+    updateOrganizationName(null);
     await signOut(auth);
     navigate("/");
   };

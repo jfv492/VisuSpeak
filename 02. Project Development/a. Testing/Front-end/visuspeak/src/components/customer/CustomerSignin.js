@@ -8,7 +8,7 @@ import defaultProfilePicture from "../../assets/images/AccountSettingsHeadshot.j
 import { AuthContext } from "../../context/AuthContext.js"
 
 const CustomerSignin = (props) => {
-  const { updateAccountType } = useContext(AuthContext);
+  const { updateAccountType, updateOrganizationName } = useContext(AuthContext);
   let navigate = useNavigate();
   const [anonymousFirstName, setAnonymousFirstName] = useState("");
   const [anonymousLastName, setAnonymousLastName] = useState("");
@@ -64,6 +64,7 @@ const CustomerSignin = (props) => {
       localStorage.setItem("accountType", "guest");
       localStorage.setItem("organizationName", anonymousOrganizationName);
       updateAccountType("guest");
+      updateOrganizationName(anonymousOrganizationName);
       initializeUserPresence(user.uid);
       setUserOnline(user.uid);
 

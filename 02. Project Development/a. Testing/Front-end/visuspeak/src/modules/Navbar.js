@@ -8,14 +8,14 @@ import CustomerNavLinks from "../components/navbar/CustomerNavLinks.js";
 import LanguageSwitcher from "../components/navbar/LanguageSwitcher.js";
 
 const Navbar = () => {
-  const { accountType } = useContext(AuthContext);
+  const { accountType, organizationName } = useContext(AuthContext);
   return (
     <nav class="navbar navbar-expand-lg bg-body-tertiary shadow px-3">
       <div class="container-fluid">
         <Link className={`navbar-brand pe-3 ${localStorage.getItem("accountType") !== null && "border-end"} `} to="/">
           <img src={ColourLogo} className="navbar-logo" alt="VisuSpeak Logo" height="45"/>
         </Link>
-        {localStorage.getItem("organizationName")}
+        {organizationName}
         <button
           class="navbar-toggler mx-3"
           type="button"
@@ -26,7 +26,7 @@ const Navbar = () => {
         >
           <span class="navbar-toggler-icon"></span>
         </button>
-        {/* <LanguageSwitcher /> */}
+        <LanguageSwitcher />
         {accountType === null && <LoggedOutNavLinks />}
         {accountType === "admin" && <AdminNavLinks />}
         {accountType === "guest" && <CustomerNavLinks />}

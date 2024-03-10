@@ -19,13 +19,16 @@ import Resources from "./modules/Resources.js";
 import React, { useContext, useState, useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-
 import { AuthContext } from "./context/AuthContext.js";
 import { refreshUserOnlineStatus } from "./utils/UserPresence.js";
+
+
 import Dashboard from "./components/admin/Dashboard.js";
+import LanguageSetter from "./utils/LanguageSetter.js";
 
 
 function App() {
+  
   const { currentUser } = useContext(AuthContext);
   const [alert, setAlert] = useState(null);
   const showAlert = (message, type) => {
@@ -61,6 +64,7 @@ function App() {
       <BrowserRouter>
         <div className="page-container">
           <div className="content-wrap">
+            <LanguageSetter />
             <Navbar />
             <Alert alert={alert} />
             <Routes>

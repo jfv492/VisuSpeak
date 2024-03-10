@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { auth, db } from "../firebase.js";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { setUserOnline } from "../utils/UserPresence.js";
 import { useTranslation } from "react-i18next";
+import { AuthContext } from "../context/AuthContext.js"
 
 const Login = (props) => {
   const { t } = useTranslation();
   let navigate = useNavigate();
+  const { updateAccountType, updateOrganizationName } = useContext(AuthContext);
 
   const [formData, setFormData] = useState({
     email: "",
@@ -50,7 +52,8 @@ const Login = (props) => {
           userDocSnap.data().organizationName
         );
         localStorage.setItem("accountType", userDocSnap.data().type);
-        // ... set other required items
+        updateAccountType(userDocSnap.data().type);
+        updateOrganizationName(userDocSnap.data().organizationName);
       } else {
         console.log("No such document in Firestore!");
       }
