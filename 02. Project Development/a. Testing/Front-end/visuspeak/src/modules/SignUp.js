@@ -6,6 +6,7 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { doc, setDoc } from "firebase/firestore";
 import { initializeUserPresence } from "../utils/UserPresence.js";
 import defaultProfilePicture from "../assets/images/AccountSettingsHeadshot.jpg";
+import TermsAndConditions from "../components/TermsAndConditions.js"
 import { useTranslation } from 'react-i18next';
 
 const SignUp = (props) => {
@@ -241,7 +242,7 @@ const SignUp = (props) => {
                   }`}
                 >
                   <label className="form-label me-2">{t('PrimaryLanguageLabel')}:</label>
-                  <div className="form-check form-check-inline">
+                  {/* <div className="form-check form-check-inline">
                     <input
                       className="form-check-input"
                       type="radio"
@@ -257,7 +258,7 @@ const SignUp = (props) => {
                     >
                       {t('ASLLabel')}
                     </label>
-                  </div>
+                  </div> */}
                   <div className="form-check form-check-inline">
                     <input
                       className="form-check-input"
@@ -306,7 +307,7 @@ const SignUp = (props) => {
               <div className="d-flex flex-column col-sm-6 mt-2">
 
               
-                <label className="" htmlFor="agreeTerms">
+                <label className="d-flex" htmlFor="agreeTerms">
                 <input
                   type="checkbox"
                   className="form-check-input me-1"
@@ -316,9 +317,7 @@ const SignUp = (props) => {
                   onChange={handleChange}
                 />
                 {t('AgreeTerms')}
-                  <Link className="hyperlink ms-1" to="/">
-                  {t('TermsAndConditions')}
-                  </Link>
+                <TermsAndConditions onAccept={() => setFormData({ ...formData, agreeTerms: true })} />
                   ?
                 </label>
 

@@ -98,11 +98,7 @@ function App() {
                   element={<ASLChat showAlert={showAlert} />}
                 />
               )}
-
               <Route exact path="/resources" element={<Resources />} />
-
-              
-
               <Route exact path="/dashboard" element={<Dashboard />} />
 
               <Route

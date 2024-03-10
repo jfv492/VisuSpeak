@@ -261,7 +261,7 @@ body {
   font-size: large;
 }
 
-.modal-body > h2, h3 {
+.modal-body > h2, h3, h4 {
   color: #555;
 }
 .modal-body > p, ul {
