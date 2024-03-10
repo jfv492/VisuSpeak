@@ -26,48 +26,42 @@ const Search = (props) => {
   const sortOrderText =
     data.sortOrder === "mostRecent" ? "Most Recent" : "Least Recent";
 
-  useEffect(() => {
-    const fetchUsers = async () => {
-      if (username.trim() === "") {
-        setUsers([]);
-        return;
-      }
-
-      const usersRef = collection(db, "users");
-
-      let q = query(
-        usersRef,
-        where("displayName", "!=", currentUser.displayName),
-        where("displayName", ">=", username),
-        where("displayName", "<=", username + "\uf8ff")
-      );
-
-      console.log("User list:", q);
-
-      if (localStorage.getItem("accountType") === "admin") {
-        q = query(
+    useEffect(() => {
+      const fetchUsers = async () => {
+        if (username.trim() === "") {
+          setUsers([]);
+          return;
+        }
+    
+        const usersRef = collection(db, "users");
+        // Fetch users based on displayName, but filter further in the application
+        let q = query(
           usersRef,
-          where("displayName", "!=", currentUser.displayName),
           where("displayName", ">=", username),
-          where("displayName", "<=", username + "\uf8ff")
+          where("displayName", "<=", username + "\uf8ff"),
         );
-      }
-
-      try {
-        const querySnapshot = await getDocs(q);
-        const fetchedUsers = [];
-        querySnapshot.forEach((doc) => {
-          fetchedUsers.push(doc.data());
-        });
-        setUsers(fetchedUsers);
-      } catch (error) {
-        setErr(true);
-        console.log(err);
-      }
-    };
-
-    fetchUsers();
-  }, [username, currentUser?.displayName, err]);
+    
+        try {
+          const querySnapshot = await getDocs(q);
+          const organizationName = localStorage.getItem("organizationName");
+          const fetchedUsers = [];
+          querySnapshot.forEach((doc) => {
+            const user = doc.data();
+            // Filter by type and organizationName in the application
+            if (user.type === "admin" && user.organizationName === organizationName) {
+              fetchedUsers.push(user);
+            }
+          });
+          setUsers(fetchedUsers);
+        } catch (error) {
+          console.error("Error fetching users:", error);
+          setErr(true);
+        }
+      };
+    
+      fetchUsers();
+    }, [username, currentUser?.displayName]);
+    
 
   const handleSortChange = (sortOrder) => {
     dispatch({ type: "CHANGE_SORT_ORDER", payload: sortOrder });

@@ -31,7 +31,11 @@ const User = () => {
       >
         <Link
           to="/"
-          className="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle dropdown-toggle-split"
+          className={`d-flex align-items-center link-body-emphasis text-decoration-none ${
+            localStorage.getItem("accountType") === "admin"
+              ? "dropdown-toggle"
+              : ""
+          }  dropdown-toggle-split`}
           data-bs-toggle="dropdown"
           data-bs-display="static"
           aria-expanded="false"
@@ -60,28 +64,32 @@ const User = () => {
 
           <strong className="mx-2">{localStorage.getItem("username")}</strong>
         </Link>
-        <ul className="dropdown-menu dropdown-menu-lg-end p-2 shadow-lg">
-          <li>
-            <Link className="dropdown-item" to="/accountsettings">
-              <i class="fa-solid fa-gear me-3" style={{ color: "#000000" }}></i>
-              Account Settings
-            </Link>
-          </li>
-          <li>
-            <hr className="dropdown-divider" />
-          </li>
-          <li>
-            <Link className="dropdown-item" onClick={handleSignOut} to="/">
-              <i
-                class="fa-solid fa-right-from-bracket me-3"
-                style={{ color: "#000000" }}
-              ></i>
-              Logout
-            </Link>
-          </li>
-        </ul>
+        {localStorage.getItem("accountType") === "admin" && (
+          <ul className="dropdown-menu dropdown-menu-lg-end p-2 shadow-lg">
+            <li>
+              <Link className="dropdown-item" to="/accountsettings">
+                <i
+                  class="fa-solid fa-gear me-3"
+                  style={{ color: "#000000" }}
+                ></i>
+                Account Settings
+              </Link>
+            </li>
+            <li>
+              <hr className="dropdown-divider" />
+            </li>
+            <li>
+              <Link className="dropdown-item" onClick={handleSignOut} to="/">
+                <i
+                  class="fa-solid fa-right-from-bracket me-3"
+                  style={{ color: "#000000" }}
+                ></i>
+                Logout
+              </Link>
+            </li>
+          </ul>
+        )}
       </div>
-      
     </div>
   );
 };

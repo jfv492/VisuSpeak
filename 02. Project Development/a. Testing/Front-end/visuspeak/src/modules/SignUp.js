@@ -66,7 +66,7 @@ const SignUp = (props) => {
     for (const [key, value] of Object.entries(formData)) {
       if (!value && key !== "agreeTerms") {
         formIsValid = false;
-        currentErrors[key] = "This field cannot be blank.";
+        currentErrors[key] = `${t('FieldBlank')}`;
       }
     }
 
@@ -74,24 +74,24 @@ const SignUp = (props) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(formData.email)) {
       formIsValid = false;
-      currentErrors.email = "Please enter a valid email address.";
+      currentErrors.email = `${t('InvalidEmail')}`;
     }
 
     // Check if passwords match
     if (formData.password !== formData.confirmPassword) {
       formIsValid = false;
-      currentErrors.confirmPassword = "Passwords do not match.";
+      currentErrors.confirmPassword = `${t('PasswordsNotMatch')}`;
     }
 
     if (formData.primaryLanguage === "" || formData.primaryLanguage == null) {
       formIsValid = false;
-      currentErrors.primaryLanguage = "Please select your primary language.";
+      currentErrors.primaryLanguage = `${t('LanguageNotSelected')}`;
     }
 
     // Check if terms and conditions are agreed to
     if (!formData.agreeTerms) {
       formIsValid = false;
-      currentErrors.agreeTerms = "You must agree to the terms and conditions.";
+      currentErrors.agreeTerms = `${t('TermsNotAgreed')}`;
     }
 
     setErrors(currentErrors);
@@ -159,12 +159,12 @@ const SignUp = (props) => {
           .catch((error) => {
             console.error("Error fetching the image as blob:", error);
           });
-        props.showAlert("Signup successful", "success");
+        props.showAlert(`${t("SuccessAlert")}`, "success");
         navigate("/login");
       } catch (err) {
         setErrors(err);
         console.log("Firebase error: ", err);
-        props.showAlert("Signup failed. Please try again", "danger");
+        props.showAlert(`${t("FailureAlert")}`, "danger");
       }
     }
   };
@@ -234,7 +234,7 @@ const SignUp = (props) => {
             <>
               {formField("password", `${t('PasswordLabel')}`, "password")}
               {formField("confirmPassword", `${t('ConfirmPasswordLabel')}`, "password")}
-              <div className="col-sm-6">
+              <div className="col-sm-6 mt-2">
                 <div
                   className={` d-flex align-items-start ${
                     mobileView ? "flex-column" : ""
@@ -303,17 +303,18 @@ const SignUp = (props) => {
                   {errors.primaryLanguage}
                 </div>
               </div>
-              <div className="d-flex col-sm-6">
+              <div className="d-flex flex-column col-sm-6 mt-2">
 
-              <input
+              
+                <label className="" htmlFor="agreeTerms">
+                <input
                   type="checkbox"
-                  className="form-check-input"
+                  className="form-check-input me-1"
                   id="agreeTerms"
                   name="agreeTerms"
                   checked={formData.agreeTerms}
                   onChange={handleChange}
                 />
-                <label className="ms-1" htmlFor="agreeTerms">
                 {t('AgreeTerms')}
                   <Link className="hyperlink ms-1" to="/">
                   {t('TermsAndConditions')}
@@ -356,7 +357,7 @@ const SignUp = (props) => {
                 ></i>
               </button>
             ) : (
-              <button type="submit" className="btn button-style ms-auto">
+              <button type="submit" className="btn form-button-style btn-raised rounded-pill ms-auto">
                 {t('SignUpButton')}
               </button>
             )}

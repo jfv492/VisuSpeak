@@ -58,10 +58,10 @@ const SettingsUserInfo = (props) => {
               width="100%"
               style={{ justifyContent: "end" }}
             />
-            <label htmlFor="file-upload" className="fa-solid fa-camera fa-xl change-user-profile-icon rounded-circle shadow border" style={{
+            <label htmlFor="file-upload" className="fa-solid fa-camera change-user-profile-icon rounded-circle shadow border" style={{
                 position: "absolute",
-                bottom: 25,
-                right: 3,
+                bottom: "0vw",
+                right: "0vw",
                 cursor: "pointer", // Change cursor to indicate clickable
               }}>
               <input id="file-upload" type="file" style={{ display: "none" }} onChange={handleFileChange} accept="image/*" />
@@ -73,7 +73,7 @@ const SettingsUserInfo = (props) => {
             {localStorage.getItem("username")}
           </h3>
           <div className="row">
-            <div className="col-sm-6">
+            <div className="col-sm-6 text-secondary">
               <Typography variant="caption" display="block" gutterBottom style={{ fontSize: '17px' }}>
                 <i className="fa-solid fa-envelope me-2" style={{color: "#006262"}}></i>{email}
               </Typography>

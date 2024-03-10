@@ -26,8 +26,6 @@
         "Login": "Login",
         "Sign-up": "Sign Up",
         "Login Prompt": "Don't have an account?",
-
-
         "SignUpHeading": "Sign Up",
         "Signup Prompt": "Don't have an account?",
         "FirstNameLabel": "First Name",
@@ -43,14 +41,33 @@
         "AgreeTerms": "Do you agree with the",
         "TermsAndConditions": "terms and conditions",
         "SignUpButton": "Sign Up",
-
         "SearchPlaceholder": "Search user...",
         "Archive": "Archive",
         "Back": "Back",
         "MostRecent": "Most Recent",
         "LeastRecent": "Least Recent",
         "ChatPlaceholder": "Click on a chat to preview messages",
-
-        "Guest": "Guest"
+        "Guest": "Guest",
+        "ChangePassword": "Change Password",
+        "Edit": "Edit",
+        "SaveChanges": "Save Changes",
+        "Cancel": "Cancel",
+        "PasswordChangeError": "An error occurred while changing password. Please try again later.",
+        "AccountUpdateError": "An error occurred while updating account information.",
+        "PasswordsMismatchError": "Passwords do not match.",
+        "FieldsEmptyError": "Fields cannot be empty.",
+        "PasswordLengthError": "Password must be more than 6 characters long.",
+        "FieldBlank": "This field cannot be blank.",
+        "InvalidEmail": "Please enter a valid email address.",
+        "PasswordsNotMatch": "Passwords do not match.",
+        "LanguageNotSelected": "Please select your primary language.",
+        "TermsNotAgreed": "You must agree to the terms and conditions.",
+        "EmptyCredentials": "Email and password cannot be empty.",
+        "NoDocument": "No such document in Firestore!",
+        "LoginSuccessful": "Login successful.",
+        "LoginFailed": "Login failed. Please try again.",
+        "InvalidCredentials": "Invalid credentials. Please try again.",
+        "SuccessAlert": "Signup successful.",
+        "FailureAlert": "Signup failed. Please try again."
     }
 }

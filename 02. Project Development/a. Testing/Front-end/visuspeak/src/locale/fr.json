@@ -28,8 +28,6 @@
         "Login Prompt": "Vous n'avez pas de compte?",
         "EmailLabel": "Courriel",
         "PasswordLabel": "Mot de passe",
-
-
         "SignUpHeading": "Inscription",
         "Signup Prompt": "Vous n'avez pas de compte?",
         "FirstNameLabel": "Prénom",
@@ -43,14 +41,33 @@
         "AgreeTerms": "Acceptez-vous les",
         "TermsAndConditions": "termes et conditions",
         "SignUpButton": "S'inscrire",
-
         "SearchPlaceholder": "Rechercher un utilisateur...",
         "Archive": "Archive",
         "Back": "Retour",
         "MostRecent": "Le plus récent",
         "LeastRecent": "Le moins récent",
         "ChatPlaceholder": "Cliquez sur un chat pour prévisualiser les messages",
-
-        "Guest": "Invité"
+        "Guest": "Invité",
+        "ChangePassword": "Changer le mot de passe",
+        "Edit": "Modifier",
+        "SaveChanges": "Sauvegarder les modifications",
+        "Cancel": "Annuler",
+        "PasswordChangeError": "Une erreur est survenue lors du changement de mot de passe. Veuillez réessayer plus tard.",
+        "AccountUpdateError": "Une erreur est survenue lors de la mise à jour des informations du compte.",
+        "PasswordsMismatchError": "Les mots de passe ne correspondent pas.",
+        "FieldsEmptyError": "Les champs ne peuvent pas être vides.",
+        "PasswordLengthError": "Le mot de passe doit contenir plus de 6 caractères.",
+        "FieldBlank": "Ce champ ne peut pas être vide.",
+        "InvalidEmail": "Veuillez entrer une adresse courriel valide.",
+        "PasswordsNotMatch": "Les mots de passe ne correspondent pas.",
+        "LanguageNotSelected": "Veuillez sélectionner votre langue principale.",
+        "TermsNotAgreed": "Vous devez accepter les termes et conditions.",
+        "EmptyCredentials": "Le courriel et le mot de passe ne peuvent pas être vides.",
+        "NoDocument": "Aucun document correspondant dans Firestore !",
+        "LoginSuccessful": "Connexion réussie.",
+        "LoginFailed": "Échec de la connexion. Veuillez réessayer.",
+        "InvalidCredentials": "Identifiants invalides. Veuillez réessayer.",
+        "SuccessAlert": "Inscription réussie.",
+        "FailureAlert": "L'inscription a échoué. Veuillez réessayer."
     }
 }

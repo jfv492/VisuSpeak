@@ -2,8 +2,8 @@
 import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom"; // Hook from React Router for accessing location object
 
-import SettingsUserInfo from "../components/account_setting/UserInfo.js";
-import SettingsEditAccountInfo from "../components/account_setting/EditPassword.js";
+import UserInfo from "../components/account_setting/UserInfo.js";
+import EditPassword from "../components/account_setting/EditPassword.js";
 
 const AccountSettings = (props) => {
   let location = useLocation();
@@ -15,10 +15,9 @@ const AccountSettings = (props) => {
   return (
     <div className="background-container">
       <div className="container account-settings-form shadow-lg rounded-4">
-        <SettingsUserInfo/>
-        <div className="row about-us-sections">
-          
-          <SettingsEditAccountInfo />
+        <UserInfo />
+        <div className="about-us-sections">
+          <EditPassword />
         </div>
       </div>
     </div>
@@ -26,4 +25,3 @@ const AccountSettings = (props) => {
 };
 
 export default AccountSettings;
-
