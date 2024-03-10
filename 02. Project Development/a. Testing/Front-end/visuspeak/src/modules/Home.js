@@ -6,6 +6,7 @@ import CustomerSignin from "../components/customer/CustomerSignin.js";
 import Dashboard from "../components/admin/Dashboard.js";
 import { useTranslation } from 'react-i18next';
 
+
 export default function Home() {
   const { t } = useTranslation();
   return (

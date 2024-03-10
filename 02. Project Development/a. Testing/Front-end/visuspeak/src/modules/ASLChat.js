@@ -9,9 +9,6 @@ import Popover from "@mui/material/Popover";
 import Typography from "@mui/material/Typography";
 import HowToModal from "../components/asl_chat/HowToModal.js";
 import modelChatUrl from "../Chat-env.js";
-import Alert from '@mui/material/Alert';
-import CheckIcon from '@mui/icons-material/Check';
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 
 const ASLChat = () => {
   const { data, dispatch } = useContext(ChatContext);
