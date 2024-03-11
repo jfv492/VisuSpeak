@@ -2,21 +2,35 @@ import React, { useState, useCallback, useEffect, useContext } from "react";
 import { ChatContext } from "../context/ChatContext.js";
 import Search from "../components/chat/Search.js";
 import Chats from "../components/chat/Chats.js";
-import axios from "axios"; // For making HTTP requests
 import ChatHeader from "../components/chat/ChatHeader.js";
 import MessageList from "../components/chat/MessageList.js";
 import InputArea from "../components/chat/Input.js";
 import Popover from "@mui/material/Popover";
 import Typography from "@mui/material/Typography";
 import HowToModal from "../components/asl_chat/HowToModal.js";
-import modelChatUrl from "../Chat-env.js"
+import modelChatUrl from "../Chat-env.js";
+import { useTranslation } from "react-i18next";
+import AdminList from "../components/customer/AdminList.js";
 
 const ASLChat = () => {
-  const { data } = useContext(ChatContext);
+  const { t } = useTranslation();
+  const { data, dispatch } = useContext(ChatContext);
   let displayName = data.user?.displayName;
   let photo = data.user?.photoURL;
   const [leftWidth, setLeftWidth] = useState(35); // Percentage
   const [isDragging, setIsDragging] = useState(false);
+  const [immediateWord, setImmediateWord] = useState("");
+
+  // Function to reset the counter and send the immediate word
+  const handleGoClick = () => {
+    setImmediateWord(gestureLabel); // Assuming gestureLabel holds the current word
+    setCountdown(fetchInterval / 1000); // Reset the countdown
+  };
+
+  // Method to be passed to InputArea to clear immediateWord after sending
+  const clearImmediateWord = () => {
+    setImmediateWord("");
+  };
 
   const startDragging = useCallback(() => {
     setIsDragging(true);
@@ -94,7 +108,6 @@ const ASLChat = () => {
   const openSpeedButtonPopover = Boolean(anchorEl5sSpeedButton);
 
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const [currentStep, setCurrentStep] = useState(1);
   const mobileView = windowWidth < 600;
 
   const [isSigning, setIsSigning] = useState(false); // State to track if user is signing
@@ -170,7 +183,7 @@ const ASLChat = () => {
           setGestureLabel(event.data.label);
         }
       } else {
-        setGestureLabel("Error translating!");
+        setGestureLabel("No word predicted");
         return;
       }
     };
@@ -186,7 +199,7 @@ const ASLChat = () => {
   useEffect(() => {
     let interval;
 
-    if (isSigning && gestureLabel !== "Error translating!") {
+    if (isSigning && gestureLabel !== "No word predicted") {
       interval = setInterval(() => {
         fetch(`${modelChatUrl}/sendword`, {
           method: "POST",
@@ -214,46 +227,57 @@ const ASLChat = () => {
   }, []);
 
   return (
-    <div className="background-container">
-      <div className="asl-chat-container resizable-container shadow rounded-4">
+    <>
+      <div
+        class={`asl-chat-container ${!mobileView ? "resizable-container" : ""}`}
+      >
         <div
-          className="resizable-left-panel p-3"
+          class="resizable-left-panel p-3"
           style={{ width: `${leftWidth}%` }}
         >
-          <Search />
+          {!displayName ? (
+            <div className="asl-chats rounded-3 my-3">
+              <Search />
+              <AdminList />
+              <Chats />
+            </div>
+          ) : (
+            <>
+              <ChatHeader user={displayName} photo={photo} />
 
-          <div className="asl-chat-box rounded-4 mt-3">
-            {displayName ? (
-              <div className="asl-chat-box rounded-4">
-                <ChatHeader user={displayName} photo={photo}/>
-
-                <div class="asl-chatbox-scrollable">
-                  <MessageList />
-                </div>
+              <MessageList />
+              <div class="chat-input-container">
                 <InputArea
                   isFetchingEnabled={isSigning}
                   fetchInterval={fetchInterval}
+                  immediateWord={immediateWord}
+                  onImmediateSend={clearImmediateWord}
                 />
               </div>
-            ) : (
-              <Chats />
-            )}
+            </>
+          )}
+        </div>
+
+        {!mobileView && (
+          <div className="resizable-divider " onMouseDown={startDragging}>
+            <i class="fa-solid fa-ellipsis-vertical fa-xl resize-icon border shadow"></i>
           </div>
-        </div>
-        <div className="resizable-divider " onMouseDown={startDragging}>
-          <i class="fa-solid fa-ellipsis-vertical fa-xl resize-icon border shadow"></i>
-        </div>
+        )}
+
         <div
           className="resizable-right-panel p-3"
           style={{ width: `${100 - leftWidth}%` }}
         >
           {displayName ? (
-            <div class="video-box rounded-4">
-              <div class="row px-4">
-                <div className="col-sm-10 fs-3">
-                  <p key={countdown} className="countdown-animation mt-2">
+            <>
+              <div class="row">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div
+                    key={countdown}
+                    className="countdown-animation d-flex align-items-center fs-2"
+                  >
                     <i
-                      className={`fa-solid fa-stopwatch fa-lg mt-4 mx-2 ${iconClass}`}
+                      className={`fa-solid fa-stopwatch ${iconClass}`}
                       style={{
                         color:
                           countdown <= 4
@@ -263,17 +287,13 @@ const ASLChat = () => {
                             : "initial",
                       }}
                     ></i>
-                    <span className="mt-1">{countdown} s</span>
-                  </p>
-                </div>
-                <div className="col-sm-2 text-end">
+                    <span className="ms-1">{countdown} s</span>
+                  </div>
                   <HowToModal />
                 </div>
               </div>
-              <div
-                class="row camera-placeholder rounded-4"
-                style={{ overflowX: "hidden" }}
-              >
+
+              <div class="row video-placeholder centered-text">
                 {isSigning ? (
                   <iframe
                     src="https://archishab.github.io/VisuSpeak-MediaPipe-Model/"
@@ -288,75 +308,91 @@ const ASLChat = () => {
                     class="align-self-center"
                   ></iframe>
                 ) : (
-                  <div className="video-placeholder centered-text">
+                  <>
                     {loading ? (
                       <div class="spinner-border text-success" role="status">
                         <span class="visually-hidden">Loading...</span>
                       </div>
                     ) : (
-                      <p class="lead">
-                        Click on the camera icon{" "}
+                      <p className="lead">
+                        {t("clickOnCameraIcon")}{" "}
                         <i
-                          class="fa-solid fa-video me-2"
+                          className="fa-solid fa-video me-2"
                           style={{ color: "#006262" }}
                         ></i>{" "}
-                        to start signing
+                        {t("toStartSigning")}
                       </p>
                     )}
-                  </div>
+                  </>
                 )}
-                <div className="row align-items-center py-2 justify-content-start action-buttons rounded-4 mt-3">
-                  <div className="col-sm-3 justify-content-start">
-                    <button
-                      type="button"
-                      className={`{btn camera-button-style btn-lg border border-3 rounded-3 ${
-                        isSigning ? "active" : ""
-                      }`}
-                      onClick={toggleSigning}
-                      aria-owns={
-                        openCameraButtonPopover
-                          ? "mouse-over-popover1"
-                          : undefined
-                      }
-                      onMouseEnter={handlePopoverOpenCameraButton}
-                      onMouseLeave={handlePopoverCloseCameraButton}
+              </div>
+              <div className="row mx-2">
+                <div
+                  class="d-flex justify-content-between align-items-center action-buttons px-3 rounded-3 shadow"
+                  style={{ minHeight: "90px" }}
+                >
+                  <button
+                    type="button"
+                    className={`{btn camera-button-style btn-lg border border-3 rounded-3 ${
+                      isSigning ? "active" : ""
+                    }`}
+                    onClick={toggleSigning}
+                    aria-owns={
+                      openCameraButtonPopover
+                        ? "mouse-over-popover1"
+                        : undefined
+                    }
+                    onMouseEnter={handlePopoverOpenCameraButton}
+                    onMouseLeave={handlePopoverCloseCameraButton}
+                  >
+                    {isSigning ? (
+                      <i
+                        class="fa-solid fa-video-slash fa-xl"
+                        style={{ color: "#ffffff" }}
+                      ></i>
+                    ) : (
+                      <i
+                        class="fa-solid fa-video fa-xl"
+                        style={{ color: "#006262" }}
+                      ></i>
+                    )}
+                    <Popover
+                      id="mouse-over-popover1"
+                      sx={{
+                        pointerEvents: "none",
+                      }}
+                      open={openCameraButtonPopover}
+                      anchorEl={anchorElCameraButton}
+                      onClose={handlePopoverCloseCameraButton}
+                      anchorOrigin={{
+                        vertical: "top",
+                        horizontal: "center",
+                      }}
+                      transformOrigin={{
+                        vertical: "bottom",
+                        horizontal: "center",
+                      }}
+                      disableRestoreFocus
                     >
-                      {isSigning ? (
-                        <i
-                          class="fa-solid fa-video-slash fa-xl"
-                          style={{ color: "#ffffff" }}
-                        ></i>
-                      ) : (
-                        <i
-                          class="fa-solid fa-video fa-xl"
-                          style={{ color: "#006262" }}
-                        ></i>
-                      )}
-                      <Popover
-                        id="mouse-over-popover1"
-                        sx={{
-                          pointerEvents: "none",
-                        }}
-                        open={openCameraButtonPopover}
-                        anchorEl={anchorElCameraButton}
-                        onClose={handlePopoverCloseCameraButton}
-                        anchorOrigin={{
-                          vertical: "top",
-                          horizontal: "center",
-                        }}
-                        transformOrigin={{
-                          vertical: "bottom",
-                          horizontal: "center",
-                        }}
-                        disableRestoreFocus
+                      <Typography sx={{ p: 1 }}>
+                        {t(isSigning ? "closeCamera" : "openCamera")}
+                      </Typography>
+                    </Popover>
+                  </button>
+                  {gestureLabel && (
+                    <div className="go-button-container border-start border-end px-5">
+                      <span className="current-word">
+                        {t("currentWord")}: {gestureLabel}
+                      </span>
+                      <button
+                        className="btn camera-button-style btn-lg border border-3 rounded-3 ms-2"
+                        onClick={handleGoClick}
                       >
-                        <Typography sx={{ p: 1 }}>{`${
-                          isSigning ? "Close" : "Open"
-                        } Camera`}</Typography>
-                      </Popover>
-                    </button>
-                  </div>
-                  <div className="col-sm-9 interval-style">
+                        {t("goButton")}
+                      </button>
+                    </div>
+                  )}
+                  <div className="interval-style">
                     {/* <input
                 type="range"
                 min="5000"
@@ -399,7 +435,7 @@ const ASLChat = () => {
                         }}
                         disableRestoreFocus
                       >
-                        <Typography sx={{ p: 1 }}>Fast Speed</Typography>
+                        <Typography sx={{ p: 1 }}>{t("fastSpeed")}</Typography>
                       </Popover>
                     </button>
 
@@ -432,7 +468,7 @@ const ASLChat = () => {
                       onClose={handlePopoverClose10sButton}
                       disableRestoreFocus
                     >
-                      <Typography sx={{ p: 1 }}>Medium Speed</Typography>
+                      <Typography sx={{ p: 1 }}>{t("mediumSpeed")}</Typography>
                     </Popover>
                     <button
                       type="button"
@@ -463,17 +499,15 @@ const ASLChat = () => {
                       onClose={handlePopoverClose15sButton}
                       disableRestoreFocus
                     >
-                      <Typography sx={{ p: 1 }}>Slow Speed</Typography>
+                      <Typography sx={{ p: 1 }}>{t("slowSpeed")}</Typography>
                     </Popover>
                   </div>
                 </div>
               </div>
-            </div>
+            </>
           ) : (
-            <div class="video-box rounded-4">
-              <div class="centered-text lead p-3">
-                Click on a chat to preview messages
-              </div>
+            <div class="chat-placeholder rounded-3">
+              <div class="centered-text lead p-3">{t("ChatPlaceholder")}</div>
             </div>
           )}
         </div>
@@ -485,7 +519,7 @@ const ASLChat = () => {
           />
         )}
       </div>
-    </div>
+    </>
   );
 };
 

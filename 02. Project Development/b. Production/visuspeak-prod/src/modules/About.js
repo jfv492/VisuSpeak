@@ -4,8 +4,10 @@ import { useLocation } from "react-router-dom"; // Hook from React Router for ac
 import AboutSections from "../components/about/AboutSections.js";
 import AboutFeatures from "../components/about/AboutFeatures.js";
 import AboutFeaturesGrid from "../components/about/AboutSocial.js";
+import { useTranslation } from "react-i18next";
 
 const About = (props) => {
+  const { t } = useTranslation();
   let location = useLocation();
 
   // Effect hook to log the current pathname whenever the location changes
@@ -15,10 +17,10 @@ const About = (props) => {
   return (
     <div>
       <div class="container my-5">
-        <h1> {props.heading}</h1>
+        <h1>{t("About Us")}</h1>
         <AboutSections />
         <div class="row about-us-sections">
-          <h4>Features</h4>
+          <h4>{t("Features")}</h4>
           <AboutFeatures />
         </div>
         <hr />

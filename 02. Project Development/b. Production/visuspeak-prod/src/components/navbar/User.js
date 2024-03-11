@@ -4,9 +4,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../../firebase";
 import { AuthContext } from "../../context/AuthContext.js";
 import { setUserOffline } from "../../utils/UserPresence.js";
+import defaultProfilePicture from "../../assets/images/AccountSettingsHeadshot.jpg";
+import { useTranslation } from "react-i18next";
 
 const User = () => {
-  const { currentUser } = useContext(AuthContext);
+  const { t } = useTranslation();
+  const { currentUser, updateAccountType, updateOrganizationName } = useContext(AuthContext);
   const [displayName, setDisplayName] = useState("");
   let navigate = useNavigate();
 
@@ -17,6 +20,8 @@ const User = () => {
     }
     // Clear local storage and sign out
     localStorage.clear();
+    updateAccountType("");
+    updateOrganizationName("");
     await signOut(auth);
     navigate("/");
   };
@@ -30,14 +35,18 @@ const User = () => {
       >
         <Link
           to="/"
-          className="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle dropdown-toggle-split"
+          className={`d-flex align-items-center link-body-emphasis text-decoration-none ${
+            localStorage.getItem("accountType") === "admin"
+              ? "dropdown-toggle"
+              : ""
+          }  dropdown-toggle-split`}
           data-bs-toggle="dropdown"
           data-bs-display="static"
           aria-expanded="false"
         >
           <div style={{ position: "relative", display: "inline-block" }}>
             <img
-              src={currentUser?.photoURL}
+              src={currentUser?.photoURL || defaultProfilePicture}
               alt="User"
               className="rounded-circle"
               style={{ width: "45px", height: "45px", objectFit: "cover" }}
@@ -59,26 +68,29 @@ const User = () => {
 
           <strong className="mx-2">{localStorage.getItem("username")}</strong>
         </Link>
-        <ul className="dropdown-menu dropdown-menu-lg-end p-2 shadow-lg">
-          <li>
-            <Link className="dropdown-item" to="/accountsettings">
-              <i class="fa-solid fa-gear me-3" style={{ color: "#000000" }}></i>
-              Account Settings
-            </Link>
-          </li>
-          <li>
-            <hr className="dropdown-divider" />
-          </li>
-          <li>
-            <Link className="dropdown-item" onClick={handleSignOut} to="/">
-              <i
-                class="fa-solid fa-right-from-bracket me-3"
-                style={{ color: "#000000" }}
-              ></i>
-              Logout
-            </Link>
-          </li>
-        </ul>
+        {localStorage.getItem("accountType") === "admin" && (
+          <ul className="dropdown-menu dropdown-menu-lg-end p-2 shadow-lg">
+            <li>
+              <Link className="dropdown-item" to="/accountsettings">
+                <i
+                  class="fa-solid fa-gear me-3"
+                ></i>
+                {t("accountSettings")}
+              </Link>
+            </li>
+            <li>
+              <hr className="dropdown-divider" />
+            </li>
+            <li>
+              <Link className="dropdown-item" onClick={handleSignOut} to="/">
+                <i
+                  class="fa-solid fa-right-from-bracket me-3"
+                ></i>
+                 {t("logout")}
+              </Link>
+            </li>
+          </ul>
+        )}
       </div>
     </div>
   );

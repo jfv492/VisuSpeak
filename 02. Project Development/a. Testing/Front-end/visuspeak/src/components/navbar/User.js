@@ -5,8 +5,10 @@ import { auth } from "../../firebase";
 import { AuthContext } from "../../context/AuthContext.js";
 import { setUserOffline } from "../../utils/UserPresence.js";
 import defaultProfilePicture from "../../assets/images/AccountSettingsHeadshot.jpg";
+import { useTranslation } from "react-i18next";
 
 const User = () => {
+  const { t } = useTranslation();
   const { currentUser, updateAccountType, updateOrganizationName } = useContext(AuthContext);
   const [displayName, setDisplayName] = useState("");
   let navigate = useNavigate();
@@ -72,9 +74,8 @@ const User = () => {
               <Link className="dropdown-item" to="/accountsettings">
                 <i
                   class="fa-solid fa-gear me-3"
-                  style={{ color: "#000000" }}
                 ></i>
-                Account Settings
+                {t("accountSettings")}
               </Link>
             </li>
             <li>
@@ -84,9 +85,8 @@ const User = () => {
               <Link className="dropdown-item" onClick={handleSignOut} to="/">
                 <i
                   class="fa-solid fa-right-from-bracket me-3"
-                  style={{ color: "#000000" }}
                 ></i>
-                Logout
+                 {t("logout")}
               </Link>
             </li>
           </ul>

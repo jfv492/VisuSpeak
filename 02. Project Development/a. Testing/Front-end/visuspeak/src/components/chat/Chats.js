@@ -12,7 +12,7 @@ import {
 import { useTranslation } from "react-i18next";
 
 const Chats = () => {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
   const currentLanguage = i18n.language;
   const [chatsWithStatus, setChatsWithStatus] = useState([]);
   const { currentUser } = useContext(AuthContext);
@@ -212,7 +212,7 @@ const Chats = () => {
                             : "text-bg-secondary"
                         }`}
                       >
-                        {chat.userInfo?.type}
+                        {chat.userInfo?.type === "guest" ? `${t("Guest")}` : `${t("Admin")}`}
                       </span>
                       <h5 className="mb-1 chat-name-ellipsis">
                         {chat.userInfo?.displayName}

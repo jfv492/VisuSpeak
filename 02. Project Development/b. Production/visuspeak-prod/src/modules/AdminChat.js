@@ -1,13 +1,39 @@
-import React, { useState, useCallback, useEffect } from "react";
-
+import React, { useState, useCallback, useEffect, useContext } from "react";
+import { ChatContext } from '../context/ChatContext';
 import Search from "../components/chat/Search.js";
 import Chats from "../components/chat/Chats.js";
-import Chat from "../components/chat/Chat.js";
+import ChatHeader from "../components/chat/ChatHeader.js";
+import MessageList from "../components/chat/MessageList.js";
+import InputArea from "../components/chat/Input.js";
+import Alert from "../components/notifications/Alert.js"
+import { useTranslation } from 'react-i18next';
 
-const AdminChat = (props) => {
+const AdminChat = () => {
+  const { t } = useTranslation();
+  const { data, dispatch } = useContext(ChatContext);
+  let displayName = data.user?.displayName;
+  let photo = data.user?.photoURL;
   const [leftWidth, setLeftWidth] = useState(35); // Percentage
   const [isDragging, setIsDragging] = useState(false);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [alert, setAlert] = useState(null);
+  
+  const showAlert = (message, type) => {
+    setAlert({
+      msg: message,
+      type: type,
+    });
+    setTimeout(() => {
+      setAlert(null);
+    }, 5000);
+  };
+
+  useEffect(() => {
+    // Function to run when component unmounts
+    return () => {
+      // Reset selected chat here
+      dispatch({ type: 'RESET_CHAT' });
+    };
+  }, [dispatch]);
 
   const startDragging = useCallback(() => {
     setIsDragging(true);
@@ -43,51 +69,48 @@ const AdminChat = (props) => {
     [isDragging]
   );
 
-    useEffect(() => {
-      const handleResize = () => {
-        setWindowWidth(window.innerWidth);
-      };
-  
-      window.addEventListener("resize", handleResize);
-      return () => window.removeEventListener("resize", handleResize);
-    }, []);
-  
   return (
-    <div className="background-container">
-      <div className="admin-chat-container resizable-container shadow rounded-4">
-        {/* <div className="row text-begin align-items-center">
-          <div className="col-sm-4">
-            <h3> {props.heading}</h3>
-          </div>
-          <div className="col-sm-8"></div>
-        </div> */}
 
+      <div className="admin-chat-container resizable-container">
         <div
           className="resizable-left-panel p-3"
           style={{ width: `${leftWidth}%` }}
         >
-            <Search />
-            <Chats />
-          </div>
-          <div className="resizable-divider " onMouseDown={startDragging}>
+          <Search showAlert={showAlert}/>
+          <Chats />
+        </div>
+        <div className="resizable-divider " onMouseDown={startDragging}>
           <i class="fa-solid fa-ellipsis-vertical fa-xl resize-icon border shadow"></i>
         </div>
         <div
           className="resizable-right-panel p-3"
           style={{ width: `${100 - leftWidth}%` }}
         >
-            <Chat />
+          <Alert alert={alert} />
+          {displayName ? (
+        <>
+          <ChatHeader user={displayName} photo={photo} />
+
+          <MessageList />
+          <div class="chat-input-container">
+            <InputArea />
           </div>
-          {isDragging && (
+        </>
+      ) : (
+        <div class="centered-text lead p-3">
+          {t('ChatPlaceholder')}
+        </div>
+      )}
+        </div>
+        {isDragging && (
           <div
             className="resizable-dragging-overlay"
             onMouseMove={onDrag}
             onMouseUp={stopDragging}
           />
         )}
-        </div>
       </div>
-    
+
   );
 };
 

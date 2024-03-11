@@ -51,7 +51,7 @@ const HowToModal = () => {
         onClose={handlePopoverClose}
         disableRestoreFocus
       >
-        <Typography sx={{ p: 1 }}>activatingASLMode</Typography>
+        <Typography sx={{ p: 1 }}>{t("howToUseChat")}</Typography>
       </Popover>
       <div
         class="modal fade"

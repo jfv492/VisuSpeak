@@ -1,8 +1,10 @@
 import React from "react";
 import Popover from "@mui/material/Popover";
 import Typography from "@mui/material/Typography";
+import { useTranslation } from "react-i18next";
 
 const HowToModal = () => {
+  const { t } = useTranslation();
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handlePopoverOpen = (event) => {
@@ -18,38 +20,38 @@ const HowToModal = () => {
     <div>
       <button
         type="button"
-        class="btn fs-3 "
+        class="btn"
         data-bs-toggle="modal"
         data-bs-target="#helpModal"
       >
         <i
-          class="fa-solid fa-circle-question howto-icon fa-lg mt-4 "
+          class="fa-solid fa-circle-question howto-icon fs-2"
           style={{ color: "#006262;" }}
-          aria-owns={open ? 'mouse-over-popover' : undefined}
-        aria-haspopup="true"
-        onMouseEnter={handlePopoverOpen}
-        onMouseLeave={handlePopoverClose}
+          aria-owns={open ? "mouse-over-popover" : undefined}
+          aria-haspopup="true"
+          onMouseEnter={handlePopoverOpen}
+          onMouseLeave={handlePopoverClose}
         ></i>
       </button>
       <Popover
         id="mouse-over-popover"
         sx={{
-          pointerEvents: 'none',
+          pointerEvents: "none",
         }}
         open={open}
         anchorEl={anchorEl}
         anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'center',
+          vertical: "top",
+          horizontal: "center",
         }}
         transformOrigin={{
-          vertical: 'bottom',
-          horizontal: 'center',
+          vertical: "bottom",
+          horizontal: "center",
         }}
         onClose={handlePopoverClose}
         disableRestoreFocus
       >
-        <Typography sx={{ p: 1 }}>How-to use the chat</Typography>
+        <Typography sx={{ p: 1 }}>{t("howToUseChat")}</Typography>
       </Popover>
       <div
         class="modal fade"
@@ -58,7 +60,7 @@ const HowToModal = () => {
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
-        <div class="modal-dialog text-start">
+        <div class="modal-dialog text-start modal-lg">
           <div class="modal-content">
             <div class="modal-header">
               <h1 class="modal-title fs-5" id="exampleModalLabel">
@@ -66,7 +68,7 @@ const HowToModal = () => {
                   class="fa-solid fa-message me-2"
                   style={{ color: "#000000;" }}
                 ></i>
-                How-to Chat
+                {t("helpSectionTitle")}
               </h1>
               <button
                 type="button"
@@ -76,35 +78,61 @@ const HowToModal = () => {
               ></button>
             </div>
             <div class="modal-body">
+              <h4>{t("activatingASLMode")}</h4>
+              <p>
+              {t("toInteractUsingASLFirstActivate")}
+              </p>
+              <hr/>
+              <h4>{t("stepsForASLInteraction")}</h4>
               <ol>
                 <li>
-                  Activate the camera for American Sign Language (ASL)
-                  interaction.
+                  <strong>{t("activateCamera")}</strong> {t("ensureYourDevicesCamera")}
                 </li>
                 <li>
-                  Sign one of the available words that can be recognized by the
-                  AI model into the camera window (Click here for list of
-                  supported words).
-                </li>
-                <li>The AI Model will detect and predict the signed word.</li>
-                <li>
-                  The predicted word will be translated from ASL to English and
-                  displayed in the text input field.
+                  <strong>{t("signWord")}</strong> {t("referToOur")}{" "}
+                  <a href="#">{t("listOfSupportedWords")}</a> {t("andSignOneOfTheseWords")}
                 </li>
                 <li>
-                  If the predicted word matches the desired word, you can send
-                  it in the chat by clicking the send button.
+                  <strong>{t("aiRecognition")}</strong> {t("onceYouSignAWord")}
                 </li>
                 <li>
-                  Adjust recognition speed using the slider/button [depending on
-                  what we choose]:
-                  <ul>
-                    <li>Select "5s" for a fast timer.</li>
-                    <li>Choose "10s" for a medium timer (default).</li>
-                    <li>Opt for "15s" for a slow timer.</li>
-                  </ul>
+                  <strong>{t("translationDisplay")}</strong> {t("thePredictedWord")}
+                </li>
+                <li>
+                  <strong>{t("sendingMessages")}</strong> {t("clickSendButton")}{" "}
+                  <strong>{t("sendButton")}</strong> {t("toIncludeInChat")}
                 </li>
               </ol>
+              <hr/>
+              <h4>{t("adjustingRecognitionSpeed")}</h4>
+              <p>
+              {t("adjustingRecognitionSpeedDesc")}
+              </p>
+              <ul>
+                <li>
+                  <strong>{t("fastTimer")}</strong> {t("selectThisForQuicker")}
+                </li>
+                <li>
+                  <strong>{t("mediumTimer")}</strong> {t("thisIsTheDefault")}
+                </li>
+                <li>
+                  <strong>{t("slowTimer")}</strong> {t("chooseThisForMore")}
+                </li>
+              </ul>
+              <div class="tips">
+                <h4>{t("tipsForAccurateRecognition")}</h4>
+                <ul>
+                  <li>
+                  {t("ensureGoodLighting")}
+                  </li>
+                  <li>
+                  {t("practiceSupportedSigns")}
+                  </li>
+                </ul>
+              </div>
+              <p>
+              {t("forAssistance")}
+              </p>
             </div>
           </div>
         </div>

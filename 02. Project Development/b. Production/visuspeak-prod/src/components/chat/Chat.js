@@ -3,25 +3,27 @@ import { ChatContext } from "../../context/ChatContext";
 import MessageList from "./MessageList";
 import Input from "./Input";
 import ChatHeader from "./ChatHeader";
+import { useTranslation } from 'react-i18next';
 
 const Chat = () => {
+  const { t } = useTranslation();
   const { data } = useContext(ChatContext);
   let displayName = data.user?.displayName;
   let photo = data.user?.photoURL;
   return (
-    <div className="admin-chat-box rounded-4">
+    <div className="">
       {displayName ? (
         <>
-          <ChatHeader user={displayName} photo={photo}/>
+          <ChatHeader user={displayName} photo={photo} />
 
-          <div class="chatbox-scrollable">
-            <MessageList />
+          <MessageList />
+          <div class="chat-input-container">
+            <Input />
           </div>
-          <Input />
         </>
       ) : (
         <div class="centered-text lead p-3">
-          Click on a chat to preview messages
+          {t('ChatPlaceholder')}
         </div>
       )}
     </div>

@@ -7,13 +7,23 @@ import {
   serverTimestamp,
   arrayUnion,
   updateDoc,
+  collection,
+  setDoc
 } from "firebase/firestore";
 import { v4 as uuid } from "uuid";
 import { doc } from "firebase/firestore";
 import { db } from "../../firebase.js";
-import modelChatUrl from "../../Chat-env.js"
+import modelChatUrl from "../../Chat-env.js";
+import { useTranslation } from "react-i18next";
 
-const Input = ({ onSendMessage, isFetchingEnabled, fetchInterval }) => {
+const Input = ({
+  onSendMessage,
+  isFetchingEnabled,
+  fetchInterval,
+  immediateWord,
+  onImmediateSend,
+}) => {
+  const { t } = useTranslation();
   const [text, setText] = useState("");
   const { currentUser } = useContext(AuthContext);
   const { data } = useContext(ChatContext);
@@ -22,6 +32,14 @@ const Input = ({ onSendMessage, isFetchingEnabled, fetchInterval }) => {
   const [lastFetchedWord, setLastFetchedWord] = useState("");
   const [isHandDetected, setIsHandDetected] = useState(true);
   const [isListening, setIsListening] = useState(false);
+
+  useEffect(() => {
+    if (immediateWord) {
+      setText((prev) => prev + " " + immediateWord);
+      // handleSend(); // You might adjust handleSend to optionally skip clearing the text if you wish
+      onImmediateSend(); // Call this to indicate the immediate send operation is complete
+    }
+  }, [immediateWord, onImmediateSend]);
 
   const { listen, listening, stop } = useSpeechRecognition({
     onResult: (result) => {
@@ -39,6 +57,11 @@ const Input = ({ onSendMessage, isFetchingEnabled, fetchInterval }) => {
   };
 
   const handleSend = async () => {
+    // Prevent sending if text is empty or only contains whitespace
+    if (!text.trim()) {
+      return;
+    }
+
     // Check if chatId is valid
     if (!data.chatId || data.chatId === "null") {
       console.error("No chat selected");
@@ -46,13 +69,16 @@ const Input = ({ onSendMessage, isFetchingEnabled, fetchInterval }) => {
       return;
     }
 
+    let lastSenderName =
+      currentUser.displayName || localStorage.getItem("username");
+
     try {
       await updateDoc(doc(db, "chats", data.chatId), {
         messages: arrayUnion({
           id: uuid(),
           text,
           senderId: currentUser.uid,
-          senderDisplayName: currentUser.displayName,
+          senderDisplayName: lastSenderName,
           date: Timestamp.now(),
         }),
       });
@@ -61,7 +87,7 @@ const Input = ({ onSendMessage, isFetchingEnabled, fetchInterval }) => {
       console.error("Error sending message:", error);
       // Handle the error appropriately
     }
-    let lastSenderName = currentUser.displayName;
+
     await updateDoc(doc(db, "userChats", currentUser.uid), {
       [data.chatId + ".lastMessage"]: {
         text,
@@ -81,6 +107,28 @@ const Input = ({ onSendMessage, isFetchingEnabled, fetchInterval }) => {
       },
       [data.chatId + ".date"]: serverTimestamp(),
     });
+
+    const recipientId = data.user.uid; // The ID of the user receiving the notification
+
+      // Now, create the notification for the recipient
+      const notificationRef = doc(db, "users", recipientId, "notifications", uuid());
+
+      try {
+        await setDoc(notificationRef, {
+          text: text,
+          chatId: data.chatId, // Assuming this is the ID of the chat where the message was sent
+          senderId: currentUser.uid,
+          senderName: lastSenderName,
+          date: serverTimestamp(),
+          read: false
+        });
+
+        setText(""); // Clear the input field after sending the message
+        // ... any other cleanup code ...
+      } catch (error) {
+        console.error("Error creating notification:", error);
+        // Handle the error appropriately
+      }
 
     setText("");
   };
@@ -119,13 +167,13 @@ const Input = ({ onSendMessage, isFetchingEnabled, fetchInterval }) => {
   }, [listening, stop]);
 
   return (
-    <div className="input-area text-center px-2">
-      <div class="input-group border rounded shadow rounded-4">
+    <div className="input-area text-center shadow">
+      <div class="input-group border shadow rounded-3">
         <span class="input-group-text input-icon">
           {listening ? (
             <i
               onClick={stop}
-              className="fa-solid fa-microphone-slash fa-xl "
+              className="fa-solid fa-microphone-slash fa-xl"
             ></i>
           ) : (
             <i onClick={listen} className="fa-solid fa-microphone fa-xl"></i>
@@ -133,13 +181,13 @@ const Input = ({ onSendMessage, isFetchingEnabled, fetchInterval }) => {
         </span>
         <textarea
           type="text"
-          placeholder="Your message..."
+          placeholder={`${t("yourMessage")}`}
           class="form-control chat-input"
           id="autoExpandingTextarea"
           onChange={(e) => setText(e.target.value)}
           onKeyPress={handleKeyPress}
           value={text}
-          style={{ height: "55px" }}
+          style={{ height: "80px" }}
         ></textarea>
         <span class="input-group-text input-icon">
           <button class="send-button py-2 " onClick={handleSend}>

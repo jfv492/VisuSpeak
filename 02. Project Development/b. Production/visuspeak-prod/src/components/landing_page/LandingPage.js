@@ -16,8 +16,9 @@ const HomeNavigation = () => {
   return (
     <div>
       <h1 className="display-3 mt-5 fw-bold ">Welcome to VisuSpeak</h1>
+      <h1 className="display-6">Your ASL Companion</h1>
       <div className="col-sm-6 mx-auto">
-        <h1 className="display-5 text-body-emphasis">Your ASL Companion</h1>
+        
         <div className="d-grid gap-2 d-md-flex justify-content-md-center mt-5 mb-lg-3">
           <Link
             to="/login"
@@ -34,6 +35,14 @@ const HomeNavigation = () => {
             role="button"
           >
             Sign Up
+          </Link>
+          <Link
+            to="/test"
+            className="btn btn-lg home-button-style"
+            tabIndex="2"
+            role="button"
+          >
+            Test
           </Link>
         </div>
       </div>

@@ -43,18 +43,19 @@ const ChatActions = (props) => {
   const handleCancelClick = () => {
     dispatch({ type: "RESET_CHAT" });
   };
+  
   return (
-    <div className="chat-actions">
-      <button
-        class="btn chat-action-button bg-gradient me-2"
+    <div className="row chat-actions">
+      {localStorage.getItem("accountType") === "admin" && <button
+        class="btn chat-action-button bg-gradient me-1"
         type="button"
         aria-expanded="false"
         onClick={copyMessagesToClipboard}
       >
         <i class="fa-regular fa-copy"></i>
-      </button>
+      </button>}
       <button
-        class="btn chat-action-button bg-gradient"
+        class="btn chat-action-button bg-gradient me-2"
         type="button"
         aria-expanded="false"
         onClick={handleCancelClick}
