@@ -6,12 +6,14 @@ import { doc, setDoc, collection, query, where, getDocs } from "firebase/firesto
 import { initializeUserPresence, setUserOnline } from "../../utils/UserPresence.js";
 import defaultProfilePicture from "../../assets/images/AccountSettingsHeadshot.jpg";
 import { AuthContext } from "../../context/AuthContext.js"
+import { ChatContext } from "../../context/ChatContext.js";
 import '../../App.css';
 import { useTranslation } from "react-i18next";
 
 const CustomerSignin = (props) => {
   const { t } = useTranslation();
   const { updateAccountType, updateOrganizationName } = useContext(AuthContext);
+  const { dispatch } = useContext(ChatContext);
   let navigate = useNavigate();
   const [anonymousFirstName, setAnonymousFirstName] = useState("");
   const [anonymousLastName, setAnonymousLastName] = useState("");
@@ -63,6 +65,7 @@ const CustomerSignin = (props) => {
       });
 
       await setDoc(doc(db, "userChats", user.uid), {});
+      dispatch({ type: "RESET_CHAT" });
       localStorage.setItem("username", displayName);
       localStorage.setItem("accountType", "guest");
       localStorage.setItem("organizationName", anonymousOrganizationName);

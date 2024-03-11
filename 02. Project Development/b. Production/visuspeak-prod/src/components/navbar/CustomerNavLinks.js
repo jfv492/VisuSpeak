@@ -1,6 +1,7 @@
 import React, { useEffect, useContext, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext.js";
+import { ChatContext } from "../../context/ChatContext.js";
 import defaultProfilePicture from "../../assets/images/AccountSettingsHeadshot.jpg";
 import { setUserOffline } from "../../utils/UserPresence.js";
 import { signOut } from "firebase/auth";
@@ -11,6 +12,7 @@ import { useTranslation } from "react-i18next";
 const CustomerNavLinks = () => {
   const { t } = useTranslation();
   const { currentUser, updateAccountType, updateOrganizationName } = useContext(AuthContext);
+  const { dispatch } = useContext(ChatContext);
   let location = useLocation();
 
   useEffect(() => {
@@ -20,6 +22,7 @@ const CustomerNavLinks = () => {
   let navigate = useNavigate();
 
   const handleSignOut = async () => {
+    dispatch({ type: "RESET_CHAT" });
     // Set user status to offline
     if (currentUser && currentUser.uid) {
       await setUserOffline(currentUser.uid);

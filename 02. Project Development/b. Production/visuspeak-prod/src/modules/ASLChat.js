@@ -20,16 +20,29 @@ const ASLChat = () => {
   const [leftWidth, setLeftWidth] = useState(35); // Percentage
   const [isDragging, setIsDragging] = useState(false);
   const [immediateWord, setImmediateWord] = useState("");
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const mobileView = windowWidth < 600;
+
+  const [isSigning, setIsSigning] = useState(false); // State to track if user is signing
+  const [loading, setLoading] = useState(false); // State for loading indication
+  const [fetchInterval, setFetchInterval] = useState(10000); // Interval for fetching messages
+  const [gestureLabel, setGestureLabel] = useState(""); // Label for gesture recognition
+
+  const [messages, setMessages] = useState([]); // State for storing messages
+
+  const [countdown, setCountdown] = useState(fetchInterval / 1000); // Countdown timer
+  const [iconClass, setIconClass] = useState("");
 
   // Function to reset the counter and send the immediate word
   const handleGoClick = () => {
-    setImmediateWord(gestureLabel); // Assuming gestureLabel holds the current word
-    setCountdown(fetchInterval / 1000); // Reset the countdown
+    setImmediateWord(gestureLabel);
+    setCountdown(fetchInterval / 1000); 
   };
 
   // Method to be passed to InputArea to clear immediateWord after sending
   const clearImmediateWord = () => {
     setImmediateWord("");
+    // setFetchInterval(fetchInterval);
   };
 
   const startDragging = useCallback(() => {
@@ -106,19 +119,6 @@ const ASLChat = () => {
   // Open states for popovers
   const openCameraButtonPopover = Boolean(anchorElCameraButton);
   const openSpeedButtonPopover = Boolean(anchorEl5sSpeedButton);
-
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const mobileView = windowWidth < 600;
-
-  const [isSigning, setIsSigning] = useState(false); // State to track if user is signing
-  const [loading, setLoading] = useState(false); // State for loading indication
-  const [fetchInterval, setFetchInterval] = useState(10000); // Interval for fetching messages
-  const [gestureLabel, setGestureLabel] = useState(""); // Label for gesture recognition
-
-  const [messages, setMessages] = useState([]); // State for storing messages
-
-  const [countdown, setCountdown] = useState(fetchInterval / 1000); // Countdown timer
-  const [iconClass, setIconClass] = useState("");
 
   // Function to introduce delay
   function delay(ms) {

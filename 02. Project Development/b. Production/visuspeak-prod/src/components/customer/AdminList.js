@@ -15,7 +15,7 @@ import {
   serverTimestamp,
 } from "firebase/firestore";
 
-const AdminList = () => {
+const AdminList = (props) => {
   const { t } = useTranslation();
   const [admins, setAdmins] = useState([]);
   const [guests, setGuests] = useState([]);
@@ -115,9 +115,9 @@ const AdminList = () => {
   };
   return (
     <div>
-      <div className="">
+      <div className="mb-2" >
         <h5>{t("AvailableAdmins")}</h5>
-        <div className="d-flex justify-content-left admin-list">
+        <div className="d-flex justify-content-center admin-list align-items-center">
           {filteredAdmins.map((user) => (
             <div
               key={user.uid}
@@ -126,14 +126,14 @@ const AdminList = () => {
               style={{ cursor: "pointer" }}
             >
               <div
-                className="me-3"
+                className=""
                 style={{ position: "relative", display: "inline-block" }}
               >
                 <img
                   src={user.photoURL || defaultProfilePicture}
                   alt="Admin"
                   className="rounded-circle"
-                  style={{ width: "50px", objectFit: "cover" }}
+                  style={{ height: "50px", width: "50px", objectFit: "cover" }}
                 />
                 <i
                   className={`fa-solid fa-circle-check`}

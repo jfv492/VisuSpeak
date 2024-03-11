@@ -3,6 +3,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../../firebase";
 import { AuthContext } from "../../context/AuthContext.js";
+import { ChatContext } from "../../context/ChatContext.js";
 import { setUserOffline } from "../../utils/UserPresence.js";
 import defaultProfilePicture from "../../assets/images/AccountSettingsHeadshot.jpg";
 import { useTranslation } from "react-i18next";
@@ -10,6 +11,7 @@ import { useTranslation } from "react-i18next";
 const User = () => {
   const { t } = useTranslation();
   const { currentUser, updateAccountType, updateOrganizationName } = useContext(AuthContext);
+  const { dispatch } = useContext(ChatContext);
   const [displayName, setDisplayName] = useState("");
   let navigate = useNavigate();
 
@@ -19,6 +21,7 @@ const User = () => {
       await setUserOffline(currentUser.uid);
     }
     // Clear local storage and sign out
+    await dispatch({ type: "RESET_CHAT" });
     localStorage.clear();
     updateAccountType("");
     updateOrganizationName("");

@@ -513,7 +513,13 @@ body {
 }
 
 .admin-list {
+  display: flex;
+  flex-wrap: nowrap;
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch; /* For momentum scroll on mobile devices */
+  /* gap: 16px; Optional: Adds some space between the children */
+  /* padding: 8px; Optional: Adds some padding inside the scroll container */
+  align-items: center; /* Keeps items aligned in the center vertically */
 }
 
 .chat-list:hover {
@@ -1383,6 +1389,7 @@ iframe {
 .asl-chats {
   height: 100%;
   overflow-y: auto;
+  padding: 10px 0;
   scrollbar-width: thin;
   scrollbar-color: darkgrey transparent;
 }
@@ -1707,9 +1714,9 @@ h5 {
   font-weight: bold;
   margin-bottom: 1rem;
 }
-.admin-list, .guest-list {
+/* .admin-list, .guest-list {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
   margin-bottom: 1rem;
-}
+} */
