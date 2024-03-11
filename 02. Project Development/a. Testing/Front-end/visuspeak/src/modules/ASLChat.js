@@ -9,8 +9,10 @@ import Popover from "@mui/material/Popover";
 import Typography from "@mui/material/Typography";
 import HowToModal from "../components/asl_chat/HowToModal.js";
 import modelChatUrl from "../Chat-env.js";
+import { useTranslation } from "react-i18next";
 
 const ASLChat = () => {
+  const { t } = useTranslation();
   const { data, dispatch } = useContext(ChatContext);
   let displayName = data.user?.displayName;
   let photo = data.user?.photoURL;
@@ -180,7 +182,7 @@ const ASLChat = () => {
           setGestureLabel(event.data.label);
         }
       } else {
-        setGestureLabel("Error translating!");
+        setGestureLabel("No word predicted");
         return;
       }
     };
@@ -196,7 +198,7 @@ const ASLChat = () => {
   useEffect(() => {
     let interval;
 
-    if (isSigning && gestureLabel !== "Error translating!") {
+    if (isSigning && gestureLabel !== "No word predicted") {
       interval = setInterval(() => {
         fetch(`${modelChatUrl}/sendword`, {
           method: "POST",
@@ -310,14 +312,14 @@ const ASLChat = () => {
                         <span class="visually-hidden">Loading...</span>
                       </div>
                     ) : (
-                      <p class="lead">
-                        Click on the camera icon{" "}
-                        <i
-                          class="fa-solid fa-video me-2"
-                          style={{ color: "#006262" }}
-                        ></i>{" "}
-                        to start signing
-                      </p>
+                      <p className="lead">
+      {t('clickOnCameraIcon')}{" "}
+      <i
+        className="fa-solid fa-video me-2"
+        style={{ color: "#006262" }}
+      ></i>{" "}
+      {t('toStartSigning')}
+    </p>
                     )}
                   </>
                 )}
@@ -370,19 +372,17 @@ const ASLChat = () => {
                       }}
                       disableRestoreFocus
                     >
-                      <Typography sx={{ p: 1 }}>{`${
-                        isSigning ? "Close" : "Open"
-                      } Camera`}</Typography>
+                      <Typography sx={{ p: 1 }}>{t(isSigning ? "closeCamera" : "openCamera")}</Typography>
                     </Popover>
                   </button>
                   {gestureLabel && (
-                      <div className="go-button-container">
-                        <span className="current-word">Current Word: {gestureLabel}</span>
+                      <div className="go-button-container border-start border-end px-5">
+                        <span className="current-word">{t("currentWord")}: {gestureLabel}</span>
                         <button
                           className="btn camera-button-style btn-lg border border-3 rounded-3 ms-2"
                           onClick={handleGoClick}
                         >
-                          Go
+                          {t("goButton")}
                         </button>
                       </div>
                     )}
@@ -429,7 +429,7 @@ const ASLChat = () => {
                         }}
                         disableRestoreFocus
                       >
-                        <Typography sx={{ p: 1 }}>Fast Speed</Typography>
+                        <Typography sx={{ p: 1 }}>{t("fastSpeed")}</Typography>
                       </Popover>
                     </button>
 
@@ -462,7 +462,7 @@ const ASLChat = () => {
                       onClose={handlePopoverClose10sButton}
                       disableRestoreFocus
                     >
-                      <Typography sx={{ p: 1 }}>Medium Speed</Typography>
+                      <Typography sx={{ p: 1 }}>{t("mediumSpeed")}</Typography>
                     </Popover>
                     <button
                       type="button"
@@ -493,7 +493,7 @@ const ASLChat = () => {
                       onClose={handlePopoverClose15sButton}
                       disableRestoreFocus
                     >
-                      <Typography sx={{ p: 1 }}>Slow Speed</Typography>
+                      <Typography sx={{ p: 1 }}>{t("slowSpeed")}</Typography>
                     </Popover>
                   </div>
                 </div>
@@ -502,7 +502,7 @@ const ASLChat = () => {
           ) : (
             <div class="chat-placeholder rounded-3">
               <div class="centered-text lead p-3">
-                Click on a chat to preview messages
+                {t("ChatPlaceholder")}
               </div>
             </div>
           )}

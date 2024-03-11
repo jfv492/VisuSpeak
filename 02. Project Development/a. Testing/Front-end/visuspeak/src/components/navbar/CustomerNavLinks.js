@@ -1,14 +1,15 @@
 import React, { useEffect, useContext, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import User from "./User";
-import NotificationsList from "../notifications/NotificationList";
+import { useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext.js";
 import defaultProfilePicture from "../../assets/images/AccountSettingsHeadshot.jpg";
 import { setUserOffline } from "../../utils/UserPresence.js";
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase";
+import HowtoChatModal from "../customer/HowtoChatModal.js";
+import { useTranslation } from "react-i18next";
 
 const CustomerNavLinks = () => {
+  const { t } = useTranslation();
   const { currentUser, updateAccountType, updateOrganizationName } = useContext(AuthContext);
   let location = useLocation();
 
@@ -48,7 +49,10 @@ const CustomerNavLinks = () => {
         ></button>
       </div>
       <div class="offcanvas-body">
-        <ul class="navbar-nav nav nav-pills nav-pills-link-active-color ms-auto justify-content-end flex-grow-1 gap-2">
+        <ul class="navbar-nav nav nav-pills nav-pills-link-active-color ms-auto justify-content-end align-items-center flex-grow-1 gap-2">
+        <li class="nav-item">
+        <HowtoChatModal />
+          </li>
         <li class="nav-item">
             <button
               className="nav-link btn navbar-button-style btn-raised rounded-pill px-3"
@@ -58,7 +62,7 @@ const CustomerNavLinks = () => {
               <i
                 class="fa-solid fa-right-from-bracket me-2"
               ></i>
-              End Chat  
+              {t("endChat")}  
             </button>
           </li>
           <li class="nav-item">
@@ -85,7 +89,7 @@ const CustomerNavLinks = () => {
             </div>
           </li>
           <li class="nav-item lh-1 align-self-center">
-            <span className="fw-light fs-6">Hello</span>
+            <span className="fw-light fs-6">{t("Hello")} </span>
             <br />
             <strong className="fs-5">{localStorage.getItem("username")}</strong>
           </li>

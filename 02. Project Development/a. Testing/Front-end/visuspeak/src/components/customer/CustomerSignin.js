@@ -112,7 +112,7 @@ const CustomerSignin = (props) => {
             </div>
             <div className="modal-body">
               <div className="row g-3 d-flex flex-wrap">
-                <div className="fs-6">
+                <div className="fs-6 text-start">
                   <i className="fa-solid fa-circle-info me-2 fs-6"></i>Please enter your details
                 </div>
                 <div className="col-sm-6">

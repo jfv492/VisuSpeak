@@ -14,6 +14,7 @@ import { v4 as uuid } from "uuid";
 import { doc } from "firebase/firestore";
 import { db } from "../../firebase.js";
 import modelChatUrl from "../../Chat-env.js";
+import { useTranslation } from "react-i18next";
 
 const Input = ({
   onSendMessage,
@@ -22,6 +23,7 @@ const Input = ({
   immediateWord,
   onImmediateSend,
 }) => {
+  const { t } = useTranslation();
   const [text, setText] = useState("");
   const { currentUser } = useContext(AuthContext);
   const { data } = useContext(ChatContext);
@@ -179,7 +181,7 @@ const Input = ({
         </span>
         <textarea
           type="text"
-          placeholder="Your message..."
+          placeholder={`${t("yourMessage")}`}
           class="form-control chat-input"
           id="autoExpandingTextarea"
           onChange={(e) => setText(e.target.value)}

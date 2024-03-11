@@ -1,8 +1,10 @@
 import React from "react";
 import Popover from "@mui/material/Popover";
 import Typography from "@mui/material/Typography";
+import { useTranslation } from "react-i18next";
 
 const HowToModal = () => {
+  const { t } = useTranslation();
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handlePopoverOpen = (event) => {
@@ -49,7 +51,7 @@ const HowToModal = () => {
         onClose={handlePopoverClose}
         disableRestoreFocus
       >
-        <Typography sx={{ p: 1 }}>How-to use the chat</Typography>
+        <Typography sx={{ p: 1 }}>activatingASLMode</Typography>
       </Popover>
       <div
         class="modal fade"
@@ -66,7 +68,7 @@ const HowToModal = () => {
                   class="fa-solid fa-message me-2"
                   style={{ color: "#000000;" }}
                 ></i>
-                Help Section: ASL Interaction Feature
+                {t("helpSectionTitle")}
               </h1>
               <button
                 type="button"
@@ -76,78 +78,60 @@ const HowToModal = () => {
               ></button>
             </div>
             <div class="modal-body">
-              <h2>Help Section: ASL Interaction Feature</h2>
-              <h3>Activating ASL Mode</h3>
+              <h4>{t("activatingASLMode")}</h4>
               <p>
-                To interact using American Sign Language (ASL), first activate
-                the camera feature in the app. This allows you to sign words
-                directly into the camera for the AI model to recognize and
-                translate.
+              {t("toInteractUsingASLFirstActivate")}
               </p>
-              <h3>Steps for ASL Interaction</h3>
+              <hr/>
+              <h4>{t("stepsForASLInteraction")}</h4>
               <ol>
                 <li>
-                  <strong>Activate the Camera:</strong> Ensure your device's
-                  camera is enabled and positioned to capture your signing
-                  clearly.
+                  <strong>{t("activateCamera")}</strong> {t("ensureYourDevicesCamera")}
                 </li>
                 <li>
-                  <strong>Sign a Word:</strong> Refer to our{" "}
-                  <a href="#">list of supported words</a> and sign one of these
-                  words into the camera. Make sure your signs are clear and
-                  within the camera's view.
+                  <strong>{t("signWord")}</strong> {t("referToOur")}{" "}
+                  <a href="#">{t("listOfSupportedWords")}</a> {t("andSignOneOfTheseWords")}
                 </li>
                 <li>
-                  <strong>AI Recognition:</strong> Once you sign a word, our AI
-                  model will attempt to detect and predict the signed word.
+                  <strong>{t("aiRecognition")}</strong> {t("onceYouSignAWord")}
                 </li>
                 <li>
-                  <strong>Translation Display:</strong> The predicted word will
-                  be automatically translated from ASL to English and appear in
-                  the text input field of the chat.
+                  <strong>{t("translationDisplay")}</strong> {t("thePredictedWord")}
                 </li>
                 <li>
-                  <strong>Sending Messages:</strong> If the AI correctly
-                  predicts the word you signed, simply click the{" "}
-                  <strong>Send</strong> button to include it in your chat
-                  conversation.
+                  <strong>{t("sendingMessages")}</strong> {t("clickSendButton")}{" "}
+                  <strong>{t("sendButton")}</strong> {t("toIncludeInChat")}
                 </li>
               </ol>
-              <h3>Adjusting Recognition Speed</h3>
+              <hr/>
+              <h4>{t("adjustingRecognitionSpeed")}</h4>
               <p>
-                To accommodate various signing speeds, you can adjust the AI's
-                recognition timing:
+              {t("adjustingRecognitionSpeedDesc")}
               </p>
               <ul>
                 <li>
-                  <strong>Fast Timer (5s):</strong> Select this for quicker
-                  recognition. Ideal for experienced signers.
+                  <strong>{t("fastTimer")}</strong> {t("selectThisForQuicker")}
                 </li>
                 <li>
-                  <strong>Medium Timer (10s):</strong> This is the default
-                  setting, offering a balanced speed.
+                  <strong>{t("mediumTimer")}</strong> {t("thisIsTheDefault")}
                 </li>
                 <li>
-                  <strong>Slow Timer (15s):</strong> Choose this for a more
-                  relaxed recognition pace, allowing more time for signing.
+                  <strong>{t("slowTimer")}</strong> {t("chooseThisForMore")}
                 </li>
               </ul>
               <div class="tips">
-                <h3>Tips for Accurate Recognition</h3>
+                <h4>{t("tipsForAccurateRecognition")}</h4>
                 <ul>
                   <li>
-                    Ensure good lighting and a clear background to improve the
-                    AI's ability to recognize your signs.
+                  {t("ensureGoodLighting")}
                   </li>
                   <li>
-                    Practice the supported signs to become familiar with how the
-                    AI model recognizes different gestures.
+                  {t("practiceSupportedSigns")}
                   </li>
                 </ul>
               </div>
               <p>
-                For further assistance or to report any issues, please contact
-                our support team.
+              {t("forAssistance")}
               </p>
             </div>
           </div>

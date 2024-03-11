@@ -13,7 +13,7 @@ const Navbar = () => {
   return (
     <nav class="navbar navbar-expand-lg bg-body-tertiary shadow px-3">
       <div class="container-fluid">
-        <Link className={`navbar-brand pe-3 ${localStorage.getItem("accountType") !== null && "border-end"} `} to="/">
+        <Link className={`navbar-brand pe-3 ${localStorage.getItem("accountType") !== null && "border-end"} `} to={`${accountType === "guest" ? "/chat" : "/"}`}>
           <img src={ColourLogo} className="navbar-logo" alt="VisuSpeak Logo" height="45"/>
         </Link>
         {(organizationName !== null || organizationName !== "") && organizationName} 
