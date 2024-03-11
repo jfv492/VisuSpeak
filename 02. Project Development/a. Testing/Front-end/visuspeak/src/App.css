@@ -512,6 +512,10 @@ body {
   scrollbar-color: darkgrey transparent;
 }
 
+.admin-list {
+  overflow-x: auto;
+}
+
 .chat-list:hover {
   background-color: #006262;
   color: #ffffff;

@@ -13,8 +13,11 @@ import {
   getDocs,
 } from "firebase/firestore";
 import { ChatContext } from "../../context/ChatContext.js";
+import NoNotifications from "../../assets/icons/NoNotifications.png";
+import { useTranslation } from "react-i18next";
 
 const NotificationsList = ({ userId }) => {
+  const { t } = useTranslation();
   const [notifications, setNotifications] = useState([]);
   const { dispatch } = useContext(ChatContext);
   const [selectedChat, setSelectedChat] = useState(null);
@@ -118,7 +121,7 @@ const NotificationsList = ({ userId }) => {
                       style={{ width: "20rem" }}
                     >
                       <span>
-                        New Message from <b>{notification.senderName}</b>:
+                      {t("NewMessageFrom")} <b>{notification.senderName}</b>:
                       </span>
                       <br />
                       {notification.text}
@@ -130,9 +133,6 @@ const NotificationsList = ({ userId }) => {
                       <i class="fa-solid fa-check me-2"></i>
                       Mark as Read
                     </div>
-                    {/* <button onClick={() => handleSelect(notification.senderName, notification.senderId)}>
-              Go to chat
-            </button> */}
                   </div>
                   <hr class="dropdown-divider" />
                 </li>
@@ -140,7 +140,11 @@ const NotificationsList = ({ userId }) => {
             ))}
           </>
         ) : (
-          <div className="fs-6 text-center">No new messages</div>
+          <div className="d-flex fs-6 text-center align-items-center px-2">
+            <span>{t("NoNewMessages")}</span>
+
+            {/* <img src={NoNotifications} height="200" className="no-notifications-icon"/> */}
+          </div>
         )}
       </ul>
     </>

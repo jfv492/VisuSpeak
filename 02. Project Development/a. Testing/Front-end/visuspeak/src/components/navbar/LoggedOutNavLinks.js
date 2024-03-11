@@ -3,13 +3,12 @@ import { Link, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 const NavButton = () => {
+  const { t } = useTranslation();
   let location = useLocation();
 
   useEffect(() => {
     console.log(location.pathname);
   }, [location]);
-
-  const { t } = useTranslation();
 
   return (
     <div
@@ -43,12 +42,12 @@ const NavButton = () => {
             <ul class="dropdown-menu">
               <li>
                 <Link class="dropdown-item" to="/login">
-                  Login
+                  {t("Login")}
                 </Link>
               </li>
               <li>
                 <Link class="dropdown-item" to="/signup">
-                  Sign Up
+                {t("Sign-up")}
                 </Link>
               </li>
             </ul>

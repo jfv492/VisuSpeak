@@ -10,6 +10,7 @@ import Typography from "@mui/material/Typography";
 import HowToModal from "../components/asl_chat/HowToModal.js";
 import modelChatUrl from "../Chat-env.js";
 import { useTranslation } from "react-i18next";
+import AdminList from "../components/customer/AdminList.js";
 
 const ASLChat = () => {
   const { t } = useTranslation();
@@ -237,6 +238,7 @@ const ASLChat = () => {
           {!displayName ? (
             <div className="asl-chats rounded-3 my-3">
               <Search />
+              <AdminList />
               <Chats />
             </div>
           ) : (
@@ -313,13 +315,13 @@ const ASLChat = () => {
                       </div>
                     ) : (
                       <p className="lead">
-      {t('clickOnCameraIcon')}{" "}
-      <i
-        className="fa-solid fa-video me-2"
-        style={{ color: "#006262" }}
-      ></i>{" "}
-      {t('toStartSigning')}
-    </p>
+                        {t("clickOnCameraIcon")}{" "}
+                        <i
+                          className="fa-solid fa-video me-2"
+                          style={{ color: "#006262" }}
+                        ></i>{" "}
+                        {t("toStartSigning")}
+                      </p>
                     )}
                   </>
                 )}
@@ -372,20 +374,24 @@ const ASLChat = () => {
                       }}
                       disableRestoreFocus
                     >
-                      <Typography sx={{ p: 1 }}>{t(isSigning ? "closeCamera" : "openCamera")}</Typography>
+                      <Typography sx={{ p: 1 }}>
+                        {t(isSigning ? "closeCamera" : "openCamera")}
+                      </Typography>
                     </Popover>
                   </button>
                   {gestureLabel && (
-                      <div className="go-button-container border-start border-end px-5">
-                        <span className="current-word">{t("currentWord")}: {gestureLabel}</span>
-                        <button
-                          className="btn camera-button-style btn-lg border border-3 rounded-3 ms-2"
-                          onClick={handleGoClick}
-                        >
-                          {t("goButton")}
-                        </button>
-                      </div>
-                    )}
+                    <div className="go-button-container border-start border-end px-5">
+                      <span className="current-word">
+                        {t("currentWord")}: {gestureLabel}
+                      </span>
+                      <button
+                        className="btn camera-button-style btn-lg border border-3 rounded-3 ms-2"
+                        onClick={handleGoClick}
+                      >
+                        {t("goButton")}
+                      </button>
+                    </div>
+                  )}
                   <div className="interval-style">
                     {/* <input
                 type="range"
@@ -501,9 +507,7 @@ const ASLChat = () => {
             </>
           ) : (
             <div class="chat-placeholder rounded-3">
-              <div class="centered-text lead p-3">
-                {t("ChatPlaceholder")}
-              </div>
+              <div class="centered-text lead p-3">{t("ChatPlaceholder")}</div>
             </div>
           )}
         </div>
