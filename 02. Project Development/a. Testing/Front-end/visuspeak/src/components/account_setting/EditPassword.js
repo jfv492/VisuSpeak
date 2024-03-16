@@ -2,14 +2,16 @@ import React, { useState, useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../../firebase.js";
 import { AuthContext } from "../../context/AuthContext.js";
+import { ChatContext } from "../../context/ChatContext.js";
 import { setUserOffline } from "../../utils/UserPresence.js";
 import { updatePassword, signOut } from "firebase/auth";
 import Alert from "@mui/material/Alert";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 
 const SettingsEditAccountInfo = () => {
   const { t } = useTranslation();
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser, updateAccountType, updateOrganizationName } = useContext(AuthContext);
+  const { dispatch } = useContext(ChatContext);
   const [editMode, setEditMode] = useState(false);
   const [formData, setFormData] = useState({
     password: "",
@@ -40,6 +42,9 @@ const SettingsEditAccountInfo = () => {
       await setUserOffline(currentUser.uid);
     }
     // Clear local storage and sign out
+    dispatch({ type: "RESET_CHAT" });
+    updateAccountType("");
+    updateOrganizationName("");
     localStorage.clear();
     await signOut(auth);
     navigate("/");
@@ -54,7 +59,7 @@ const SettingsEditAccountInfo = () => {
 
     if (formData.password !== formData.confirmPassword) {
       formIsValid = false;
-      setError(`${t('PasswordsMismatchError')}`);
+      setError(`${t("PasswordsMismatchError")}`);
     }
 
     if (
@@ -64,12 +69,12 @@ const SettingsEditAccountInfo = () => {
       formData.confirmPassword == ""
     ) {
       formIsValid = false;
-      setError(`${t('FieldsEmptyError')}`);
+      setError(`${t("FieldsEmptyError")}`);
     }
 
-    if (0 < formData.password <= 6 || 0 < formData.confirmPassword <= 6) {
+    if (formData.password <= 6 || formData.confirmPassword <= 6) {
       formIsValid = false;
-      setError(`${t('PasswordLengthError')}`);
+      setError(`${t("PasswordLengthError")}`);
     }
 
     try {
@@ -80,15 +85,14 @@ const SettingsEditAccountInfo = () => {
           setSuccess("Account information updated successfully.");
           setEditMode(false);
           handleSignOut();
+          
         } catch (error) {
-          setError(
-            `${t('PasswordChangeError')}`
-          );
+          setError(`${t("PasswordChangeError")}`);
           console.error(error);
         }
       }
     } catch (error) {
-      setError(`${t('AccountUpdateError')}`);
+      setError(`${t("AccountUpdateError")}`);
       console.error(error);
     }
   };
@@ -122,51 +126,65 @@ const SettingsEditAccountInfo = () => {
   return (
     <>
       <div className="d-flex align-items-center px-2">
-        <h4>{t('ChangePassword')}</h4>
+        <h4>{t("ChangePassword")}</h4>
         <div className="ms-auto">
           {!editMode && (
-            <button type="button" className="btn settings-cancel-button " onClick={handleEdit}>
-              {t('Edit')}
+            <button
+              type="button"
+              className="btn settings-cancel-button "
+              onClick={handleEdit}
+            >
+              {t("Edit")}
             </button>
           )}
         </div>
       </div>
       <form className="settings-form p-3 rounded-3" onSubmit={handleSubmit}>
         <div className="row ">
-          {formField("password", `${t('PasswordLabel')}`, "password", false, !editMode)}
+          {formField(
+            "password",
+            `${t("PasswordLabel")}`,
+            "password",
+            false,
+            !editMode
+          )}
           {formField(
             "confirmPassword",
-            `${t('ConfirmPasswordLabel')}`,
+            `${t("ConfirmPasswordLabel")}`,
             "password",
             false,
             !editMode
           )}
         </div>
-        <div className="d-flex my-2 justify-content-between align-items-center" style={{minHeight: "50px"}}>
-        <div className="">
+        <div
+          className="d-flex my-2 justify-content-between align-items-center"
+          style={{ minHeight: "50px" }}
+        >
+          <div className="">
             {error && <Alert severity="error">{error}</Alert>}
             {success && <Alert severity="success">{success}</Alert>}
           </div>
           <div className="">
             {editMode && (
               <>
-                <button type="submit" className="btn account-button-style btn-raised rounded-pill">
-                {t('SaveChanges')}
+                <button
+                  type="submit"
+                  className="btn account-button-style btn-raised rounded-pill"
+                >
+                  {t("SaveChanges")}
                 </button>
                 <button
                   type="button"
                   className="btn settings-cancel-button"
                   onClick={handleCancel}
                 >
-                  {t('Cancel')}
+                  {t("Cancel")}
                 </button>
               </>
             )}
           </div>
-          
         </div>
       </form>
-      
     </>
   );
 };
