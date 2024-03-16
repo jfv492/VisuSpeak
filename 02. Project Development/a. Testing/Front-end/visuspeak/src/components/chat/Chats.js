@@ -133,7 +133,7 @@ const Chats = () => {
   };
 
   return (
-    <>
+    <div className="chat-page-container">
       <div className="list-group list-group-flush rounded-3 admin-chat-list">
         {chatsWithStatus.map((chat) => {
           const date = chat.date
@@ -237,7 +237,7 @@ const Chats = () => {
           );
         })}
       </div>
-    </>
+    </div>
   );
 };
 

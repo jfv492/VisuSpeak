@@ -437,6 +437,8 @@ body {
 
 .content-wrap {
   flex: 1;
+  min-height: 100vh;
+  background-color: #eee;
   /* padding-bottom: 100px; */
 }
 
@@ -1255,8 +1257,8 @@ iframe {
 
 /* ***************ADMIN CHAT STYLE*************** */
 .admin-chat-container {
-  min-height: 100vh;
-  min-width: 95%;
+  min-height: 90vh;
+  /* min-width: 95%; */
   justify-content: center;
   align-items: center;
   border-color: #ddd;
@@ -1320,7 +1322,7 @@ iframe {
 .resizable-right-panel {
   flex-grow: 1;
   overflow: auto;
-  height: 100vh;
+  /* height: 100vh; */
   display: flex;
   flex-direction: column;
 }
@@ -1361,7 +1363,7 @@ iframe {
 
 /* ***************ASL CHAT STYLE*************** */
 .asl-chat-container {
-  height: 100vh;
+  height: 90vh;
   justify-content: center;
   align-items: center;
   border-color: #ddd;
