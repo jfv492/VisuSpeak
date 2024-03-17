@@ -1,19 +1,20 @@
 import * as React from "react";
 import HowToAdminChatModal from "./HowToAdminChatModal.js";
 import HowToEditAccountSettingsModal from "./HowToEditAccountSettingsModal.js"
+import { useTranslation } from "react-i18next";
 
 const AdminUserSupport = (props) => {
+  const { t } = useTranslation();
   return (
     <>
       <div className="support-cards-container">
-        <h3>Admin User Support</h3>
+        <h3>{t("AdminUserSupport")}</h3>
         <div class="row mt-2 support-grid">
             <div class="col p-2 card resources-grid-item" aria-hidden="true">
                 <div class="card-body">
-                <h4 class="card-title border-bottom">How to Start a Chat</h4>
+                <h4 class="card-title border-bottom">{t("HowToStartAChat")}</h4>
                 <p class="card-text py-3 large-text-style">
-                    Learn how to start a conversation with an ASL User so you can assist 
-                    them with their customer service needs.
+                  {t("HowToStartAChatDescription")}
                 </p>
                 <HowToAdminChatModal />
                 </div>
@@ -21,9 +22,9 @@ const AdminUserSupport = (props) => {
 
           <div class="col p-2 card resources-grid-item" aria-hidden="true">
             <div class="card-body">
-            <h4 class="card-title border-bottom">How to Edit Account Settings</h4>
+            <h4 class="card-title border-bottom">{t("HowToEditAccountSettings")}</h4>
               <p class="card-text py-3 large-text-style">
-                Learn how to edit your account setttings like passwords and profile picture from the Admin Dashboard. 
+                {t("HowToEditAccountSettingsDescription")} 
               </p>
               <HowToEditAccountSettingsModal />
             </div>

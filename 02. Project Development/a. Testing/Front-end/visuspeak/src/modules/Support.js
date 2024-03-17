@@ -4,8 +4,10 @@ import { useLocation } from "react-router-dom"; // Hook from React Router for ac
 import ASLUserSupport from "../components/support/ASLUserSupport.js";
 import ASLTranslationOptions from "../components/support/ASLTranslationOptions.js";
 import AdminUserSupport from "../components/support/AdminUserSupport.js";
+import { useTranslation } from "react-i18next";
 
 const Support = () => {
+  const { t } = useTranslation();
   let location = useLocation();
 
   useEffect(() => {
@@ -14,12 +16,10 @@ const Support = () => {
   return (
     <div>
       <div class="container my-5">
-        <h1> Support </h1>
+        <h1> {t("SupportPage")} </h1>
         <div className="row about-us-sections align-items-center">
           <div className="row container my-5 px-4">
-            Welcome to VisuSpeak's support page. Whether you are an ASL User here for clarification on how to use the chat, 
-            or an Admin User wanting to know more about how to use the applications features, you can find support suited for 
-            every users needs. Please see below how you can use some of VisuSpeak's common features. 
+            {t("SupportPageDescription")} 
           </div>
         </div>
         <hr />

@@ -1,10 +1,12 @@
 import * as React from "react";
+import { useTranslation } from "react-i18next";
 
 const ASLTranslationOptions = () => {
+  const { t } = useTranslation();
   return (
     <>
       <div className="support-cards-container">
-        <h3>Current ASL Translation Capabilities</h3>
+        <h3>{t("CurrentASlTranslation")}</h3>
         <div class="accordion accordion-flush" id="accordionPanelsStayOpenExample">
           <div class="accordion-item">
             <h2 class="accordion-header">
@@ -16,7 +18,7 @@ const ASLTranslationOptions = () => {
                 aria-expanded="false"
                 aria-controls="flush-collapseOne"
               >
-                Letters
+                {t("ASLLetters")}
               </button>
             </h2>
             <div
@@ -25,7 +27,7 @@ const ASLTranslationOptions = () => {
               data-bs-parent="#accordionFlushExample"
             >
               <div class="accordion-body">
-                All letters in the English Alphabet (A-Z).
+                {t("ASLLettersDescription")}
               </div>
             </div>
           </div>
@@ -39,7 +41,7 @@ const ASLTranslationOptions = () => {
                 aria-expanded="false"
                 aria-controls="flush-collapseTwo"
               >
-                Words
+                {t("ASLWords")}
               </button>
             </h2>
             <div
