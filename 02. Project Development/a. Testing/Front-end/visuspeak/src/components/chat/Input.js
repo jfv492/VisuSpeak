@@ -22,6 +22,7 @@ const Input = ({
   fetchInterval,
   immediateWord,
   onImmediateSend,
+  fingerspellingActive,
 }) => {
   const { t } = useTranslation();
   const [text, setText] = useState("");
@@ -35,11 +36,12 @@ const Input = ({
 
   useEffect(() => {
     if (immediateWord) {
-      setText((prev) => prev + " " + immediateWord);
-      // handleSend(); // You might adjust handleSend to optionally skip clearing the text if you wish
+      // Check if fingerspelling is active to decide whether to add a space
+      const wordToAdd = fingerspellingActive ? immediateWord : ` ${immediateWord}`;
+      setText((prev) => prev + wordToAdd);
       onImmediateSend(); // Call this to indicate the immediate send operation is complete
     }
-  }, [immediateWord, onImmediateSend]);
+  }, [immediateWord, onImmediateSend, fingerspellingActive]);
 
   const { listen, listening, stop } = useSpeechRecognition({
     onResult: (result) => {
@@ -142,7 +144,9 @@ const Input = ({
           .then((data) => {
             if (data.word && data.word !== lastFetchedWord) {
               setLastFetchedWord(data.word);
-              setText((prev) => prev + " " + data.word);
+              // Check if fingerspelling is active to decide whether to add a space
+              const wordToAdd = fingerspellingActive ? data.word : ` ${data.word}`;
+              setText((prev) => prev + wordToAdd);
               setIsHandDetected(true);
             } else {
               setIsHandDetected(false);
@@ -156,7 +160,7 @@ const Input = ({
     }
 
     return () => clearInterval(interval);
-  }, [isFetchingEnabled, fetchInterval, lastFetchedWord]);
+  }, [isFetchingEnabled, fetchInterval, lastFetchedWord, fingerspellingActive]);
 
   useEffect(() => {
     return () => {
