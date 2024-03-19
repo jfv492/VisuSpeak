@@ -1,6 +1,8 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 const HowToSignIntoCameraModal = () => {
+  const { t } = useTranslation();
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const open = Boolean(anchorEl);
@@ -12,7 +14,7 @@ const HowToSignIntoCameraModal = () => {
         data-bs-toggle="modal"
         data-bs-target="#signIntoCameraModal"
       >
-        Learn More
+        {t("SupportLearnMoreButton")} 
       </button>
 
       <div
@@ -30,7 +32,7 @@ const HowToSignIntoCameraModal = () => {
                   class="fa-solid fa-message me-2"
                   style={{ color: "#000000;" }}
                 ></i>
-                How-to Use the Camera for Signing
+                {t("ASLUserModalHeading2")}
               </h1>
               <button
                 type="button"
@@ -42,31 +44,26 @@ const HowToSignIntoCameraModal = () => {
             <div class="modal-body">
               <ol>
                 <li>
-                    Once you enter a chat with an admin, there will be a section on the right for hand gesture input.  
+                  {t("ASLUserCameraDescription1")}  
                 </li>
                 <li>
-                    Click the camera icon within this section to open your camera. <br/>
-                    <i>Please note, you might need to allow VisuSpeak to access your camera.</i>
+                  {t("ASLUserCameraDescription2")}  <br/>
+                    <i>{t("ASLUserCameraDescription2Sub1")} </i>
                 </li>
                 <li>
-                    Once the camera opens, you may begin signing into the camera. There will be outlines on your hand to 
-                    indicate the system is actively predicting your gestures. Within this screen, you will see what words 
-                    the system is predicting in real time.   
+                  {t("ASLUserCameraDescription3")}    
                 </li>
                 <li>
-                    There is a timer that is present on the screen, when this timer reaches 0, the predicted input will appear 
-                    in the text input field so you may edit, delete, or send it. You have an option to change the time it counts 
-                    down from, or you can simply press the accept button instead of waiting for the timer to complete. 
+                  {t("ASLUserCameraDescription4")} 
                 </li>
                 <li>
-                    Once you are satisified with the message, you may click send. 
+                  {t("ASLUserCameraDescription5")}  
                 </li>
                 <li>
-                    At any point, if you no longer wish to use the ASL prediction feature, you may close the camera and continue to 
-                    send message via text or audio input.  
+                  {t("ASLUserCameraDescription6")}  
                 </li>
                 <li>
-                    If you wish to repoen the camera, simply click the camera icon again.   
+                  {t("ASLUserCameraDescription7")}   
                 </li>
               </ol>
             </div>

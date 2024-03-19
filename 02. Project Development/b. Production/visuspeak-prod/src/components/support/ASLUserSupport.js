@@ -1,19 +1,20 @@
 import * as React from "react";
 import HowToASLChatModal from "./HowToASLChatModal.js";
 import HowToSignIntoCameraModal from "./HowToSignIntoCameraModal.js"
+import { useTranslation } from "react-i18next";
 
 const ASLUserSupport = (props) => {
+  const { t } = useTranslation();
   return (
     <>
       <div className="support-cards-container-odd">
-        <h3>ASL User Support</h3>
+        <h3>{t("ASLUserSupport")}</h3>
         <div class="row mt-2 support-grid">
           <div class="col p-2 card resources-grid-item" aria-hidden="true">
             <div class="card-body">
-              <h4 class="card-title border-bottom">How to Start a Chat</h4>
+              <h4 class="card-title border-bottom">{t("HowToStartAChat")}</h4>
               <p class="card-text py-3 large-text-style">
-                Learn how to start a conversation with an Admin so they can assist 
-                you with your customer service needs.
+                {t("HowToStartAChatUserDescription")}
               </p>
               <HowToASLChatModal />
             </div>
@@ -21,9 +22,9 @@ const ASLUserSupport = (props) => {
 
           <div class="col p-2 card resources-grid-item" aria-hidden="true">
             <div class="card-body">
-              <h4 class="card-title border-bottom">How to Use the Camera to Sign</h4>
+              <h4 class="card-title border-bottom">{t("HowToUseTheCameraToSign")}</h4>
               <p class="card-text py-3 large-text-style">
-                Learn how to open the camera, allow permissions, and sign into the camera for sending ASL spoken messages.
+                {t("HowToUseTheCameraToSignDescription")}
               </p>
               <HowToSignIntoCameraModal />
             </div>

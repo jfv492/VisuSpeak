@@ -32,11 +32,16 @@ const ASLChat = () => {
 
   const [countdown, setCountdown] = useState(fetchInterval / 1000); // Countdown timer
   const [iconClass, setIconClass] = useState("");
+  const [fingerspellingActive, setFingerspellingActive] = useState(false);
+
+  const toggleFingerspelling = () => {
+    setFingerspellingActive((prev) => !prev);
+  };
 
   // Function to reset the counter and send the immediate word
   const handleGoClick = () => {
     setImmediateWord(gestureLabel);
-    setCountdown(fetchInterval / 1000); 
+    setCountdown(fetchInterval / 1000);
   };
 
   // Method to be passed to InputArea to clear immediateWord after sending
@@ -252,6 +257,7 @@ const ASLChat = () => {
                   fetchInterval={fetchInterval}
                   immediateWord={immediateWord}
                   onImmediateSend={clearImmediateWord}
+                  fingerspellingActive={fingerspellingActive}
                 />
               </div>
             </>
@@ -288,6 +294,18 @@ const ASLChat = () => {
                       }}
                     ></i>
                     <span className="ms-1">{countdown} s</span>
+                  </div>
+                  <div className="d-flex align-items-center gap-2 lead">
+                    <span>Words</span>
+                    <label class="switch">
+                      <input
+                        type="checkbox"
+                        checked={fingerspellingActive}
+                        onChange={toggleFingerspelling}
+                      />
+                      <span class="slider round"></span>
+                    </label>
+                    <span>Fingerspelling</span>
                   </div>
                   <HowToModal />
                 </div>
@@ -379,18 +397,22 @@ const ASLChat = () => {
                       </Typography>
                     </Popover>
                   </button>
-                  {gestureLabel && (
-                    <div className="go-button-container border-start border-end px-5">
-                      <span className="current-word">
-                        {t("currentWord")}: {gestureLabel}
-                      </span>
-                      <button
-                        className="btn camera-button-style btn-lg border border-3 rounded-3 ms-2"
-                        onClick={handleGoClick}
-                      >
-                        {t("goButton")}
-                      </button>
-                    </div>
+                  {isSigning && (
+                    <>
+                      {gestureLabel && (
+                        <div className="go-button-container border-start border-end px-5">
+                          <span className="current-word">
+                            {t("currentWord")}: {gestureLabel}
+                          </span>
+                          <button
+                            className="btn camera-button-style btn-lg border border-3 rounded-3 ms-2"
+                            onClick={handleGoClick}
+                          >
+                            {t("goButton")}
+                          </button>
+                        </div>
+                      )}
+                    </>
                   )}
                   <div className="interval-style">
                     {/* <input

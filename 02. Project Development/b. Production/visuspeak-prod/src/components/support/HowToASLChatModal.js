@@ -1,6 +1,8 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 const HowToASLChatModal = () => {
+  const { t } = useTranslation();
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const open = Boolean(anchorEl);
@@ -12,7 +14,7 @@ const HowToASLChatModal = () => {
         data-bs-toggle="modal"
         data-bs-target="#aslStartChatModal"
       >
-        Learn More
+        {t("SupportLearnMoreButton")} 
       </button>
 
       <div
@@ -30,7 +32,7 @@ const HowToASLChatModal = () => {
                   class="fa-solid fa-message me-2"
                   style={{ color: "#000000;" }}
                 ></i>
-                How-to Start a Chat as an ASL User
+                {t("ASLUserModalHeading1")}
               </h1>
               <button
                 type="button"
@@ -42,26 +44,25 @@ const HowToASLChatModal = () => {
             <div class="modal-body">
               <ol>
                 <li>
-                  Go to the "Home" page by clicking the VisuSpeak Logo in the top left corner of the page. 
+                  {t("ASLUSerChatSupportDescription1")} 
                 </li>
                 <li>
-                    Click the Start Conversation button. 
+                  {t("ASLUSerChatSupportDescription2")}  
                 </li>
                 <li>
-                    You will be prompted to fill in your first and last name. 
+                  {t("ASLUSerChatSupportDescription3")} 
                 </li>
                 <li>
-                    Enter the organization name the admin is employed at. 
+                  {t("ASLUSerChatSupportDescription4")}  
                 </li>
                 <li>
-                    Next, click the name of the admin you wish to start a chat with.  
+                  {t("ASLUSerChatSupportDescription5")}  
                 </li>
                 <li>
-                    You will enter the chat interface and can begin chatting with the admin. You can send 
-                    messages to the admin user using the various input methods (text, audio, signing). 
+                  {t("ASLUSerChatSupportDescription6")}  
                 </li>
                 <li>
-                    When you are done chatting, you can simply exit the chat page.  
+                  {t("ASLUSerChatSupportDescription7")}  
                 </li>
               </ol>
             </div>

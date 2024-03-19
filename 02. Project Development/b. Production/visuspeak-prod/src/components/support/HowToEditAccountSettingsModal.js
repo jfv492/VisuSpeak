@@ -1,6 +1,8 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 const HowToEditAccountSettingsModal = () => {
+  const { t } = useTranslation();
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const open = Boolean(anchorEl);
@@ -12,7 +14,7 @@ const HowToEditAccountSettingsModal = () => {
         data-bs-toggle="modal"
         data-bs-target="#editAccountSettingsModal"
       >
-        Learn More
+        {t("SupportLearnMoreButton")} 
       </button>
 
       <div
@@ -30,7 +32,7 @@ const HowToEditAccountSettingsModal = () => {
                   class="fa-solid fa-message me-2"
                   style={{ color: "#000000;" }}
                 ></i>
-                How-to Edit Account Settings
+                {t("AdminSupportModalHeading2")}
               </h1>
               <button
                 type="button"
@@ -42,40 +44,40 @@ const HowToEditAccountSettingsModal = () => {
             <div class="modal-body">
               <ol>
                 <li>
-                    Click your username in the top right corner, then click "Account Settings". 
+                  {t("AdminAccountSupportModalDescription1")} 
                 </li>
                 <li>
-                    To change your profile picture:
+                  {t("AdminAccountSupportModalDescription2")} 
                 </li>
 
                 <ol>
                     <li>
-                        Click the camera icon in the bottom right corner of the profile picture placeholder. 
+                      {t("AdminAccountSupportModalDescription2Sub1")} 
                     </li>
                     <li>
-                        This will open up your file explorer. Locate the desired photo you wish to upload, click it, then click open.
+                      {t("AdminAccountSupportModalDescription2Sub2")} 
                     </li>
                     <li>
-                        This will upload your new profile picture, and it should load into the placeholder.  
+                      {t("AdminAccountSupportModalDescription2Sub3")}   
                     </li>
                 </ol>
 
                 <li>
-                    To change your password:
+                  {t("AdminAccountSupportModalDescription3")} 
                 </li>
 
                 <ol>
                     <li>
-                        Scroll to the "Edit Password" section, and click the edit button located beside this title. 
+                      {t("AdminAccountSupportModalDescription3Sub1")} 
                     </li>
                     <li>
-                        This will enable the text fields, and allow you to type in a new password. 
+                      {t("AdminAccountSupportModalDescription3Sub2")}  
                     </li>
                     <li>
-                        Type the new password in the password field as well as the confirm password field; ensure these are the same.  
+                      {t("AdminAccountSupportModalDescription3Sub3")}   
                     </li>
                     <li>
-                        Once you are done, click Save. Alternatively, you may hit Cancel instead if you choose not to change your password.   
+                      {t("AdminAccountSupportModalDescription3Sub4")}    
                     </li>
                 </ol>
               </ol>

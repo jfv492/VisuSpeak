@@ -438,7 +438,7 @@ body {
 .content-wrap {
   flex: 1;
   min-height: 100vh;
-  background-color: #eee;
+  /* background-color: #eee; */
   /* padding-bottom: 100px; */
 }
 
