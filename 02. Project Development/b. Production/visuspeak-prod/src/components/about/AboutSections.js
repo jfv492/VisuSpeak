@@ -1,58 +1,60 @@
 import React from "react";
-import Hands from "../../assets/images/Hands.jpg";
-import ConversationImage from "../../assets/images/Conversation.jpg";
 import { useTranslation } from 'react-i18next';
+import '../../App.css';
 
 const AboutSections = () => {
   const { t } = useTranslation();
   return (
     <div>
-      <div class="row about-us-sections align-items-center ">
-        <div class="col-sm-4">
-          <img
-            src={Hands}
-            className="rounded-4 mx-auto d-block"
-            alt="..."
-            width="100%"
-            style={{ justifyContent: "end" }}
-          /> 
+      <div className="row about-us-sections align-items-center ">
+        <div className="col-sm-4">
+          <iframe
+            src="https://www.youtube.com/embed/hrNCJlUDN3A?&rel=0"
+            title="YouTube video player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            style={{ width: '100%', height: '100%', aspectRatio: '16 / 9', borderRadius: '15px' }}
+          ></iframe>
         </div>
-        <div class="col-sm-8 lead">
-          <h3 class="about-us-headers border-bottom pb-2">{t('Project Idea')}</h3>
+        <div className="col-sm-8 lead">
+          <h3 className="about-us-headers border-bottom pb-2">{t('Project Idea')}</h3>
           {t('Project Idea Description')}
         </div>
       </div>
       <hr />
-      <div class="row about-us-sections align-items-center row-reverse rounded-4">
-        <div class="col-sm-4">
-          <img
-            src={ConversationImage}
-            className="rounded-4 mx-auto d-block"
-            alt="..."
-            width="100%"
-            style={{ justifyContent: "end" }}
-          />
+      <div className="row about-us-sections align-items-center row-reverse rounded-4">
+        <div className="col-sm-4">
+          <iframe
+            src="https://www.youtube.com/embed/mMeU9zoFOsM?&rel=0"
+            title="YouTube video player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            style={{ width: '100%', height: '100%', aspectRatio: '16 / 9', borderRadius: '15px' }}
+          ></iframe>
         </div>
-        <div class="col-sm-8 lead">
-          <h3 class="about-us-headers border-bottom pb-2">
-          {t('Project Background')}
+        <div className="col-sm-8 lead">
+          <h3 className="about-us-headers border-bottom pb-2">
+            {t('Project Background')}
           </h3>
           {t('Project Background Description')}
         </div>
       </div>
       <hr />
-      <div class="row about-us-sections align-items-center">
-        <div class="col-sm-4">
-          <img
-            src={Hands}
-            className="rounded-4 mx-auto d-block"
-            alt="..."
-            width="100%"
-            style={{ justifyContent: "end" }}
-          />
+      <div className="row about-us-sections align-items-center">
+        <div className="col-sm-4">
+          <iframe
+            src="https://www.youtube.com/embed/wHkPcFh8ni0?&rel=0"
+            title="YouTube video player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            style={{ width: '100%', height: '100%', aspectRatio: '16 / 9', borderRadius: '15px' }}
+          ></iframe>
         </div>
-        <div class="col-sm-8 lead">
-          <h3 class="about-us-headers border-bottom pb-2"> {t('About VisuSpeak')}</h3>
+        <div className="col-sm-8 lead">
+          <h3 className="about-us-headers border-bottom pb-2"> {t('About VisuSpeak')}</h3>
           {t('About VisuSpeak Description')}
         </div>
       </div>
