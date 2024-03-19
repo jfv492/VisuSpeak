@@ -52,7 +52,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "server": "nodemon server/server.js",
-    "all": "concurrently \"react-scripts start\" \"nodemon server/server.js\"",
+    "all": "concurrently \"react-scripts start\"",
     "dev": "vite",
     "buildvite": "vite build",
     "preview": "vite preview"

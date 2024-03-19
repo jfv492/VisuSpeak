@@ -79,13 +79,14 @@ const Dashboard = () => {
 
   return (
     <>
-      <div class="container">
-        <div class="dashboard-header text-start mt-4 mb-3">
+      <div className="background-container">
+      <div className="container account-settings-form shadow-lg rounded-4 p-2">
+        <div class="dashboard-header text-start p-2 rounded-3">
           <h1 class="greeting">Hi, {localStorage.getItem("username")}</h1>
           <div className="date-styling">{formatDate()}</div>
         </div>
 
-        <div class="row mb-4">
+        <div class="row my-4">
           <div class="col-sm-4">
             <div class="overview-box bg-light">
               <h2>{t("AdminUsers")}</h2>
@@ -158,6 +159,7 @@ const Dashboard = () => {
           <p>10 Slides</p>
         </div> */}
       </div>
+    </div>
     </>
   );
 };

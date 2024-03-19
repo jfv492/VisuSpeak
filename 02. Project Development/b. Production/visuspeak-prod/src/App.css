@@ -1689,7 +1689,7 @@ iframe {
 }
   
 
-/* ***************Dashboard PAGE STYLE*************** */
+/* ***************DASHBOARD PAGE STYLE*************** */
 .user-list-item {
   display: flex;
   align-items: center;
@@ -1714,9 +1714,14 @@ h5 {
   font-weight: bold;
   margin-bottom: 1rem;
 }
-/* .admin-list, .guest-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 1rem;
-} */
+
+.dashboard-header {
+  background-color: #eee;
+}
+
+.overview-box {
+  background-color: #eee !important;
+  padding: 10px;
+  height: 30vh;
+  overflow-y: auto;
+}
