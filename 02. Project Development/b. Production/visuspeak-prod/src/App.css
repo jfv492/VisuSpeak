@@ -1278,7 +1278,8 @@ iframe {
 
 .admin-chat-list {
   background: white;
-  max-height: 610px;
+  /* max-height: 100%; */
+  flex-grow: 1;
   overflow-y: auto;
 }
 
@@ -1722,6 +1723,61 @@ h5 {
 .overview-box {
   background-color: #eee !important;
   padding: 10px;
-  height: 30vh;
+  height: 40vh;
   overflow-y: auto;
 }
+
+/* ***************USER CARD STYLE*************** */
+.user-card {
+  position: absolute;
+  width: 100%;
+  padding: 10px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  display: none; /* initially hidden */
+  z-index: 10; /* ensure it's above other items */
+}
+
+.user-item:hover .user-card {
+  display: block; /* show on hover */
+}
+
+.user-card-image {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+.user-card-info {
+  margin-left: 10px;
+}
+
+.user-card-organization {
+  font-size: 1.3em;
+  color: #006262; /* example green color */
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+  color: white;
+  padding: 5px 15px;
+  margin-top: 10px;
+  border-radius: 5px;
+  font-size: 0.9em;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+/* Ensure that the user list has a position relative to position the user cards correctly */
+.user-item {
+  position: relative;
+  cursor: pointer;
+}
+

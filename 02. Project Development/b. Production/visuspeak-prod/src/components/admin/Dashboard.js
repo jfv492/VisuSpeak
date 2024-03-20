@@ -4,10 +4,12 @@ import { ref, onValue } from "firebase/database";
 import { doc, getDoc } from "firebase/firestore";
 
 import defaultProfilePicture from "../../assets/images/AccountSettingsHeadshot.jpg";
-import SettingsUserInfo from "../account_setting/UserInfo.js";
+// import SettingsUserInfo from "../account_setting/UserInfo.js";
 import { AuthContext } from "../../context/AuthContext.js";
 import { useTranslation } from "react-i18next";
 import LatestFeedback from "./LatestFeedback.js";
+
+import UserCard from "./UserCard";
 
 const formatDate = () => {
   const options = { year: "numeric", month: "long", day: "numeric" };
@@ -28,6 +30,8 @@ const Dashboard = () => {
   const [admins, setAdmins] = useState([]);
   const [guests, setGuests] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [hoveredUser, setHoveredUser] = useState(null);
+  let lastActiveTime;
 
   useEffect(() => {
     const statusRef = ref(realtimeDb, "/status");
@@ -38,6 +42,7 @@ const Dashboard = () => {
       for (let userId in statuses) {
         if (statuses[userId].state === "online") {
           onlineUsers.push(userId);
+          lastActiveTime = statuses[userId].last_changed
         }
       }
 
@@ -45,9 +50,19 @@ const Dashboard = () => {
         onlineUsers.map(async (userId) => {
           const userDocRef = doc(db, "users", userId);
           const userDocSnap = await getDoc(userDocRef);
-          return userDocSnap.exists()
-            ? { uid: userId, ...userDocSnap.data() }
-            : null;
+  
+          if (userDocSnap.exists()) {
+            const userData = userDocSnap.data();
+            const lastChangedTimestamp = statuses[userId]?.last_changed || null;
+  
+            return {
+              uid: userId,
+              ...userData,
+              lastChanged: lastChangedTimestamp ? new Date(lastChangedTimestamp) : null
+            };
+          } else {
+            return null;
+          }
         })
       );
 
@@ -80,74 +95,82 @@ const Dashboard = () => {
   return (
     <>
       <div className="background-container">
-      <div className="container account-settings-form shadow-lg rounded-4 p-2">
-        <div class="dashboard-header text-start p-2 rounded-3">
-          <h1 class="greeting">Hi, {localStorage.getItem("username")}</h1>
-          <div className="date-styling">{formatDate()}</div>
-        </div>
+        <div className="container account-settings-form shadow-lg rounded-4 p-3">
+          <div class="dashboard-header text-start p-3 rounded-3">
+            <h1 class="greeting">Hi, {localStorage.getItem("username")}</h1>
+            <div className="date-styling">{formatDate()}</div>
+          </div>
 
-        <div class="row my-4">
-          <div class="col-sm-4">
-            <div class="overview-box bg-light">
-              <h2>{t("AdminUsers")}</h2>
-              <ul class="list-unstyled">
-                {filteredAdmins.map((user) => (
-                  <li key={user.uid} class="user-item py-2">
-                    <div class="d-flex media align-items-center">
-                      <img
-                        src={user.photoURL || defaultProfilePicture}
-                        alt="Admin"
-                        className="rounded-circle me-2"
-                        style={{
-                          width: "50px",
-                          height: "50px",
-                          objectFit: "cover",
-                        }}
-                      />
-                      <div class="media-body">
-                        <h5 class="mt-0 mb-1">{user.displayName}</h5>
+          <div class="row mt-4">
+            <div class="col-sm-4">
+              <div class="overview-box bg-light rounded-3">
+                <h3>{t("AdminUsers")}</h3>
+                <ul class="list-unstyled">
+                  {filteredAdmins.map((user) => (
+                    <li key={user.uid} class="user-item py-2">
+                      <div class="d-flex media align-items-center">
+                        <img
+                          src={user.photoURL || defaultProfilePicture}
+                          alt="Admin"
+                          className="rounded-circle me-2"
+                          style={{
+                            width: "50px",
+                            height: "50px",
+                            objectFit: "cover",
+                          }}
+                        />
+                        <div class="media-body">
+                          <h5 class="mt-0 mb-1">{user.displayName}</h5>
+                        </div>
                       </div>
-                    </div>
-                  </li>
-                ))}
-              </ul>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
-          </div>
-          <div class="col-sm-4">
-            <div class="overview-box bg-light">
-              <h2>{t("GuestUsers")}</h2>
-              <ul class="list-unstyled">
-                {filteredGuests.map((user) => (
-                  <li key={user.uid} class="user-item py-2">
-                    <div class="d-flex media align-items-center">
-                      <img
-                        src={user.photoURL || defaultProfilePicture}
-                        alt="Admin"
-                        className="rounded-circle me-2"
-                        style={{
-                          width: "50px",
-                          height: "50px",
-                          objectFit: "cover",
-                        }}
-                      />
-                      <div class="media-body">
-                        <h5 class="mt-0 mb-1">{user.displayName}</h5>
+            <div class="col-sm-4">
+              <div class="overview-box bg-light rounded-3">
+                <h3>{t("GuestUsers")}</h3>
+                <ul class="list-unstyled user-list">
+                  {filteredGuests.map((user) => (
+                    <li
+                      key={user.uid}
+                      class="user-item py-2"
+                      onMouseEnter={() => setHoveredUser(user)}
+                      onMouseLeave={() => setHoveredUser(null)}
+                    >
+                      <div class="d-flex media align-items-center">
+                        <img
+                          src={user.photoURL || defaultProfilePicture}
+                          alt="Admin"
+                          className="rounded-circle me-2"
+                          style={{
+                            width: "50px",
+                            height: "50px",
+                            objectFit: "cover",
+                          }}
+                        />
+                        <div class="media-body">
+                          <h5 class="mt-0 mb-1">{user.displayName}</h5>
+                        </div>
                       </div>
-                    </div>
-                  </li>
-                ))}
-              </ul>
+                      {hoveredUser === user && <UserCard user={user} lastChanged={hoveredUser.lastChanged}/>}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="overview-box bg-light rounded-3">
+                <h3>Recent Feedback</h3>
+                <LatestFeedback
+                  organization={localStorage.getItem("organizationName")}
+                />
+              </div>
             </div>
           </div>
-          <div class="col-sm-4">
-            <div class="overview-box bg-light">
-              <h2>Recent Feedback</h2>
-              <LatestFeedback />
-            </div>
-          </div>
-        </div>
 
-        {/* <div class="slide-preview bg-light">
+          {/* <div class="slide-preview bg-light">
           <h4>Next in Fashion</h4>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
           <p>10 Slides</p>
@@ -158,8 +181,8 @@ const Dashboard = () => {
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
           <p>10 Slides</p>
         </div> */}
+        </div>
       </div>
-    </div>
     </>
   );
 };

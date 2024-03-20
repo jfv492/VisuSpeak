@@ -9,13 +9,6 @@ import { setUserOffline } from "../../utils/UserPresence.js";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
 
-const emojis = {
-    sad: '😔',
-    neutral: '😐',
-    happy: '🙂',
-    excited: '😄',
-  };
-
 const FeedbackForm = () => {
     const { t } = useTranslation();
   const [feedback, setFeedback] = useState("");
@@ -92,7 +85,7 @@ const FeedbackForm = () => {
               ></button>
             </div>
             <div className="modal-body">
-            <p>What do you think of the editing tool?</p>
+            <p>What do you think of the VisuSpeak chat?</p>
             <div className="text-center mb-3">
               {/* Icon buttons for rating feedback */}
               {[1, 2, 3, 4, 5].map((num) => (
@@ -108,8 +101,8 @@ const FeedbackForm = () => {
             <textarea className="form-control my-3" rows="3" placeholder="Do you have any thoughts you’d like to share?" value={feedback} onChange={(e) => setFeedback(e.target.value)}></textarea>
           </div>
           <div className="modal-footer">
-            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-            <button type="submit" className="btn btn-primary" data-bs-dismiss="modal" onClick={handleSubmit}>Send</button>
+            <button type="button" className="btn" data-bs-dismiss="modal" onClick={handleSignOut}>Cancel</button>
+            <button type="submit" className="btn modal-button-style btn-raised rounded-pill" data-bs-dismiss="modal" onClick={handleSubmit}>Send</button>
           </div>
           </div>
         </div>
