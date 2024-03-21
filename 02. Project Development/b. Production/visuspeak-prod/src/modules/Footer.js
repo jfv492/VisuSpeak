@@ -15,18 +15,18 @@ const Footer = () => {
         </div>
 
         <nav className="menu">
-          <a href="/" className="menu-item">
+          <Link to="/" className="menu-item">
           {t('Home')}
-          </a>
-          <a href="/resources" className="menu-item">
+          </Link>
+          <Link to="/resources" className="menu-item">
           {t('Resources')}
-          </a>
-          {/* <a href="/support" className="menu-item">
+          </Link>
+          <Link to="/support" className="menu-item">
           {t('Support')}
-          </a> */}
-          <a href="/about" className="menu-item">
+          </Link>
+          <Link to="/about" className="menu-item">
           {t('About Us')}
-          </a>
+          </Link>
         </nav>
 
         <div className="social-media mx-3">
