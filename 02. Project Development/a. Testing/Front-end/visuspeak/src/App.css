@@ -1602,7 +1602,7 @@ iframe {
 }
 
 .visuspeak-hero h1 {
-  font-size: 50px; /* Adjust the size as needed */
+  font-size: 50px; 
 }
 
 .features-container {
@@ -1629,7 +1629,7 @@ iframe {
   display: flex;
   flex-wrap: wrap; /* Allow cards to wrap on smaller screens */
   justify-content: center;
-  gap: 1px; /* This replaces the margin for spacing between cards */
+  gap: 1px; 
 }
 
 .benefit-card {
