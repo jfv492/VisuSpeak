@@ -18,11 +18,11 @@ export default function Home() {
           <div className="visuspeak-hero">
             <h1>{t("WelcomeNew")}</h1>
             <p className="asl-user-query">{t("SubWelcomeOne")}</p>
-            <p className="connect-admin">{t("SubWelcomeTwo")}</p>
+            <p className="connect-admin mb-4">{t("SubWelcomeTwo")}</p>
             <CustomerSignin />
           </div>
           <div className="features-container">
-            <h2 className="features-title">{t("Features")}</h2>
+            <h2 className="features-title align-self-start">{t("Features")}</h2>
             <div className="benefits-container">
               <div className="benefit-card">
                 <img src={icon1} className="benefit-icon" alt="One-on-One" />
@@ -43,7 +43,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <Link to="/about" className="learn-more-link">{t("Learn More")}</Link>
+            <Link to="/about" className="learn-more-link align-self-end">{t("Learn More")}</Link>
           </div>
         </>
       ) : (

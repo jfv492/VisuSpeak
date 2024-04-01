@@ -10,11 +10,21 @@ const HowToASLChatModal = () => {
     <div>
       <button
         type="button"
-        class="btn btn-lg button-style fs-6"
+        class="btn"
         data-bs-toggle="modal"
         data-bs-target="#aslStartChatModal"
       >
-        {t("SupportLearnMoreButton")} 
+        <div class="card text-center btn-raised p-3" aria-hidden="true">
+            <div className="card-heading">
+              <i class="fa-solid fa-message fs-1"></i>
+              <h4 class="card-title mt-3">{t("HowToStartAChat")}</h4>
+            </div>
+            <div class="card-body">
+              <p class="card-text large-text-style">
+                {t("HowToStartAChatUserDescription")}
+              </p>
+            </div>
+          </div>
       </button>
 
       <div

@@ -10,11 +10,21 @@ const HowToEditAccountSettingsModal = () => {
     <div>
       <button
         type="button"
-        class="btn btn-lg button-style fs-6"
+        class="btn"
         data-bs-toggle="modal"
         data-bs-target="#editAccountSettingsModal"
       >
-        {t("SupportLearnMoreButton")} 
+        <div class="card text-center btn-raised p-3" aria-hidden="true">
+          <div className="card-heading">
+            <i class="fa-solid fa-gear fs-1"></i>
+            <h4 class="card-title mt-3">{t("HowToEditAccountSettings")}</h4>
+          </div>
+          <div class="card-body">
+            <p class="card-text large-text-style">
+              {t("HowToEditAccountSettingsDescription")}
+            </p>
+          </div>
+        </div>
       </button>
 
       <div
@@ -43,42 +53,22 @@ const HowToEditAccountSettingsModal = () => {
             </div>
             <div class="modal-body">
               <ol>
-                <li>
-                  {t("AdminAccountSupportModalDescription1")} 
-                </li>
-                <li>
-                  {t("AdminAccountSupportModalDescription2")} 
-                </li>
+                <li>{t("AdminAccountSupportModalDescription1")}</li>
+                <li>{t("AdminAccountSupportModalDescription2")}</li>
 
                 <ol>
-                    <li>
-                      {t("AdminAccountSupportModalDescription2Sub1")} 
-                    </li>
-                    <li>
-                      {t("AdminAccountSupportModalDescription2Sub2")} 
-                    </li>
-                    <li>
-                      {t("AdminAccountSupportModalDescription2Sub3")}   
-                    </li>
+                  <li>{t("AdminAccountSupportModalDescription2Sub1")}</li>
+                  <li>{t("AdminAccountSupportModalDescription2Sub2")}</li>
+                  <li>{t("AdminAccountSupportModalDescription2Sub3")}</li>
                 </ol>
 
-                <li>
-                  {t("AdminAccountSupportModalDescription3")} 
-                </li>
+                <li>{t("AdminAccountSupportModalDescription3")}</li>
 
                 <ol>
-                    <li>
-                      {t("AdminAccountSupportModalDescription3Sub1")} 
-                    </li>
-                    <li>
-                      {t("AdminAccountSupportModalDescription3Sub2")}  
-                    </li>
-                    <li>
-                      {t("AdminAccountSupportModalDescription3Sub3")}   
-                    </li>
-                    <li>
-                      {t("AdminAccountSupportModalDescription3Sub4")}    
-                    </li>
+                  <li>{t("AdminAccountSupportModalDescription3Sub1")}</li>
+                  <li>{t("AdminAccountSupportModalDescription3Sub2")}</li>
+                  <li>{t("AdminAccountSupportModalDescription3Sub3")}</li>
+                  <li>{t("AdminAccountSupportModalDescription3Sub4")}</li>
                 </ol>
               </ol>
             </div>

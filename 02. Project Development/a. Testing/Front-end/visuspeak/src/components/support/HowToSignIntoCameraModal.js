@@ -10,11 +10,21 @@ const HowToSignIntoCameraModal = () => {
     <div>
       <button
         type="button"
-        class="btn btn-lg button-style fs-6"
+        class="btn"
         data-bs-toggle="modal"
         data-bs-target="#signIntoCameraModal"
       >
-        {t("SupportLearnMoreButton")} 
+        <div class="card text-center btn-raised p-3" aria-hidden="true">
+          <div className="card-heading">
+            <i class="fa-solid fa-video fs-1"></i>
+            <h4 class="card-title mt-3">{t("HowToUseTheCameraToSign")}</h4>
+          </div>
+          <div class="card-body">
+            <p class="card-text large-text-style">
+              {t("HowToUseTheCameraToSignDescription")}
+            </p>
+          </div>
+        </div>
       </button>
 
       <div
@@ -43,28 +53,16 @@ const HowToSignIntoCameraModal = () => {
             </div>
             <div class="modal-body">
               <ol>
+                <li>{t("ASLUserCameraDescription1")}</li>
                 <li>
-                  {t("ASLUserCameraDescription1")}  
+                  {t("ASLUserCameraDescription2")} <br />
+                  <i>{t("ASLUserCameraDescription2Sub1")} </i>
                 </li>
-                <li>
-                  {t("ASLUserCameraDescription2")}  <br/>
-                    <i>{t("ASLUserCameraDescription2Sub1")} </i>
-                </li>
-                <li>
-                  {t("ASLUserCameraDescription3")}    
-                </li>
-                <li>
-                  {t("ASLUserCameraDescription4")} 
-                </li>
-                <li>
-                  {t("ASLUserCameraDescription5")}  
-                </li>
-                <li>
-                  {t("ASLUserCameraDescription6")}  
-                </li>
-                <li>
-                  {t("ASLUserCameraDescription7")}   
-                </li>
+                <li>{t("ASLUserCameraDescription3")}</li>
+                <li>{t("ASLUserCameraDescription4")}</li>
+                <li>{t("ASLUserCameraDescription5")}</li>
+                <li>{t("ASLUserCameraDescription6")}</li>
+                <li>{t("ASLUserCameraDescription7")}</li>
               </ol>
             </div>
           </div>

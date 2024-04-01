@@ -467,7 +467,7 @@ body {
 .resources-grid-item {
   min-height: 300px;
   border-style: solid;
-  border-width: 3px;
+  border-width: 1px;
   border-color: #bdbdbd;
   border-radius: 5px;
 }
@@ -1522,14 +1522,8 @@ iframe {
 /* ***************SUPPORT STYLE*************** */
 
 .support-cards-container {
-  margin-top: 10px;
-  padding-top: 20px;
-  padding-bottom: 30px;
-  padding-left: 20px;
-  padding-right: 20px;
-  border-radius: 15px;
-  background-color: #eee;
   align-items: center;
+  justify-content: center;
 }
 
 .support-cards-container-odd {
@@ -1611,7 +1605,8 @@ iframe {
   border-radius: 10px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  max-width: 1000px; /* Adjusted max-width for better scaling */
+  
+  max-width: 1000px; 
   margin: 20px auto 50px;
   margin-top: -1.5rem;
 }
@@ -1619,13 +1614,11 @@ iframe {
 .features-title {
   color: #006262;
   margin-bottom: 1rem;
-  text-align: left !important;
-  font-size: 24px; /* Increased font size for the feature title */
 }
 
 .benefits-container {
   display: flex;
-  flex-wrap: wrap; /* Allow cards to wrap on smaller screens */
+  flex-wrap: wrap; 
   justify-content: center;
   gap: 1px; 
 }
@@ -1652,7 +1645,6 @@ iframe {
 .benefit-text h3 {
   color: #ffffff;
   font-size: 1rem;
-  margin-bottom: 0.5rem;
 }
 
 .benefit-text p {
