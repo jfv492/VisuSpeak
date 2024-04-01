@@ -1581,84 +1581,144 @@ iframe {
 
 
 /* ***************LANDING PAGE STYLE*************** */
-.visuspeak-hero {
-  background-image: url('../src/assets/images/bg3.png');
+.visuhero-section {
+  background-image: url('../src/assets/images/bg7.png');
   background-size: cover;
-  background-position: center;
-  text-align: center;
-  height: 500px; /* Set a specific height */
-  color: white;
+  background-position: center center;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Center content vertically */
-  align-items: center; /* Center content horizontally */
-}
-
-.content-container {
-  padding: 2rem;
-}
-
-.asl-user-query{
-  font-weight: bold; /* Makes the text bold */
-  font-size: 30px; /* Increases the font size */
-  margin-bottom: 0.5rem; 
-}
-.connect-admin {
-  font-size: 30px; /* Increases the font size */
-  margin-bottom: 2rem; /* Adds space below the paragraph */
-}
-
-.service-info-section {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-.service-card {
-  display: flex;
-  flex-direction: column;
-  width: 18rem; /* Set a fixed width */
-  margin: 1rem; /* Provide some space around the cards */
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effect */
-  background-color: #006262;
-  color: white;
-  font-size: 18px;
-}
-
-.service-card .card-body {
-  flex: 1; /* Makes the card-body fill the available space */
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between; /* Space content evenly */
-}
-
-.card-body {
-  display: flex; /* Enable flexbox */
-  flex-direction: column; /* Stack children vertically */
-  align-items: center; /* Center children horizontally */
-  justify-content: center; /* Center children vertically */
-  text-align: center; /* Center text */
-  flex: 1; /* Allow the body to fill the space */
-}
-
-.card-img-top {
-  width: 50%; /* Ensure the image takes up the card width */
-  height: 50; /* Maintain aspect ratio */
-  justify-content: center;
-}
-.card-img-top {
-  height: auto; /* Maintain aspect ratio */
-  max-width: 100%; /* Max width as 100% of the parent */
-  display: block; /* To remove bottom space under the image */
   align-items: center;
+  color: white;
+  text-align: center;
+  padding-top: 50px;
+  min-height: 100vh;
+  width: 100%; 
+  overflow: hidden; 
 }
 
-/* Hover effect */
-.service-card:hover {
-  transform: translateY(-5px); /* Lifts the card up on hover */
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Increases shadow to give "depth" */
-  background-color: #023e3d;
+.visuspeak-hero {
+  margin-bottom: 100px; /* Increased space below the hero content */
+  padding-top: 5rem;
+}
+
+.visuspeak-hero h1 {
+  font-size: 50px; /* Adjust the size as needed */
+}
+
+.features-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  max-width: 1000px; /* Adjusted max-width for better scaling */
+  margin: 20px auto 50px;
+  margin-top: -1.5rem;
+}
+
+.features-title {
+  color: #006262;
+  margin-bottom: 1rem;
+  text-align: left !important;
+  font-size: 24px; /* Increased font size for the feature title */
+}
+
+.benefits-container {
+  display: flex;
+  flex-wrap: wrap; /* Allow cards to wrap on smaller screens */
+  justify-content: center;
+  gap: 1px; /* This replaces the margin for spacing between cards */
+}
+
+.benefit-card {
+  background-color: #006262;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 250px;
+  margin: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.benefit-icon {
+  width: 60px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.benefit-text h3 {
+  color: #ffffff;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.benefit-text p {
+  color: #ffffff;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.learn-more-link {
+  color: #006262;
+  text-decoration: underline;
+  font-weight: bold;
+  margin-top: 0.1;
+  align-self: center;
+  display: inline-block;
+  position: relative;
+  padding-right: 25px;
+}
+
+/* Adds the arrow after the link text */
+.learn-more-link::after {
+  content: '→';
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-weight: bold;
+  font-size: 1.25em;
+}
+
+@media (max-width: 768px) {
+  .features-container {
+    width: 95%;
+    margin-top: 30px; /* Increased margin-top for spacing */
+  }
+
+  .benefit-card {
+    width: calc(50% - 20px); /* Full width for better alignment */
+    margin: 10px 0; /* Adjusted margin for consistency */
+  }
+
+  .hero-section {
+    padding-top: 20px;
+    padding-bottom: 30px;
+  }
+
+  .visuspeak-hero {
+    margin-bottom: 30px; /* Increased space below the hero content */
+  }
+
+  .learn-more-link {
+    margin-top: 20px;
+  }
+}
+
+.asl-user-query, .connect-admin {
+  font-size: 24px;
+  margin-bottom: 0.5rem;
+}
+
+/* Ensuring the main heading is responsive and prominent */
+@media (max-width: 768px) {
+  .benefit-card {
+    width: calc(100% - 20px); /* Full width */
+  }
 }
 
 .disclaimer-text {
