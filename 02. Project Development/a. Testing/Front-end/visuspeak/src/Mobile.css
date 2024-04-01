@@ -17,17 +17,17 @@
 
     .landing-page h1 {
         font-size: 6vh;
-      }
+    }
 
-      .landing-page p {
+    .landing-page p {
         font-size: 4vh;
         margin-bottom: 2rem;
-      }
+    }
 
-      .landing-page i {
+    .landing-page i {
         cursor: help;
         font-size: 3vh;
-      }
+    }
 
     .login-form,
     .signup-form {
@@ -192,9 +192,14 @@
     }
 
     /* ***************RESIZABLE COLUMNS*************** */
-.resizable-container {
-    flex-direction: column;
-  }
+    .resizable-container {
+        flex-direction: column;
+    }
+
+    /* ***************DASHBOARD PAGE STYLE*************** */
+    .mobile-dashboard {
+        overflow-y: auto;
+    }
 }
 
 @media screen and (max-width: 600px) {

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext.js"
 import ColourLogo from "../assets/logos/VisuSpeakPrimaryLogo.png";
@@ -9,14 +9,24 @@ import LanguageSwitcher from "../components/navbar/LanguageSwitcher.js";
 
 const Navbar = () => {
   const { accountType, organizationName } = useContext(AuthContext);
-  console.log("dd", accountType === "null")
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const mobileView = windowWidth < 600;
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
   return (
     <nav class="navbar navbar-expand-lg bg-body-tertiary shadow px-3">
       <div class="container-fluid">
-        <Link className={`navbar-brand pe-3 ${localStorage.getItem("accountType") !== null && "border-end"} `} to={`${accountType === "guest" ? "/chat" : "/"}`}>
+        <Link className={`navbar-brand pe-3 ${(localStorage.getItem("accountType") !== null && !mobileView) && "border-end"} `} to={`${accountType === "guest" ? "/chat" : "/"}`}>
           <img src={ColourLogo} className="navbar-logo" alt="VisuSpeak Logo" height="45"/>
         </Link>
-        {(organizationName !== null || organizationName !== "") && organizationName} 
+        {!mobileView && (organizationName !== null || organizationName !== "") && organizationName} 
         <button
           class="navbar-toggler mx-3"
           type="button"
@@ -27,7 +37,7 @@ const Navbar = () => {
         >
           <span class="navbar-toggler-icon"></span>
         </button>
-        <LanguageSwitcher />
+        {!mobileView && <LanguageSwitcher />}
         {(accountType === null || accountType === "") && <LoggedOutNavLinks />}
         {accountType === "admin" && <AdminNavLinks />}
         {accountType === "guest" && <CustomerNavLinks />}

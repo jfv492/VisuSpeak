@@ -437,8 +437,6 @@ body {
 
 .content-wrap {
   flex: 1;
-  min-height: 100vh;
-  /* background-color: #eee; */
   /* padding-bottom: 100px; */
 }
 
@@ -1257,8 +1255,8 @@ iframe {
 
 /* ***************ADMIN CHAT STYLE*************** */
 .admin-chat-container {
-  min-height: 90vh;
-  /* min-width: 95%; */
+  min-height: 100vh;
+  min-width: 95%;
   justify-content: center;
   align-items: center;
   border-color: #ddd;
@@ -1280,7 +1278,8 @@ iframe {
 
 .admin-chat-list {
   background: white;
-  max-height: 610px;
+  /* max-height: 100%; */
+  flex-grow: 1;
   overflow-y: auto;
 }
 
@@ -1322,7 +1321,7 @@ iframe {
 .resizable-right-panel {
   flex-grow: 1;
   overflow: auto;
-  /* height: 100vh; */
+  height: 100vh;
   display: flex;
   flex-direction: column;
 }
@@ -1363,7 +1362,7 @@ iframe {
 
 /* ***************ASL CHAT STYLE*************** */
 .asl-chat-container {
-  height: 90vh;
+  height: 100vh;
   justify-content: center;
   align-items: center;
   border-color: #ddd;
@@ -1462,7 +1461,6 @@ iframe {
 
 .user-profile-picture {
   width: 15vw;
-  height: 15vw;
   border-color: #023e3d;
 }
 
@@ -1689,107 +1687,116 @@ iframe {
   height: 100%;
   border: none;
 }
+  
 
 /* ***************DASHBOARD PAGE STYLE*************** */
-.dashboard-header {
-  background-color: #f8f9fa; /* Adjust the color to match your design */
-  padding: 20px;
-  border-radius: 8px;
-  margin-bottom: 20px;
-}
-.greeting {
-  color: #333; /* Adjust the color to match your design */
-}
-.overview-box {
-  padding: 20px;
-  margin-bottom: 20px;
-  height: 50vh;
-  overflow-y: auto;
-}
-.slide-preview {
-  border-radius: 8px;
-  padding: 10px;
-  margin-bottom: 10px;
+.dashboard{
+  display: flex; /* Enable flexbox */
+  flex-direction: column; /* Stack children vertically */
+  height: 100vh;
+  overflow: hidden; /* Prevent scrolling on the container */
 }
 
-.date-styling {
-  font-size: 1rem; /* Adjust the size as needed */
+.dashboard-row{
+  display: flex; /* Enable flexbox */
+  flex: 1; /* Take up all available space */
+  overflow: hidden;
 }
 
-.user-item {
-  border-bottom: 1px solid #ddd; /* or any color you prefer */
-}
-
-.user-initials {
-  background-color: #4caf50; /* or any color you prefer */
-  color: white;
-  font-weight: bold;
-  width: 50px;
-  height: 50px;
+.dashboard-col{
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+}
+
+.user-list-item {
+  display: flex;
   align-items: center;
+  margin-bottom: 1rem;
+}
+
+.user-list-item img {
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
-  font-size: 1.5rem; /* Adjust the size as needed */
+  object-fit: cover;
+  margin-right: 0.5rem;
 }
-
-/* If you want to add custom font sizes or weights, add here */
-.media-body h5 {
-  font-size: 1rem; /* Adjust the size as needed */
-  font-weight: 500; /* Adjust the weight as needed */
-}
-
-/* ***************TOGGLE PAGE STYLE*************** */
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
-}
-
-.switch input { 
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
-  border-radius: 34px;
-}
-
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
+.user-list-item .fa-circle-check {
+  color: #77bb41;
   background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
   border-radius: 50%;
-  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
+  padding: 3px;
 }
 
-input:checked + .slider {
-  background-color: #2196F3;
+h5 {
+  font-weight: bold;
+  margin-bottom: 1rem;
 }
 
-input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
+.dashboard-header {
+  background-color: #eee;
 }
 
-input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
+.overview-box, .feedback-box {
+  background-color: #eee !important;
+  padding: 10px;
+  flex: 1; /* Take up all available space */
+  display: flex; /* Enable flexbox */
+  flex-direction: column;
+  overflow-y: auto; /* Enable scrolling within this container */
 }
+/* ***************USER CARD STYLE*************** */
+.user-card {
+  position: absolute;
+  width: 100%;
+  padding: 10px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  display: none; /* initially hidden */
+  z-index: 10; /* ensure it's above other items */
+}
+
+.user-item:hover .user-card {
+  display: block; /* show on hover */
+}
+
+.user-card-image {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+.user-card-info {
+  margin-left: 10px;
+}
+
+.user-card-organization {
+  font-size: 1.3em;
+  color: #006262; /* example green color */
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+  color: white;
+  padding: 5px 15px;
+  margin-top: 10px;
+  border-radius: 5px;
+  font-size: 0.9em;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+/* Ensure that the user list has a position relative to position the user cards correctly */
+.user-item {
+  position: relative;
+  cursor: pointer;
+}
+

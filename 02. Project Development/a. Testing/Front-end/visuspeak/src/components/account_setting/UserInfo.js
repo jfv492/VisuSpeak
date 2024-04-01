@@ -55,7 +55,6 @@ const SettingsUserInfo = (props) => {
               src={currentUser?.photoURL || Headshot} // Display user's photoURL or default
               className="user-profile-picture rounded-circle img-thumbnail"
               alt="..."
-              width="100%"
               style={{ justifyContent: "end" }}
             />
             <label htmlFor="file-upload" className="fa-solid fa-camera change-user-profile-icon rounded-circle shadow border" style={{

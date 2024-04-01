@@ -8,7 +8,7 @@ import {
   arrayUnion,
   updateDoc,
   collection,
-  setDoc
+  setDoc,
 } from "firebase/firestore";
 import { v4 as uuid } from "uuid";
 import { doc } from "firebase/firestore";
@@ -37,7 +37,9 @@ const Input = ({
   useEffect(() => {
     if (immediateWord) {
       // Check if fingerspelling is active to decide whether to add a space
-      const wordToAdd = fingerspellingActive ? immediateWord : ` ${immediateWord}`;
+      const wordToAdd = fingerspellingActive
+        ? immediateWord
+        : ` ${immediateWord}`;
       setText((prev) => prev + wordToAdd);
       onImmediateSend(); // Call this to indicate the immediate send operation is complete
     }
@@ -112,25 +114,31 @@ const Input = ({
 
     const recipientId = data.user.uid; // The ID of the user receiving the notification
 
-      // Now, create the notification for the recipient
-      const notificationRef = doc(db, "users", recipientId, "notifications", uuid());
+    // Now, create the notification for the recipient
+    const notificationRef = doc(
+      db,
+      "users",
+      recipientId,
+      "notifications",
+      uuid()
+    );
 
-      try {
-        await setDoc(notificationRef, {
-          text: text,
-          chatId: data.chatId, // Assuming this is the ID of the chat where the message was sent
-          senderId: currentUser.uid,
-          senderName: lastSenderName,
-          date: serverTimestamp(),
-          read: false
-        });
+    try {
+      await setDoc(notificationRef, {
+        text: text,
+        chatId: data.chatId, // Assuming this is the ID of the chat where the message was sent
+        senderId: currentUser.uid,
+        senderName: lastSenderName,
+        date: serverTimestamp(),
+        read: false,
+      });
 
-        setText(""); // Clear the input field after sending the message
-        // ... any other cleanup code ...
-      } catch (error) {
-        console.error("Error creating notification:", error);
-        // Handle the error appropriately
-      }
+      setText(""); // Clear the input field after sending the message
+      // ... any other cleanup code ...
+    } catch (error) {
+      console.error("Error creating notification:", error);
+      // Handle the error appropriately
+    }
 
     setText("");
   };
@@ -145,7 +153,9 @@ const Input = ({
             if (data.word && data.word !== lastFetchedWord) {
               setLastFetchedWord(data.word);
               // Check if fingerspelling is active to decide whether to add a space
-              const wordToAdd = fingerspellingActive ? data.word : ` ${data.word}`;
+              const wordToAdd = fingerspellingActive
+                ? data.word
+                : ` ${data.word}`;
               setText((prev) => prev + wordToAdd);
               setIsHandDetected(true);
             } else {
