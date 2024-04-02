@@ -90,11 +90,33 @@ const ChatHeader = (props) => {
     console.log(isArchived);
     dispatch({ type: "RESET_CHAT" });
   };
+
+  const handleDeleteClick = async () => {
+    if (!data.chatId || data.chatId === "null") {
+      console.error("No chat selected");
+      return;
+    }
+  
+    // Here you might want to confirm with the user before deletion
+    if (window.confirm("Are you sure you want to delete this chat?")) {
+      // Update the Firestore database to mark the chat as deleted
+      await updateDoc(doc(db, "userChats", currentUser.uid), {
+        [`${data.chatId}.isDeleted`]: true,
+      });
+  
+      await updateDoc(doc(db, "userChats", data.user.uid), {
+        [`${data.chatId}.isDeleted`]: true,
+      });
+  
+      // Optionally, reset the chat or update the UI as needed
+      dispatch({ type: "RESET_CHAT" });
+    }
+  };
   return (
     <div className="messages-heading row mb-1 z-3 position-relative ">
       <div className="">
         <div className="chat-header rounded-3 bg-gradient shadow">
-          <div className="user-info col-sm-8">
+          <div className="user-info col-sm-6">
             <img
               src={props.photo || defaultProfilePicture}
               alt="User"
@@ -105,7 +127,7 @@ const ChatHeader = (props) => {
             <h4 className="user-name chat-name-ellipsis">{props.user}</h4>
             {localStorage.getItem("accountType") === "admin" && <div>
             <button
-              className="btn chat-action-button bg-gradient mx-2"
+              className="btn chat-action-button bg-gradient"
               type="button"
               aria-expanded="false"
               onClick={handleClick}
@@ -113,6 +135,16 @@ const ChatHeader = (props) => {
               onMouseLeave={handlePopoverClose}
             >
               <i className="fa-solid fa-box-archive"></i>
+            </button>
+            <button
+              className="btn chat-action-button bg-gradient"
+              type="button"
+              aria-expanded="false"
+              onClick={handleDeleteClick} // Update this line
+              onMouseEnter={handlePopoverOpen}
+              onMouseLeave={handlePopoverClose}
+            >
+              <i className="fa-solid fa-trash"></i>
             </button>
             <Popover
               id="mouse-over-popover"

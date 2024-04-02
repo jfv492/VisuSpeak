@@ -12,9 +12,9 @@ export default function Home() {
   const { t } = useTranslation();
 
   return (
-    <div className="visuhero-section">
+    <div>
       {localStorage.getItem("accountType") !== "admin" ? (
-        <>
+        <div className="visuhero-section">
           <div className="visuspeak-hero">
             <h1>{t("WelcomeNew")}</h1>
             <p className="asl-user-query">{t("SubWelcomeOne")}</p>
@@ -45,7 +45,7 @@ export default function Home() {
             </div>
             <Link to="/about" className="learn-more-link align-self-end">{t("Learn More")}</Link>
           </div>
-        </>
+        </div>
       ) : (
         <Dashboard />
       )}

@@ -45,7 +45,7 @@ const ChatActions = (props) => {
   };
   
   return (
-    <div className="row chat-actions">
+    <div className="d-flex flex-row chat-actions">
       {localStorage.getItem("accountType") === "admin" && <button
         class="btn chat-action-button bg-gradient me-1"
         type="button"

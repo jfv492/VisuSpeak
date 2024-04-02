@@ -1,9 +1,5 @@
 import { AuthContext } from "./AuthContext.js";
-import {
-  createContext,
-  useReducer,
-  useContext,
-} from "react";
+import { createContext, useReducer, useContext } from "react";
 
 export const ChatContext = createContext();
 
@@ -29,14 +25,14 @@ export const ChatContextProvider = ({ children }) => {
               : action.payload.uid + currentUser.uid,
         };
       case "SET_CHAT":
-          return {
-            ...state,
-            user: action.payload,
-            chatId:
-              currentUser.uid > action.payload.uid
-                ? currentUser.uid + action.payload.uid
-                : action.payload.uid + currentUser.uid,
-          };
+        return {
+          ...state,
+          user: action.payload,
+          chatId:
+            currentUser.uid > action.payload.uid
+              ? currentUser.uid + action.payload.uid
+              : action.payload.uid + currentUser.uid,
+        };
       case "RESET_CHAT":
         return {
           ...INITIAL_STATE,
@@ -51,17 +47,17 @@ export const ChatContextProvider = ({ children }) => {
           ...state,
           showArchived: !state.showArchived,
         };
-        case "TOGGLE_USER_TYPE":
-          const newUserTypes = new Set(state.userTypes);
-          if (newUserTypes.has(action.payload)) {
-            newUserTypes.delete(action.payload);
-          } else {
-            newUserTypes.add(action.payload);
-          }
-          return {
-            ...state,
-            userTypes: Array.from(newUserTypes),
-          };        
+      case "TOGGLE_USER_TYPE":
+        const newUserTypes = new Set(state.userTypes);
+        if (newUserTypes.has(action.payload)) {
+          newUserTypes.delete(action.payload);
+        } else {
+          newUserTypes.add(action.payload);
+        }
+        return {
+          ...state,
+          userTypes: Array.from(newUserTypes),
+        };
       default:
         return state;
     }

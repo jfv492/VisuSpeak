@@ -76,11 +76,17 @@ const NotificationsList = ({ userId }) => {
     await updateDoc(notificationRef, { read: true });
   };
 
-  // const handleSelect = (senderId, senderName) => {
-  //   dispatch({ type: "CHANGE_USER", payload: senderName });
-  //   // setSelectedChat(senderId);
-  //   navigate("/chat");
-  // };
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const mobileView = windowWidth < 600;
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
     <>
@@ -93,7 +99,7 @@ const NotificationsList = ({ userId }) => {
       >
         <i class="fa-solid fa-bell fs-3"></i>
         {unreadCount != 0 && (
-          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger mt-1">
+          <span class={`position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger mt-1`}>
             {unreadCount <= 10 ? unreadCount : "10+"}
           </span>
         )}

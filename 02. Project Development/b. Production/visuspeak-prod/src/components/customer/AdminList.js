@@ -86,6 +86,7 @@ const AdminList = (props) => {
           },
           [combinedId + ".date"]: serverTimestamp(),
           [combinedId + ".isArchive"]: false,
+          [combinedId + ".isDeleted"]: false,
         });
 
         await updateDoc(doc(db, "userChats", user.uid), {
@@ -98,6 +99,7 @@ const AdminList = (props) => {
           },
           [combinedId + ".date"]: serverTimestamp(),
           [combinedId + ".isArchive"]: false,
+          [combinedId + ".isDeleted"]: false,
         });
 
         console.log(

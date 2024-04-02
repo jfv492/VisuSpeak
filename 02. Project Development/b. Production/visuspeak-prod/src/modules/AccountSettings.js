@@ -13,14 +13,12 @@ const AccountSettings = (props) => {
     console.log(location.pathname);
   }, [location]);
   return (
-    <div className="background-container">
-      <div className="container account-settings-form shadow-lg rounded-4">
+      <div className="container rounded-4">
         <UserInfo />
         <div className="about-us-sections">
           <EditPassword />
         </div>
       </div>
-    </div>
   );
 };
 

@@ -10,11 +10,21 @@ const HowToAdminChatModal = () => {
     <div>
       <button
         type="button"
-        class="btn btn-lg button-style fs-6"
+        class="btn"
         data-bs-toggle="modal"
         data-bs-target="#adminStartChatModal"
       >
-        {t("SupportLearnMoreButton")} 
+        <div class="card text-center btn-raised p-3" aria-hidden="true">
+          <div className="card-heading">
+            <i class="fa-solid fa-message fs-1"></i>
+            <h4 class="card-title mt-3">{t("HowToStartAChat")}</h4>
+          </div>
+          <div class="card-body">
+            <p class="card-text large-text-style">
+              {t("HowToStartAChatDescription")}
+            </p>
+          </div>
+        </div>
       </button>
 
       <div
@@ -43,32 +53,20 @@ const HowToAdminChatModal = () => {
             </div>
             <div class="modal-body">
               <ol>
-                <li>
-                  {t("AdminChatSupportModalDescription1")}
-                </li>
-                <li>
-                {t("AdminChatSupportModalDescription2")}
-                </li>
+                <li>{t("AdminChatSupportModalDescription1")}</li>
+                <li>{t("AdminChatSupportModalDescription2")}</li>
 
                 <ul>
-                    <li>
-                      {t("AdminChatSupportModalDescription2Sub1")} 
-                    </li>
-                    <li>
-                      {t("AdminChatSupportModalDescription2Sub2")} 
-                    </li>
-                    <li>
-                      {t("AdminChatSupportModalDescription2Sub3")}  
-                    </li>
+                  <li>{t("AdminChatSupportModalDescription2Sub1")}</li>
+                  <li>{t("AdminChatSupportModalDescription2Sub2")}</li>
+                  <li>{t("AdminChatSupportModalDescription2Sub3")}</li>
                 </ul>
 
                 <li>
-                    {t("AdminChatSupportModalDescription3")}  <br/>
-                    <i>{t("AdminChatSupportModalDescription3Sub1")} </i>
+                  {t("AdminChatSupportModalDescription3")} <br />
+                  <i>{t("AdminChatSupportModalDescription3Sub1")} </i>
                 </li>
-                <li>
-                  {t("AdminChatSupportModalDescription4")}  
-                </li>
+                <li>{t("AdminChatSupportModalDescription4")}</li>
               </ol>
             </div>
           </div>

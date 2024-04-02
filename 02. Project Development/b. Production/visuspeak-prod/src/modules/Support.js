@@ -17,17 +17,14 @@ const Support = () => {
     <div>
       <div class="container my-5">
         <h1> {t("SupportPage")} </h1>
-        <div className="row about-us-sections align-items-center">
-          <div className="row container my-5 px-4">
+        <div className="row about-us-sections align-items-center lead">
             {t("SupportPageDescription")} 
-          </div>
         </div>
         <hr />
-
         <div className="row about-us-sections align-items-center">
           <AdminUserSupport /> 
         </div>
-        <hr />
+        
 
         <div className="row about-us-sections align-items-center">
           <ASLUserSupport /> 

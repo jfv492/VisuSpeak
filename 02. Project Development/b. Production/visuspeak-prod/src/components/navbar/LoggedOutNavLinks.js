@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 const NavButton = () => {
   const { t } = useTranslation();
@@ -9,6 +10,18 @@ const NavButton = () => {
   useEffect(() => {
     console.log(location.pathname);
   }, [location]);
+
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const mobileView = windowWidth < 600;
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
     <div
@@ -47,7 +60,7 @@ const NavButton = () => {
               </li>
               <li>
                 <Link class="dropdown-item" to="/signup">
-                {t("Sign-up")}
+                  {t("Sign-up")}
                 </Link>
               </li>
             </ul>
@@ -73,6 +86,11 @@ const NavButton = () => {
               {t("About Us")}
             </Link>
           </li>
+          {mobileView && (
+            <li class="nav-item">
+              <LanguageSwitcher />
+            </li>
+          )}
         </ul>
       </div>
     </div>

@@ -24,7 +24,7 @@ const LatestFeedback = ({ organization }) => {
           day: '2-digit', month: 'short', year: 'numeric'
         })
       }));
-      setFeedbacks(feedbacksData);
+      setFeedbacks(feedbacksData.sort((a, b) => b.createdAt - a.createdAt));
     });
 
     return () => unsubscribe(); // Detach listener on unmount
@@ -40,9 +40,9 @@ const LatestFeedback = ({ organization }) => {
         <div key={feedback.id} className="card my-3">
           <div className="p-2">
             <div className="d-flex align-items-start mb-2">
-              <i className="fas fa-user-circle fa-3x text-secondary me-2"></i>
+              <i className="fas fa-user-circle fs-1 text-secondary me-2"></i>
               <div>
-                <h5 className="card-title mb-0">{feedback.name || 'Anonymous'}</h5>
+                <h6 className="card-title mb-0 chat-name-ellipsis">{feedback.name || 'Anonymous'}</h6>
                 <p className="card-text text-muted">{feedback.createdAtFormatted}</p>
               </div>
               <div className='ms-auto'>
