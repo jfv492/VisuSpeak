@@ -49,9 +49,10 @@ const Chats = () => {
           let chatsArray = [];
 
           if (chatsData) {
-            // Since this is async, we use 'let' to define chatsArray
+            const activeChatsEntries = Object.entries(chatsData).filter(([_, chatInfo]) => !chatInfo.isDeleted);
+
             chatsArray = await Promise.all(
-              Object.entries(chatsData).map(async ([id, chatInfo]) => {
+              activeChatsEntries.map(async ([id, chatInfo]) => {
                 let photoURL = defaultProfilePicture; // Default image URL in case userInfo is undefined
                 if (chatInfo.userInfo && chatInfo.userInfo.uid) {
                   photoURL = await fetchUsersPhotoUrl(chatInfo.userInfo.uid);
