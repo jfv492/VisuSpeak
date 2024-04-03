@@ -18,7 +18,6 @@
 - Time on task: Assess the time taken by participants to complete tasks.
 - Error rate: Track the frequency and nature of errors encountered during testing.
 - User satisfaction: Gather subjective feedback on the overall experience.
-- Developer Comments: Analyze user interactions to identify areas of interest and potential pain points.
 
 ## Phase 2: Testing Chat Functionality
 
@@ -36,7 +35,6 @@
 - Response accuracy: Measure the correctness of responses provided.
 - User engagement: Assess the level of interaction and retention during chat sessions.
 - Error recovery rate: Evaluate the chat's ability to recover from errors and guide users back on track.
-- Developer Comments: Analyze user interactions to identify potential pain points.
 
 ## Phase 3: Testing the Entire Application
 
@@ -55,5 +53,5 @@
 
 **Metrics:**
 - Overall satisfaction: Gather feedback on the overall experience and likelihood of continued usage.
-- Completion rate: Measure the percentage of participants who successfully complete key tasks.
-- Developer Comments: Document and prioritize any bugs or issues encountered during testing for resolution.
+
+
