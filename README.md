@@ -21,6 +21,9 @@ Our project vlogs are available in our [playlist](https://youtube.com/playlist?l
 ## 🎬 Project Commercial
 [VisuSpeak Commercial](https://youtu.be/FcZBFbL3QkE)
 
+## 🎬 Project Demo
+[VisuSpeak Demo](https://youtu.be/BDVc4W2KQ8g)
+
 ## 👥 Team Members
 ![Updated Github Teams-4](https://github.com/jfv492/VisuSpeak/assets/98986952/a0290ad0-37ae-4547-b44b-1909c2fd9eec)
 
