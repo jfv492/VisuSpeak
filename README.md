@@ -24,6 +24,9 @@ Our project vlogs are available in our [playlist](https://youtube.com/playlist?l
 ## 🎬 Project Demo
 [VisuSpeak Demo](https://youtu.be/BDVc4W2KQ8g)
 
+## 🌅 Project Poster
+![VisuSpeak - SSE Group 1 Poster ](https://github.com/jfv492/VisuSpeak/assets/98986952/5a45515c-0dac-431a-adcc-f89f09d87e73)
+
 ## 👥 Team Members
 ![Updated Github Teams-4](https://github.com/jfv492/VisuSpeak/assets/98986952/a0290ad0-37ae-4547-b44b-1909c2fd9eec)
 
