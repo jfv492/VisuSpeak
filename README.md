@@ -33,5 +33,3 @@ Our project vlogs are available in our [playlist](https://youtube.com/playlist?l
 ## 📝 License 
 [Read the License agreement here](https://github.com/jfv492/VisuSpeak/blob/main/LICENSE)
 
-
-## 📄 References 
