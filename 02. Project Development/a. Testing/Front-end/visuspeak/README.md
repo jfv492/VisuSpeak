@@ -5,17 +5,14 @@
 Before you begin, ensure you have met the following requirements:
 - Node.js (latest stable version)
 - npm (comes with Node.js)
-- MySQL Server (latest stable version)
-- A MySQL client (like MySQL Workbench, phpMyAdmin, or command-line client)
-
-## Setting up the Database
 
 ### Using Firebase
 
 This project uses Firebase as its database. You will need to:
 1. Create a Firebase project through the Firebase console.
-2. Configure Firestore or the Realtime Database depending on your project needs.
-3. Obtain your Firebase project keys.
+2. Configure Authentication to accept both Email/Password and Anonymous sign-up methods
+3. Configure Firestore Database, Realtime Database and Storage following the on-screen insctructions and documentation provided by Google.
+4. Obtain your Firebase project keys.
 
 ### Configuring Environment Variables
 
@@ -31,7 +28,7 @@ REACT_APP_messagingSenderId=<your-firebase-messagingSenderId>
 REACT_APP_appId=<your-firebase-appId>
 REACT_APP_modelChatUrl=https://visuspeak-chat-server-2c8ad7bff3cf.herokuapp.com
 ```
-
+Note: Please do not change the REACT_APP_modelChatUrl
 
 ## Running the React Project
 
@@ -42,12 +39,12 @@ REACT_APP_modelChatUrl=https://visuspeak-chat-server-2c8ad7bff3cf.herokuapp.com
    - Run `npm install` to install the required dependencies.
 
 3. **Start the Application**:
-   - Run `npm run all` to start the development server.
+   - Run `npm run start` to start the development server.
    - Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 ## Additional Notes
 
-- Ensure the database connection details in your project in `server/db.js` match the credentials you use for your MySQL server. For Firebase configurations, ensure your `.env` file is set up correctly as mentioned above.
+- For Firebase configurations, ensure your `.env` file is set up correctly as mentioned above.
 - The React project might require additional setup or environment variables depending on its configuration.
 
 ## Support
