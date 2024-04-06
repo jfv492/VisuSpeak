@@ -29,7 +29,7 @@ REACT_APP_projectId=<your-firebase-projectId>
 REACT_APP_storageBucket=<your-firebase-storageBucket>
 REACT_APP_messagingSenderId=<your-firebase-messagingSenderId>
 REACT_APP_appId=<your-firebase-appId>
-REACT_APP_modelChatUrl=<your-modelChatUrl>
+REACT_APP_modelChatUrl=https://visuspeak-chat-server-2c8ad7bff3cf.herokuapp.com
 ```
 
 
