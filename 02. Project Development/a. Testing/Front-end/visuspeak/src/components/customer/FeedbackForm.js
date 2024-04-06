@@ -75,7 +75,7 @@ const FeedbackForm = () => {
           <div class="modal-content">
             <div class="modal-header">
               <h1 class="modal-title fs-5" id="exampleModalLabel">
-                Your Feedback
+              {t("FeedbackHeading")}
               </h1>
               <button
                 type="button"
@@ -85,7 +85,7 @@ const FeedbackForm = () => {
               ></button>
             </div>
             <div className="modal-body">
-            <p>What do you think of the VisuSpeak chat?</p>
+            <p>{t("FeedbackHeadingThink")}</p>
             <div className="text-center mb-3">
               {/* Icon buttons for rating feedback */}
               {[1, 2, 3, 4, 5].map((num) => (
@@ -98,11 +98,11 @@ const FeedbackForm = () => {
                 </button>
               ))}
             </div>
-            <textarea className="form-control my-3" rows="3" placeholder="Do you have any thoughts you’d like to share?" value={feedback} onChange={(e) => setFeedback(e.target.value)}></textarea>
+            <textarea className="form-control my-3" rows="3" placeholder={t("FeedbackMessage")} value={feedback} onChange={(e) => setFeedback(e.target.value)}></textarea>
           </div>
           <div className="modal-footer">
-            <button type="button" className="btn" data-bs-dismiss="modal" onClick={handleSignOut}>Cancel</button>
-            <button type="submit" className="btn modal-button-style btn-raised rounded-pill" data-bs-dismiss="modal" onClick={handleSubmit}>Send</button>
+            <button type="button" className="btn" data-bs-dismiss="modal" onClick={handleSignOut}>{t("ConnectWithAdminCancel")}</button>
+            <button type="submit" className="btn modal-button-style btn-raised rounded-pill" data-bs-dismiss="modal" onClick={handleSubmit}>{t("FeedbackSend")}</button>
           </div>
           </div>
         </div>

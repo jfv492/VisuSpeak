@@ -1,4 +1,4 @@
-# Installation Intructions
+# Installation Instructions
 
 ## Prerequisites
 
@@ -10,67 +10,35 @@ Before you begin, ensure you have met the following requirements:
 
 ## Setting up the Database
 
-1. **Start MySQL Server**: Ensure your MySQL server is running.
+### Using Firebase
 
-2. **Create Database**:
-   - Open your MySQL client.
-   - Execute the following SQL command to create a new database:
-     ```sql
-     CREATE DATABASE VisuSpeak;
-     ```
+This project uses Firebase as its database. You will need to:
+1. Create a Firebase project through the Firebase console.
+2. Configure Firestore or the Realtime Database depending on your project needs.
+3. Obtain your Firebase project keys.
 
-3. **Create Tables**:
-   - Select the `VisuSpeak` database.
-   - Execute the following SQL commands to create the necessary tables:
+### Configuring Environment Variables
 
-     ```sql
-     CREATE TABLE `user` (
-       `userID` int(11) NOT NULL AUTO_INCREMENT,
-       `FirstName` varchar(255) NOT NULL,
-       `LastName` varchar(255) NOT NULL,
-       `Username` varchar(255) NOT NULL,
-       `Email` varchar(255) NOT NULL,
-       `Password` varchar(255) NOT NULL,
-       PRIMARY KEY (`userID`)
-     );
+You'll need to create a `.env` file in the root of the project folder to store sensitive information such as Firebase keys. Please add the following template to your `.env` file and replace `<your-firebase-keys>` with your actual Firebase project keys:
 
-     CREATE TABLE `chat_sessions` (
-       `id` int(11) NOT NULL AUTO_INCREMENT,
-       `userID` int(11) NOT NULL,
-       `chatName` varchar(255) DEFAULT NULL,
-       `start_timestamp` timestamp NOT NULL DEFAULT current_timestamp(),
-       `end_timestamp` timestamp NULL DEFAULT NULL,
-       `status` enum('active','ended') DEFAULT 'active',
-       PRIMARY KEY (`id`),
-       KEY `userID` (`userID`),
-       CONSTRAINT `chat_sessions_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`)
-     );
+```
+REACT_APP_apiKey=<your-firebase-apiKey>
+REACT_APP_authDomain=<your-firebase-authDomain>
+REACT_APP_databaseURL=<your-firebase-databaseURL>
+REACT_APP_projectId=<your-firebase-projectId>
+REACT_APP_storageBucket=<your-firebase-storageBucket>
+REACT_APP_messagingSenderId=<your-firebase-messagingSenderId>
+REACT_APP_appId=<your-firebase-appId>
+REACT_APP_modelChatUrl=<your-modelChatUrl>
+```
 
-     CREATE TABLE `messages` (
-       `id` int(11) NOT NULL AUTO_INCREMENT,
-       `userID` int(11) NOT NULL,
-       `username` varchar(255) NOT NULL,
-       `text` text DEFAULT NULL,
-       `timestamp` timestamp NOT NULL DEFAULT current_timestamp(),
-       `type` enum('text','image','audio') NOT NULL DEFAULT 'text',
-       `status` enum('sent','received','read') NOT NULL DEFAULT 'sent',
-       `sessionID` int(11) DEFAULT NULL,
-       PRIMARY KEY (`id`),
-       KEY `userID` (`userID`),
-       KEY `sessionID` (`sessionID`),
-       CONSTRAINT `messages_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`) ON DELETE CASCADE,
-       CONSTRAINT `messages_ibfk_2` FOREIGN KEY (`sessionID`) REFERENCES `chat_sessions` (`id`)
-     );
-     ```
 
 ## Running the React Project
 
 1. **Clone the Repository**: Clone the project repository to your local machine.
 
 2. **Install Dependencies**:
-   - Navigate to the project directory in your terminal: `cd 02.\ Project\ Development/a.\ Testing/Front-end/visuspeak/`
-   - Run `npm install` to install the required dependencies.
-   - Navigate to the server directory in your terminal: `cd server`
+   - Navigate to the project directory in your terminal: `cd 02. Project Development/a. Testing/Front-end/visuspeak/`
    - Run `npm install` to install the required dependencies.
 
 3. **Start the Application**:
@@ -79,7 +47,7 @@ Before you begin, ensure you have met the following requirements:
 
 ## Additional Notes
 
-- Ensure the database connection details in your project in `server/db.js` match the credentials you use for your MySQL server.
+- Ensure the database connection details in your project in `server/db.js` match the credentials you use for your MySQL server. For Firebase configurations, ensure your `.env` file is set up correctly as mentioned above.
 - The React project might require additional setup or environment variables depending on its configuration.
 
 ## Support

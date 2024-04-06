@@ -22,7 +22,7 @@ const Footer = () => {
               {t("Resources")}
             </Link>
             <Link to="/support" className="menu-item">
-              {t("Support")}
+              {t("SupportPage")}
             </Link>
             <Link to="/about" className="menu-item">
               {t("About Us")}

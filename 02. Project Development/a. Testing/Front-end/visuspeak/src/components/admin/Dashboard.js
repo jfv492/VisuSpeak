@@ -100,11 +100,11 @@ const Dashboard = () => {
 
   // Filter admins and guests based on search term
   const filteredAdmins = admins.filter((admin) =>
-    admin.displayName.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-  const filteredGuests = guests.filter((guest) =>
-    guest.displayName.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  admin && admin.displayName && admin.displayName.toLowerCase().includes(searchTerm.toLowerCase())
+);
+const filteredGuests = guests.filter((guest) =>
+  guest && guest.displayName && guest.displayName.toLowerCase().includes(searchTerm.toLowerCase())
+);
 
   return (
     <div className="container rounded-4 dashboard my-4">

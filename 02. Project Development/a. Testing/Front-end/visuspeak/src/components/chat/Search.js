@@ -106,6 +106,7 @@ const Search = (props) => {
           },
           [combinedId + ".date"]: serverTimestamp(),
           [combinedId + ".isArchive"]: false,
+          [combinedId + ".isDeleted"]: false,
         });
 
         await updateDoc(doc(db, "userChats", user.uid), {
@@ -118,6 +119,7 @@ const Search = (props) => {
           },
           [combinedId + ".date"]: serverTimestamp(),
           [combinedId + ".isArchive"]: false,
+          [combinedId + ".isDeleted"]: false,
         });
 
         console.log(

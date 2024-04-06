@@ -83,13 +83,15 @@
         "DisclaimerOfWarrantiesDesc1": "3.1 The Application is provided on an \"as-is\" and \"as-available\" basis. We make no representations or warranties of any kind, express or implied, regarding the accuracy, reliability, or availability of the Application.",
         "DisclaimerOfWarrantiesDesc2": "3.2 We disclaim all warranties, express or implied, including but not limited to implied warranties of merchantability, fitness for a particular purpose, and non-infringement.",
         "DisclaimerOfWarrantiesDesc3": "3.3 The predicted words provided by the AI model are generated based on a trained dataset. While we strive for accuracy, we cannot guarantee the precise interpretation of signed words. Users should exercise discretion when relying on the predicted words and understand that the accuracy may vary. We do not assume responsibility for any inaccuracies in the predictions.",
-        "LimitationOfLiability": "4. Limitation of Liability",
-        "LimitationOfLiabilityDesc": "4.1 In no event shall VisuSpeak, nor its directors, employees, partners, agents, suppliers, or affiliates, be liable for any indirect, incidental, special, consequential, or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses, resulting from (i) your access to or use of or inability to access or use the Application; (ii) any conduct or content of any third party on the Application.",
-        "GoverningLaw": "5. Governing Law",
-        "GoverningLawDesc1": "5.1 These Terms shall be governed by and construed in accordance with the laws of Canada, without regard to its conflict of law provisions.",
-        "GoverningLawDesc2": "5.2 Users from international jurisdictions are responsible for compliance with local laws regarding the use of the Application.",
-        "ChangesToTerms": "6. Changes to Terms",
-        "ChangesToTermsDesc": "6.1 We reserve the right, at our sole discretion, to modify or replace these Terms at any time. If a revision is material, we will provide at least 30 days' notice prior to any new terms taking effect.",
+        "WebcamUsage": "4. Use of Webcam ",
+        "WebcamUsageDescription": "4.1 By accessing webcam features within the Application, you consent to its use. We do not store any webcam video or images. Your consent is required for accessing certain features. You are solely responsible for content captured. Misuse may result in termination of access. ",
+        "LimitationOfLiability": "5. Limitation of Liability",
+        "LimitationOfLiabilityDesc": "5.1 In no event shall VisuSpeak, nor its directors, employees, partners, agents, suppliers, or affiliates, be liable for any indirect, incidental, special, consequential, or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses, resulting from (i) your access to or use of or inability to access or use the Application; (ii) any conduct or content of any third party on the Application.",
+        "GoverningLaw": "6. Governing Law",
+        "GoverningLawDesc1": "6.1 These Terms shall be governed by and construed in accordance with the laws of Canada, without regard to its conflict of law provisions.",
+        "GoverningLawDesc2": "6.2 Users from international jurisdictions are responsible for compliance with local laws regarding the use of the Application.",
+        "ChangesToTerms": "7. Changes to Terms",
+        "ChangesToTermsDesc": "7.1 We reserve the right, at our sole discretion, to modify or replace these Terms at any time. If a revision is material, we will provide at least 30 days' notice prior to any new terms taking effect.",
         "Copyright": "© 2023-2024 Team VisuSpeak",
         "Home": "Home",
         "Support": "Support",
@@ -233,8 +235,17 @@
         "ASLUserCameraDescription7": "If you wish to repoen the camera, simply click the camera icon again.",
         "SupportLearnMoreButton": "Learn More",
         "SupportPage": "Support",
-        "SupportPageDescription": "Welcome to VisuSpeak's support page. Whether you are an ASL User here for clarification on how to use the chat, or an Admin User wanting to know more about how to use the applications features, you can find support suited for every users needs. Please see below how you can use some of VisuSpeak's common features.  "
-        
-
+        "SupportPageDescription": "Welcome to VisuSpeak's support page. Whether you are an ASL User here for clarification on how to use the chat, or an Admin User wanting to know more about how to use the applications features, you can find support suited for every users needs. Please see below how you can use some of VisuSpeak's common features.  ",
+        "ConnectWithAdmin": "Connect with an Administrator",
+        "ConnectWithAdminDetails": "Please enter your details",
+        "ConnectWithAdminFirstName": "First Name",
+        "ConnectWithAdminLastName": "Last Name",
+        "ConnectWithAdminOrg": "Select Organization",
+        "ConnectWithAdminCancel": "Cancel",
+        "ConnectWithAdminChat": "Start Chat as Guest",
+        "FeedbackHeading": "Your Feedback",
+        "FeedbackHeadingThink": "What do you think of the VisuSpeak chat?",
+        "FeedbackMessage": "Do you have any thoughts you'd like to share?",
+        "FeedbackSend": "Send"
     }
 }

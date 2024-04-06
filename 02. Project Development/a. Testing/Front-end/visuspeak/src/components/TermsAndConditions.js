@@ -45,6 +45,8 @@ const TermsAndConditions = ({ onAccept }) => {
               <p>{t("DisclaimerOfWarrantiesDesc1")}</p>
               <p>{t("DisclaimerOfWarrantiesDesc2")}</p>
               <p>{t("DisclaimerOfWarrantiesDesc3")}</p>
+              <h4>{t("WebcamUsage")}</h4>
+              <p>{t("WebcamUsageDescription")}</p>
               <h4>{t("LimitationOfLiability")}</h4>
               <p>{t("LimitationOfLiabilityDesc")}</p>
               <h4>{t("GoverningLaw")}</h4>
