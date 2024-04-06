@@ -7,7 +7,10 @@ The objective is to develop and train an AI model capable of accurately recogniz
 MediaPipe is a cross-platform pipeline framework to build custom machine learning solutions for live and streaming media. The framework was open-sourced by Google and is currently in the alpha stage. ([Viso.ai](https://viso.ai/computer-vision/mediapipe/#:~:text=Computer%20Vision%20Teams-,What%20is%20MediaPipe%3F,currently%20in%20alpha%20at%20v0.))
 
 ## Dataset
-- The dataset comprises images captured for five distinct hand gestures corresponding to the words: "Hello," "Yes," "No," "Please," and "Thank you."
+- The dataset comprises images captured for:
+  - ASL Letter (A-Z)
+  - Phrases (I love you, GoodBye, Thankyou)
+  - Words (Ask, Good, Hello, I, More, No, Please, Sorry, They, We, What, Where, Who, Why, Yes, You, Your)
 - The collection of hand images was curated through the collaborative efforts of [Archisha](https://github.com/archishab) and [Jasmeet](https://github.com/jfv492).
 - For the training of hand sign recognition, the dataset employs a keypoint classifiers script, facilitating the classification process.
 - About 20 classifiers are stored to map various coordinates on a hand, enhancing the precision and accuracy of gesture recognition
