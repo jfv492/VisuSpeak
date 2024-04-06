@@ -2,7 +2,7 @@
   <a href="https://www.visuspeak.ca"><img src="https://github.com/jfv492/VisuSpeak/assets/98986952/73343806-7cc4-41ba-8e53-f3c3cf25cee0"></a>
 </div>
 
-## 🖥️ Aplication Releases
+## 🖥️ Application Releases
 - Deployed website: [VisuSpeak](https://www.visuspeak.ca)
 - Run on localhost: [visuspeak](https://github.com/jfv492/VisuSpeak/tree/main/02.%20Project%20Development/a.%20Testing/Front-end/visuspeak)
 - View our deployed AI model: [VisuSpeak-MediaPipe-Model](https://archishab.github.io/VisuSpeak-MediaPipe-Model/)
