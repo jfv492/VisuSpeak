@@ -105,7 +105,7 @@ const CustomerSignin = (props) => {
         >
           <div className="modal-content">
             <div className="modal-header">
-              <div className="fs-5 fw-bold">Connect with an Administrator</div>
+              <div className="fs-5 fw-bold">{t("ConnectWithAdmin")}</div>
               <button
                 type="button"
                 className="btn-close"
@@ -116,13 +116,13 @@ const CustomerSignin = (props) => {
             <div className="modal-body">
               <div className="row g-3 d-flex flex-wrap">
                 <div className="fs-6 text-start">
-                  <i className="fa-solid fa-circle-info me-2 fs-6"></i>Please enter your details
+                  <i className="fa-solid fa-circle-info me-2 fs-6"></i>{t("ConnectWithAdminDetails")}
                 </div>
                 <div className="col-sm-6">
                   <input
                     type="text"
                     className="form-control"
-                    placeholder="First name"
+                    placeholder={t("ConnectWithAdminFirstName")}
                     aria-label="First name"
                     value={anonymousFirstName}
                     onChange={(e) => setAnonymousFirstName(e.target.value)}
@@ -132,7 +132,7 @@ const CustomerSignin = (props) => {
                   <input
                     type="text"
                     className="form-control"
-                    placeholder="Last name"
+                    placeholder={t("ConnectWithAdminLastName")}
                     aria-label="Last name"
                     value={anonymousLastName}
                     onChange={(e) => setAnonymousLastName(e.target.value)}
@@ -145,7 +145,7 @@ const CustomerSignin = (props) => {
                     value={anonymousOrganizationName}
                     onChange={(e) => setAnonymousOrganizationName(e.target.value)}
                   >
-                    <option selected>Select Organization</option>
+                    <option selected>{t("ConnectWithAdminOrg")}</option>
                     {organizationNames.map((name, index) => (
                       <option key={index} value={name}>{name}</option>
                     ))}
@@ -159,7 +159,7 @@ const CustomerSignin = (props) => {
                 className="btn "
                 data-bs-dismiss="modal"
               >
-                Cancel
+                {t("ConnectWithAdminCancel")}
               </button>
               <button
                 type="button"
@@ -167,7 +167,7 @@ const CustomerSignin = (props) => {
                 data-bs-dismiss="modal"
                 onClick={handleAnonymousSignIn}
               >
-                Start Chat as Guest
+                {t("ConnectWithAdminChat")}
               </button>
             </div>
           </div>
