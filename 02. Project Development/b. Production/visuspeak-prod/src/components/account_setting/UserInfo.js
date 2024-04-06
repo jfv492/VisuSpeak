@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 // Import necessary Firebase utilities
 import { updateProfile } from "firebase/auth";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { storage, auth, db } from "../../firebase.js"; // Ensure you have these exports in your firebase.js
+import { storage, auth, db } from "../../firebase.js";
 import { doc, updateDoc } from "firebase/firestore";
 
 const SettingsUserInfo = (props) => {

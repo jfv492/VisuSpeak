@@ -15,6 +15,7 @@ const ChatHeader = (props) => {
   const { data, dispatch } = useContext(ChatContext);
   const [alert, setAlert] = useState(null);
   const [isArchived, setIsArchived] = useState(null);
+  const [popover, setPopover] = useState(null);
   const showAlert = (message, type) => {
     setAlert({
       msg: message,
@@ -131,7 +132,7 @@ const ChatHeader = (props) => {
               type="button"
               aria-expanded="false"
               onClick={handleClick}
-              onMouseEnter={handlePopoverOpen}
+              onMouseEnter={(event) => {handlePopoverOpen(event); setPopover("Archive")}}
               onMouseLeave={handlePopoverClose}
             >
               <i className="fa-solid fa-box-archive"></i>
@@ -140,8 +141,8 @@ const ChatHeader = (props) => {
               className="btn chat-action-button bg-gradient"
               type="button"
               aria-expanded="false"
-              onClick={handleDeleteClick} // Update this line
-              onMouseEnter={handlePopoverOpen}
+              onClick={handleDeleteClick} 
+              onMouseEnter={(event) => {handlePopoverOpen(event); setPopover("Delete")}}
               onMouseLeave={handlePopoverClose}
             >
               <i className="fa-solid fa-trash"></i>
@@ -164,7 +165,7 @@ const ChatHeader = (props) => {
               onClose={handlePopoverClose}
               disableRestoreFocus
             >
-              <Typography sx={{ p: 1 }}>Archive Chat</Typography>
+              <Typography sx={{ p: 1 }}>{popover} Chat</Typography>
             </Popover>
             </div>}
           </div>
